@@ -1,0 +1,46 @@
+8
+
+dir
+78
+https://192.168.1.118/svn/GQFP/trunk/src/com/console/backup/service
+https://192.168.1.118/svn/GQFP
+
+
+
+2016-09-23T09:37:32.540316Z
+78
+LGC
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+7eaa1c50-b5f8-8d46-a0b5-e5067a1f1115
+
+IDBBackupService.java
+file
+
+
+
+
+2016-09-23T08:02:03.562000Z
+1368d19a3ab2b85a1c445b6bd618a6cd
+2016-09-23T09:37:32.540316Z
+78
+LGC
+
+dao
+dir
+
+spring
+dir
+

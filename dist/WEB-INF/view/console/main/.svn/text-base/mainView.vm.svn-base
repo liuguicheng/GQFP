@@ -1,0 +1,364 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=gb2312" />
+<title>$!{appContext.appName}</title>
+  <link href="$!{appContext.skin}/main.css" rel="stylesheet" type="text/css" />
+  <script language="javascript" src="../script/loadingBar.js" type="text/javascript"></script>
+  <script language="javascript" src="../script/common.js" type="text/javascript"></script>
+  <script language="javascript" src="../lib/indieui/external/My97DatePicker/WdatePicker.js" type="text/javascript"></script>
+  <script language="javascript" src="../script/jquery-1.8.3.min.js" type="text/javascript"></script>
+  <!-- easyui -->
+  <script language="javascript" src="../lib/easyui/jquery.easyui.min.js" type="text/javascript" ></script>
+  <script language="javascript" src="../lib/easyui/locale/easyui-lang-zh_CN.js" type="text/javascript"></script>
+  <link href="../lib/easyui/themes/default/easyui.css" rel="stylesheet" type="text/css" />
+  <link href="../lib/easyui/themes/icon.css" rel="stylesheet" type="text/css" />
+
+<script>
+//EASYUI Tabs组件扩展，增加标题栏双机绑定机制
+jQuery.extend($.fn.tabs.methods, {
+    /**
+     * 绑定双击事件
+     * @param {Object} jq
+     * @param {Object} caller 绑定的事件处理程序
+     */
+    bindDblclick: function(jq, caller){
+        return jq.each(function(){
+            var that = this;
+            $(this).children("div.tabs-header").find("ul.tabs").undelegate('li', 'dblclick.tabs').delegate('li', 'dblclick.tabs', function(e){
+                if (caller && typeof(caller) == 'function') {
+                    var title = $(this).text();
+                    var index = $(that).tabs('getTabIndex', $(that).tabs('getTab', title));
+                    caller(index, title);
+                }
+            });
+        });
+    },
+    /**
+     * 解除绑定双击事件
+     * @param {Object} jq
+     */
+    unbindDblclick: function(jq){
+        return jq.each(function(){
+            $(this).children("div.tabs-header").find("ul.tabs").undelegate('li', 'dblclick.tabs');
+        });
+    }
+});
+var defaultModule = '';
+
+$(document).ready( function() {
+  //双机关闭Tab页
+  $('#moduleTab').tabs('bindDblclick', function(index, title){
+        $('#moduleTab').tabs('close',index);
+    });
+    
+    switchModule(defaultModule);
+    addContentPanel("主页", "主页", "../main/homepage.do");
+
+    //中间栏点击事件
+    
+     $("#switchPoint").click(function(){
+     /*
+        if ($(this).attr("point") == "1") {
+          $(this).attr("point","2");
+          $(this).removeClass("SpanUnExpand");
+          $(this).addClass("SpanExpand");
+          $(this).attr("alt","打开菜单栏");
+        } else {
+          $(this).attr("point","1");
+          $(this).removeClass("SpanExpand");
+          $(this).addClass("SpanUnExpand");
+          $(this).attr("alt","关闭菜单栏");
+        }
+        var frmMenu = jQuery("#frmMenu");
+        frmMenu.toggle();
+        */
+        $('body').layout('collapse','west');
+      });
+      
+      slide();
+
+});
+//右下角弹出框;
+function slide(){
+//请假审批
+#if($leave)
+    jQuery.messager.show({
+        title:'温馨提示:',
+        msg:'<a href="javascript:leave();">$!{leave}</a>',
+        timeout:0,
+        showType:'slide',
+        width:300,
+        height:100
+    });
+  #end
+
+  #if($target)
+    jQuery.messager.show({
+        title:'温馨提示:',
+        msg:'<a href="javascript:target();">$!{target}</a>',
+        timeout:0,
+        showType:'slide',
+        width:300,
+        height:100
+    });
+  #end
+
+  //提醒用户更改账号、密码;
+  #if($msgInfo)
+    jQuery.messager.show({
+        title:'温馨提示:',
+        msg:'<a href="javascript:staffEditSelf();">$!{msgInfo}</a>',
+        timeout:0,
+        showType:'slide',
+        width:300,
+        height:100
+    });
+  #end
+  //提醒用户接收任务
+  #if($recievFlag)
+    jQuery.messager.show({
+        title:'温馨提示:',
+        msg:'<a href="javascript:taskReciev(\'00\');">$!{recievFlag}</a>',
+        timeout:0,
+        showType:'slide',
+        width:300,
+        height:100
+    });
+  #end
+  //提醒用户处理即将超期任务;
+  #if($taskFlag)
+    jQuery.messager.show({
+        title:'温馨提示:',
+        msg:'<a href="javascript:taskReciev(\'04\');">$!{taskFlag}</a>',
+        timeout:0,
+        showType:'slide',
+        width:300,
+        height:100
+    });
+  #end
+}
+
+function staffEditSelf(){
+    addContentPanel('修改个人资料','修改个人资料', '../manage/staffEditSelf.do?staffId=$!{currentUser.id}');
+}
+
+function taskReciev(tab){
+    addContentPanel('任务处理','任务处理', '../enforcement/taskManage.do?tab='+tab);
+}
+function switchModule(moduleName) {
+  var treeFrame = jQuery("#treeFrame");
+  treeFrame.attr("src","../main/menuTree.do?moduleName=" + moduleName);
+}
+
+function openWindow(uri,title){
+  truckMonitorWin=window.open(uri,title,'channelmode=yes,fullscreen=yes,directories=no',true);
+  truckMonitorWin.focus();
+}
+
+function closeApp() {
+  if (confirm('您确定要退出应用系统吗？')) {
+   // top.close();
+    top.location.href = "../main/logout.do";
+  }
+}
+
+function addContentPanel(title, code, url) {
+if ($('#moduleTab').tabs('exists', title)){//如果tab已经存在,则选中并刷新该tab         
+              $('#moduleTab').tabs('select', title);  //选中
+              //refreshTab({tabTitle:node.text, url:href});//刷新tab
+              return;
+          }
+/*
+ 
+  var panels = $('#moduleTab').tabs('tabs');
+  for (var i = 0; i < panels.length; i++) {
+    var p = $('#moduleTab').tabs('getTab', i);
+    var tab = pp.panel('options').tab;
+    alert(tab.panel('title'));
+  }
+  */
+  // alert(url);
+  $('#moduleTab').tabs('add',{
+    title:title,
+    content:'<iframe style=width:100%;height:100%; src="' + url + '" scrolling=no frameborder=0></iframe>',
+    iconCls:'icon-topic',
+    id:code,
+    closable:true
+   });
+//    $('#moduleTab').bind('dblclick',function(){
+//        var title = $('.tabs-selected').text();
+//        $('#moduleTab').tabs('close',title);
+//    })  
+  //  showLoadingBar();
+  //  jQuery("#contentFrame").attr("src", url);
+ // sheetContainer.innerHTML = "<iframe frameborder='0' scrolling='yes' src='" + url + "' style='height: 100%; visibility: inherit; width:100%; z-index: 1;'></iframe>";
+}
+// 弹出模态窗口
+function openDialog(title,theUrl,callback,closeCallback,width,height) {
+  if(jQuery("#dialogDiv").get(0) == null) {
+    jQuery("<div id='dialogDiv' style='overflow:hidden;'><iframe id='dialogFrame' frameborder='0' scrolling='auto' src='' style='width:100%;height:100%'></iframe></div>").appendTo(document.body);
+  }
+  //需稍微修改原来选择的vm文件，设置setSelectData的值为一个返回对象。如果说后续不考虑兼容FCKDialog，则可以简化传输对象机制，直接设置callback
+  var frame = document.getElementById("dialogFrame");
+  var oDialogInfo = new Object();
+  oDialogInfo.CustomValue = callback;
+  frame.contentWindow.top.dialogArguments = oDialogInfo;
+  frame.contentWindow.top.close = function(){
+    jQuery("#dialogDiv").dialog("close");
+  }
+  width = width || 800;
+  height = height || 400;
+  jQuery("#dialogDiv").dialog({
+    title: title,
+    iconCls: 'icon-topic',
+    width: width,
+    height: height,
+    modal: true,
+    resizable: false,
+    draggable: true,
+    onClose: function() {
+      if (closeCallback != null) {
+        closeCallback();
+      }
+      jQuery("#dialogFrame").attr("src", "");
+    }
+  });
+  jQuery("#dialogFrame").attr("src", theUrl);
+  jQuery("#dialogDiv").dialog("open");//.dialog("refresh", theUrl);
+  if(jQuery(".window-mask iframe").get(0) == null){
+    jQuery("<iframe style='position: absolute; z-index: -1; width: 100%;height: 100%; top: 0;left:0;scrolling:no;' frameborder='0'></iframe>").appendTo(".window-mask");
+  }
+}
+
+// 关闭模态窗口
+function closeDialog(){
+  if (jQuery("#dialogDiv").get(0) != null) {
+    jQuery("#dialogDiv").dialog("close");
+  }
+}
+// 存储数据到模态窗口（使用之后必须清空）
+function setDialogParam(key,value) {
+  if (jQuery("#dialogDiv").get(0) != null) {
+    jQuery("#dialogDiv").data(key,value);
+  }
+}
+// 获取模态窗口的数据
+function getDialogParam(key) {
+  if (jQuery("#dialogDiv").get(0) != null) {
+    return jQuery("#dialogDiv").data(key);
+  }
+}
+
+ // 打开聊天窗口
+  function showWinManage (objId,objName,chatFlag,chatState,sendTime) {
+  //alert(objId);
+     $("#winInChat").window('open');
+   chatInFrame.addChatPanelFromCollect(objName,"../oa/personalInstantChat.do?staffId="+objId+"&chatFlag="+chatFlag+"&chatState="+chatState+"&sendTime="+sendTime,true);
+   parent.closeDialog();
+  }
+  
+  //打开新的消息聊天窗口
+  function showNewchatWin(){
+  $("#winInChat").window('open');
+    jQuery.ajax({
+        url: '../plugins/messageChatList.do?staffId=$!{currentUser.id}',
+        type: 'POST',
+        cache: false,
+        success: function(result) {
+          try {
+          var data = eval("(" + result + ")");
+              jQuery.each(data, function(i) {
+           chatInFrame.addChatPanelFromCollect(data[i].sendMan,"../oa/personalInstantChat.do?staffId="+data[i].sendManId+"&chatFlag=1&chatState="+data[i].chatState,true);
+              });
+           } catch (e) {
+         
+           }
+        },
+        error: function(e) {
+        }
+    });
+  }
+  function target(){
+   addContentPanel('任务反馈','任务反馈', '../taskindices/targetCompleteManage.do');
+    
+  }
+  function leave(){
+   addContentPanel('请假管理','考勤审批', '../leave/leaveAuditManage.do');
+    
+  }
+</script>
+</head>
+<body class="easyui-layout">
+  <div data-options="region:'north',height:92">
+        <table width="100%" height="90" border="0" cellpadding="0" cellspacing="0" class="toptable">
+         <tr>
+         <td>
+                <a class="ABtnIco AIcoLogOut" href="javascript:closeApp()">退出系统</a>
+                <a class="ABtnIco AIcoSeting" href="javascript:addContentPanel('修改个人资料','修改个人资料', '../manage/staffEditSelf.do?staffId=$!{currentUser.id}')" >修改个人资料</a>
+                <a class="ABtnIco AIcoHome" href="javascript:addContentPanel('主页','主页', '../main/homepage.do')" >返回主页</a>
+                <span class="spnSysInfo">
+
+          <img src="../images/user.gif" width="14" height="15" align="absmiddle">
+            <span class="SpnUser" title="当前登录用户">$!{currentUser.name}</span>
+        </span>
+         </td>
+         </tr>
+          <tr>
+            <td align="center" valign="top" >
+                <div id="tabs">
+                    <ul>
+                        #foreach($menu in $mainMenu)
+                        <script>
+                           if (defaultModule == '') defaultModule = "${menu.data.id}";
+                        </script>
+                         #if($!{menu.data.moduleName} == '01')
+                          <li><a  #if($!{isOpenWindowId}=="$!{menu.data.code}") onclick="javascript:openWindow('$!{menu.data.url}','$!{menu.data.name}')" 
+                              #else href="javascript:switchModule('$!{menu.data.id}')" #end >
+                          <span class="Tab_out">$!{menu.data.name}</span></a></li>
+                         #end
+                        #end
+                    </ul>
+                </div>
+            </td>
+          </tr>
+        </table>
+</div>
+
+
+<div data-options="region:'west',width:190" style="overflow:hidden">
+  <table width="100%" height="100%" border="0" cellpadding="0" cellspacing="0" style="background:#C3DAF9;">
+<tr>
+    <td align="middle" id="frmMenu" valign="top"  class="TdLeftMenu" name="frmMenu">
+
+    <iframe frameborder="0" id="treeFrame" name="treeFrame" src="" style="height: 100%; visibility: inherit;" allowtransparency="true"></iframe>
+    </td>
+    <td class="TdHandle"  valign="middle">
+        <span point="1"  class="SpanUnExpand" id="switchPoint" title="点击关闭左侧菜单"></span>
+    </td>
+</tr>
+  </table>
+    
+</div>
+<div data-options="region:'center'">
+      <div id="moduleTab" class="easyui-tabs" data-options="fit:true">
+##            <iframe id="contentFrame" frameborder='0' scrolling='yes' src='' style='height: 100%; visibility: inherit; width:100%; z-index: 1;'
+##                onload="javascript:hiddenLoadingBar()"></iframe>
+      </div>
+</div>
+<div id="winInChat" class="easyui-window" title="即时消息0" data-options="iconCls:'icon-chat',closed:true,closable:true,minimizable:false,maximizable:false,collapsible:false"
+    style="width:685px;height:560px;left:600px;">
+  <iframe id='chatInFrame' name="chatInFrame" frameborder='0' scrolling='no' src='../oa/personalInstantDialog.do' style='width:100%;height:485px;overflow:auto;'></iframe>
+</div> 
+</body>
+<script>
+   //关闭页面清空对话
+ // $("#winInChat").window({
+      //onClose:function(){
+    //  chatInFrame.removeTab();
+      
+ //     }
+ // });
+
+</script>
+</html>

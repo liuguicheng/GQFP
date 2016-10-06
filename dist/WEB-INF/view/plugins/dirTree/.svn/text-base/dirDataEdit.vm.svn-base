@@ -1,0 +1,103 @@
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=GBK" />
+  <title>$!{appContext.appName}</title>
+  <link href="$!{appContext.skin}/content.css" rel="stylesheet" type="text/css" />
+  <script language="javascript" type="text/javascript" src="../script/common.js"></script>
+  <script language="javascript" src="../script/loadingBar.js" type="text/javascript"></script>
+  <script language="javascript" type="text/javascript" src="../script/validator.js"></script>
+  <script language="javascript" type="text/javascript" src="../script/jquery-1.8.3.min.js"></script>
+  <script language="javascript" type="text/javascript" src="../lib/indieui/src/jquery.formatinput.js"></script>
+  <script type="text/javascript">
+  validator.formName = "editForm";
+  validator.addNormalCheckPoint("dirName","目录名称","checkNotNull;checkNotEmpty");
+  validator.addNormalCheckPoint("sortOrder","序号","checkInt");
+function doSave(){
+    var e = document.editForm;
+    var reg = /^[a-zA-Z]+$/;
+    if(validator.checkAll()){
+        /*if(!reg.test(e.dirTypeCode.value)) {
+            alert("类型标识输入的类型不匹配");
+            e.dirTypeCode.focus();
+        } else */{
+            document.editForm.submit();
+        }
+    }
+}
+
+function doReturn() {
+     document.location.href  = "../dirTree/dirDataSelect.do?$!{requestque}";
+}
+
+function showselectsubdir(){
+var theUrl="../dirTree/dirDataDialog.do?dirTypeCode=$!{type.dirTypeCode}";
+top.openDialog("选择目录", theUrl, selectedDirData);
+}
+
+function selectedDirData(depId , depName) {
+    var e = document.editForm;
+    e.parentId.value = depId;
+    e.parentname.value = depName;
+  }
+
+#if($opMessage)
+    alert("$opMessage");
+#end
+  </script>
+</head>
+<body class="main-bgimg1" leftmargin="0" topmargin="10px" marginwidth="0" marginheight="0">
+<table  width="100%" cellpadding="0" cellspacing="0" border="0" class='indieui-form'>
+  <tr valign="top">
+    <td height="28" valign="top">
+      <table cellspacing="0" cellpadding="0" class="TbTitle" align="center">
+        <tr>
+            <td height="24">
+                <div class="DivIcoEdit"><a href="javascript:submitRequest('../dirTree/dirDataSelect.do?$!{requestque}')">目录列表</a>&nbsp;-&gt;&nbsp;目录编辑</div>
+            </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+
+  <tr valign="top">
+    <td align="center" height="100%" >
+      <form name="editForm" method="POST" >
+		 #formHiddenInput('dirTypeId' $!{type.dirTypeId} '')
+		 #formHiddenInput('parentId' $!{command.parentId} '')
+        <table cellpadding="0" cellspacing="0" class="TbCommon">
+          <tr align="center">
+            <td align="right" class="TdLabel" width="25%">目录类型</td>
+            <td class="TdInput" align="left" width="31%">$!{type.dirTypeName}</td>
+          </tr>
+		   <tr align="center">
+            <td align="right" class="TdLabel" width="25%">上级目录</td>
+            <td class="TdInput" align="left" width="31%">#formTextInput("parentname" $!{parentname} "readonly='readonly'")
+				<img id="showbox" src="$!{appContext.skin}/../btnEdit_.gif" title="选择上级目录" onclick="showselectsubdir();" /></td>
+          </tr>
+		  <tr align="center">
+            <td align="right" class="TdLabel" width="25%">#requiredInput("目录名称")</td>
+            <td class="TdInput" align="left" width="31%">#makeTextInput("dirName" "$!{command.dirName}" "maxlength='20'")</td>
+          </tr>
+	  <tr>
+             <td align="right" class="Tdlabel" width="25%">#requiredInput("序号")</td>
+            <td class="TdInput" align="left" width="31%">#makeTextInput("sortOrder" "$!{command.sortOrder}" "")</td>
+      </td>
+          </tr>
+		   <tr>
+             <td align="right" class="Tdlabel" width="25%">备注</td>
+            <td class="TdInput" align="left" width="31%">#formTextarea("remark" "$!{command.remark}" "style='width:300px; height:50px;'")</td>
+      </td>
+          </tr>
+          <tr align="center">
+            <td width="100%" align="center" colspan="4" class="TdCommand">
+              #makeButton("保 存" "doSave()" "")
+              #makeButton("返 回" "doReturn()" "")
+            </td>
+          </tr>
+        </table>
+      </form>
+    </td>
+  </tr>
+</table>
+</body>
+</html>

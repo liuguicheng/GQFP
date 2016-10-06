@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  #headInclude()
+  <script type="text/javascript">
+  #if($message)alert("#javaScriptEscape($message)");#end
+
+  function doEdit(operateId) {
+    var url = "../gq/bonusContentEdit.do?token=$!{command.token}&id=" + operateId;
+    document.location.href = url;
+  }
+
+  function doDelete() {
+    if (!hasCheckBoxSelect("id")) {
+      alert("请选择要删除的奖励种类！");
+      return;
+    }
+    if (confirm("您确定要删除所选择的奖励种类吗?")) {
+      var f =  document.listForm;
+      f.action = "../gq/bonusContentDel.do";
+      f.submit();      
+    }
+  }
+  </script>
+</head>
+<body>
+<div class="PageHeader">
+  <div class="LeftBox Title">奖励类型列表</div>
+</div>
+
+
+
+<div class="PageTool">
+  <div class="LeftBox Tool">
+    <input type="button" class="BtnAdd" value="新增"  title="新增" onclick="javascript:doEdit('');"/>
+    <input type="button" class="BtnDel" value="删除"  title="删除" onclick="javascript:doDelete();"/>
+  </div>
+</div>
+
+<div class="PageContainer indieui-scroll">
+<form name="listForm" method="post">
+<input type="hidden" name="submitFlag" value="0">
+<input type="hidden" name="token" value="$!{command.token}">
+<table class="TbList">
+  <thead> 
+    <tr>
+      <th style="width:20px;" nowrap>
+        <input type="checkbox" onclick="javascript:setCheckBoxValue('id', this.checked);">
+      </th>
+      <th>奖励类型</th>
+	  <th>奖励比例</th>
+      <th>奖励发放开始条件</th>
+      <th>奖励结束条件</th>
+	  <th>奖励方法时间</th>
+	  <th>备注</th>
+    </tr>
+  </thead>
+  <tbody>
+  #foreach( $data in $page.data )
+    <tr>
+      <td><input type="checkbox" name="id" value="$!{data.id}"></td>
+      <td><a href="javascript:doEdit('$!{data.id}');;"> #lookUpDict($dicData.dicBonusContent "$!{data.bonusType}") </a></td>
+      <td>$!{data.proportion}%</td>
+      <td>$!{data.begin}</td>
+	  <td>$!{data.end}</td>
+	  <td>$!{data.releaseTime}</td>
+	  <td>#htmlEscape($!{data.bz})</td>
+	  
+    </tr>
+  #end
+  </tbody>   
+</table>
+</form>
+</div>
+
+<div data-options="region:'south'" style="overflow-y:hidden"> 
+#pageDirector($page "#getRequestUri()" "")
+</div>
+</body>
+</html>

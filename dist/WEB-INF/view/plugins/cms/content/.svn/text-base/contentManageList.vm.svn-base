@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  #headInclude()
+  <script type="text/javascript">
+  #if($message)alert("#javaScriptEscape($message)");#end
+  function delContent() {
+    var f = document.formList;
+    if (f.submitFlag.value == "1") {
+        alert('请求已经提交！');
+        return ;
+    }
+    if (!hasCheckBoxSelect("contentId")) {
+        alert("请选择要删除的信息内容!");
+        return ;
+    }
+    if (!confirm("数据删除之后将无法恢复\n\n您确定要删除数据吗？")) {
+        return;
+    }
+    f.action = "../cms/contentDelete.do";
+    f.submitFlag.value = "1";
+    f.submit();
+  }
+
+  function editContent(contentId) {
+    location.href = "../cms/contentEdit.do?channelId=$!{command.channelId}&token=$!{page.token}&contentId=" + contentId + "&channelPath=" + "$!{command.channelPath}";
+  }
+  </script>
+</head>
+<body>
+<div class="PageHeader">
+  <div class="LeftBox Title">#lookUpDict($dicData.dicCmsChannel "$!{command.channelId}")内容管理  </div>
+</div>
+
+#parse("cms/content/inner/cmsContentQueryInner.vm")
+
+<div class="PageTool">
+  <div class="LeftBox Tool">
+    <input type="button" value="查询" class="BtnSearch" onclick="javascript:showDiv('divSearch')" />
+    <input type="button" value="新增" class="BtnAdd" onclick="javascript:editContent('')"  />
+    <input type="button" value="删除" class="BtnDel" onclick="javascript:delContent('')"  />
+  </div>
+  <div class="RightBox Pager">
+    #pageDirector( $page "#getRequestUri()" false)
+  </div>
+</div>
+
+<div class="PageContainer indieui-scroll">
+<form name="formList" method="post">
+  <input type="hidden" name="submitFlag" value="0">
+  <input type="hidden" name="token" value="$!{page.token}">
+  <table class="TbList">
+    <thead >
+      <tr >
+        <th style="width:20px">
+          <input type="checkbox" onclick="javascript:setCheckBoxValue('contentId', this.checked);"/>
+        </th>
+        <th style="width:35px">序号</th>
+        <th >标题</th>
+        <th style="width:80px">状态</th>
+        <th style="width:160px">发布时间</th>
+      </tr>
+    </thead>
+    <tbody>
+    #foreach($content in ${page.data})
+      #set($index = $velocityCount + $page.pageSize * ($page.pageNumber - 1))
+      <tr >
+        <td>
+          <input type="checkbox" name="contentId" value="$!{content.contentId}" />
+        </td>
+        <td>$!{index}</td>
+        <td style="text-align:left" class="TdTxtOver" title="#htmlEscape($!{content.title})"><a class="1" href="javascript:editContent('$!{content.contentId}')">#htmlEscape($!{content.title})</a></td>
+        <td>#lookUpDict($dicData.dicCmsContentStatus $!{content.status})</td>
+        <td>#formatTime($!{content.releaseDate})</td>
+        <!--
+        <td  >
+        #if($content.contentStatus == "0")
+        <a class="1" href="javascript:startContent('$!{content.contentId}')">启用</a>
+        #elseif($content.contentStatus == "1")
+        <a href="javascript:forbiddenContent('$!{content.contentId}')">禁用</a>
+        #end
+        </td> -->
+      </tr>
+    #end
+    </tbody>
+  </table>
+</form>
+</div>
+</body>
+</html>

@@ -1,0 +1,887 @@
+/* 
+	layout style
+	create by huanganzhi 2012-12-18
+	version v.0.1.0
+	support ie6.0+/ff/chrome
+*/
+/*公共属性*/
+*{
+	margin:0;
+	padding:0;
+	font-weight: normal;
+	text-decoration: none;
+	list-style:none;
+	font-size: 14px;
+	font-family:  "微软雅黑","宋体",Verdana, Geneva, sans-serif;
+	border:none;
+	border-width:0px;
+	
+	scrollbar-face-color: #dbebfe; 
+    scrollbar-shadow-color: #b8d6fa; 
+    scrollbar-highlight-color: #ffffff; 
+    scrollbar-3dlight-color: #dbebfe; 
+    scrollbar-darkshadow-color:#458ce4; 
+    scrollbar-track-color: #f3f3f3; 
+    scrollbar-arrow-color: #b8d6fa;
+	
+}
+ 
+html{
+	height:100%;
+	width:100%;
+	margin:0px;
+	padding:0px;
+}
+body{
+	color: #151515;
+	background-color: #ffffff;
+	height:100%;
+	width:100%;
+	/*overflow:hidden;*/
+}
+form{
+    margin:0;
+	padding:0;
+	height:100%;
+	width:100%;
+}
+img{
+    text-align: center;
+    vertical-align: middle;
+    border:none;
+}
+a{
+    color: #1e1e1e;
+    text-decoration: none;
+}
+a:visited {
+    color: #552d0b;
+}
+a:hover {
+	color: #f30;
+	text-decoration: underline;
+}
+fieldset{
+	margin:5px;
+	border:#dfdfdf 1px solid;
+	padding:5px;
+}
+fieldset legend{
+	color:#666666;
+	font-size:12px;
+	margin:2px;
+	font-weight: bold;
+}
+.LeftBox{
+	float:left;
+}
+.RightBox{
+	float:right;
+}
+.Fixed{
+	position:fixed;
+	position:absolute;
+}
+.MarginHolder {
+	line-height: 0px;
+	height: 0px;
+	width: 0px;
+	margin: 0;
+	padding: 0;
+}
+.PageHeader,.PageHeader .Title,.PageHeader .Tools{
+	height:28px;
+	line-height:28px;
+}
+.PageHeader{
+	overflow:hidden;
+	border-bottom:#cccccc 1px solid;
+	background-color: #FF8534;
+	color: #fff;
+	/*background-image: url(images/commonbtnbg.png);
+	background-repeat: repeat-x;*/
+	font-weight: bold;
+	width:100%;
+}
+.PageHeader .Title{
+	overflow:hidden;
+	text-overflow:ellipsis;
+	-webkit-text-overflow: ellipsis;
+	-o-text-overflow: ellipsis;
+	white-space:nowrap;
+	width:350px;
+	padding-left:10px;
+	color: #FFF;
+}
+.PageHeader .Tool{
+	width:auto;
+	max-width:500px;
+}
+.SearchBox{
+	display:none;
+}
+
+.PageTool{
+	height:28px;
+	line-height:28px;
+	background-image: url(images/datagrid_title_bg.gif);
+	background-repeat: repeat-x;
+	background-position: center center;
+	border:#e6e6e6 1px solid;
+	background-color: #f3f3f3;
+	margin:0px;
+	margin-bottom:1px;
+	padding-left:5px;
+	padding-right:5px;
+}
+.PageTool .Tool .Btn, .PageTool .Tool input{
+	height:28px;
+	width:auto;
+	padding-left:20px;
+	padding-right:5px;
+	*padding-left:12px;
+	*padding-right:2px;
+	_padding-left:12px;
+	_padding-right:2px;
+	margin:0px;
+	
+	border:none;
+	*border:0px solid #fafafa;
+	_border:0px solid #fafafa;
+	background-repeat: no-repeat;
+	background-position: 2px center;
+	background-color:transparent;
+	/*border-left:1px solid #CCC;
+	border-left:1px solid #999;*/
+}
+
+.PageTool .Tool .Btn:hover,.PageTool .Tool input:hover{
+	/*background-color: #F90;*/
+	cursor:pointer;
+	border-bottom:2px solid #0c0;
+}
+.PageTool td{
+	height:20px;
+	line-height:20px;
+}
+.PageTool td.TdInfo{
+	height:20px;
+	line-height:20px;
+}
+.PageTool  .Status{
+	margin: 0px 2px;
+	padding: 0px 2px 0px 20px;
+	width: auto;
+	height: 28px;
+	line-height:28px;
+	_display: block;
+	_float: left;
+	background-repeat: no-repeat;
+	background-position: 2px center;
+	font-size: 14px;
+}
+.PageTool .Separator{
+	padding: 0px 2px 0px 0px;	
+}
+/*.PageTool a,.PageTool span{
+	width:auto;
+	padding-left:6px;
+	padding-right:6px;
+	margin:1px;
+	height:20px;
+	line-height:20px;
+	background-color:#f9f9f9;
+	border: #d2d8df 1px solid;
+	text-align:center;
+}
+.PageTool span a{
+	border:none;
+	padding:0;
+	height:18px;
+	line-height:18px;
+}*/
+.PageTool .Pager a{
+	margin:auto 2px;
+	color: #666;
+}
+
+.LeftSide{
+	width:259px;
+	float:left;
+	height:100%;
+	border-right:1px solid #d9d9d9;
+	overflow:auto;
+}
+.RightSide{
+	width:260px;
+	float:right;
+	height:100%;
+	/*border-left:1px solid #e6e6e6;
+	overflow:auto;*/
+	/*background-color:#efefef;*/
+	margin-left:1px;
+}
+.RightSide .InfoBox{
+	margin: 5px;
+	margin-bottom:0px;
+	border:1px solid #e6e6e6;
+}
+.RightSide .InfoBox h2{
+	height: 28px;
+	line-height: 28px;
+	padding: 0px 10px 0px 10px;
+	background-color: #F5F5F5;
+	border:none;
+	border-bottom: 1px solid #C00;
+	font-size: 14px;
+	font-weight: bold;
+	color: #900;
+}
+.InfoBox .SimpleIcoList{
+	height:30px;
+	line-height:30px;
+	background-color: #FFF8E1;
+}
+.InfoBox .SimpleIcoList .Status{
+	display:block;
+	height:28px;
+	line-height:28px;
+	background-repeat: no-repeat;
+	background-position: left center;
+	float:left;
+	width:auto;
+	padding:1px 3px 1px 18px;
+	margin-left:5px;
+	font-size: 14px;
+	color: #666;
+}
+.RightSide .InfoBox .TimelineList{
+	height:auto;
+	background-image: url(images/time_line_2.png);
+	background-repeat: repeat-y;
+	background-position: 4px 0px;
+}
+.RightSide .InfoBox .TimelineList li.Step{
+	margin: 0px 5px 10px 15px;
+	background-repeat: no-repeat;
+	background-position: 5px 4px;
+}
+.RightSide .InfoBox .TimelineList li.Step h4{
+	background-repeat: no-repeat;
+	background-position: 4px 4px;
+	padding:2px;
+	padding-left:30px;
+	font-size: 14px;
+	font-weight: normal;
+	color: #000;
+}
+.RightSide .InfoBox .TimelineList li.Step h5,.RightSide .InfoBox .TimelineList li.Step h6{
+	font-size: 14px;
+	color: #666;
+	padding-left:33px;
+	background-repeat: no-repeat;
+	background-position: 25px center;
+}
+.RightSide .InfoBox .TimelineList li.Step h6{
+	color: #F30;	
+}
+ .AttchmentList{
+	height:auto;
+}
+ .AttchmentList .Item{
+	width:100%;
+	height:auto;
+}
+ .AttchmentList .Item h5{
+	font-size: 14px;
+	line-height:1.5;
+	background-image: url(images/box.png);
+	background-repeat: no-repeat;
+	background-position: 5px 3px;
+	padding-left:25px;
+	font-weight: bold;
+	color: #666;
+}
+ .AttchmentList .Item h5 .Name{
+	font-weight: bold;	
+}
+ .AttchmentList .Item h5 .Time{
+	font-size: 12px;
+	color: #999;	
+}
+.RightSide .InfoBox .DownloadList{
+	height:auto;
+}
+.RightSide .InfoBox .DownloadList li{
+	height:auto;
+	width:100%;
+}
+.RightSide .InfoBox .DownloadList li a{
+	margin:1px;
+	padding:2px 10px 2px 28px;
+	height:auto;
+	display:block;
+	float:left;
+	background-image: url(icons/download_s.png);
+	background-repeat: no-repeat;
+	background-position: 6px 2px;
+	font-size: 12px;
+	border:none;
+	background-color:transparent;
+	word-break: break-all;
+	word-wrap : break-word 
+}
+.RightSide .InfoBox .DownloadList li a:hover{
+	text-decoration: underline;
+	background-color:transparent;
+	color: #F30;
+}
+
+.MainWrap{
+	/*margin-left:260px;*/
+	height:100%;
+	overflow:hidden;
+}
+.LeftMainWrap{
+	margin-left:0px;
+	margin-right:260px;
+	overflow:visible;
+}
+.MainWrap iframe{
+	width:100%;
+	height:100%;
+}
+.InfoBox{
+	margin:5px;
+	*margin:2px;
+	margin-bottom:0px;
+	/*background-color:#F5F5F5;*/
+}
+ .InfoBox h2{
+	height:28px;
+	line-height:28px;
+	padding: 0px 10px 0px 10px;
+	background-color: #F5F5F5;
+	border-top:1px solid #e6e6e6;
+	border-bottom:1px solid #C00;
+	border-left:1px solid #e6e6e6;
+	border-right:1px solid #e6e6e6;
+	font-weight: bold;
+	color: #900;
+}
+ .InfoBox h2 .Title{
+	font-size: 16px;
+	font-weight: bold;
+	color: #900;	
+	
+}
+.InfoBox h2 .Btn, .InfoBox h2 input{
+	background-repeat: no-repeat;
+	background-position: left center;
+	padding-left:18px;
+	font-size: 14px;
+	margin-left:10px;
+	float:right;
+	width:auto;
+	display:block;
+	color: #069;
+	background-color:transparent;
+}
+ .InfoBox h2 .Btn:hover{
+	color: #F60;
+}
+.CommandTool{
+	clear:both;
+	height:auto;
+	line-height:1.5px;
+	background-color:#f6f6f6;
+	border: #d2d8df 1px solid;
+	text-align:center;
+	/*margin:2px;*/
+	height:35px;
+	/*position:fixed;
+	bottom:0;*/
+	/*width:100%;*/
+}
+/* 数据列表工具按钮定义 */
+.PageTool a:hover{
+	color: #ff6600;
+	text-decoration: none;
+}
+.PageHeader .Tools input.Btn{
+	height:28px;
+	line-height:28px;
+	width:auto;
+	padding-left:10px;
+	padding-right:10px;
+	margin:0px;
+	float:left;
+	background-color:transparent;
+	border:none;
+	color: #EBEBEB;
+}
+.PageHeader .Tools input.Btn:hover{
+	color: #FFF;
+	cursor:pointer;
+	background-color: #0072A8;
+	height:26px;
+	line-height:26px;
+	border-bottom:2px solid #0c0;
+}
+
+
+div.ListContainer,div.PageContainer{
+	width:100%;
+	height:100%;
+    overflow:auto;
+}
+div.DocListContainer{
+  width:100%;
+  height:100%;
+  overflow:auto;
+  max-height:300px;
+ 
+}
+.DocSignList .Content{
+	line-height:2.0;
+	text-indent:2em;
+}
+.DocSignList .Name,.DocSignList .DateTime{
+	text-align:right;
+	padding-right:10px;
+	font-size: 14px;
+}
+.DocSignList .Name{
+	font-weight: bold;
+	color: #666;
+}
+.DocSignList .DateTime{
+	font-weight: normal;
+	color: #999;
+}
+.DocOpinionSignData {
+	position: relative;
+	padding:5px;
+}
+
+/*****************************************
+ * 输入区域的单元格样式
+ *****************************************/
+ .InnerBtn{
+	 background-color:transparent;
+	 border:none;
+	 border-width:0px;
+	 cursor:pointer;
+	width: auto;
+	padding: 1px 2px 1px 20px ;
+	_padding: 1px 2px 1px 12px ;
+	margin: 0px;
+	border: none;
+	_border: 0px solid #fafafa;
+	background-repeat: no-repeat;
+	background-position: 2px center;
+	background-color: transparent;
+ }
+ .InnerBtn:hover{
+	color: #F30;
+	text-decoration: underline;
+ }
+table.TbCommon{
+	width:100%;
+	margin:0;
+	padding:0;
+	border-collapse:collapse;
+	table-layout:fixed;
+}
+table.TbCommon td{
+	border:#e6e6e6 1px solid;
+	line-height:150%;
+	padding:3px 5px;
+	height:32px;
+	word-break: break-all;
+	overflow: hidden;
+}
+table.TbCommon tr.ClearBottom td{
+	border-bottom:none;
+}
+.TdLabel {
+	line-height: 150%;
+	background-color: #f3f3f3;
+	text-align: right;
+	vertical-align: middle;
+	/*color: #4d4d4d;*/
+	color: #000;
+}
+.TdInput,.TdData{
+	line-height: 150%;
+	background-color: #ffffff;
+	text-align:left;
+	vertical-align: middle;
+	/*color: #666;*/
+	color: #333;
+}
+.TdInput .Status{
+	margin: 1px;
+	padding: 1px 5px 1px 20px;
+	width: auto;
+	height: auto;
+	display: block;
+	float: left;
+	background-color: #FFF7D0;
+	background-repeat: no-repeat;
+	background-position: 2px center;
+	font-size: 14px;
+	border: 1px solid #FFEFE8;
+	
+}
+.SpanNotNull{
+	color: #db002c;
+	font-size: 12px;
+	margin-left:2px;
+	margin-right:2px;
+}
+.SpanTips{
+	color: #cccccc;
+	text-decoration: none;
+	margin-left:2px;
+	margin-right:2px;
+	font-size: 12px;
+}
+
+a.PageHandle{
+	padding:0 2px 0 2px;
+	margin:0 2px 0 2px;
+}
+.SimpleList{
+	height:auto;
+}
+.SimpleList li{
+	height:auto;
+	width:100%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	-webkit-text-overflow: ellipsis;
+	-o-text-overflow: ellipsis;
+	white-space: nowrap;
+
+}
+.SimpleList li a{
+	background-repeat: no-repeat;
+	background-position: 5px 3px;
+	font-size: 14px;
+	color: #A25100;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	-webkit-text-overflow: ellipsis;
+	-o-text-overflow: ellipsis;
+	white-space: nowrap;
+
+}
+.BlockList li{
+	width:auto;
+	height:auto;	
+	display:block;
+	float:left;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	-webkit-text-overflow: ellipsis;
+	-o-text-overflow: ellipsis;
+	white-space: nowrap;
+}
+.BlockList li  a{
+	margin:2px;
+	padding:2px 10px 2px 28px;
+	width:auto;
+	height:auto;	
+	display:block;
+	float:left;
+	background-color: #FFF7D0;
+	border:1px solid #FFEFE8;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	-webkit-text-overflow: ellipsis;
+	-o-text-overflow: ellipsis;
+	white-space: nowrap;
+}
+.Download li  a{
+	background-image: url(icons/download_s.png);
+	padding-left:25px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	-webkit-text-overflow: ellipsis;
+	-o-text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.ItemList{
+	height:auto;
+}
+.ItemList .Item{
+	width:100%;
+	height:auto;
+}
+.ItemList .Item h5{
+	font-size: 12px;
+	line-height:1.5;
+	background-image: url(images/box.png);
+	background-repeat: no-repeat;
+	background-position: 5px 3px;
+	padding-left:25px;
+	font-weight: bold;
+	color: #666;
+}
+ .ItemList .Item h5 .Title{
+	font-weight: bold;	
+}
+.ItemList .Item h5 .Gray{
+	font-size: 12px;
+	color: #999;	
+}
+
+.DownloadList{
+	height:auto;
+}
+.DownloadList li{
+	height:auto;
+	width:auto;
+	float:left;
+	
+	overflow: hidden;
+	text-overflow: ellipsis;
+	-webkit-text-overflow: ellipsis;
+	-o-text-overflow: ellipsis;
+	white-space: nowrap;
+}
+.DownloadList li a{
+	margin:2px;
+	padding:2px 10px 2px 28px;
+	width:auto;
+	height:auto;
+	display:block;
+	float:left;
+	background-color: #FFF7D0;
+	background-image: url(icons/download_s.png);
+	background-repeat: no-repeat;
+	background-position: 5px 4px;
+	font-size: 14px;
+	line-height: 22px;
+	border:1px solid #FFEFE8;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	-webkit-text-overflow: ellipsis;
+	-o-text-overflow: ellipsis;
+	white-space: nowrap;
+}
+.DownloadList li a.Download{
+	float: left;
+	font-size: 14px;
+	line-height: 22px;
+	margin: 2px;
+	padding: 2px 10px 2px 10px;
+	background: #f3f3f3;
+	border: 1px solid #e6e6e6;
+}
+.DownloadList li a.Download:hover{
+  text-decoration: none;
+  background-color: #F90;
+  color: #FFF;
+  cursor: pointer;
+}
+.DownloadList li a:hover{
+	text-decoration: none;
+	background-color: #F90;
+	color: #FFF;
+}
+
+/* datalist table style */
+table.TbList {
+	table-layout:fixed;
+	width:100%;
+    padding: 0px;
+	margin:0px;
+	border-collapse:collapse;
+	/*border:1px solid #ccc;*/
+}
+table.TbList tfoot{
+	display:none;
+}
+table.TbList tbody tr{
+	line-height:2;
+}
+
+table.TbList tbody td {
+	padding:3px 2px 3px 2px;
+	/*white-space:nowrap;*/
+	border-collapse:collapse;
+	border:1px solid #e1e1e1;
+	margin:0;
+	color: #4f4f4f;
+	text-align:center;
+}
+table.TbList thead tr{
+	/*position:absolute;
+	width:100%;
+	top:0px;*/
+}
+table.TbList thead tr th,table.TbList tfoot tr th,table.TbList tr.TrHeader td,table.TbList tr.TrFooter td{
+	color:#000000;
+	height:32px;
+	line-height:32px;
+	text-align:center;
+	border:#e6e6e6 1px solid;
+	border-right: #cccccc 1px solid;
+	background-image: url(images/bg.gif);
+	background-repeat: no-repeat;
+	background-position: right bottom;
+	padding-left:5px;
+	padding-right:8px;
+	/*white-space:nowrap;*/
+	text-decoration: none;
+	font-weight: normal;
+	margin:0;
+	background-color: #fafafa;
+}
+table.TbList thead tr th,table.TbList tr.TrHeader td{
+	border-bottom: #99cc00 1px solid;
+}
+/*table.TbList tfoot tr th{
+	border-top:#99cc00 1px solid;
+}*/
+table.TbList thead tr th.formatinputthinner{
+	border-bottom: #cccccc 1px solid;
+}
+table.TbList tfoot tr th.formatinputthinner{
+	border-top: #cccccc 1px solid;
+}
+table.TbList thead tr th.formatinputtdtitlehover {
+	border-bottom: #ff9900 1px solid;
+}
+table.TbList thead tr.formatinputheader {
+	background-image: url(images/datagridheadbg.gif);
+	background-repeat: no-repeat;
+	background-position: right bottom;
+	cursor: pointer;
+}
+table.TbList tbody tr.formatinputtrlistodd, table.TbList tbody tr:nth-child(odd){
+    background-color: #ffffff;
+}
+table.TbList tbody tr.formatinputtrlisteven, table.TbList tbody tr:nth-child(even)/**/{
+	background-color: #FFFFD5;
+}
+table.TbList tbody tr.formatinputtrlisthover,table.TbList tbody tr:hover,table.TbList tbody tr.formatinputtrlistfocus{
+	background-color:#fff1bb;
+	/*cursor:pointer;*/
+}
+td.TdTxtOver{
+	text-overflow:ellipsis;
+    overflow:hidden;
+    white-space: nowrap;
+	word-break: break-all;
+}
+
+table.TbList tbody a, table.TbList tbody a:visited{
+	color: #A25100;
+	margin:2px;
+	text-decoration:none;
+}
+table.TbList tbody tr.formatinputtrlistfocus a{
+	text-decoration: none;
+	color: #ff6600;
+}
+table.TbList tbody tr.formatinputtrlistfocus a:hover{
+	text-decoration: underline;
+	color: #ff6600;
+}
+
+table.TbList tbody td .ListIcon{
+	height:24px;
+	width:24px;
+	display:block;
+	background-repeat: no-repeat;
+	background-position: center center;
+	margin:1px auto;
+}
+table.TbList tbody td .Status{
+	margin: 1px;
+	padding: 1px 1px 1px 20px;
+	width: auto;
+	height: auto;
+	background-repeat: no-repeat;
+	background-position: 2px center;
+	font-size: 16px;
+}
+table.TbList tbody td .UnReceive{
+	color: #069;
+	font-weight: bold;
+}
+
+table.TbList tbody td .Commend{
+	font-weight: bold;
+}
+
+.ConstructionBox{
+	text-align: center;
+	height: 300px;
+	width: 800px;
+	margin: 20px;
+	background-image: url(images/boxBg.jpg);
+	background-repeat: repeat-x;
+	background-position: center top;
+	_background-image: none;
+	position:absolute;
+	border: 1px solid #C1E8F9;
+	top:50%;
+	left:50%;
+	margin-top:-150px;
+	margin-left:-400px;
+}
+.MsgBox{
+	background-image: url(images/construction_icon.png);
+	background-position: 0px center;
+	padding-left: 140px;
+	width: 200px;
+	height: 200px;
+	line-height: 200px;
+	background-repeat: no-repeat;
+	color: #666;
+	font-size: 14px;
+	margin: 30px auto;
+	text-align: left;
+}
+
+/* 公共 */
+.ClearFix{
+	clear:both;
+}
+.Handwrite{
+	background-image: url(images/doc_handwrite.png);
+	background-repeat: no-repeat;
+	padding: 0px 2px 0px 16px;
+}
+.Handwrite:hover{
+	cursor: pointer;
+}
+
+.badge {
+  display: inline-block;
+  min-width: 10px;
+  padding: 3px 7px;
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 1;
+  color: #fff;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  background-color: #ffc903;
+  border-radius: 10px;
+}
+.badge:empty {
+  display: none;
+}
+a.badge:hover,
+a.badge:focus {
+  color: red;
+  text-decoration: none;
+  cursor: pointer;
+}

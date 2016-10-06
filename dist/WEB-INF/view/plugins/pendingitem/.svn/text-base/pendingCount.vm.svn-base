@@ -1,0 +1,14 @@
+
+
+  <meta http-equiv="Content-Type" content="text/html; charset=GBK" />
+  <title>$!{appContext.appName}</title>
+  <link href="../script/css.css" rel="stylesheet" type="text/css" />
+
+
+<body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" style="background-color:#F6F8FF" >
+  <div class="text12" valign="middle" align="left">
+      &nbsp; &nbsp;<a class ='1' href="../pendingitem/pendingItemQuery.do" target="mainFrame">待办事项：<font color = "red">$pendinCount</font> 个</a>
+   </div>
+</body>
+
+

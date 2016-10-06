@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 46
+/svn/GQFP/!svn/ver/2/trunk/src/com/plugins/sms
+END
+SmsHelper.java
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/GQFP/!svn/ver/2/trunk/src/com/plugins/sms/SmsHelper.java
+END
+SmsReplyHandlerChain.java
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/GQFP/!svn/ver/2/trunk/src/com/plugins/sms/SmsReplyHandlerChain.java
+END
+ISmsReplyHandler.java
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/GQFP/!svn/ver/2/trunk/src/com/plugins/sms/ISmsReplyHandler.java
+END
+plugins-sms.config.xml
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/GQFP/!svn/ver/2/trunk/src/com/plugins/sms/plugins-sms.config.xml
+END

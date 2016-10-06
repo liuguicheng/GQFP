@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+        
+	<!--附件 -->
+	<import resource="classpath:com/plugins/attach/attach.config.xml"/>
+	<!-- 字典 -->
+	<import resource="classpath:com/plugins/dictionary/plugins-dictionary.config.xml"/>
+	<!-- 目录树 -->
+	<import resource="classpath:com/plugins/dirtree/plugins-dirtree.config.xml"/>
+	<!-- 序号生成器 -->
+	<import resource="classpath:com/plugins/sn/plugins-sn.config.xml"/>
+	<!-- 系统消息 -->
+	<import resource="classpath:com/plugins/msg/plugins-msg.config.xml"/>
+	<!-- 通用信息发布 -->
+	<import resource="classpath:com/plugins/cms/plugins-cms.config.xml"/>
+	<import resource="classpath:com/plugins/pending/plugins-pendingitem.config.xml"/>
+	<!-- 短消息 -->
+	<import resource="classpath:com/plugins/sms/plugins-sms.config.xml"/>
+	<!-- 放假原因 -->
+    <bean class="org.springline.beans.dictionary.support.SystemDictionaryInstance">
+        <property name="identifier"><value>dicHolidayReason</value></property>
+        <property name="data">
+            <map>
+                <entry key="0"><value>周末</value></entry>
+                <entry key="1"><value>法定假日</value></entry>
+                <entry key="2"><value>临时假日</value></entry>
+                <entry key="3"><value>假日调休</value></entry>
+                <entry key="4"><value>其他</value></entry>
+            </map>
+        </property>
+    </bean>
+    <!-- 是否放假 -->
+    <bean class="org.springline.beans.dictionary.support.SystemDictionaryInstance">
+        <property name="identifier"><value>dicIsLeave</value></property>
+        <property name="data">
+            <map>
+                <entry key="0"><value>不放假</value></entry>
+                <entry key="1"><value>放假</value></entry>
+            </map>
+        </property>
+    </bean>
+    <!-- 假日类型 -->
+    <bean class="org.springline.beans.dictionary.support.SystemDictionaryInstance">
+        <property name="identifier"><value>dicHolidayType</value></property>
+        <property name="data">
+            <map>
+                <entry key="0"><value>农历</value></entry>
+                <entry key="1"><value>新历</value></entry>
+            </map>
+        </property>
+    </bean>
+
+    <!-- 是否是法定假日-->
+    <bean class="org.springline.beans.dictionary.support.SystemDictionaryInstance">
+        <property name="identifier"><value>dicIsStatutory</value></property>
+        <property name="data">
+            <map>
+                <entry key="0"><value>否</value></entry>
+                <entry key="1"><value>是</value></entry>
+            </map>
+        </property>
+    </bean>
+
+
+</beans>
+

@@ -1,0 +1,40 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+.box {
+    width: 210mm;
+    height: 297mm;
+    margin-right: auto;
+    margin-left: auto;
+    font-size: 14pt;
+    height£º100%£»
+    
+}
+.content {
+    padding: 20mm 18mm 10mm 18mm;
+}
+.title {
+    font-family: "é»‘ä½“";
+    font-size: 22pt;
+    text-align: center;
+}
+.substance {
+    padding-top: 10mm;
+}
+.substance p {
+    line-height: 24pt;
+}
+.text-right {
+    text-align: right;
+}
+.text-indent {
+    text-indent: 2em;
+}
+.dtb {
+    padding-left: 10pt;
+}
+.footer {
+    margin-top: 20pt;
+    border-top: solid 2px #000;
+}

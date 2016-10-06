@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  #headInclude()
+  <script type="text/javascript">
+  #if($message)alert("#javaScriptEscape($message)");#end
+
+  //上移
+  function doMoveUp() {
+    var chkbox = document.getElementsByName("depId");
+    var tbl = document.getElementById("dataTable");
+    if(chkbox.length > 0)  {
+      for(var i=0; i<chkbox.length; ++i) {
+        if (chkbox[i] && chkbox[i].checked) {
+          if(i>0 && !chkbox[(i-1)].checked)  {
+##            var tr1 = document.getElementById("depRow" + i);
+##            var tr2 = document.getElementById("depRow"+(i-1));
+##            var temp1 = tr1.innerHTML;
+##            tr1.innerHTML = tr2.innerHTML;
+##            tr2.innerHTML = temp1;
+            var tr1 = $("#depRow" + i);
+            var tr2 = $("#depRow" + (i - 1));
+            var temp = tr1.html();
+            tr1.html(tr2.html());
+            tr2.html(temp);
+			chkbox[i-1].checked = true;
+          }
+        }
+      }
+    }
+  }
+  //下移
+  function doMoveDown() {
+    var chkbox = document.getElementsByName("depId");
+    var tbl = document.getElementById("dataTable");
+    if(chkbox.length > 0)  {
+      for(var i=chkbox.length - 1; i >= 0; --i) {
+        if (chkbox[i] && chkbox[i].checked) {
+          if(i < chkbox.length - 1 && !chkbox[(i+1)].checked)  {
+##            var tr1 = document.getElementById("depRow" + i);
+##            var tr2 = document.getElementById("depRow"+(i+1));
+##            var temp1 = tr1.innerHTML;
+##            tr1.innerHTML = tr2.innerHTML;
+##            tr2.innerHTML = temp1;
+            var tr1 = $("#depRow" + i);
+            var tr2 = $("#depRow" + (i + 1));
+            var temp = tr1.html();
+            tr1.html(tr2.html());
+            tr2.html(temp);
+			chkbox[i+1].checked = true;
+          }
+        }
+      }
+    }
+  }
+
+  function doDelete() {
+    if (!hasCheckBoxSelect("depId")) {
+      alert("请选择要删除的单位或部门！");
+      return false;
+    }
+    var e = document.listForm;
+    if (e.submitFlag.value == "1") {
+      alert("页面已提交，请稍等");
+      return;
+    }
+
+    if (confirm("您确认要删除所有选择的部门吗？")) {
+      e.action = "../manage/departmentDelete.do";
+      e.submitFlag.value = "1";
+      e.submit();
+    }
+  }
+
+  function doSort() {
+    var chkbox = document.getElementsByName("depId");
+    if(chkbox.length > 0)  {
+      for(var i=chkbox.length - 1; i >= 0; --i) {
+        chkbox[i].checked = true;
+      }
+    }
+    var e = document.listForm;
+    e.action = "../manage/departmentSort.do";
+    e.submit();
+  }
+  function doEdit(depId) {
+    location.href = "../manage/departmentEdit.do?id=" + depId;
+  }
+  function doNew(isIndependent) {
+    var parentId = document.getElementById("parentId").value;
+    var theUrl =  "../manage/departmentEdit.do?parentId=" + parentId + "&isIndependent=" + isIndependent
+    document.location.href = theUrl;
+  }
+  </script>
+</head>
+<body class="easyui-layout">
+      #set($depName = $parentDep.name)
+    #if($parentDep.parentDep)
+        #set($depName = $parentDep.parentDep.name + "/" + $depName)
+        #set($parentDep = $parentDep.parentDep)
+    #end
+<div data-options="region:'north',title:'$!{depName}直属机构管理',iconCls:'icon-topic',collapsible:false,height:70">
+<div id="toolbar" class="PageTool">
+  <div class="LeftBox Tool">
+    <input type="button" class="BtnAdd" value="新增" title="新增" onclick="javascript:doNew('');"/>
+    <input type="button" class="BtnDel" value="删除" title="删除" onclick="javascript:doDelete();"/>
+    <input type="button" class="BtnSortUp" value="上移" title="上移" onclick="javascript:doMoveUp()"/>
+    <input type="button" class="BtnSortDown" value="下移" title="下移" onclick="javascript:doMoveDown()"/>
+    <input type="button" class="BtnSort" value="排序" title="排序" onclick="javasciprt:doSort()"/>
+  </div>
+</div>
+
+
+</div>
+
+
+<div data-options="region:'center',iconCls:'icon-topic'">
+<form name="listForm" method="post">
+<input type="hidden" name="submitFlag" value="0">
+<input type="hidden" name="token" value="$!{command.token}">
+<input type="hidden" id="parentId" name="parentId" value="$!{parentDep.id}">
+  <table class="TbList">
+  <thead>
+    <tr>
+      <th style="width:35px;" nowrap>
+        <input type="checkbox" onclick="javascript:setCheckBoxValue('depId', this.checked);">
+      </th>
+      <th style="width:40px;">序号</th>
+      <th>名称</th>
+    </tr>
+  </thead>
+  <tbody>
+  #foreach( $data in ${departmentList} )
+    #set($index = $velocityCount - 1)
+    <tr id="depRow$index">
+      <td><input type="checkbox" name="depId" value="$!{data.id}"></td>
+      <td>${data.orderNumber}</td>
+      <td><a href="javascript:doEdit('$!{data.id}')">#htmlEscape($!{data.name})</a></td>
+    </tr>
+  #end
+  </tbody>
+</table>
+</form>
+</div>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping default-lazy="false">
+	<!--<class name="com.console.entity.Operate" table="sys_operate" schema="NNJW"> 
+		<id name="operateId" type="java.lang.String"> <column name="OPERATE_ID" length="32" 
+		/> <generator class="uuid.hex"></generator> </id> -->
+	<class name="com.console.entity.Operate" table="sys_operate"
+		dynamic-update="true" dynamic-insert="false">
+
+		<id name="operateId" column="OPERATE_ID" type="java.lang.String"
+			length="32">
+			<generator class="uuid"></generator>
+		</id>
+		<property name="operateName" type="java.lang.String">
+			<column name="OPERATE_NAME" length="30" />
+		</property>
+		<property name="operateCode" type="java.lang.String">
+			<column name="OPERATE_CODE" length="30" />
+		</property>
+		<property name="remark" type="java.lang.String">
+			<column name="REMARK" length="100" />
+		</property>
+	</class>
+
+</hibernate-mapping>

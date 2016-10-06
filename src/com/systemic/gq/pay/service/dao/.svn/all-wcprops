@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/GQFP/!svn/ver/62/trunk/src/com/systemic/gq/pay/service/dao
+END
+IWithdrawalsDao.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/GQFP/!svn/ver/95/trunk/src/com/systemic/gq/pay/service/dao/IWithdrawalsDao.java
+END
+ITransferAccountsDao.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/GQFP/!svn/ver/101/trunk/src/com/systemic/gq/pay/service/dao/ITransferAccountsDao.java
+END
+IPayLogDao.java
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/GQFP/!svn/ver/62/trunk/src/com/systemic/gq/pay/service/dao/IPayLogDao.java
+END
+IPayDao.java
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/GQFP/!svn/ver/48/trunk/src/com/systemic/gq/pay/service/dao/IPayDao.java
+END

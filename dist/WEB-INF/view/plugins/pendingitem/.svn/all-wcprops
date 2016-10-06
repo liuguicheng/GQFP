@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/GQFP/!svn/ver/2/trunk/dist/WEB-INF/view/plugins/pendingitem
+END
+pendingItemQuery2.vm
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/GQFP/!svn/ver/2/trunk/dist/WEB-INF/view/plugins/pendingitem/pendingItemQuery2.vm
+END
+finishedItemQuery.vm
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/GQFP/!svn/ver/2/trunk/dist/WEB-INF/view/plugins/pendingitem/finishedItemQuery.vm
+END
+pendingItemQuery.vm
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/GQFP/!svn/ver/2/trunk/dist/WEB-INF/view/plugins/pendingitem/pendingItemQuery.vm
+END
+pendingItemHomepage.vm
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/GQFP/!svn/ver/2/trunk/dist/WEB-INF/view/plugins/pendingitem/pendingItemHomepage.vm
+END
+finishedItemQuery2.vm
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/GQFP/!svn/ver/2/trunk/dist/WEB-INF/view/plugins/pendingitem/finishedItemQuery2.vm
+END
+pendingCount.vm
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/GQFP/!svn/ver/2/trunk/dist/WEB-INF/view/plugins/pendingitem/pendingCount.vm
+END

@@ -1,0 +1,329 @@
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/GQFP/!svn/ver/50/trunk/dist/WEB-INF/view/console/manage
+END
+staffSubDepartmentList.vm
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/GQFP/!svn/ver/2/trunk/dist/WEB-INF/view/console/manage/staffSubDepartmentList.vm
+END
+staffSubDepartmentInnerEdit.vm
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/GQFP/!svn/ver/2/trunk/dist/WEB-INF/view/console/manage/staffSubDepartmentInnerEdit.vm
+END
+departmentSingleSelect.vm
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/GQFP/!svn/ver/2/trunk/dist/WEB-INF/view/console/manage/departmentSingleSelect.vm
+END
+dutyEdit.vm
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/GQFP/!svn/ver/2/trunk/dist/WEB-INF/view/console/manage/dutyEdit.vm
+END
+flowRoleList.vm
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/GQFP/!svn/ver/2/trunk/dist/WEB-INF/view/console/manage/flowRoleList.vm
+END
+staffManage.vm
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/GQFP/!svn/ver/2/trunk/dist/WEB-INF/view/console/manage/staffManage.vm
+END
+roleEdit.vm
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/GQFP/!svn/ver/2/trunk/dist/WEB-INF/view/console/manage/roleEdit.vm
+END
+staffMultiSelect.vm
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/GQFP/!svn/ver/2/trunk/dist/WEB-INF/view/console/manage/staffMultiSelect.vm
+END
+departmentFilterMultSelect.vm
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/GQFP/!svn/ver/2/trunk/dist/WEB-INF/view/console/manage/departmentFilterMultSelect.vm
+END
+grantOperateToRole.vm
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/GQFP/!svn/ver/2/trunk/dist/WEB-INF/view/console/manage/grantOperateToRole.vm
+END
+departmentEdit.vm
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/GQFP/!svn/ver/2/trunk/dist/WEB-INF/view/console/manage/departmentEdit.vm
+END
+queueEdit.vm
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/GQFP/!svn/ver/2/trunk/dist/WEB-INF/view/console/manage/queueEdit.vm
+END
+staffAgentManage.vm
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/GQFP/!svn/ver/2/trunk/dist/WEB-INF/view/console/manage/staffAgentManage.vm
+END
+departmentMultiTree.vm
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/GQFP/!svn/ver/2/trunk/dist/WEB-INF/view/console/manage/departmentMultiTree.vm
+END
+operateEdit.vm
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/GQFP/!svn/ver/2/trunk/dist/WEB-INF/view/console/manage/operateEdit.vm
+END
+favoriteConfigStaff.vm
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/GQFP/!svn/ver/2/trunk/dist/WEB-INF/view/console/manage/favoriteConfigStaff.vm
+END
+roleList.vm
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/GQFP/!svn/ver/80/trunk/dist/WEB-INF/view/console/manage/roleList.vm
+END
+selectInputerStaff.vm
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/GQFP/!svn/ver/2/trunk/dist/WEB-INF/view/console/manage/selectInputerStaff.vm
+END
+roleGrant.vm
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/GQFP/!svn/ver/2/trunk/dist/WEB-INF/view/console/manage/roleGrant.vm
+END
+staffContacts.vm
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/GQFP/!svn/ver/2/trunk/dist/WEB-INF/view/console/manage/staffContacts.vm
+END
+staffDetail.vm
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/GQFP/!svn/ver/2/trunk/dist/WEB-INF/view/console/manage/staffDetail.vm
+END
+passwordEdit.vm
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/GQFP/!svn/ver/2/trunk/dist/WEB-INF/view/console/manage/passwordEdit.vm
+END
+dutyList.vm
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/GQFP/!svn/ver/2/trunk/dist/WEB-INF/view/console/manage/dutyList.vm
+END
+staffSubDepartmentEdit.vm
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/GQFP/!svn/ver/50/trunk/dist/WEB-INF/view/console/manage/staffSubDepartmentEdit.vm
+END
+departmentPower.vm
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/GQFP/!svn/ver/2/trunk/dist/WEB-INF/view/console/manage/departmentPower.vm
+END
+operateLogManageList.vm
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/GQFP/!svn/ver/2/trunk/dist/WEB-INF/view/console/manage/operateLogManageList.vm
+END
+operateList.vm
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/GQFP/!svn/ver/2/trunk/dist/WEB-INF/view/console/manage/operateList.vm
+END
+selectOperateStaff.vm
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/GQFP/!svn/ver/2/trunk/dist/WEB-INF/view/console/manage/selectOperateStaff.vm
+END
+powerGrant.vm
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/GQFP/!svn/ver/2/trunk/dist/WEB-INF/view/console/manage/powerGrant.vm
+END
+flowRoleEdit.vm
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/GQFP/!svn/ver/2/trunk/dist/WEB-INF/view/console/manage/flowRoleEdit.vm
+END
+queueList.vm
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/GQFP/!svn/ver/2/trunk/dist/WEB-INF/view/console/manage/queueList.vm
+END
+departmentManage.vm
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/GQFP/!svn/ver/2/trunk/dist/WEB-INF/view/console/manage/departmentManage.vm
+END
+powerManage.vm
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/GQFP/!svn/ver/2/trunk/dist/WEB-INF/view/console/manage/powerManage.vm
+END
+importResult.vm
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/GQFP/!svn/ver/2/trunk/dist/WEB-INF/view/console/manage/importResult.vm
+END
+testXinFangTmp.vm
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/GQFP/!svn/ver/2/trunk/dist/WEB-INF/view/console/manage/testXinFangTmp.vm
+END
+powerEdit.vm
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/GQFP/!svn/ver/2/trunk/dist/WEB-INF/view/console/manage/powerEdit.vm
+END
+departmentTree.vm
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/GQFP/!svn/ver/2/trunk/dist/WEB-INF/view/console/manage/departmentTree.vm
+END
+staffSubDepartmentListInner.vm
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/GQFP/!svn/ver/2/trunk/dist/WEB-INF/view/console/manage/staffSubDepartmentListInner.vm
+END
+departmentMultipleSelect3.vm
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/GQFP/!svn/ver/2/trunk/dist/WEB-INF/view/console/manage/departmentMultipleSelect3.vm
+END
+grantFlowRoleToStaff.vm
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/GQFP/!svn/ver/2/trunk/dist/WEB-INF/view/console/manage/grantFlowRoleToStaff.vm
+END
+departmentMultipleSelect.vm
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/GQFP/!svn/ver/2/trunk/dist/WEB-INF/view/console/manage/departmentMultipleSelect.vm
+END
+staffQueryList.vm
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/GQFP/!svn/ver/2/trunk/dist/WEB-INF/view/console/manage/staffQueryList.vm
+END
+staffSingleSelect.vm
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/GQFP/!svn/ver/2/trunk/dist/WEB-INF/view/console/manage/staffSingleSelect.vm
+END
+grantRoleToStaff.vm
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/GQFP/!svn/ver/2/trunk/dist/WEB-INF/view/console/manage/grantRoleToStaff.vm
+END
+flowRoleEditBak.vm
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/GQFP/!svn/ver/2/trunk/dist/WEB-INF/view/console/manage/flowRoleEditBak.vm
+END
+staffQueryInList.vm
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/GQFP/!svn/ver/2/trunk/dist/WEB-INF/view/console/manage/staffQueryInList.vm
+END
+departmentList.vm
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/GQFP/!svn/ver/2/trunk/dist/WEB-INF/view/console/manage/departmentList.vm
+END
+staffEditSelf.vm
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/GQFP/!svn/ver/2/trunk/dist/WEB-INF/view/console/manage/staffEditSelf.vm
+END
+grantPowerToRole.vm
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/GQFP/!svn/ver/2/trunk/dist/WEB-INF/view/console/manage/grantPowerToRole.vm
+END
+staffAgentLogin.vm
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/GQFP/!svn/ver/2/trunk/dist/WEB-INF/view/console/manage/staffAgentLogin.vm
+END
+unitDeptSingleSelect.vm
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/GQFP/!svn/ver/2/trunk/dist/WEB-INF/view/console/manage/unitDeptSingleSelect.vm
+END
+flowRoleManageList.vm
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/GQFP/!svn/ver/2/trunk/dist/WEB-INF/view/console/manage/flowRoleManageList.vm
+END
+powerList.vm
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/GQFP/!svn/ver/2/trunk/dist/WEB-INF/view/console/manage/powerList.vm
+END
+selectAllStaffList.vm
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/GQFP/!svn/ver/2/trunk/dist/WEB-INF/view/console/manage/selectAllStaffList.vm
+END

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  #headInclude()
+   <script type="text/javascript" src="../script/validator.js"></script>
+    <script type="text/javascript">
+	  #if($message)alert("#javaScriptEscape($message)");#end
+		function ons(){
+		$.ajax({
+        url: '../pay/payReview.do',
+        type: 'POST',
+		data:$('#form1').serialize(),// 你的formid
+        cache: false,
+        success: function(result) {
+			if(result==1){
+			alert("操作成功");
+			  top.closeDialog();
+			}
+        }
+   		 });
+		}
+ 		
+    </script>
+</head>   
+<body>
+<form id="form1" name="editForm" method="post"  action="" class="indieui-form">
+<div class="PageContainer indieui-scroll">
+    <div class="InfoBox">
+    <h2>充值审核</h2>
+	<table class="TbCommon">
+      <tr >
+		<td width="10%" align="left" class="TdLabel">充值类型：</td>
+		<td  align="left" class="TdInput" >
+			#lookUpDict($dicData.dicPayType $!{payinfo.recordType})
+			<input type="hidden" name="recordType" value="$!{payinfo.recordType}"/>
+			<input type="hidden" name="numberId" value="$!{payinfo.numberId}"/>
+    	</td>
+		<td width="10%" align="left" class="TdLabel">充值金额：</td>
+		<td  align="left" class="TdInput" >
+			<input type="hidden" name="applyRecordNum" value="$!{payinfo.applyRecordNum}"/>
+			$!{payinfo.applyRecordNum}
+		</td> 
+		<td width="10%" align="left" class="TdLabel">充值时间：</td>
+		<td  align="left" class="TdInput" >
+			<input  type="hidden" name="applyTime"  value="$!{payinfo.applyTime}" >
+				$!{payinfo.applyTime}
+    	</td> 
+    </tr>
+    
+    <tr >
+		<td width="10%" align="left" class="TdLabel">充值前余额：</td>
+		<td  align="left" class="TdInput" >
+			<font color="red">￥#showMoney($!{payinfo.payBeforeNum})</font>
+			<input type="hidden" id="" name="payBeforeNum" value="$!{payinfo.payBeforeNum}"  >
+    	</td>
+		<td width="10%" align="left" class="TdLabel">充值后余额：</td>
+		<td  align="left" class="TdInput" colspan="3">
+			<font color="red">￥#showMoney($!{payinfo.payAfterNum})</font>
+			<input type="hidden" id="" name="payAfterNum" value="$!{payinfo.payAfterNum}"  >
+		</td> 
+	</tr>
+	<tr>
+		<td width="10%" align="left" class="TdLabel">审核结果：</td>
+		<td  align="left" class="TdInput" colspan="5">
+			<input type="radio" id="male" name="istrue" value="2"/><label for="male"  >同意</label>&nbsp;&nbsp;
+			<input type="radio" id="male" name="istrue" value="3" checked="checked"/><label for="male"  >拒绝</label>
+			
+    	</td>
+	</tr>
+	</table>
+</div>  
+</div>
+	<div class="CommandTool indieui-form">
+		<input type="button"  onclick="ons();"   id="btnconfirm" value="提交"/>
+	</div>
+	
+</form> 
+
+</body>
+</html>

@@ -1,0 +1,343 @@
+/* 系统主框架页面CSS样式定义 */
+/*--------公共部分-------------*/
+body {
+    overflow:hidden;
+    font-size:12px;
+    color : #000;
+    font-family :  宋体,tahoma, fantasy;
+    text-align : center;
+    margin : 0;
+    background :#fff;
+}
+
+td {
+    font-size:12px;
+    font-family : 宋体, tahoma, fantasy;
+}
+
+a {
+    color: #202020;
+    text-decoration: none;
+}
+a:hover {
+    color: #FF6600;
+    text-decoration: underline;
+}
+.toptable{
+    margin:0px;
+    font-size:12px;
+    float:left;
+    background-color: #3face5;
+    background-image: url(../topbanner.jpg);
+    background-repeat: no-repeat;
+    background-position: right top;
+}
+.DivLogo
+{
+    float:left;
+    width:120px;
+    height:70px;
+    margin-left: 5px;
+    margin-top: 10px;
+    color: #FFFFFF;
+    font-size: 24px;
+    text-align: center;
+    vertical-align: middle;
+}
+/*----------------------- 导航栏   --------------------------- */
+#tabs {
+    margin-top:56px;
+    margin-left:0px;
+    float:left;
+    line-height:normal;
+    padding-bottom:0px;
+    padding-top: 0px;
+  }
+#tabs ul {
+  margin:0;
+  padding:5px 5px 0 0px !important;
+  *padding:6px 5px 0 0px !important;
+  padding:6px 5px 0 0px;
+  list-style:none;
+  }
+#tabs li {
+  display:inline;
+  margin:0;
+  padding:0;
+  }
+#tabs a {
+  float:left;
+  background:url("../tableft6.gif") no-repeat left top;
+  margin:0;
+  padding:0 0 0 4px;
+  text-decoration:none;
+  white-space:nowrap;
+  }
+#tabs a span {
+    float:left;
+    display:block;
+    background:url("../tabright6.gif") no-repeat right top;
+    padding:8px 8px 6px 6px;
+    color:#E9F4FF;
+    font-size: 12px;
+    filter:blendtrans(duration=0.5);
+  }
+/* Commented Backslash Hack hides rule from IE5-Mac \*/
+#tabs a span {float:none;}
+/* End IE5-Mac hack */
+
+#tabs a:hover span {
+  color:#fff;
+  }
+#tabs a:hover {
+  background-position:0% -42px;
+  }
+#tabs a:hover span {
+  background-position:100% -42px;
+  color:#222;
+  }
+
+#tabs LI a.selectTab
+{
+  background-position:0% -42px;
+}
+#tabs LI a.selectTab span
+{
+  background-position:100% -42px;
+  color:#222;
+}
+/* ---------------  常用工具栏样式定义  ------------------- */
+.tbtooltop
+{
+    background-color: #1291A9;
+    background-image: url(../bg2.gif);
+    background-repeat: repeat-x;
+    font-family: "宋体", Arial, sans-serif;
+    color: #333333;
+    height: 25px;
+    width: 100%;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: #91C2F4;
+    vertical-align: middle;
+    margin: 0px;
+    padding-left: 10px;
+}
+.tbtoolbottom
+{
+    background-color: #1291A9;
+    background-image: url(../botbg.gif);
+    background-repeat: repeat-x;
+    font-family: "宋体", Arial, sans-serif;
+    color: #1E1E1E;
+    height: 25px;
+    width: 100%;
+    margin: 0px;
+}
+.tdright
+{
+    text-align: right;
+    padding-right: 20px;
+}
+.tdleft
+{
+    text-align: left;
+    padding-left: 20px;
+
+}
+.tdframe
+{
+    padding:1px;
+    BACKGROUND-COLOR: #fff;
+    font-size: 12px;
+    border-bottom:#a0a0a0 1px solid;
+    border-left:#a0a0a0 1px solid;
+    border-right:#a0a0a0 1px solid;
+}
+/* --------- 选项卡样式定义 ---------- */
+.tabbar
+{
+    width:100%;
+    overflow:hidden;
+    overflow:hidden !important;
+    height:29px;
+    margin:0px;
+    float:left;
+    display:inline;
+    background-image: url(../tabbarbg.gif);
+    background-repeat: repeat-x;
+    background-position: top;
+    position:absolute;
+    border-left:#C8C8C8 1px solid;
+}
+#tags {
+    padding:0px;
+    MARGIN: 5px 0px 0px 0px;
+    HEIGHT: 23px;
+    display:inline;
+    float:left;
+    border-bottom:#a0a0a0 1px solid;
+}
+#tags LI {
+    FLOAT: left;
+    MARGIN-RIGHT: 1px;
+    LIST-STYLE-TYPE: none;
+    HEIGHT: 23px;
+    display:block;
+    background-image: url(../tagleft.gif);
+    background-repeat: no-repeat;
+    background-position: left bottom;
+    /*position:relative;*/
+}
+#tags LI A {
+    PADDING-RIGHT: 10px;
+    PADDING-LEFT: 10px;
+    FLOAT: left;
+    PADDING-BOTTOM: 0px;
+    COLOR: #666666;
+    LINE-HEIGHT: 23px;
+    PADDING-TOP: 0px;
+    HEIGHT: 23px;
+    TEXT-DECORATION: none;
+    white-space:nowrap;
+    background-image: url(../tagright.gif);
+    background-repeat: no-repeat;
+    background-position: right bottom;
+    filter:DropShadow(Color=#FFFFFF,OffX=1,OffY=1);
+    /*font-size: 14px*/
+}
+
+#tags LI.selectTag {
+    BACKGROUND-POSITION: left top; MARGIN-BOTTOM: -2px; POSITION: relative; HEIGHT: 25px;
+    background-image: url(../tagleft.gif);
+    background-repeat: no-repeat;
+
+}
+#tags LI.selectTag A {
+    BACKGROUND-POSITION: right top; COLOR: #262626; LINE-HEIGHT: 25px; HEIGHT: 27px;
+    background-image: url(../tagright.gif);
+    background-repeat: no-repeat;
+    font-size:13px;
+    padding-top: 2px;
+}
+#tags LI.selectTag A SPAN
+{
+    width:16px !important;
+    width:20px;
+    color: #FF3300;
+    height:23px;
+    cursor:pointer;
+    line-height:23px;
+    padding-left:4px;
+    font-weight: bold;
+}
+
+/*---------  选项卡工具栏工具箱 ----------*/
+.tabtoolbox
+{
+    margin:0px;
+    width:50px;
+    height:29px;
+    float:right;
+    position:relative;
+    background-image: url(../tabbarbg.gif);
+    background-repeat: repeat-x;
+    background-position: top;
+    border-left: #E1E1E1 1px solid;
+    border-right:#C8C8C8 1px solid;
+}
+.tabtoolbox a
+{
+    height:29px;
+    width: 16px;
+    line-height:29px;
+    float:left;
+    display:block;
+    text-decoration:none;
+    text-align:center;
+    font-size: 12px;
+    color: #35689B;
+}
+.tabtoolbox a:hover
+{
+    height:29px;
+    width: 16px;
+    float:left;
+    display:block;
+    background-image: url(../arrowtabbg.gif);
+    background-repeat: repeat-x;
+    background-position: center;
+    cursor:pointer;
+    color: #FF6633;
+    text-decoration: none;
+    font-weight: bold;
+}
+.arrowtoleft
+{
+    height:29px;
+    background-image: url(../toleft.gif);
+    background-repeat: no-repeat;
+    background-position: center center;
+    width: 16px;
+    float:left;
+    display:block;
+}
+.arrowtoright
+{
+    height:29px;
+    background-image: url(../toright.gif);
+    background-repeat: no-repeat;
+    background-position: center center;
+    width: 16px;
+    float:left;
+    display:block;
+}
+.arrowcloseall
+{
+    height:29px;
+    background-image: url(../closeall.gif);
+    background-repeat: no-repeat;
+    background-position: center center;
+    width: 16px;
+    float:left;
+    display:block;
+}
+/* ------------ 进度条 ---------------- */
+.LoadingBar {
+    position: absolute;
+    background-position:center center;
+    width:340px;
+    height:65px;
+    background-color:#FFFFFF;
+    left: 50%;
+    top: 45%;
+    *left: expression((document.body.offsetWidth - 340)/2);
+    *top: expression((document.body.offsetHeight - 120)/2);
+    background-image: url(../pressbar.gif);
+    background-repeat: no-repeat;
+    font-family: "宋体", Tahoma, sans-serif;
+    font-size: 12px;
+    color: #666666;
+    padding-top: 10px;
+    border: 1px solid #2F5F86;
+    padding-left: 8px;
+    z-index:2;
+}
+.TdLeftMenu{
+	width:182px;
+	background:#c9defa;
+}
+.TdLeftMenu iframe{
+	width: 182px;
+	background:url(../skins/leftop.gif) no-repeat
+}
+.TdHandle {
+	width:9px;
+}
+.TdMain{
+	background-color: #FFF;
+	_width:100%;
+}
+.TdMain .TbMain{
+	background-color: #FFF;
+}

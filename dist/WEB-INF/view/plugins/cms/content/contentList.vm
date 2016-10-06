@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  #headInclude()
+  <script type="text/javascript">
+  #if($message)alert("#javaScriptEscape($message)");#end
+  function editContent(contentId) {
+    var url = "../cms/contentView.do?channelId=$!{command.channelId}&token=$!{page.token}&contentId=" + contentId;
+    #if("$!{channel.isBlank}" == "1") ##新窗口打开
+      window.open(url);
+    #else
+      location.href = url;
+    #end
+  }
+  </script>
+</head>
+<body>
+<div class="PageHeader">
+  <div class="LeftBox Title">#lookUpDict($dicData.dicCmsChannel "$!{command.channelId}") </div>
+</div>
+
+#parse("cms/content/inner/cmsContentQueryInner.vm")
+
+<div class="PageTool">
+  <div class="LeftBox Tool">
+    <input type="button" value="查询" class="BtnSearch" onclick="javascript:showDiv('divSearch')" />
+  </div>
+  <div class="RightBox Pager">
+    #pageDirector( $page "#getRequestUri()" false)
+  </div>
+</div>
+
+<div class="PageContainer indieui-scroll">
+<form name="formList" method="post">
+  <input type="hidden" name="submitFlag" value="0">
+  <input type="hidden" name="token" value="$!{page.token}">
+  <table class="TbList">
+    <thead >
+      <tr >
+        <th style="width:35px">序号</th>
+        <th >标题</th>
+        <th style="width:160px">发布时间</th>
+      </tr>
+    </thead>
+    <tbody>
+    #foreach($content in ${page.data})
+      #set($index = $velocityCount + $page.pageSize * ($page.pageNumber - 1))
+      <tr >
+        <td>$!{index}</td>
+        <td class="TdTxtOver" title="#htmlEscape($!{content.title})" style="text-align:left">
+          <a href="javascript:editContent('$!{content.contentId}')" #if("$!{content.topLevel}" == "1") class="Status Commend" #end>#htmlEscape($!{content.title})</a>
+        </td>
+        <td>#formatTime($!{content.releaseDate})</td>
+      </tr>
+    #end
+    </tbody>
+  </table>
+</form>
+</div>
+</body>
+</html>

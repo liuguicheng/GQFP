@@ -1,0 +1,192 @@
+/*
+* Jquery FormatInput Plugin Style Document
+* Copyright (c) 2013 CERC HuangAnzhi
+* huanganzhi@cerc.net.cn
+* Version 1.0.1 build 20130826
+* Requires jquery v1.4.4+
+*/
+
+/* Input Style */
+input.FormatInputInputTxt, textarea.FormatInputInputMultiTxt, select{
+	border: 1px solid #CCCCCC;
+	background-color: #FFFFFF;
+	border-radius: 2px;
+	color: #333;
+	line-height:1.5;
+	background-image: url(images/input_bg.jpg);
+	background-repeat: repeat-x;
+	background-position: center top;
+}
+input.FormatInputInputDate, input.FormatInputInputTxt{
+	height:20px;
+}
+input.FormatInputInputTxt, textarea.FormatInputInputMultiTxt, input.FormatInputInputDate,input.FormatInputQueryTxt{
+	padding:2px;
+}
+select{
+	height:26px;
+}
+input.FormatInputInputDate, .FormatInputInputDate{
+	border: 1px solid #CCCCCC;
+	background-color: #ECF7FF;
+	border-radius: 2px;
+	color: #666;
+	line-height:1.5;
+	background-image: url(images/input_date_ico.png);
+	background-repeat: no-repeat;
+	background-position: right center;
+}
+input.FormatInputQueryTxt, .FormatInputQueryTxt{
+	border: 1px solid #CCCCCC;
+	color: #666;
+	line-height:1.5;
+	
+	border-top-left-radius: 2px;
+	border-top-right-radius: 0px;
+	border-bottom-right-radius: 0px;
+	border-bottom-left-radius: 2px;
+	height:20px;
+	float:left;
+	border-right:1px solid #E5E5E5;
+}
+span.FormatInputQueryBtn{
+	width:auto;
+	/*border-radius: 2px;*/
+	line-height:1.5;
+	background-image: url(images/search_btn_bg.jpg);
+	background-repeat: no-repeat;
+	background-position: center center;
+	cursor:pointer;
+	display:block;
+	float: left;
+	border: 1px solid #CCCCCC;
+	border-left:0px;
+	height:24px;
+	width:30px;
+	
+	margin:0;
+	border-top-left-radius: 0px;
+	border-top-right-radius: 2px;
+	border-bottom-right-radius: 2px;
+	border-bottom-left-radius: 0px;
+}
+span.FormatInputQueryBtn:hover{
+	background-image: url(images/search_btn_hover_bg.jpg);
+}
+input.FormatInputInputTxtFocus,textarea.FormatInputInputTxtFocus{
+	border:1px solid #09F;
+}
+input.FormatInputInputTxtError, textarea.FormatInputInputTxtError{
+	border:1px solid #f90;
+	background-color: #FFFFFF;
+	color: #FF0000;
+}
+
+/* button input[type='button'] , button Style*/
+input.FormatInputBtn, button.FormatInputBtn, a.FormatInputABtn{
+	margin:3px 1px;
+	border:#83B1F2 1px solid;
+	/*background-image: url(images/common_btn_bg.png);
+	background-repeat: repeat-x;
+	background-position: center center;*/
+	padding: 2px 15px 2px 15px;
+	*padding: 1px 10px 1px 10px;
+	_padding: 1px 10px 1px 10px;
+	white-space:nowrap;
+	text-align:center;
+	width:auto;
+	height:auto;
+	line-height:1.5;
+	vertical-align:middle;
+	background-color: #09C;
+	font-size: 12px;
+	color: #FFF;
+	cursor:pointer;
+	border-radius: 2px;
+}
+input.FormatInputBtn.Main, button.FormatInputBtn.Main, a.FormatInputABtn.Main{
+	padding: 2px 30px 2px 30px;
+	*padding: 1px 15px 1px 15px;
+	_padding: 1px 15px 1px 15px;
+	background-color: #F60;
+	border:#FF9900 1px solid;
+}
+input.FormatInputBtn:hover, input.FormatInputBtnHover,button.FormatInputBtn:hover, button.FormatInputBtnHover{
+	/*background-image: url(images/btn_bg_hover.gif);*/
+	border:1px solid #096;
+	color: #FFF;
+	background-color: #093;
+}
+
+a.FormatInputABtn{
+	*padding: 2px 10px 2px 10px;
+	_padding: 2px 10px 2px 10px;
+}
+a.FormatInputABtn:Hover{
+	background-image: url(images/btn_bg_hover.gif);
+	border:#FF9900 1px solid;
+	color: #666;
+	text-decoration: none;
+}
+
+/* Disable Control Style */
+input.FormatInputCtrlDisable, select.FormatInputCtrlDisable, textarea.FormatInputCtrlDisable{
+	border: 1px solid #CCCCCC;
+	background-color: #F2F2F2;
+	background-image:none;
+	overflow:hidden;
+	color:#999;
+}
+.SearchBoxMask{
+	background-image: url(images/mask.png);
+	position:absolute;
+	width:100%;
+	height:100%;
+	top:0px;
+	left:0px;
+	z-index:9;
+	display:block;
+}
+.SearchBox{
+	position:absolute;
+	width:750px;
+	left:50%;
+	margin-left:-375px;
+	box-shadow: 0 2px 2px rgba(0, 0, 0, 0.35);
+	top:80px;
+	height:auto;
+	_height:30px;
+	background-color: #FFF;
+	display:none;
+	z-index:99;
+	padding:5px;
+	border:1px solid #E6E6E6;
+}
+.SearchBox h3{
+	height:38px;
+	line-height:38px;
+	/*background-color: #09C;*/
+	margin:-6px;
+	margin-bottom:7px;
+	background-color: #4F0000;
+	padding-left: 5px;
+}
+.SearchBox .TitleTxt{
+	display:block;
+	float:left;
+	color: #FFF;
+	margin-left:5px;
+}
+.SearchBox .CloseBtn{
+	font-size:20px;
+	display:block;
+	float:right;
+	color: #FFF;
+	text-decoration: none;
+	font-weight:bold;
+	margin-right:5px;
+}
+.SearchBox .CloseBtn:hover{
+	color: #F90;
+	cursor:pointer;
+}

@@ -1,0 +1,269 @@
+package com.systemic.gq.member.command;
+
+import java.util.Date;
+
+import org.springline.web.mvc.SpringlineCommand;
+
+import com.systemic.gq.entity.Stock;
+
+public class MemberEditInfo extends SpringlineCommand {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8823385399049838013L;
+	private String id;
+	/**标识id*/
+     private String bsid;
+     /**用户名*/
+     private String userName;
+     /**登陆名*/
+     private String loginName;
+     /**密码	password*/
+     private String password;
+     /**二级密码	passwodTwo*/
+     private String passwodTwo;
+     /**推荐人id*/
+     private String referenceId;
+     /**推荐人*/
+     private String referenceName;
+     /**股权等级id*/
+     private Stock stock;
+     /**奖金币*/
+     private Double goldAward;
+     /**电子币*/
+     private Double electroniccurrency;
+     /**创建时间	*/
+     private Date createTime;
+     /**激活时间*/
+     private Date activationTime;
+     /**是否正常*/
+     private Integer isok;
+     /**删除标识*/
+     private Integer isdel;
+     /**所在区域*/
+     private String region;
+     /**系统id*/
+     private String staffId;
+     /** 股权等级id */
+ 	private String productgradeId;
+ 	private String note;
+ 	//密保问题
+ 		private String mbwt;
+ 		//真实姓名
+ 		private String zsxm;
+ 		//联系电话
+ 		private String lxdh;
+ 		//联系地址
+ 		private String lxdz;
+ 		//银行信息
+ 		private String yhxx;
+ 		//开户姓名
+ 		private String khxm;
+ 		//银行卡号
+ 		private String yhkh;
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
+	public String getBsid() {
+		return bsid;
+	}
+	public void setBsid(String bsid) {
+		this.bsid = bsid;
+	}
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	public String getPasswodTwo() {
+		return passwodTwo;
+	}
+	public void setPasswodTwo(String passwodTwo) {
+		this.passwodTwo = passwodTwo;
+	}
+	public String getReferenceId() {
+		return referenceId;
+	}
+	public void setReferenceId(String referenceId) {
+		this.referenceId = referenceId;
+	}
+	public String getReferenceName() {
+		return referenceName;
+	}
+	public void setReferenceName(String referenceName) {
+		this.referenceName = referenceName;
+	}
+	public Stock getStock() {
+		return stock;
+	}
+	public void setStock(Stock stock) {
+		this.stock = stock;
+	}
+	public Double getGoldAward() {
+		return goldAward;
+	}
+	public void setGoldAward(Double goldAward) {
+		this.goldAward = goldAward;
+	}
+	public Double getElectroniccurrency() {
+		return electroniccurrency;
+	}
+	public void setElectroniccurrency(Double electroniccurrency) {
+		this.electroniccurrency = electroniccurrency;
+	}
+	public Date getCreateTime() {
+		return createTime;
+	}
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
+	public Date getActivationTime() {
+		return activationTime;
+	}
+	public void setActivationTime(Date activationTime) {
+		this.activationTime = activationTime;
+	}
+	public Integer getIsok() {
+		return isok;
+	}
+	public void setIsok(Integer isok) {
+		this.isok = isok;
+	}
+	public Integer getIsdel() {
+		return isdel;
+	}
+	public void setIsdel(Integer isdel) {
+		this.isdel = isdel;
+	}
+	public String getRegion() {
+		return region;
+	}
+	public void setRegion(String region) {
+		this.region = region;
+	}
+	public String getStaffId() {
+		return staffId;
+	}
+	public void setStaffId(String staffId) {
+		this.staffId = staffId;
+	}
+	public String getLoginName() {
+		return loginName;
+	}
+	public void setLoginName(String loginName) {
+		this.loginName = loginName;
+	}
+	public String getProductgradeId() {
+		return productgradeId;
+	}
+	public void setProductgradeId(String productgradeId) {
+		this.productgradeId = productgradeId;
+	}
+	/**
+	 * @return the note
+	 */
+	public String getNote() {
+		return note;
+	}
+	/**
+	 * @param note the note to set
+	 */
+	public void setNote(String note) {
+		this.note = note;
+	}
+	/**
+	 * @return the mbwt
+	 */
+	public String getMbwt() {
+		return mbwt;
+	}
+	/**
+	 * @param mbwt the mbwt to set
+	 */
+	public void setMbwt(String mbwt) {
+		this.mbwt = mbwt;
+	}
+	/**
+	 * @return the zsxm
+	 */
+	public String getZsxm() {
+		return zsxm;
+	}
+	/**
+	 * @param zsxm the zsxm to set
+	 */
+	public void setZsxm(String zsxm) {
+		this.zsxm = zsxm;
+	}
+	/**
+	 * @return the lxdh
+	 */
+	public String getLxdh() {
+		return lxdh;
+	}
+	/**
+	 * @param lxdh the lxdh to set
+	 */
+	public void setLxdh(String lxdh) {
+		this.lxdh = lxdh;
+	}
+	/**
+	 * @return the lxdz
+	 */
+	public String getLxdz() {
+		return lxdz;
+	}
+	/**
+	 * @param lxdz the lxdz to set
+	 */
+	public void setLxdz(String lxdz) {
+		this.lxdz = lxdz;
+	}
+	/**
+	 * @return the yhxx
+	 */
+	public String getYhxx() {
+		return yhxx;
+	}
+	/**
+	 * @param yhxx the yhxx to set
+	 */
+	public void setYhxx(String yhxx) {
+		this.yhxx = yhxx;
+	}
+	/**
+	 * @return the khxm
+	 */
+	public String getKhxm() {
+		return khxm;
+	}
+	/**
+	 * @param khxm the khxm to set
+	 */
+	public void setKhxm(String khxm) {
+		this.khxm = khxm;
+	}
+	/**
+	 * @return the yhkh
+	 */
+	public String getYhkh() {
+		return yhkh;
+	}
+	/**
+	 * @param yhkh the yhkh to set
+	 */
+	public void setYhkh(String yhkh) {
+		this.yhkh = yhkh;
+	}
+	
+}

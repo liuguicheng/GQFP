@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/GQFP/!svn/ver/2/trunk/.externalToolBuilders
+END
+org.eclipse.wst.validation.validationbuilder.launch
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/GQFP/!svn/ver/2/trunk/.externalToolBuilders/org.eclipse.wst.validation.validationbuilder.launch
+END
+org.eclipse.wst.jsdt.core.javascriptValidator.launch
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/GQFP/!svn/ver/2/trunk/.externalToolBuilders/org.eclipse.wst.jsdt.core.javascriptValidator.launch
+END

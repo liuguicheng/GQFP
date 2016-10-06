@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+  <bean id="urlPendingItemMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+    <property name="mappings">
+      <props>
+        <prop key="homepage/pendingItemHomepage.do"> pendingItemMultiController</prop>
+        <prop key="pendingitem/pendingItemQuery.do">pendingItemQueryController</prop>
+        <prop key="pendingitem/finishedItemQuery.do">finishedItemQueryController</prop>
+        <prop key="pendingitem/pendingItemHomepage.do">pendingItemMultiController</prop>
+        <prop key="pendingitem/pendingWSDispatch.do">pendingItemMultiController</prop>        
+        <prop key="pendingitem/pendingItemAsyncList.do">pendingItemMultiController</prop>
+      </props>
+    </property>
+  </bean>
+  <!-- 共有部分,DAO查询工具,dao,service,proxy-->
+  <bean id="pengdingItemQueryUtil" class="org.springline.beans.dataquery.support.SimpleQueryMethod">
+    <property name="valueObjectClassName"><value>com.plugins.pending.entity.PendingItemRecipients</value></property>
+    <property name="tableAlias"><value>pdr</value></property>
+    <property name="orderByClause"><value>forDoc.sendTime desc</value></property>
+    <property name="queryParam">
+      <list>
+        <value>forDoId,forDoId,EQU</value>
+        <value>recipientId,recipientId,EQU</value>
+        <value>forDoc.title,title,LIKE</value>
+        <value>forDoc.moduleName,moduleName,LIKE</value>
+        <value>forDoc.moduleType,moduleType,EQU</value>
+        <value>forDoc.sendTime,sendTimeBegin,GT_EQU</value>
+        <value>forDoc.sendTime,sendTimeEnd,LESS_EQU</value>
+      </list>
+    </property>
+  </bean>
+  <bean id="pendingItemDao" class="com.plugins.pending.service.dao.hibernate.HibernatePendingItemDao">
+    <property name="sessionFactory"><ref bean="sessionFactory" /></property>
+    <property name="pengdingItemQueryUtil"><ref bean="pengdingItemQueryUtil"/> </property>
+    <property name="finishedItemQueryUtil"><ref bean="finishedItemQueryUtil"/> </property>
+  </bean>
+
+  <bean id="pendingItemService" class="com.plugins.pending.service.spring.SpringPendingItemService">
+    <property name="pendingItemDao"><ref bean="pendingItemDao" /></property>
+  </bean>
+
+<!--   <bean id="pendingItemServiceProxy"  parent="serviceProxyFactory">
+    <property name="target"><ref bean="pendingItemService" /></property>
+  </bean> -->
+  
+  <!-- 简单待办事项工厂 -->
+  <bean id="SimplePendingItemFactory" class="com.plugins.pending.common.support.SimplePendingItemFactory">
+    <property name="pendingItem"><ref bean="pendingItemService"/></property>
+    <property name="pendingItemBackUrl"><value>../pendingitem/pendingItemQuery.do</value></property>
+  </bean>
+
+  <!-- 完成事项 查询 -->
+  <bean id="finishedItemQueryUtil" class="org.springline.beans.dataquery.support.SimpleQueryMethod">
+    <property name="valueObjectClassName"><value>com.plugins.pending.entity.PendingItemRecipientsBak</value></property>
+    <property name="tableAlias"><value>pir</value></property>
+    <property name="orderByClause"><value>recipientBakId desc</value></property>
+    <property name="queryParam">
+      <list>
+        <!--                <value>[sqlProperty],[infoProperty],[condition(EQU,GT,GT_EQU,LESS,LESS_EQU,LIKE)]</value>-->
+        <value>recipientId,recipientId,EQU</value>
+        <value>finishedItem.title,title,LIKE</value>
+        <value>finishedItem.sender.name,sender,LIKE</value>
+        <value>finishedItem.sendTime,beginTime,GT_EQU</value>
+        <value>finishedItem.sendTime,endTime,LESS_EQU</value>
+      </list>
+    </property>
+  </bean>
+
+  <bean id="pendingItemQueryController" class="com.plugins.pending.controller.PendingItemQueryController">
+    <property name="sessionForm"><value>true</value></property>
+    <property name="commandClass"><value>com.plugins.pending.command.PendingItemQureyInfo</value></property>
+    <property name="formView"><value>pendingitem/pendingItemQuery</value></property>
+    <property name="successView"><value>pendingitem/pendingItemQuery</value></property>
+    <property name="pendingItemService"><ref bean="pendingItemService" /></property>
+    <!--    <property name="projetTimeService"><ref bean="projectPerformComplementEditMethodServiceProxy" /></property>-->
+  </bean>
+
+  <bean id="finishedItemQueryController" class="com.plugins.pending.controller.FinishedItemQueryController">
+    <property name="sessionForm"><value>true</value></property>
+    <property name="commandClass"><value>com.plugins.pending.command.FinishedItemQueryInfo</value></property>
+    <property name="formView"><value>pendingitem/finishedItemQuery</value></property>
+    <property name="successView"><value>pendingitem/finishedItemQuery</value></property>
+    <property name="pendingItemService"><ref bean="pendingItemService" /></property>
+    <!--    <property name="projetTimeService"><ref bean="projectPerformComplementEditMethodServiceProxy" /></property>-->
+  </bean>
+
+  <bean id="pendingItemMultiController" class="com.plugins.pending.controller.PendingItemMultiController">
+    <property name="pendingItemHomepageView"><value>pendingitem/pendingItemHomepage</value></property>
+    <property name="pendingItemService"><ref bean="pendingItemService"/> </property>
+  </bean>
+</beans>

@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/GQFP/!svn/ver/2/trunk/src/com/plugins/cms/entity
+END
+CmsContent.java
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/GQFP/!svn/ver/2/trunk/src/com/plugins/cms/entity/CmsContent.java
+END
+CmsChannel.java
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/GQFP/!svn/ver/2/trunk/src/com/plugins/cms/entity/CmsChannel.java
+END
+CmsChannel.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/GQFP/!svn/ver/2/trunk/src/com/plugins/cms/entity/CmsChannel.hbm.xml
+END
+CmsContent.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/GQFP/!svn/ver/2/trunk/src/com/plugins/cms/entity/CmsContent.hbm.xml
+END

@@ -1,0 +1,99 @@
+﻿/*
+* Jquery FormatInput Plugin Style Document
+* Copyright (c) 2012-2013 CERC HuangAnzhi 2013-02-20
+* huanganzhi@cerc.net.cn
+* Version 1.0.0 build 20130422
+* Requires jquery v1.4.4+
+*/
+
+/* Input Style */
+.FormatInputInput{
+	font-size: 12px;
+}
+.FormatInputInputDate{
+	background-image: url(images/calendarIco.gif);
+	background-repeat: no-repeat;
+	background-position: right center;
+}
+.FormatInputInputTxt{
+	height:20px;
+	margin-left:1px;
+	line-height:20px;
+	border: 1px solid #83B1F2;
+	background-color: #FFFFFF;
+}
+.FormatInputInputMultiTxt{
+	font-size: 12px;
+	margin-left:1px;
+	border: 1px solid #83B1F2;
+	background-color: #FFFFFF;
+}
+.FormatInputInputTxtFocus{
+	border:1px solid #FF9B59;
+	background-color: #FFFAE6;
+}
+.FormatInputInputTxtError{
+	border:1px solid #FF9B59;
+	background-color: #FFFFFF;
+	color: #FF0000;
+}
+
+/* Button Input[type='button']  Style*/
+.FormatInputBtn{
+	margin:3px;
+	border:#83B1F2 1px solid;
+	background-image: url(images/btnBg.gif);
+	background-repeat: repeat-x;
+	background-position: center center;
+	padding-left:10px;
+	padding-right:10px;
+	white-space:nowrap;
+	text-align:center;
+	width:auto;
+	height:22px;
+	line-height:22px;
+	vertical-align:middle;
+	text-align:center;
+	background-color: #f5f5f5;
+	font-size: 12px;
+	color: #151515;
+	cursor:pointer;
+}
+.FormatInputBtn:hover,.FormatInputBtnHover{
+	background-image: url(images/btnBgHover.gif);
+	border:#FF9900 1px solid;
+}
+
+A.FormatInputABtn{
+	margin:3px;
+	border:#83B1F2 1px solid;
+	background-image: url(images/btnBg.gif);
+	background-repeat: repeat-x;
+	background-position: center center;
+	padding:2px 15px 2px 15px !important;
+	padding:0 10px 0 10px;
+	white-space:nowrap;
+	text-align:center;
+	width:auto;
+	height:18px !important;
+	height:20px;
+	line-height:20px;
+	vertical-align:middle;
+	text-align:center;
+	background-color: #f5f5f5;
+	font-size: 12px;
+	color: #151515;
+}
+A.FormatInputABtn:Hover{
+	background-image: url(images/btnBgHover.gif);
+	text-decoration: none;
+	border:#FF9900 1px solid;
+	color: #151515;
+}
+
+/* Disable Control Style */
+.FormatInputCtrlDisable{
+	border: 1px solid #CCCCCC;
+	background-color: #F6F6F6;
+	overflow:hidden;
+}

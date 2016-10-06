@@ -1,0 +1,5 @@
+<script>
+    var url = "../html/welcome.html";//"../pendingitem/pendingItemQuery.do";
+
+    document.location.href = url;
+</script>

@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/GQFP/!svn/ver/2/trunk/dist/WEB-INF/view/plugins/cms/content
+END
+contentView.vm
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/GQFP/!svn/ver/2/trunk/dist/WEB-INF/view/plugins/cms/content/contentView.vm
+END
+contentEdit.vm
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/GQFP/!svn/ver/2/trunk/dist/WEB-INF/view/plugins/cms/content/contentEdit.vm
+END
+channelSelect.vm
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/GQFP/!svn/ver/2/trunk/dist/WEB-INF/view/plugins/cms/content/channelSelect.vm
+END
+contentManage.vm
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/GQFP/!svn/ver/2/trunk/dist/WEB-INF/view/plugins/cms/content/contentManage.vm
+END
+contentList.vm
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/GQFP/!svn/ver/2/trunk/dist/WEB-INF/view/plugins/cms/content/contentList.vm
+END
+contentManageList.vm
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/GQFP/!svn/ver/2/trunk/dist/WEB-INF/view/plugins/cms/content/contentManageList.vm
+END

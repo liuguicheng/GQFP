@@ -1,0 +1,63 @@
+/* 
+	layout style
+	create by mayu 2015-5-26
+	version v.0.1.0
+	support ie6.0+/ff/chrome
+*/
+.instant:hover{
+	cursor: pointer;
+}
+
+.instant{	
+	background-image: url(images/seat_chat.png);
+}
+
+.chat{ 
+	width:50px;
+	height:50px;
+	display:block;
+	margin-left:5px;
+	background-position:center center; 
+	background-repeat: no-repeat;
+}
+
+.icon-chat {
+background: url('images/win_chat.png') no-repeat center center;
+}
+
+.btn:hover{
+	cursor: pointer;
+}
+
+
+.btn{
+	width: 35px;
+	height:30px;
+	display:block;
+	vertical-align: middle;
+}
+.icon-stas-chat{
+   background: url('images/win_chat.png') no-repeat center left;
+}
+
+.instantNum{
+	font-size: 14px;
+	color: #FFF;
+	text-align: center;
+	display: block;
+	font-weight:600;
+	background-position: center center;
+	position:absolute;
+	margin-top:14px;
+	margin-left:3px;
+	background: none repeat scroll 0 0 #FF3300;
+    border-radius: 78.5px 78.5px 70.5px 70.5px;
+    color: #FFFFFF;
+    padding:0.05px 6px;
+    position: absolute;
+}
+/* 设置即时消息前面的图标宽度和高度，因为easyUI设置了固定宽度，不合适导致图片变形，所以只能在这里再设置一次 */
+.panel-icon {
+    width: 30px;
+	height:25px;
+ }

@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/svn/GQFP/!svn/ver/71/trunk/dist/WEB-INF/config
+END
+hibernate.cfg.xml
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/GQFP/!svn/ver/93/trunk/dist/WEB-INF/config/hibernate.cfg.xml
+END
+ApplicationContext.xml
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/GQFP/!svn/ver/79/trunk/dist/WEB-INF/config/ApplicationContext.xml
+END
+applicationContext.properties
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/GQFP/!svn/ver/88/trunk/dist/WEB-INF/config/applicationContext.properties
+END

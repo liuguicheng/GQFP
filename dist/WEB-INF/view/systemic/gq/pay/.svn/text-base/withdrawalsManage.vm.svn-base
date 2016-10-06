@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  #headInclude()
+   <script type="text/javascript" src="../script/validator.js"></script>
+  <script type="text/javascript">
+  #if($message)alert("#javaScriptEscape($message)");#end
+ function doSave(){
+            var url="../withdrawals/ajaxEditwithdrawals.do";
+            var memberstaffid = $("#memberstaffid").val();
+			 var WMoney = $("#WMoney").val();
+            var WAccountType = $("select[name='WAccountType'] option:selected").val();
+			var memberId=$("#memberId").val();
+			var bank=$("select[name='bank'] option:selected").val();
+			var bankName=$("#bankName").val();
+			var bankUsername=$("#bankUsername").val();
+            if(memberstaffid==""){
+				alert("会员编号不能为空");
+				return false;
+			}
+			if(WAccountType==""){
+                alert("提现类型不能为空！");
+                return false;
+            }
+            if(WMoney==""){
+                alert("提现金额不能为空！");
+                return false;
+            }
+			if(bank==""){
+				alert("请选择开户银行！");
+                return false;
+			}
+			if(bankName==""){
+				alert("请填写银行账户！");
+                return false;
+			}
+			if(bankUsername==""){
+				alert("请填写开户姓名！");
+                return false;
+			}
+			if(!isNumberBy100(WMoney)){
+				alert("提现金额请填写100的倍数！");
+                return false;
+			}
+            var arrs={
+                "memberstaffid":memberstaffid,
+                "WMoney":WMoney,
+				"WAccountType":WAccountType,
+				"memberId":memberId,
+				"bank":bank,
+				"bankName":bankName,
+				"bankUsername":encodeURI(bankUsername)
+            };
+			
+            $.post(url,arrs,function(data){
+                if(data==1){
+                  alert("申请成功!");
+                  window.location.href="../withdrawals/withdrawalsManage.do";
+                }else if(data==2){
+				alert("申请成功!");
+                  window.location.href="../withdrawals/withdrawalsMember.do";
+				}else if(data==-1){
+					alert("单次提现金额已超过限定!");
+				}else if(data==-2){
+					alert("该会员今日提现次数已达上限,请明日再进行提现申请!");
+				}else if(data==-3){
+					alert("该会员今日提现金额已达上限,请明日再进行提现申请!");
+				}else if(data==-4){
+					alert("当前提现余额不足");
+				}else if(data==-7){
+					alert("今日不在系统规定可提现日期内,请在规定日期内再次尝试");
+				}
+				else{
+				  alert("申请失败!");
+				}
+            });
+} 
+
+  function doQuery() {
+      $("#queryForm").submit();
+      $('body').processMask();
+}
+ function doRefresh() {
+    $(":text").val('');
+    //$("#queryForm").submit();
+  }
+  
+  function review(id){
+  	 var theUrl="../withdrawals/withdrawalsReview.do?WId="+id+"&modalDialog=true";
+	 top.openDialog("提现审核", theUrl,reloadPendingds,closeCallback, 800, 400 );
+  }
+  function reloadPendingds(obj) {
+  	
+  }
+	function closeCallback(){
+	location.reload();
+	}
+	function isNumberBy100(ssn) {
+ 		var re = /^[0-9]*[0-9]$/i;       //校验是否为数字
+ 		if(re.test(ssn) && ssn%100===0) {
+ 			return true;
+ 		}else {
+  			return false;
+ 		}
+	}
+  </script>
+</head>
+<body>
+<div class="PageHeader">
+  <div class="LeftBox Title">提现列表</div>
+</div>
+
+
+
+<div class="PageContainer indieui-scroll">
+	
+    <div class="InfoBox">
+		<form name="editForm" method="post"  action="#getRequestUri()" class="indieui-form">
+    <h2>信息</h2>
+<table class="TbCommon">
+	#if(!${member.memberId})
+		
+     #else
+		 <tr >
+    <td width="8%" align="left" class="TdLabel">奖金余额：</td>
+    <td  align="left" class="TdInput" >
+		<input type="hidden" id="memberId" value="${member.memberId}"/>
+		 #if(!${member.goldAward})<font color="red">￥0.00</font>#else
+        <font color="red">￥#showMoney($!{member.goldAward})</font><input type="hidden" id="" name="" value="$!{member.goldAward}" readonly >
+		 #end    
+	</td>
+    <td width="8%" align="left" class="TdLabel">现金余额：</td>
+    <td  align="left" class="TdInput" >
+			<font color="red">￥0.00</font>
+    </td> 
+    <td width="8%" align="left" class="TdLabel">注册金余额：</td>
+    <td  align="left" class="TdInput" >
+            #if(!${member.electroniccurrency})<font color="red">￥0.00</font>#else
+        <font color="red">￥#showMoney($!{member.electroniccurrency})</font>
+            #end
+    </td> 
+    </tr>
+		
+    #end
+    <tr >
+		#if(!${member.memberId})
+			<td width="8%" align="left" class="TdLabel">#requiredInput("会员编号")：</td>
+	  <td  align="left" class="TdInput" colspan="5">
+        <input type="text" id="memberstaffid" name="memberstaffid" value="" >
+			#requiredInput("提现类型")：
+			#formSingleSelectDictionary("WAccountType" $!{command.WAccountType} ${dicData.dicPayType} "" "--请选择--")
+			#requiredInput("提现金额")
+			￥：<input type="text" id="WMoney" name="WMoney" value="" ><span style="color:red;">100的倍数</span>
+		#else
+			<td width="8%" align="left" class="TdLabel">#requiredInput("会员编号")：</td>
+	  <td  align="left" class="TdInput" colspan="5">
+        <input type="text" id="memberstaffid" name="memberstaffid" value="$!{member.staffId}" readonly  >
+			#requiredInput("提现类型")：
+			#formSingleSelectDictionary("WAccountType" $!{command.WAccountType} ${dicData.dicPayType} "" "--请选择--")
+			#requiredInput("提现金额")
+			￥：<input type="text" id="WMoney" name="WMoney" value="" ><span style="color:red;">100的倍数</span>
+		#end
+    </td>
+</tr>
+<tr>
+	<td width="8%" align="left" class="TdLabel">#requiredInput("开户银行")：</td>
+	  <td  align="left" class="TdInput" colspan="5">
+		#formSingleSelectDictionary("bank" $!{command.bank} ${dicData.dicBank} "" "--请选择--")
+		#requiredInput("银行账户")
+		<input type="text" id="bankName" name="bankName" value="" >
+		#requiredInput("开户姓名")
+		<input type="text" id="bankUsername" name="bankUsername" value="" >
+		 <input type="button" value="申请提现" onclick="javascript:doSave();"/>	
+      </td>
+</tr>
+</table>
+</form>
+</div>  
+
+
+<div id="toolbar" style="padding:5px;height:auto">
+  <div>
+    <form id="queryForm" name="queryForm" action="#getRequestUri()" method="post" class="indieui-form">
+        <table cellpadding="5">
+        <tr> 
+          <td style="width:120px;height:30px;text-align:right">提现时间：</td>
+          <td colspan="3" >
+            <input type="text" name="applyTimeUp" value="#formatDate($!{command.applyTimeUp})" dateFormat  style="width:120px" >
+                <span>-</span>
+            <input type="text" name="applyTimeDown" value="#formatDate($!{command.applyTimeDown})" dateformat  style="width:120px" >
+          </td>
+          <td  colspan="2" style="text-align:center">
+            <a href="javascript:doQuery()" class="easyui-linkbutton" iconCls="icon-search">查 询</a>
+            <a href="javascript:doRefresh()" class="easyui-linkbutton" iconCls="icon-cut">清 空</a></td>
+        </tr>
+      </table> 
+    </form>          
+  </div>
+</div>
+<form name="listForm" method="post">
+<input type="hidden" name="submitFlag" value="0">
+<input type="hidden" name="token" value="$!{command.token}">
+<table class="TbList" style="table-layout:auto;">
+  <thead> 
+    <tr>
+		<th style="width:30px;"><input type="checkbox" onclick="javascript:setCheckBoxValue('id', this.checked);"></th>
+		<th >会员编号</th>
+        <th >会员姓名</th>
+        <th >提现账户</th>
+        <th >提现现金</th>
+        <th >手续费</th>
+        <th >实际金额</th>
+        <th >开户银行</th>
+        <th>银行账号</th>
+		<th >开户姓名</th>
+		<th >申请日期</th>
+        <th >状态</th>  
+        <th >操作</th>  
+    </tr>
+  </thead>
+  <tbody>
+  #foreach( $data in $page.data )
+     #set($index = ($page.pageNumber - 1) * $page.pageSize + $velocityCount)
+            #if($velocityCount % 2 == 0) #set($css = "TrListEven") #else #set($css = "TrListOdd") #end
+    <tr>
+		<td><input type="checkbox" name="id" value="$!{data.WId}"></td>
+     <td> $!{data.memberstaffid}</td>
+      <td>$!{data.memberUsername}</td>
+      <td>#lookUpDict($dicData.dicPayType $!{data.WAccountType})</td>
+      <td>$!{data.WMoney}</td>
+      <td>$!{data.WCounterfree}%</td>
+      <td>$!{data.actualMoeny}</td>
+      <td>#lookUpDict($dicData.dicBank $!{data.bank})</td>
+      <td>$!{data.bankName}</td>
+	  <td>$!{data.bankUsername}</td>
+	  <td>$!{data.applyTime}</td>
+	  
+      <td> #lookUpDict($dicData.dicAuditState $!{data.status})</td>
+      <td>
+		#if(!${member.memberId})
+		#if($!{data.status}==1) [<a href="javascript:review('$!{data.WId}')" style="color:red;">审核</a>]#else -- #end</td>
+		#else
+			--
+		#end	
+	</tr>
+  #end
+  </tbody>   
+</table>
+</form>
+</div>
+
+
+
+<div data-options="region:'south'" style="overflow-y:hidden"> 
+#pageDirector($page "#getRequestUri()" "")
+</div>
+
+
+</body>
+</html>

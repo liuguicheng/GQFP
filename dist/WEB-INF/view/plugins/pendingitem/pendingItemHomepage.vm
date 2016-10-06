@@ -1,0 +1,99 @@
+<html>
+<head>
+<title>$!{appContext.appName}</title>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<link rel="stylesheet" type="text/css" href="../script/homepage.css">
+<script language="javascript" type="text/javascript" src="../script/common.js"></script>
+<script language="javascript">
+var INNERSYSFLAG = '#lookUpDict(${dicData.dicMessageManageIndex} "INNERSYSTEM")';
+function openItemPending(url, module, fordoId) {
+    var theUrl = "";
+    if (module == INNERSYSFLAG || module == "") {
+        theUrl = url + "&modalDialog=true";
+    } else {
+        theUrl = "../pendingitem/pendingWSDispatch.do?modalDialog=true&pendingItemId=" + fordoId;
+    }
+    FCKDialog.OpenDialog("processDocument", "待办公文", theUrl, 800, 750, reloadPending, window);
+}
+
+function openReadPending(readInstanceId) {
+    var theUrl = "../docsend/sendFileRead.do?readInstanceId=" + readInstanceId + "&modalDialog=true";
+    FCKDialog.OpenDialog("processDocument", "待阅公文", theUrl, 800, 750, reloadPending, window);
+}
+
+function reloadPending() {
+    location.reload();
+}
+
+function navigateToMoreItemPending() {
+   if (window.parent == top) {
+       window.location.href = "../pendingitem/pendingItemQuery.do";
+   } else {
+       window.parent.location.href = "../pendingitem/pendingItemQuery.do";
+   }
+}
+
+function navigateToMoreReadPending() {
+   if (window.parent == top) {
+       window.location.href = "../docsend/sendFileReadQuery.do";
+   } else {
+       window.parent.location.href = "../docsend/sendFileReadQuery.do";
+   }
+}
+</script>
+</head>
+<body>
+<div class="D_Centent_back">
+
+    <div class="title_left">
+      <div class="home_pending_item">
+      </div>
+    </div>
+
+    <div class="more_right">
+        <div class="more_space"><a href="javascript:navigateToMoreItemPending()" ><img src="../images/more.gif" border="0"/></a></div>
+    </div>
+  <table cellpadding="0" cellspacing="0" class="tab" width="100%">
+#foreach($pendingItem in $pendingItemList)
+    #if($velocityCount < 6)
+    <tr class="tr_height">
+      <td><img src="../images/homepage/D_Centent_Ico.gif" align="absmiddle"></td>
+      <td><a href="#" onclick="javascript:openItemPending('$!{pendingItem.forDoc.url}', '$!{pendingItem.forDoc.moduleType}', '$!{pendingItem.forDoId}');">$!{pendingItem.forDoc.title}</a><font style="color:#a6a5a4">#formatDate($!{pendingItem.forDoc.sendTime})</font></td>
+    </tr>
+    <tr>
+      <td class="d_line" colspan="2"></td>
+    </tr>
+    #end
+#end
+  </table>
+
+    <div class="title_left">
+      <div class="home_read_pending_item">
+      </div>
+    </div>
+
+    <div class="more_right">
+        <div class="more_space"><a href="javascript:navigateToMoreReadPending()" ><img src="../images/more.gif" border="0"/></a></div>
+    </div>
+
+
+  <table cellpadding="0" cellspacing="0" class="tab"  width="100%">
+#foreach($readPendingItem in $readPendingItemList)
+    #if($velocityCount < 5)
+    <tr class="tr_height">
+      <td><img src="../images/homepage/D_Centent_Ico.gif" align="absmiddle"></td>
+      <td><a href="#" onclick="javascript:openReadPending('$!{readPendingItem.readInstanceId}');">公文『$!{readPendingItem.docRead.docTitle}』等待您的阅读！ 发送人：#lookUpDict($dicData.dicStaff "$!{readPendingItem.sendMan}")</a><font style="color:#a6a5a4">&nbsp;#formatDate($!{readPendingItem.sendTime})</font></td>
+    </tr>
+    <tr>
+      <td class="d_line" colspan="2"></td>
+    </tr>
+    #end
+#end
+  </table>
+
+
+</div>
+
+
+</body>
+</html>

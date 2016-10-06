@@ -1,0 +1,52 @@
+8
+
+dir
+96
+https://192.168.1.118/svn/GQFP/trunk/src/com/systemic/unit
+https://192.168.1.118/svn/GQFP
+
+
+
+2016-09-28T08:17:45.864503Z
+96
+LGC
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+7eaa1c50-b5f8-8d46-a0b5-e5067a1f1115
+
+ConUnit.java
+file
+102
+
+
+
+2016-09-29T01:38:00.271000Z
+368f4fe1fde79529f50f3b5f684f7777
+2016-09-29T03:33:33.511035Z
+102
+LGC
+
+ErrorDataMsg.java
+file
+
+
+
+
+2016-09-28T02:36:08.325000Z
+373f2866e25f65501fa742fcfe91103f
+2016-09-28T08:17:45.864503Z
+96
+LGC
+

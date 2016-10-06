@@ -1,0 +1,133 @@
+package com.systemic.gq.member.service.spring;
+
+
+import java.util.Date;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+import org.apache.commons.lang.StringUtils;
+import org.springframework.beans.BeanUtils;
+import org.springline.beans.cache.CacheHelper;
+import org.springline.beans.utils.EncryptHelper;
+import org.springline.orm.Page;
+
+import com.console.ConsoleHelper;
+import com.console.entity.Role;
+import com.console.entity.Staff;
+import com.console.entity.StaffSecurity;
+import com.plugins.sn.service.SNHelper;
+import com.systemic.gq.entity.Member;
+import com.systemic.gq.member.command.MemberEditInfo;
+import com.systemic.gq.member.command.MemberInfo;
+import com.systemic.gq.member.service.ISpringMemberService;
+import com.systemic.gq.member.service.dao.IMemberDao;
+
+public class SpringMemberSerivce implements ISpringMemberService {
+	private IMemberDao memberDao;
+
+	public void setMemberDao(IMemberDao memberDao) {
+		this.memberDao = memberDao;
+	}
+
+	@Override
+	public Page selectMeber(MemberInfo info) {
+
+		return this.memberDao.selectMeber(info);
+	}
+
+	@Override
+	public Member loadMermber(String id) {
+
+		return (Member) this.memberDao.load(Member.class, id);
+	}
+
+	@Override
+	public void saveMermber(MemberEditInfo info) {
+		Member member = new Member();
+		if (StringUtils.isNotBlank(info.getId())) {
+			BeanUtils.copyProperties(info, member);
+		} else {
+			//新增登陆账号
+			Staff staff = new Staff();
+			staff.setId(SNHelper.getSNService().getSerialNumber(
+					Staff.class.getName(), "id", false));
+			staff.setName(info.getUserName());
+			
+			// 判断登录名是否被使用
+			Staff tmp = ConsoleHelper.getInstance().getMainService().selectAllStaff(info.getLoginName());
+			if (tmp != null && !tmp.getId().equals(info.getId())) {
+				throw new RuntimeException("登录名『"
+						+ info.getLoginName() + "』已被使用！");
+			}
+			BeanUtils.copyProperties(info, staff, new String[] { "id",
+					"password" });
+			BeanUtils.copyProperties(info, member, new String[] { "memberId" });
+			staff.setLoginName(info.getUserName());//登录名
+			staff.setPassword(info.getPassword());//密码
+			// 设置密码，并加密
+			if (info.getPassword() != null
+					&& info.getPassword().trim().length() > 0) {
+			    //判断密码是否变更，变更则更新CHANGE_TIME字段
+			    if(!staff.getPassword().equals(EncryptHelper.md5Encoding(info.getPassword()))){
+			        StaffSecurity ss = ConsoleHelper.getInstance().getMainService().loadStaffSecurity(staff.getId());
+		            ss.setChangeTime(new Date());
+		            this.memberDao.update(ss);
+	             }
+	            staff.setPassword(EncryptHelper
+	                .md5Encoding(info.getPassword()));
+	            member.setPassword(EncryptHelper
+		                .md5Encoding(info.getPassword()));
+			}
+			Set<Role> set = new HashSet<Role>();
+			Role role = (Role) this.memberDao.load(Role.class, "21");//21为会员角色ID
+			set.add(role);
+			staff.setSystemRole(set);
+			staff.setDepartment(ConsoleHelper.getInstance().getMainService().selectDepartment("1"));
+			staff.setValid(ConsoleHelper.YES);
+			staff.setSysTemplate(ConsoleHelper.YES);
+			this.memberDao.save(staff);
+			CacheHelper.getInstance().dispatchRefreshEvent(Staff.SIMPLE_DIC_IDENTIFICATION);
+			member.setStaffId(staff.getId());//系统登录
+			// TODO: Animate this.group instead 选择股权等级待处理 使用Stock id做连接
+			member.setProductgradeId(info.getProductgradeId());
+			member.setCreateTime(new Date());
+			if(StringUtils.isNotBlank(info.getRegion())){
+				// TODO: Animate this.group instead //判断区域、节点是否有人
+				member.setRegion(ConsoleHelper.YES);
+			}
+		} 
+		this.memberDao.save(member);
+		CacheHelper.getInstance().dispatchRefreshEvent(Member.SIMPLE_DIC_IDENTIFICATION);
+		// TODO: Animate this.group instead 开始算钱
+	}
+
+	@Override
+	public void deleteMember(String[] ids) {
+			for (String id :ids ) {
+				Member member = this.loadMermber(id);
+				if(member != null){
+					this.memberDao.delete(member);
+				}
+				try {
+					ConsoleHelper.getInstance().getManageService().deleteStaff(member.getStaffId());
+				} catch (Exception e) {
+					e.printStackTrace();
+					System.out.println("删除会员出错");
+					throw new RuntimeException("删除会员出错!请联系技术人员!"+this.getClass());
+				}
+			}
+			// TODO: Animate this.group instead 
+	}
+
+	@Override
+	public List<Member> selectMemberBy(MemberInfo info) {
+		return this.memberDao.selectMemberBy(info);
+	}
+
+	@Override
+	public void updateMermber(Member member) {
+		memberDao.update(member);
+	}
+
+}

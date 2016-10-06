@@ -1,0 +1,126 @@
+*{
+	padding:0;
+	margin:0;
+	border:none;
+	*border-width:0px;
+	_border-width:0px;
+	list-style:none;
+	
+	scrollbar-face-color: #dbebfe; 
+    scrollbar-shadow-color: #b8d6fa; 
+    scrollbar-highlight-color: #ffffff; 
+    scrollbar-3dlight-color: #dbebfe; 
+    scrollbar-darkshadow-color:#458ce4; 
+    scrollbar-track-color: #f3f3f3; 
+    scrollbar-arrow-color: #b8d6fa;
+}
+html,body{
+	height:100%;
+	width:100%;
+}
+body {
+	color: #333;
+	font-family:  "微软雅黑","宋体",Verdana, Geneva, sans-serif;
+	font-size: 12px;
+	line-height: 1.5;
+	margin:0;
+	background-color: #F5F5F5;
+}
+img {
+	border:none;
+	vertical-align:middle;
+}
+ul {
+	padding:0;
+	margin:0;
+	list-style:none;
+}
+a {
+	color:#333;
+	text-decoration:none;
+	overflow:hidden;
+	text-overflow:ellipsis;
+	-webkit-text-overflow: ellipsis;
+	-o-text-overflow: ellipsis;
+	white-space:nowrap;
+}
+a:hover {
+	color:#F60;
+}
+
+.DeskTopIconList{
+	height:100%;
+	position:relative;
+	overflow:hidden;
+}
+.DeskTopIconList .IconList{
+	height:auto;
+	width:auto;
+}
+.DeskTopIconList .IconList li{
+	width:auto;
+	height:auto;
+	float:left;
+	margin:10px;
+}
+.DeskTopIconList .IconList li .DelBtn{
+	color: #FFF;
+	height: 20px;
+	width: 20px;
+	text-align: center;
+	display: block;
+	background-image: url(framework/delete.png);
+	background-repeat: no-repeat;
+	background-position: center center;
+	position: absolute;
+	margin-top: 0px;
+	margin-left: 63px;
+}
+.DeskTopIconList .IconList li a{
+	height:90px;
+	width:90px;
+	display:block;
+	text-align:center;
+}
+.DeskTopIconList .IconList li a img{
+	width:48px;
+	height:48px;
+	margin:10px 10px 5px 10px ;
+}
+ .DeskTopIconList .IconList li a span.title{
+	display:block;
+	width:100%;
+	color: #333;
+	font-size: 14px;
+	/*text-shadow: 0 1px 1px #000000;
+	filter:Shadow(color=black, direction=180,Strength=2);*/
+	text-decoration: none;
+	overflow:hidden;
+	text-overflow:ellipsis;
+	-webkit-text-overflow: ellipsis;
+	-o-text-overflow: ellipsis;
+	white-space:nowrap;
+}
+.DeskTopIconList .IconList li a span.btn{
+	display:none;
+}
+/*.DeskTopIconList .IconList li a:hover{
+	background-image: url(framework/icon_over.png);
+	background-repeat: no-repeat;
+	background-position: center center;	
+}*/
+.DeskTopIconList .IconList li .DelBtn:hover{
+	cursor:pointer;
+}
+
+/* 附加样式 */
+.ClearFix {
+	clear:both;
+}
+.MarginHolder {
+	line-height:0px;
+	height:0px;
+	width:0px;
+	margin:0;
+	padding:0;
+}

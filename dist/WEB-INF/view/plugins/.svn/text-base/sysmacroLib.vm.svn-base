@@ -1,0 +1,924 @@
+#macro(headInclude)
+<meta http-equiv="Content-Type" content="text/html; charset=GBK" />
+  <title>$!{appContext.appName}</title>
+  <link href="$!{appContext.skin}/content.css" rel="stylesheet" type="text/css" />
+  <script type="text/javascript" src="../script/jquery-1.8.3.min.js"></script>
+  <script type="text/javascript" src="../script/common.js"></script>
+  <script type="text/javascript" src="../lib/indieui/src/jquery.format.js"></script>
+
+  <script language="javascript" src="../lib/easyui/jquery.easyui.min.js" type="text/javascript" ></script>
+  <script language="javascript" src="../lib/easyui/locale/easyui-lang-zh_CN.js" type="text/javascript"></script>
+  <link href="../lib/easyui/themes/default/easyui.css" rel="stylesheet" type="text/css" />
+  <link href="../lib/easyui/themes/icon.css" rel="stylesheet" type="text/css" />
+  
+#end
+
+#**
+ * requiredInput
+ *
+ * 标记编辑界面中必须输入的项
+ *
+ * @param message 要标记的信息
+ *
+*#
+#macro(requiredInput $message)#if($message)<font color="red">*</font>$!message#end#end
+#**
+ * richTextEscape
+ *
+ * 大文本转义，主要处理空格和换行符
+ *
+*#
+#macro(richTextEscape $text)
+  #set($tmp = "#htmlEscape($!{text})")
+  $!{tmp.replaceAll("\n", "<br>").replaceAll(" ", "&nbsp;")}
+#end
+
+
+#**
+ * dateEditor
+ *
+ * 产生一个输入日期文本框和日期选择按钮。
+ *
+ * @param editorname  日期文本框的名字
+ * @param editorvalue 日期文本框中的当前日期值
+ * @param formname 日期文本框所在的form的名字
+ *
+*#
+#macro(dateEditor $editorname $editorvalue $attribute)
+  <input class="Wdate" name="$editorname" readonly  value="$editorvalue" type="text" $attribute
+  onClick="javascript:WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd'})"/>
+#end
+#**
+*timeEditor
+*产生一个有时分秒的日期文本框和日期选择按钮
+*@param editorname文本框名称
+*@param editorvalue 日期文本框中的当前日期值
+*@param formname 日期文本框所在的form的名字
+*@param attribute 其他属性
+*@param dateProperty显示日期的属性
+*#
+#macro(timeEditor $editorname $editorvalue $attribute $dateProperty)
+  #if("$dateProperty" == "t")
+  <input class="Wdate" name="$editorname" readonly  value="$editorvalue" type="text" $attribute
+  onClick="javascript:WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd HH:mm'})"/>
+  #elseif("$dateProperty" == "s")
+  <input class="Wdate" name="$editorname" readonly  value="$editorvalue" type="text" $attribute
+  onClick="javascript:WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd HH:mm:ss'})"/>
+  #end
+#end
+
+#**
+ * pageDirector
+ *
+ * 产生分页列表的信息翻页标题行,并指定宽度。
+ *
+ * @param page 分页对象
+ * @param action 显示其他页的url
+ * @param width 显示的宽度
+ *
+ *#
+#macro(pageDirector $page $action $event)
+  <div class="easyui-pagination datagrid-pager" style="height:32px" 
+        data-options="
+           total: $!{page.totalSize},
+           ##showPageList:false,
+           showRefresh : false,
+           pageSize: $!{page.pageSize},
+           pageNumber: $!{page.pageNumber},
+           ##layout:['list','sep','first','prev','links','next','last'],
+            onSelectPage: function(pageNumber, pageSize){
+                document.changePageFrom.pageNumber.value = pageNumber;
+                document.changePageFrom.pageSize.value = pageSize;
+                document.changePageFrom.submit();
+                return;
+           },
+           onBeforeRefresh: function(pageNumber, pageSize){
+                #if($event && '$!{event}' != '')
+               //   return $event();
+                #end           
+           },
+           onChangePageSize: function(pageSize){
+                document.changePageFrom.pageSize.value = pageSize;
+                document.changePageFrom.submit();
+                return;           
+           }
+           ">
+  </div>
+        <form name="changePageFrom" method="post" action="$!{action}">
+      <input type="hidden" name="token" value="$!{page.token}" />
+      <input type="hidden" name="pageNumber" value="$!{page.pageNumber}" />
+      <input type="hidden" name="pageSize" value="$!{page.pageSize}"/>
+      </form> 
+#end
+#**
+ * pageDirector
+ *
+ * 产生分页列表的信息翻页标题行,并指定宽度。
+ *
+ * @param page 分页对象
+ * @param action 显示其他页的url
+ * @param width 显示的宽度
+ *
+ *#
+#macro(pageDirector2 $page $action $event)
+<form name="changePageFrom" method="post" action="$!{action}"
+    onsubmit="if(changePageFrom.pageNumber.value == '' #if($event) || !$event()#end){return false;}else{return true;}">
+          ##<td nowrap align="right">
+<input type="hidden" name="token" value="$!{page.token}" />
+##<input name="pageNumber" type="hidden" size="3" class="inputobject" maxlength="4"/>
+<script>
+function changePageEventOnGotToPage(pagenum){
+#if($event && "$event" != "")
+    if ($event()) {
+        gotoPage(pagenum);
+    }
+    return false;
+#else
+    gotoPage(pagenum);
+#end
+}
+
+function gotoPage(pagenum) {
+    document.changePageFrom.pageNumber.value = pagenum;
+    document.changePageFrom.submit();
+    return;
+}
+</script>
+
+  总记录数【$!{page.totalSize}】
+  | 第 $!{page.pageNumber} / $!{page.totalPage} 页
+  #if($page.hasPreviousPage())
+  | <a href="#" onclick="return changePageEventOnGotToPage(1);">首页</a>
+  | <a href="#" onclick="return changePageEventOnGotToPage($page.pageNumber - 1);">上一页</a>
+  #else
+  | 首页 | 上一页
+  #end
+  #if($page.hasNextPage())
+  | <a href="#" onclick="return changePageEventOnGotToPage($page.pageNumber + 1);">下一页</a>
+  | <a href="#" onclick="return changePageEventOnGotToPage($page.totalPage);">尾页</a>
+  #else
+  | 下一页 | 尾页
+  #end
+  | 转到 <input name="pageNumber" type="text" size="3" maxlength="4"class="input_out" onFocus="this.className='input_focus'; this.onmousemove=function(){this.className='input_focus'}; this.onmouseout=''" onBlur=" this.className='input_out';this.onmouseout=function(){this.className='input_out'};this.onmousemove=function(){this.className='input_move'};" onMouseMove="this.className='input_move'" onMouseOut="this.className='input_out'"
+    onkeyup="value=value.replace(/^0|[^\d]/g,'');"
+    onbeforepaste="clipboardData.setData('text', clipboardData.getData('text').replace(/[^\d]/g,''))" /> 页
+##</td>
+
+</form>
+
+#end
+
+#**
+ * pageDirector
+ *
+ * 产生分页列表的信息翻页标题行,并指定宽度。
+ *
+ * @param page 分页对象
+ * @param action 显示其他页的url
+ * @param width 显示的宽度
+ *
+ *#
+#macro(pageDirector2 $page $action $event)
+<form name="changePageFrom" method="post" action="$!{action}"
+    onsubmit="if(changePageFrom.pageNumber.value == ''#if($event) || !$event()#end){return false;}else{return true;}">
+<input type="hidden" name="pageNumber" value="$!{page.pageNumber}">
+<input type="hidden" name="token" value="$!{page.token}" />
+</form>
+##<input name="pageNumber" type="hidden" size="3" class="inputobject" maxlength="4"/>
+<script>
+function changePageEventOnGotToPage(pagenum){
+#if($event && "$event" != "")
+    if ($event()) {
+        gotoPage(pagenum);
+    }
+    return false;
+#else
+    gotoPage(pagenum);
+#end
+}
+
+function gotoPage(pagenum) {
+    document.changePageFrom.pageNumber.value = pagenum;
+    document.changePageFrom.submit();
+    return;
+}
+</script>
+<div class="pageNumber">
+
+    <a #if(!$page.hasPreviousPage())  class="disabled" #else href="#" onclick="return changePageEventOnGotToPage($page.pageNumber - 1);"#end > Prev</a>
+
+        #set ($sIndex = ${page.pageNumber} - 5) #if($sIndex <=0) #set($sIndex = 1) #end
+        #set($eIndex = $sIndex + 9) #if ($eIndex > $!{page.totalPage}) #set($eIndex = $!{page.totalPage}) #end
+
+        #foreach($n in [$sIndex..$eIndex])
+        <a href="#"  #if($n == ${page.pageNumber} )class="current" #end onclick="return changePageEventOnGotToPage($n);">$n </a>
+        #end
+    <a #if(!$page.hasNextPage())  class="disabled" #else href="#" onclick="return changePageEventOnGotToPage($page.pageNumber + 1);"#end> Next</a>
+
+  </div>
+
+
+#end
+
+#############################################################################################
+
+## 本宏在一个页面内只能调用一次
+## $treeRootNodeList        树根节点列表
+## $treeName                树标题
+## $openLevel                缺省展开级别
+## $clickMode                单击节点时的行为：allNode-->全部节点都响应单击事件
+##                                         none----->全部节点都不响应单击事件
+##                                         其它------>只有叶子节点响应单击事件
+## $treeNodeClickFunction    单击节点时调用的函数
+#macro(showDepTree $treeRootNodeList $treeName $openLevel $clickMode $treeNodeClickFunction $isDep)
+##    <div id="treeContentBorder" class="unnamed1" style="position:absolute;top:0;left:0;display:none;">
+      <table border="0" cellpadding="0" cellspacing="0" class="text12">
+        <tbody>
+          <tr>
+            <td align="left" height="16" width="16"><img alt="" border="0" height="8" width="16"
+              src="../images/tree/space.gif" /></td>
+            <td align="left" height="16" width="16"><img alt="" border="0" height="16" width="16"
+              src="../images/tree/item_root.gif" /></td>
+            <td align="left" height="10" width="3"><img alt="" border="0" height="10" width="3"
+              src="../images/tree/space.gif" /></td>
+            ##<td align="left">$treeName</td>
+            <td align="left">
+              #if("$isDep" == "1")
+                $treeName
+              #else
+                <a href="javascript:$treeNodeClickFunction('', '${treeName}')"><span class="contextDiv">$treeName</span></a>
+              #end
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    ##set($openLevel = $openLevel - 1) ##此处设置根节点
+    #set($parentIsLastRootArray = [])   ##标识每个父结点是否是其所在级别中的最后一个结点
+    #set($currentRootNodeArray = [])    ##当前正在处理的根结点栈
+    #foreach($treeNode in $treeRootNodeList)
+        #set($isLast = $velocityCount == $treeRootNodeList.size())
+        #set($temp = $currentRootNodeArray.add($treeNode))    ##当前结点进栈
+
+        #showRootTreeNode($currentRootNodeArray $parentIsLastRootArray $isLast $openLevel $clickMode $treeNodeClickFunction)
+    #end
+##    </div>
+<script type="text/javascript">
+function showTreeNextLevel(divId, clickObj) {
+    var nextLevel = document.getElementById(divId);
+    if (nextLevel.style.display == "none") {
+        nextLevel.style.display = "";
+        if (clickObj.src == "../images/tree/plus_last.gif") {
+            clickObj.src = "../images/tree/minus_last.gif";
+        } else {
+            clickObj.src = "../images/tree/minus_notlast.gif";
+        }
+    } else {
+        nextLevel.style.display = "none";
+        if (clickObj.src == "../images/tree/minus_last.gif") {
+            clickObj.src = "../images/tree/plus_last.gif";
+        } else {
+            clickObj.src = "../images/tree/plus_notlast.gif";
+        }
+    }
+    return false;
+}
+</script>
+#end
+
+## 本宏在一个页面内只能调用一次
+## $treeRootNodeList        树根节点列表
+## $treeName                树标题
+## $openLevel                缺省展开级别
+## $clickMode                单击节点时的行为：allNode-->全部节点都响应单击事件
+##                                         none----->全部节点都不响应单击事件
+##                                         其它------>只有叶子节点响应单击事件
+## $treeNodeClickFunction    单击节点时调用的函数
+#macro(showTree $treeRootNodeList $treeName $openLevel $clickMode $treeNodeClickFunction)
+    #showDepTree($treeRootNodeList $treeName $openLevel $clickMode $treeNodeClickFunction '1')
+#end
+
+#macro(showRootTreeNode $currentRootNodeArray $parentIsLastRootArray $isLastRoot $openLevel $clickMode $treeNodeClickFunction)
+    #set($currentRootNodeIndex = $currentRootNodeArray.size() - 1)
+    #set($treeNode = $currentRootNodeArray.get($currentRootNodeIndex))    ##取得当前根结点
+      <table border="0" cellpadding="0" cellspacing="0" class="text12">
+        <tbody>
+          <tr>
+            <td align="left" height="16" width="16"><img alt="" border="0" height="16" width="16"
+              src="../images/tree/space.gif" /></td>
+    #foreach($parentIsLastRoot in $parentIsLastRootArray)
+            <td align="left" height="16" width="16"><img alt="" border="0" height="16" width="16"
+            #if($parentIsLastRoot) src="../images/tree/space.gif" #else src="../images/tree/line.gif" #end /></td>
+    #end
+            <td align="left" height="16" width="16">
+    #if(!$treeNode.isLeaf())  ##有子结点
+        #if(!$treeZoomIndex) #set($treeZoomIndex = 1) #end
+              <input type="image" alt="" border="0" height="16" width="16"
+        #if($parentIsLastRootArray.size() > $openLevel)
+              #if($isLastRoot) src="../images/tree/plus_last.gif" #else src="../images/tree/plus_notlast.gif" #end
+        #else
+              #if($isLastRoot) src="../images/tree/minus_last.gif" #else src="../images/tree/minus_notlast.gif" #end
+        #end
+              onclick="showTreeNextLevel('treeZoom${treeZoomIndex}', this);return false;" />
+    #else
+              <img alt="" border="0" height="16" width="16"
+              #if($isLastRoot) src="../images/tree/minus_last.gif" #else src="../images/tree/minus_notlast.gif" #end />
+    #end
+            </td>
+            <td align="left" height="16" width="16"><img alt="" border="0" height="16" width="16"
+              src="../images/tree/item_dir.gif" /></td>
+            <td align="left" height="10" width="3"><img alt="" border="0" height="10" width="3"
+              src="../images/tree/space.gif" /></td>
+            <td align="left">
+    #if($clickMode == "allNode")
+              <a href="javascript:$treeNodeClickFunction('$!treeNode.getNodeKey()', '$!treeNode.getNodeName()')"><span class="contextDiv">$treeNode.getNodeName()</span></a>
+    #else
+              <span class="contextDiv">$treeNode.getNodeName()</span>
+    #end
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    #if(!$treeNode.isLeaf())  ##有子结点
+      <div id="treeZoom${treeZoomIndex}" #if($parentIsLastRootArray.size() > $openLevel)style="display:none;"#end>
+        #set($treeZoomIndex = $treeZoomIndex + 1)
+        #set($temp = $parentIsLastRootArray.add($isLastRoot))
+
+        #foreach($treeSubNode in $treeNode.getChildren())
+            #set($currentRootNodeIndex = $currentRootNodeArray.size() - 1)
+            #set($treeNode = $currentRootNodeArray.get($currentRootNodeIndex)) ##恢复 $treeNode 指向当前根结点
+            #set($isLast = $velocityCount == $treeNode.getChildren().size())   ##否则这行的比较可能不正确
+                                                                               ##因为递归时可能修改了 $treeNode 的值
+                                                                               ##使其指定别的根结点
+
+            #if($treeSubNode.isLeaf())
+                #showLeafTreeNode($treeSubNode $parentIsLastRootArray $isLast $clickMode $treeNodeClickFunction)
+            #else
+                #set($temp = $currentRootNodeArray.add($treeSubNode))    ##当前结点进栈
+                #showRootTreeNode($currentRootNodeArray $parentIsLastRootArray $isLast $openLevel $clickMode $treeNodeClickFunction)
+            #end
+        #end
+
+        #set($removeIndex = $parentIsLastRootArray.size() - 1)
+        #set($temp = $parentIsLastRootArray.remove($removeIndex))
+      </div>
+    #end
+
+    #set($currentRootNodeIndex = $currentRootNodeArray.size() - 1)
+    #set($temp = $currentRootNodeArray.remove($currentRootNodeIndex))    ##处理完成，当前根结点出栈
+#end
+
+#macro(showLeafTreeNode $treeNode $parentIsLastRootArray $isLastLeaf $clickMode $treeNodeClickFunction)
+      <table border="0" cellpadding="0" cellspacing="0" class="text12">
+        <tbody>
+          <tr>
+            <td align="left" height="16" width="16"><img alt="" border="0" height="16" width="16"
+              src="../images/tree/space.gif" /></td>
+    #foreach($parentIsLastRoot in $parentIsLastRootArray)
+            <td align="left" height="16" width="16"><img alt="" border="0" height="16" width="16"
+            #if($parentIsLastRoot) src="../images/tree/space.gif" #else src="../images/tree/line.gif" #end /></td>
+    #end
+            <td align="left" height="16" width="16"><img alt="" border="0" height="16" width="16"
+            #if($isLastLeaf) src="../images/tree/line_last.gif" #else src="../images/tree/line_notlast.gif" #end /></td>
+            <td align="left" height="16" width="16"><img alt="" border="0" height="16" width="16"
+              src="../images/tree/item_leaf.gif" /></td>
+            <td align="left" height="10" width="3"><img alt="" border="0" height="10" width="3"
+              src="../images/tree/space.gif" /></td>
+            <td align="left">
+    #if($clickMode == "none")
+              <span class="contextDiv">$treeNode.getNodeName()</span>
+    #else
+              <a href="javascript:$treeNodeClickFunction('$!treeNode.getNodeKey()', '$!treeNode.getNodeName()')"><span class="contextDiv">$treeNode.getNodeName()</span></a>
+    #end
+            </td>
+          </tr>
+        </tbody>
+      </table>
+#end
+
+## 本宏在一个页面内只能调用一次
+## $treeRootNodeList        树根节点列表
+## $treeName                树标题
+## $openLevel                缺省展开级别
+## $clickMode                单击节点时的行为：allNode-->全部节点都响应单击事件
+##                                         none----->全部节点都不响应单击事件
+##                                         其它------>只有叶子节点响应单击事件
+## $treeNodeClickFunction    单击节点时调用的函数
+#macro(showMultiTree $treeRootNodeList $treeName $openLevel $clickMode)
+##    <div id="treeContentBorder" class="unnamed1" style="position:absolute;top:0;left:0;display:none;">
+      <table border="0" cellpadding="0" cellspacing="0" class="text12">
+        <tbody>
+          <tr>
+            <td align="left" height="16" width="16"><img alt="" border="0" height="8" width="16"
+              src="../images/tree/space.gif" /></td>
+            <td align="left" height="16" width="16"><img alt="" border="0" height="16" width="16"
+              src="../images/tree/item_root.gif" /></td>
+            <td align="left" height="10" width="3"><img alt="" border="0" height="10" width="3"
+              src="../images/tree/space.gif" /></td>
+            <td align="left">$treeName</td>
+          </tr>
+        </tbody>
+      </table>
+    ##set($openLevel = $openLevel - 1)
+    #set($parentIsLastRootArray = [])   ##标识每个父结点是否是其所在级别中的最后一个结点
+    #set($currentRootNodeArray = [])    ##当前正在处理的根结点栈
+    #foreach($treeNode in $treeRootNodeList)
+        #set($isLast = $velocityCount == $treeRootNodeList.size())
+        #set($temp = $currentRootNodeArray.add($treeNode))    ##当前结点进栈
+
+        #showRootMultiTreeNode($currentRootNodeArray $parentIsLastRootArray $isLast $openLevel $clickMode)
+    #end
+##    </div>
+<script type="text/javascript">
+function showTreeNextLevel(divId, clickObj) {
+    var nextLevel = document.getElementById(divId);
+    if (nextLevel.style.display == "none") {
+        nextLevel.style.display = "";
+        if (clickObj.src == "../images/tree/plus_last.gif") {
+            clickObj.src = "../images/tree/minus_last.gif";
+        } else {
+            clickObj.src = "../images/tree/minus_notlast.gif";
+        }
+    } else {
+        nextLevel.style.display = "none";
+        if (clickObj.src == "../images/tree/minus_last.gif") {
+            clickObj.src = "../images/tree/plus_last.gif";
+        } else {
+            clickObj.src = "../images/tree/plus_notlast.gif";
+        }
+    }
+    return false;
+}
+
+function getSelectDate() {
+
+}
+</script>
+#end
+
+#macro(showRootMultiTreeNode $currentRootNodeArray $parentIsLastRootArray $isLastRoot $openLevel $clickMode)
+    #set($currentRootNodeIndex = $currentRootNodeArray.size() - 1)
+    #set($treeNode = $currentRootNodeArray.get($currentRootNodeIndex))    ##取得当前根结点
+      <table border="0" cellpadding="0" cellspacing="0" class="text12">
+        <tbody>
+          <tr>
+            <td align="left" height="16" width="16"><img alt="" border="0" height="16" width="16"
+              src="../images/tree/space.gif" /></td>
+    #foreach($parentIsLastRoot in $parentIsLastRootArray)
+            <td align="left" height="16" width="16"><img alt="" border="0" height="16" width="16"
+            #if($parentIsLastRoot) src="../images/tree/space.gif" #else src="../images/tree/line.gif" #end /></td>
+    #end
+            <td align="left" height="16" width="16">
+    #if(!$treeNode.isLeaf())  ##有子结点
+        #if(!$treeZoomIndex) #set($treeZoomIndex = 1) #end
+              <input type="image" alt="" border="0" height="16" width="16"
+        #if($parentIsLastRootArray.size() > $openLevel)
+              #if($isLastRoot) src="../images/tree/plus_last.gif" #else src="../images/tree/plus_notlast.gif" #end
+        #else
+              #if($isLastRoot) src="../images/tree/minus_last.gif" #else src="../images/tree/minus_notlast.gif" #end
+        #end
+              onclick="showTreeNextLevel('treeZoom${treeZoomIndex}', this);return false;" />
+    #else
+              <img alt="" border="0" height="16" width="16"
+              #if($isLastRoot) src="../images/tree/minus_last.gif" #else src="../images/tree/minus_notlast.gif" #end />
+    #end
+            </td>
+            <td align="left" height="16" width="16"><img alt="" border="0" height="16" width="16"
+              src="../images/tree/item_dir.gif" /></td>
+            <td align="left" height="10" width="3"><img alt="" border="0" height="10" width="3"
+              src="../images/tree/space.gif" /></td>
+            <td align="left">
+    #if($clickMode == "allNode")
+              <input type="checkbox" name="check_node" nodeName="$!{treeNode.getNodeName()}" value="$!{treeNode.getNodeKey()}"/>$!{treeNode.getNodeName()}
+    #else
+              ${treeNode.getNodeName()}
+    #end
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    #if(!$treeNode.isLeaf())  ##有子结点
+      <div id="treeZoom${treeZoomIndex}" #if($parentIsLastRootArray.size() > $openLevel)style="display:none;"#end>
+        #set($treeZoomIndex = $treeZoomIndex + 1)
+        #set($temp = $parentIsLastRootArray.add($isLastRoot))
+
+        #foreach($treeSubNode in $treeNode.getChildren())
+            #set($currentRootNodeIndex = $currentRootNodeArray.size() - 1)
+            #set($treeNode = $currentRootNodeArray.get($currentRootNodeIndex)) ##恢复 $treeNode 指向当前根结点
+            #set($isLast = $velocityCount == $treeNode.getChildren().size())   ##否则这行的比较可能不正确
+                                                                               ##因为递归时可能修改了 $treeNode 的值
+                                                                               ##使其指定别的根结点
+
+            #if($treeSubNode.isLeaf())
+                #showLeafMultiTreeNode($treeSubNode $parentIsLastRootArray $isLast $clickMode)
+            #else
+                #set($temp = $currentRootNodeArray.add($treeSubNode))    ##当前结点进栈
+                #showRootMultiTreeNode($currentRootNodeArray $parentIsLastRootArray $isLast $openLevel $clickMode)
+            #end
+        #end
+
+        #set($removeIndex = $parentIsLastRootArray.size() - 1)
+        #set($temp = $parentIsLastRootArray.remove($removeIndex))
+      </div>
+    #end
+
+    #set($currentRootNodeIndex = $currentRootNodeArray.size() - 1)
+    #set($temp = $currentRootNodeArray.remove($currentRootNodeIndex))    ##处理完成，当前根结点出栈
+#end
+
+#macro(showLeafMultiTreeNode $treeNode $parentIsLastRootArray $isLastLeaf $clickMode)
+<table border="0" cellpadding="0" cellspacing="0" class="text12">
+  <tbody>
+    <tr>
+      <td align="left" height="16" width="16"><img alt="" border="0" height="16" width="16" src="../images/tree/space.gif" /></td>
+      #foreach($parentIsLastRoot in $parentIsLastRootArray)
+      <td align="left" height="16" width="16"><img alt="" border="0" height="16" width="16"
+      #if($parentIsLastRoot) src="../images/tree/space.gif" #else src="../images/tree/line.gif" #end /></td>
+      #end
+      <td align="left" height="16" width="16"><img alt="" border="0" height="16" width="16"
+      #if($isLastLeaf) src="../images/tree/line_last.gif" #else src="../images/tree/line_notlast.gif" #end /></td>
+      <td align="left" height="16" width="16"><img alt="" border="0" height="16" width="16" src="../images/tree/item_leaf.gif" /></td>
+      <td align="left" height="10" width="3"><img alt="" border="0" height="10" width="3" src="../images/tree/space.gif" /></td>
+      <td align="left">
+      #if($clickMode == "none")
+        ${treeNode.getNodeName()}
+      #else
+        <input type="checkbox" name="check_node" nodeName="$!{treeNode.getNodeName()}" value="${treeNode.getNodeKey()}"/>$!{treeNode.getNodeName()}
+      #end
+      </td>
+    </tr>
+  </tbody>
+</table>
+#end
+
+#**
+ * 选择部门
+ *
+ * 从弹出的部门树选择一个部门或科室
+ *
+ * @param title 按钮标题
+ * @param editorName 输入域的Id
+ * @param departmentId 初始部门Id
+ * @param departmentName 初始部门名称
+ * @param rootId 弹出部门树的根节点，空则显示全局部门
+ * @param attributes 输入域的显示属性
+ *
+ *#
+#macro(selectDepartment $title $editorName $departmentId $departmentName $rootId $attributes)
+<script type="text/javascript">
+function selectDepartmentFor${editorName}(data) {
+  document.getElementById('$editorName').value = data.id;
+  document.getElementById('${editorName}_Name').value = data.name;
+}
+</script>
+<input type="hidden" id="$editorName" name="$editorName" value="$!{departmentId}" />
+<input type="text" id="${editorName}_Name" name="${editorName}_Name" value="$!{departmentName}" $attributes readonly/>
+#selectDepartmentAction("${title}" "$!{rootId}" "selectDepartmentFor${editorName}")
+#end
+#**
+ * 选择部门
+ *
+ * 为兼容旧的系统管理而保留，其选择方式并不适合后续系统需要
+ *
+ * @param callbackFunction 回调函数 参数为(depId, depName)
+ *
+ *#
+#macro(selectDepartmentAction $title $rootId $callbackFunction)
+ #if(!$INCLUDE_SHOW_SELECT_DEPARTMENT_DIALOG_SCRIPT)
+ #set($INCLUDE_SHOW_SELECT_DEPARTMENT_DIALOG_SCRIPT = true)
+  <script type="text/javascript">
+  function showSelectDepartmentDlg(callbackFunction) {
+    var theUrl = "../manage/departmentTree.do?rootId=$!{rootId}";
+    top.openDialog("${title}",theUrl,callbackFunction,400,300);
+  }
+  </script>
+ #end
+<input type="button" value="${title}" onclick="javascript:showSelectDepartmentDlg($callbackFunction)" />
+#end
+
+
+#**
+ * selectMultipleDepartment －－ 
+ *
+ * 选择多个单位，过滤掉下属科室，采用按名称查询的方式获取数据，
+ * 用于主送、抄送单位等的封装，其他地方及后续系统应使用上一个选择单位的宏，该宏须进一步重构
+ *
+ * @param formName form的名称
+ * @param name 输入域的名称
+ * @param value 初始单位Id
+ * @param text 初始单位名称
+ * @param attributes 名称输入域的属性
+ *#
+#macro(selectMultipleDepartment $formName $name $value $text $attributes)
+<textarea name="${name}Text" $attributes>$text</textarea>
+<input type="hidden" name="$name" value="$value">
+#selectMultipleDepartmentAction("$formName" "$name" "selectMultiDepartmentCallbackFunctionFor${name}")
+
+#selectMultiDepartmentCallbackFunction("$name" "${name}Text")
+#end
+
+#macro(selectMultipleDepartmentAction $formName $name $callbackFunction)
+<script type="text/javascript">
+function showSelectDepartmentDialogFor${name}(callbackFunction) {
+  var theUrl = "../manage/departmentMultiSelect.do";
+  FCKDialog.OpenDialog("selectDepartment", "选择部门", theUrl, 520, 390, callbackFunction, window);
+}
+</script>
+<input type="button" value="选择" onclick="javascript:showSelectDepartmentDialogFor${name}($callbackFunction)" />
+#end
+
+#**
+ * selectMultiDepartmentCallbackFunction －
+ *
+ * 生成部门、单位多选时的回调函数
+ *
+ * 因部门多选时，对已选数据的处理均采用Get方法回传controller，当选择的单位足够多时，回传URL地址将会超出限制
+ * 故改用选人页面调用回调函数读取初始值的方法来替代原有处理机制，此时需要对回调函数进行特殊处理，所以统一在此生成该宏
+ *
+ * @param name Id域名称
+ * @param textName text域名称
+ *#
+#macro (selectMultiDepartmentCallbackFunction $name $textName)
+<script type="text/javascript">
+function selectMultiDepartmentCallbackFunctionFor${name}(dataList, opType) {
+    var idObj = document.getElementById("${name}");
+    var nameObj = document.getElementById("${textName}");
+    if (opType == 0) { //读取初始值
+        var obj = new Object();
+        obj.value = idObj.value;
+        obj.text = nameObj.value;
+        return obj;
+    } else { //回填结果
+        idObj.value = "";
+        nameObj.value = "";
+        if (dataList.length > 0) {
+            for (var i = 0; i < dataList.length; i++) {
+                idObj.value = idObj.value + dataList[i].id + ",";
+                nameObj.value = nameObj.value + dataList[i].name + ",";
+            }
+        }
+        if (idObj.value.length > 1) {
+            nameObj.value = nameObj.value.substring(0, nameObj.value.length - 1);
+            idObj.value = idObj.value.substring(0, idObj.value.length - 1);
+        }
+    }
+}
+</script>
+#end
+
+#**
+ * selectStaff
+ *
+ * 选择人员的宏 单选,用文本框显示选择的人员列表
+ * @param $title 按钮名，窗口名
+ * @param $editorName input域的名称
+ * @param $idValue 人员的Id列表初始值
+ * @param $nameValue 人员的名称列表初始值
+ * @param $rootId 人员所在组织结构的根Id，为空则在全局中选择
+ * @param $attributes input域的样式属性
+*#
+#macro(selectStaff $title $editorName $idValue $nameValue $rootId $attributes)
+<script type="text/javascript">
+function selectSingleStaffFor${editorName}(data) {
+  //document.getElementById("${editorName}duty").value = data.duty ;
+  //document.getElementById("${editorName}isInner").value = data.isInner ;
+  //document.getElementById("${editorName}roomNum").value = data.roomNum ;
+  document.getElementById("${editorName}loginName").value = data.loginName;
+  document.getElementById("${editorName}mobile").value = data.mobile;
+  document.getElementById("${editorName}Text").value = data.name ;
+  document.getElementById("${editorName}").value = data.id;
+}
+</script>
+<input type="text" id="${editorName}Text" name="${editorName}Text" $attributes value="$nameValue" readonly>
+<input type="hidden" id="$editorName" name="$editorName" value="$idValue" >
+#selectStaffAction("${title}" "${editorName}" "${rootId}" "selectSingleStaffFor${editorName}")
+#end
+
+#**
+ * selectStaffAction
+ *
+ * 选择人员的宏 单选
+ * @param $title 按钮名，窗口名
+ * @param $editorName input域的名称
+ * @param $rootId 人员所在组织结构的根Id，为空则在全局中选择
+ * @param $callbackFunction 回调函数
+*#
+#macro(selectStaffAction $title $editorName $rootId $callbackFunction)
+<script type="text/javascript">
+function showSelectSingleStaffDlgFor${editorName} (callbackFunc) {
+  #if(!${editorName} || $!{editorName}=="")
+  #else
+  var val = document.getElementById("${editorName}").value;
+  //top.setDialogParam("staffSelDlgParam",val);
+  #end
+  var theUrl = "../manage/staffSingleSelect.do?rootId=${rootId}&staffs=" + document.getElementById("$editorName").value;
+  top.openDialog("${title}",theUrl,callbackFunc,null,700,400);
+}
+</script>
+<input type="button" value="${title}" onclick="javascript:showSelectSingleStaffDlgFor${editorName}($callbackFunction);"/>
+#end
+
+#**
+ * selectMultiStaff
+ *
+ * 可以多选的选择人员的宏,用文本框显示选择的人员列表
+ * @param $title 窗体名
+ * @param $editorName input域的名称
+ * @param $idValue 人员的Id列表初始值，各值之间以逗号分割
+ * @param $rootId 人员所在组织结构的根Id，各值之间以逗号分割，为空则在全局中选择
+ * @param $nameValue 人员的名称列表初始值，各值之间以逗号分割
+*#
+#macro(selectMultiStaff $title $editorName $idValue $nameValue $rootId $attributes)
+<script type="text/javascript">
+function selectMultipleStaffFor${editorName}(data) {
+  // 清空原来的
+  $("#${editorName}-name").val("");
+  $("#$editorName").val("");
+  // 添加数据
+  var nameVal = "";
+  var idVal = "";
+  for (var i = 0; i < data.length; i++) {
+    nameVal += data[i].name + ",";
+    idVal += data[i].id + ",";
+  };
+  // 去掉最后一个逗号
+  if (nameVal.length > 1 && idVal.length > 1) {
+    nameVal = nameVal.substr(0,nameVal.length - 1);
+    idVal = idVal.substr(0,idVal.length - 1);
+  }
+  $("#${editorName}-name").val(nameVal);
+  $("#$editorName").val(idVal);
+}
+</script>
+<input type="text" id="${editorName}-name" name="${editorName}-name" $attributes value="$nameValue" readonly>
+<input type="hidden" id="$editorName" name="$editorName" value="$idValue" >
+#selectMultiStaffAction("${title}" "$editorName" "${rootId}" "selectMultipleStaffFor${editorName}")
+#end
+
+#**
+ * selectMultiStaffAction
+ *
+ * 可以多选的选择人员的宏
+ * @param $title 按钮名，窗体名
+ * @param $editorName input域的名称
+ * @param $rootId 人员所在组织结构的根Id，各值之间以逗号分割，为空则在全局中选择
+ * @param $callbackFunction 回调函数
+*#
+#macro(selectMultiStaffAction $title $editorName $rootId $callbackFunction)
+<script type="text/javascript">
+function showSelectMultiStaffDlgFor${editorName}(callbackFunc) {
+  #if(!${editorName} || $!{editorName}=="")
+  #else
+  var val = document.getElementById("${editorName}").value;
+  top.setDialogParam("staffSelDlgParam",val);
+  #end
+  var theUrl = "../manage/staffMultiSelect.do?rootId=${rootId}";
+  top.openDialog("${title}",theUrl,callbackFunc,null,700,400);
+}
+</script>
+<input type="button" value="${title}" onclick="javascript:showSelectMultiStaffDlgFor${editorName}($callbackFunction)"/>
+#end
+
+## 暂时禁用
+###macro(selectMultiStaffFromGroupAction $editorName $callbackFunction)
+##<script type="text/javascript">
+##function showselectMultipleStaffDialog2For${editorName}(callbackFunction) {
+##    var idVal = document.getElementById("${editorName}").value;
+##    var nameVal = document.getElementById("${editorName}_Name").value
+##    var theUrl = "../selectdata/staffGroupSelect.do?staffIds=" + idVal + "&staffNames=" + nameVal;
+##    FCKDialog.OpenDialog("selectGroup", "选择群组", theUrl, 520, 390, callbackFunction, window);
+##}
+##</script>
+##<input type="button" class="button1" value="选择群组" onclick="javascript:showselectMultipleStaffDialog2For${editorName}($callbackFunction)" />
+###end
+
+#macro(selectYearFirstNone $editorName $defaultValue $attributes  $display)
+  <select name="$editorName" class="inputobject" $attributes>
+       <option value="">$!display</option>
+     #foreach($year in [2005..2020])
+       <option value="$year" #if($defaultValue && "$defaultValue" == "$year") selected="true" #end>$year</option>
+     #end
+  </select>
+#end
+
+#macro(selectYear $editorName $defaultValue $attributes)
+  <select name="$editorName" class="inputobject" $attributes>
+     #foreach($year in [2005..2020])
+       <option value="$year" #if($defaultValue && "$defaultValue" == "$year") selected="true" #end>$year</option>
+     #end
+  </select>
+#end
+
+#macro(selectMonthFirstNone $editorName $defaultValue $attributes $display)
+  <select name="$editorName" class="inputobject" $attributes>
+     <option value="">$display</option>
+     #foreach($month in [1..12])
+       <option value="$month" #if($defaultValue && "$defaultValue" == "$month") selected="true" #end>$month</option>
+     #end
+  </select>
+#end
+
+#macro(selectMonth $editorName $defaultValue $attributes)
+  <select name="$editorName" class="inputobject" $attributes>
+     #foreach($month in [1..12])
+       <option value="$month" #if($defaultValue && "$defaultValue" == "$month") selected="true" #end>$month</option>
+     #end
+  </select>
+#end
+
+#macro(selectDate $editorName $defaultValue $attributes)
+  <select name="$editorName" class="inputobject" $attributes>
+     #foreach($day in [1..31])
+       <option value="$day" #if($defaultValue && "$defaultValue" == "$day") selected="true" #end>$day</option>
+     #end
+  </select>
+#end
+
+#**
+ * makeUploadAttach
+ *
+ * 从服务器下载附件到客户机,默认上传大小限制20M
+ *
+ * @param $ownerId 属主ID
+ * @param $ownerType 属主类型
+ * @param $isMulti 是否多文件上传ture为多文件，false为单文件
+ * @param $readonly 是否为只读，true为只读，false为非只读
+ * @param $width 单选时固定长度
+ *
+*#
+#macro(makeUploadAttach $ownerId $ownerType $isMulti $readonly $width)
+  #set($txtId = $ownerType.toString().replace(".",""))
+  #makeUploadWithFlash($ownerId $ownerType $isMulti $readonly $txtId "20480000")
+#end
+
+#**
+ * makeUploadWithFlash
+ *
+ * 从服务器下载附件到客户机
+ *
+ * @param $ownerId 属主ID
+ * @param $ownerType 属主类型
+ * @param $isMulti 是否多文件上传，true为多文件，false为单文件
+ * @param $readonly 是否为只读，true为只读，false为非只读
+ * @param $txtId input txt的id
+ * @param $size 允许上传的最大文件大小
+ *
+*#
+#macro(makeUploadWithFlash $ownerId $ownerType $isMulti $readonly $txtId $size)
+  <script type="text/javascript">
+    jQuery(document).ready(function(){
+      $("#${txtId}").uploadify({
+        'ownerType': '$!{ownerType}',
+        'ownerId':'$!{ownerId}',
+        'sizeLimit':$!{size},
+        'multi': $!{isMulti},
+        'readonly':$!{readonly}
+        });
+      });
+  </script>
+  <div id="${txtId}"></div>
+#end
+
+#**
+ * makeAttachUploadControl
+ *
+ * 附件打开
+ *
+ * @param $ownerId 属主ID
+ * @param $ownerType 属主类型
+ * @param $isMulti 是否多文件上传，true为多文件，false为单文件
+ * @param $readonly 是否为只读，true为只读，false为非只读
+ * @param $txtId input txt的id
+ * @param $size 允许上传的最大文件大小
+ *
+*#
+#macro(makeAttachUploadControl $DivId $id $width $height $user $ownerId $moduleName)
+<div id="$DivId" style="z-index: 10">
+  ##<OBJECT id="$id" classid="clsid:9DB303D3-6757-4BDE-B8CB-7D89192F0E0D" codebase="../lib/webannex/WebAnnexManager.ocx#version=1,1,1,3" width=$width height=$height align=center hspace=0 vspace=0></OBJECT>
+  ##<OBJECT id="$id" TYPE="application/x-itst-activex" clsid="{9DB303D3-6757-4BDE-B8CB-7D89192F0E0D}" progid="" codebase="../lib/webannex/WebAnnexManager.ocx#version=1,1,1,3" width=$width height=$height align=center hspace=0 vspace=0></OBJECT>
+</div>
+##<div id="processUpload" style="position: absolute; left: 220px; top: 150px; width: 350px; height: 40px;" >
+##<iframe name="processUploadIframe"  src='javascript:\"\"'  scrolling="no" frameborder=0 width="100%" height="80px"  marginheight="0" style=' border:1px outset #EFEBDE;background-color:#EFF7F7;'></iframe>
+##</div>
+<script type="text/javascript">
+// 获取Uri地址——内部调用
+function getUri(withPort) {//带不带端口
+  if (withPort == "true") {
+    return "http://" + window.location.host + "#getContextPath()/common/editFile.ao";
+  } else {
+    return "http://" + window.location.hostname + "#getContextPath()/common/editFile.ao";
+  }
+}
+##  processUpload.style.visibility='hidden';
+##  with(window.frames("processUploadIframe")) {
+##    document.writeln("<div id='inner' width='100%' height='100%' style='color: #4C4C4C; font-size: 14px; text-align:center; padding-top:10px;background-color:#EFF7F7;'><img border='0' src='../images/process.gif' width='240px' height='32'><p><font color=red> 正将请求发送至服务器...</font></p></div>");
+##    document.close();
+##  }
+  WebAnnexManager.addOcx("$!{DivId}","$!{id}","$!{width}","$!{height}");
+  WebAnnexManager.checkOcx("$!{id}");
+  WebAnnexManager.initOcx("$!{id}","$!{user}","$!{ownerId}","$!{moduleName}",getUri());
+  window.onunload = function () {
+    WebAnnexManager.clearOcx("$!{id}");
+  }
+</script>
+#end
+

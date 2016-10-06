@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd"
+   > 
+    <bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+        <property name="mappings">
+            <props>
+                <prop key="manage/roleEdit.do">roleEditController</prop>
+                <prop key="manage/roleList.do">roleController</prop>
+                <prop key="manage/roleDelete.do">roleController</prop>
+                <!-- 授权角色 -->
+                <prop key="manage/grantOperateToRole.do">roleController</prop>
+                <prop key="manage/grantOperateToRoleSubmit.do">roleController</prop>
+<!--                <prop key="manage/roleGrant.do">roleGrantController</prop>-->
+<!--                <prop key="manage/grantPowerToRole.do">roleController</prop>-->
+<!--                <prop key="manage/grantPowerToRoleSubmit.do">roleController</prop>-->
+<!--                <prop key="manage/grantStaffToRole.do">roleController</prop>-->
+<!--                <prop key="manage/grantStaffToRoleSubmit.do">roleController</prop>-->
+            </props>
+        </property>
+    </bean>
+
+
+    <bean id="roleDao" class="com.console.role.service.dao.hibernate.HibernateRoleDao">
+        <property name="sessionFactory"><ref bean="sessionFactory" /></property>
+    </bean>
+
+
+    <bean id="roleService" class="com.console.role.service.spring.SpringRoleService">
+        <property name="roleDao"><ref bean="roleDao" /></property>
+    </bean>
+
+
+    <bean id="roleController" class="com.console.role.controller.RoleController" autowire="byType" />
+
+<!--    <bean id="roleEditValidator" class="com.console.manage.validator.RoleEditValidator" />-->
+    <bean id="roleEditController" class="com.console.role.controller.RoleEditController" autowire="byType" >
+        <property name="sessionForm"><value>true</value></property>
+        <property name="commandClass"><value>com.console.role.command.RoleInfo</value></property>
+        <property name="formView"><value>manage/roleEdit</value></property>
+        <property name="successView"><value>../manage/roleList.do</value></property>
+    </bean>
+
+
+<!--    <bean id="roleGrantController" class="com.console.role.controller.RoleGrantController">-->
+<!--        <property name="commandClass"><value>com.console.role.command.RoleGrantInfo</value></property>-->
+<!--        <property name="formView"><value>manage/roleGrant</value></property>-->
+<!--        <property name="roleService"><ref bean="roleServiceProxy" /></property>-->
+<!--        <property name="manageService"><ref bean="manageServiceProxy" /></property>-->
+<!--        <property name="successView"><value>../manage/roleGrant.do</value></property>-->
+<!--    </bean>-->
+
+
+<!--     <bean class="com.console.role.RoleConfig" autowire="byType" /> default-autowire="byType"-->
+
+</beans>

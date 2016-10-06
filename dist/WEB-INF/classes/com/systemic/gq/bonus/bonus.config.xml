@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- QueryStringUtil -->
+    <bean id="bonusRecordQueryStringUtil" class="org.springline.beans.dataquery.support.SimpleQueryMethod">
+        <property name="valueObjectClassName"><value>com.systemic.gq.entity.BonusRecord</value></property>
+        <property name="tableAlias"><value>me</value></property>
+        <property name="orderByClause"><value>id asc</value></property>
+        <property name="queryParam">
+            <list>
+                <value>userid,userid,LIKE</value>
+                <value>bonustype,bonustype,EQU</value>
+                <value>create_time,create_time,GT_EQU</value>
+                <value>create_time,end_time,LESS_EQU</value>
+            </list>
+        </property>
+    </bean>
+    <bean id="bonusRecordDao" class="com.systemic.gq.bonus.service.dao.hibernate.HinbernateBonusRecordDao">
+        <property name="sessionFactory"><ref bean="sessionFactory" /></property>
+        <property name="bonusRecordQueryStringUtil"><ref bean="bonusRecordQueryStringUtil" /></property>
+    </bean>    
+    <bean id="bonusRecordService" class="com.systemic.gq.bonus.service.spring.SpringBonusRecordService"  autowire="byType"/>
+	
+</beans>

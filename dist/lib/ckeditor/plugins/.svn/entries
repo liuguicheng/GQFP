@@ -1,0 +1,139 @@
+8
+
+dir
+6
+https://192.168.1.118/svn/GQFP/trunk/dist/lib/ckeditor/plugins
+https://192.168.1.118/svn/GQFP
+
+
+
+2016-09-07T09:42:09.304169Z
+2
+ZBJ
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+7eaa1c50-b5f8-8d46-a0b5-e5067a1f1115
+
+a11yhelp
+dir
+
+about
+dir
+
+adobeair
+dir
+
+ajax
+dir
+
+autogrow
+dir
+
+bbcode
+dir
+
+clipboard
+dir
+
+colordialog
+dir
+
+devtools
+dir
+
+dialog
+dir
+
+div
+dir
+
+docprops
+dir
+
+find
+dir
+
+flash
+dir
+
+forms
+dir
+
+iframe
+dir
+
+iframedialog
+dir
+
+image
+dir
+
+link
+dir
+
+liststyle
+dir
+
+pagebreak
+dir
+
+pastefromword
+dir
+
+pastetext
+dir
+
+placeholder
+dir
+
+scayt
+dir
+
+showblocks
+dir
+
+smiley
+dir
+
+specialchar
+dir
+
+styles
+dir
+
+stylesheetparser
+dir
+
+table
+dir
+
+tableresize
+dir
+
+tabletools
+dir
+
+templates
+dir
+
+uicolor
+dir
+
+wsc
+dir
+
+xml
+dir
+

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  #headInclude()
+  <script type="text/javascript" src="../script/validator.js"></script>
+  <script type="text/javascript">
+  validator.formName = "editForm";
+  validator.addNormalCheckPoint("code", "菜单编号", "checkNotNull;checkNotEmpty");
+  validator.addNormalCheckPoint("name", "菜单名称", "checkNotNull;checkNotEmpty");
+
+  function doSave(){
+    var e = document.editForm;
+    if (checkInput(e)) {
+      e.submitFlag.value = "1";
+      e.submit();
+    }
+  }
+  function checkInput(e) {
+    if (e.submitFlag.value == "1") {
+      alert("当前页面已经提交，请稍等！");
+      return false;
+    }
+    return validator.checkAll();
+  }
+  function doReturn() {
+    document.location.href = "../manage/powerInnerList.do?token=$!{token}&tab=$!{tab}";
+  }
+</script>
+</head>
+<body class="easyui-layout" style="overflow-y:hidden">
+
+
+<div data-options="region:'center',title:'编辑菜单信息',iconCls:'icon-edit', collapsible:false" >
+
+<form name="editForm" method="post" action="#getRequestUri()" class="indieui-form">
+<input type="hidden" name="token" value="$!{token}" />
+<input type="hidden" name="submitFlag" value="0" />
+<input type="hidden" name="id" value="$!{command.id}" />
+<input type="hidden" name="tab" value="$!{tab}" />
+
+<table class="TbCommon">
+  <tr>
+    <td class="TdLabel" style="width:120px;">#requiredInput("菜单编号")</td>
+    <td class="TdInput">
+      <input type="text" name="code" value="#htmlEscape($!{command.code})" style="width:98%" />
+    </td>
+    <td class="TdLabel" style="width:100px;">菜单类型</td>
+    <td class="TdInput">
+      #formSingleSelect("typeFlag" $!{command.typeFlag} ${command.typeFlagMap} "")
+    </td>
+  </tr>
+  <tr>
+    <td class="TdLabel">#requiredInput("菜单名称")</td>
+    <td class="TdInput" colspan="3">
+      <input type="text" name="name" value="#htmlEscape($!{command.name})" style="width:98%" />
+    </td>
+  </tr>
+  <tr>
+    <td class="TdLabel">菜单功能的url</td>
+    <td class="TdInput"  colspan="3">
+      <input type="text" name="url" value="#htmlEscape($!{command.url})" style="width:98%"/>
+    </td>
+  </tr>
+  <tr>
+    <td class="TdLabel">菜单图标的url</td>
+    <td class="TdInput"  colspan="3">
+      <input type="text" name="imgUrl" value="#htmlEscape($!{command.imgUrl})" style="width:98%"/>
+    </td>
+  </tr>
+  <tr>
+    <td class="TdLabel">是否放置桌面菜单</td>
+    <td class="TdInput"  colspan="3">
+      #formRadioButtonDictionary("powerDesk" "$!{command.powerDesk}" $dicData.dicWhether "" "")
+    </td>
+  </tr>  
+  <tr>
+    <td class="TdLabel">菜单所属模块名</td>
+    <td class="TdInput"  colspan="3">
+      ##<input type="text" name="moduleName" value="#htmlEscape($!{command.moduleName})" style="width:98%"/>
+       ###formRadioButtonDictionary("moduleName" "$!{tab}" $dicData.dicModuleName "" "")
+        <input type="hidden" name="moduleName" value="$!{tab}"/>
+       #lookUpDict($dicData.dicModuleName $!{tab})
+    </td>
+  </tr>
+</table>
+</form>
+</div>
+
+<div data-options="region:'south'" style="overflow:hidden" >
+  <div class="CommandTool indieui-form">
+##  <a href="javascript:doSave()" class="easyui-linkbutton" data-options="iconCls:'icon-save'" style="width:100px">保 存</a>
+##  <a href="javascript:doReturn()" class="easyui-linkbutton" data-options="iconCls:'icon-cancel'" style="width:100px">返 回</a>
+  <input type="button" style="width:100px" value="保 存" onclick="javascript:doSave();"/>
+  <input type="button" style="width:100px" value="返 回" onclick="javascript:doReturn();"/>
+  </div>
+</div>
+</body>
+</html>

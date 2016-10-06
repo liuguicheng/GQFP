@@ -1,0 +1,80 @@
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=GBK" />
+  <title>$!{appContext.appName}</title>
+  <link href="../script/css.css" rel="stylesheet" type="text/css" />
+  <script type="text/javascript" src="../script/common.js"></script>
+<script type="text/javascript">
+#if($opTime)
+    writeStatusMsg('$opTime', '$opMessage');
+#end
+</script>
+</head>
+<body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+<table width="100%" height="100%" border="0" cellpadding="0" cellspacing="0">
+  <tr valign="top" height="1">
+    <td>
+      <table width="100%" height="26" border="0" cellpadding="0" cellspacing="0" class="bj">
+        <tr>
+          <td height="24">
+            <table width="100%" height="100%" border="0" cellpadding="0" cellspacing="0" class="sb">
+              <tr>
+                <td>
+                  <table width="100%" border="0" cellpadding="0" cellspacing="0" class="unnamed1">
+                    <tr>
+                      <td width="1%"></td>
+                      <td width="49%" height="24">
+                        <img src="../images/mb_top_zl1.gif" width="16" height="13" align="absmiddle" alt="工具条" />
+                        <span class="text12">编辑流程角色信息</span>
+                      </td>
+                      <td width="49%" align="right" valign="middle" class="text12">
+                        <input type="button" class="nv" value="保存" onclick="document.editForm.submit();" />
+                        <input type="button" class="nv" value="复位" onclick="document.editForm.reset();" />
+                      </td>
+                      <td width="1%"></td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <tr valign="top">
+    <td>
+      <table width="100%" height="100%" border="0" cellpadding="0" cellspacing="0" class="zyx">
+<form name="editForm" method="post" action="../manage/flowRoleEdit.do">
+#springBind("command.opType")
+#set($isModify = $status.value == "update")
+<input type="hidden" name="opType" value="${status.value}" />
+        <tr>
+          <td valign="top">
+            <table width="100%" border="0" cellpadding="3" cellspacing="0" class="t">
+#springBind("command.name")
+              <tr align="center">
+                <td width="30%" align="right" class="t3">#requiredInput("角色名称")</td>
+                <td width="70%" align="left" class="t2">
+                  <input type="text" name="name" value="$!{status.value}" #if($isModify) readOnly="true" #end/>
+                  #showErrorMessage($status.errorMessage)
+                </td>
+              </tr>
+#springBind("command.flowName")
+              <tr align="center">
+                <td width="30%" align="right" class="t3">#requiredInput("所属流程名称")</td>
+                <td width="70%" align="left" class="t2">
+                  <input type="text" name="flowName" value="$!{status.value}" />
+                  #showErrorMessage($status.errorMessage)
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+</form>
+      </table>
+    </td>
+  </tr>
+</table>
+</body>
+</html>

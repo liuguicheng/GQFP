@@ -1,0 +1,814 @@
+/*公共属性*/
+*{
+	font-family: "微软雅黑", "宋体", Tahoma, sans-serif;
+}
+
+BODY
+{
+	font-size: 14px;
+	margin: 0px;
+	color: #2B2B2B;
+	font-family: "微软雅黑", "宋体", Tahoma, sans-serif;
+	padding:2px;
+	padding:0px;
+    *height:100%;
+	_height:100%;
+}
+TD
+{
+    font-size: 14px;
+    line-height: 150%;
+}
+
+FORM
+{
+    margin: 0px 0px 0px 0px;
+}
+IMG
+{
+    text-align: center;
+    vertical-align: middle;
+    border:none;
+}
+A
+{
+    color: #000000;
+    text-decoration: none;
+}
+a:visited {
+    color: #552D0B;
+}
+
+a:hover {
+    color: #FF6600;
+    text-decoration: underline;
+}
+/*----------- 遮罩--------------- */
+#mask{
+    position: absolute;
+    left: 0;
+    top:0;
+    width:100%;
+    height:100%;
+    background:#666;
+    filter:ALPHA(opacity=30);
+    opacity: .30;
+    -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=30);
+    z-index:1;
+}
+
+/* ------------ 进度条 ---------------- */
+.LoadingBar {
+	position: absolute;
+	background-position:center center;
+	width:340px;
+	height:65px;
+	background-color:#FFFFFF;
+    left: expression((document.body.offsetWidth - 340)/2);
+    top: expression((document.body.offsetHeight - 120)/2);
+	top:50% !important;
+	left:50% !important;
+	background-image: url(../pressbar.gif);
+	background-repeat: no-repeat;
+	font-size: 14px;
+	color: #666666;
+	padding-top: 10px;
+	border: 1px solid #66C1FF;
+	padding-left: 8px;
+	z-index:2;
+}
+
+/* 定义带滚动条的DIV */
+.DivScroll {
+    /*
+        滚动条相关颜色属性：
+    　　face-color：滑块颜色
+    　　hightlight-color：高亮颜色
+    　　3dlight-color：三维光线颜色
+    　　darkshadow-color：暗影颜色
+    　　shadow-color：阴影颜色
+    　　arrow-color：箭头颜色
+    　　tack-color：滑道颜色
+    　　滚动条属性：
+    　　overflow：auto为自动，yes为有，no为无
+    　　overflow-x：横向滚动条
+    　　overflow-y：纵向滚动条
+     */
+    overflow:auto;
+    /*position:relative;*/
+    width:100%;
+	height:auto !important;
+    *height:100%;
+	_height:100%;
+    line-height: 1.5;
+    font-size: 14px;
+    background-color: #FFFFFF;
+   /* padding:1px 0px 1px 0px;
+	padding:0px;
+	padding:0px !importance;
+    margin:0px;
+	border:none !important;
+    border: 1px solid #DFDFDF;
+	border:none !important;*/
+    /*float:left;*/
+}
+/*
+.DivScroll_X
+{
+    overflow:auto;
+    width:expression(body.scrollWidth*0.99+2);
+    height:100%;
+    background-color: #FFFFFF;
+    padding: 0px;
+    margin:1px 0px 1px 0px;
+    border: 1px solid #DFDFDF;
+}*/
+/*表格样式定义*/
+.TbBlank {
+    border: 0px;
+}
+.TbBlank TD {
+    border: 0px;
+}
+.TbCommon {
+    padding: 0px;
+    width: 100%;
+    background-color: #FFFFFF;
+    margin:0px;
+    border: 1px solid #DBDBDB;
+    border-collapse: collapse;
+}
+.TbCommon TD {
+	border-collapse:collapse;
+	empty-cells:show;
+	/*border-top-width: 1px;*/
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	/*border-left-width: 1px;*/
+	/*border-top-style: solid;*/
+	border-right-style: solid;
+	border-bottom-style: solid;
+	/*border-left-style: solid;*/
+	/*border-top-color: #FFFFFF;*/
+	border-right-color: #E7E7E7;
+	border-bottom-color: #E7E7E7;
+	/*border-left-color: #FFFFFF;*/
+}
+.TbTool {
+    width: 100%;
+    background-color: #FAFAFA;
+    height:25px;
+    margin-top: 2px;
+    margin-right: 0px;
+    margin-bottom: 2px;
+    margin-left: 0px;
+    padding-right: 5px;
+    padding-left: 5px;
+    padding-top: 1px;
+    padding-bottom: 1px;
+    border: 1px solid #ACC9FD;
+}
+.TbTool TD {
+    border:0px;
+}
+/*.TbList {
+    padding: 0px;
+    width: 100%;
+    margin-top: 1px;
+    margin-right: 0px;
+    margin-bottom: 1px;
+    margin-left: 0px;
+    border-left-width: 1px;
+    border-left-style: solid;
+    border-left-color: #CCCCCC;
+    border-top:#CCCCCC 1px solid;
+    border-collapse:collapse;
+	table-layout:fixed;
+}*/
+Table.TbList {
+	table-layout:fixed;
+	/*position:relative;*/
+	width:100%;
+    padding: 0px;
+	margin:0px;
+	border:#D8D8D8 1px solid;
+	border-collapse:collapse;
+	/*white-space:nowrap;*/
+	color: #151515;
+}
+Table.TbList tr{
+	height:30px;
+	line-height: 150%;
+    text-align: center;
+}
+/*突出显示表格，"醒目"*/
+.TbShow {
+    width: 100%;
+    background-color: #F2F2F2;
+    height:25px;
+    margin-top: 2px;
+    margin-right: 0px;
+    margin-bottom: 2px;
+    margin-left: 0px;
+    padding-right: 5px;
+    padding-left: 5px;
+    padding-top: 1px;
+    padding-bottom: 1px;
+    border: 3px solid #4499ee;
+}
+/*这个好像没用到呢*/
+.tbmainlistStatic
+{
+/*position:inherit;*/
+    margin-top: 1px;
+    margin-right: 0px;
+    margin-bottom: 1px;
+    margin-left: 0px;
+}
+.TbList TD,.tbmainlistStatic TD {
+    padding:2px;
+	/*white-space:nowrap;*/
+	border-collapse:collapse;
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-right-color: #E7DEDE;
+	border-bottom-color: #EBEBEB;
+}
+
+.TbList TD a,.tbmainlistStatic TD a {
+    color: #202020;
+}
+Table.TbList TD.TdTxtOver{
+	text-overflow:ellipsis;
+    overflow:hidden;
+    white-space: nowrap;
+    padding-left:2px;
+	text-align:left;
+}
+
+/**这个好像也没用到*/
+.tbmainlistinner {
+    padding: 0px;
+    width: 100%;
+    margin: 0px;
+    border: none;
+    border-collapse:collapse;
+}
+.tbmainlistinner TD {
+    padding:1px 5px 1px 5px;
+    margin: 0px;
+    border-collapse:collapse;
+    border-top: 1px solid #FFFFFF;
+    border-left: 1px solid #FFFFFF;
+    border-right: 1px solid #999999;
+    border-bottom:none;
+}
+
+.TbTitle {
+    border: 1px solid #83B4D8;
+    text-align: left;
+    background-color: #CFE6F3;
+    width: 100%;
+    height: 26px;
+    margin:1px 0px 1px 0px;
+    padding: 0px 2px 0px 2px;
+    background-image: url(../trtlebg.gif);
+    background-repeat: repeat-x;
+    background-position: center center;
+    /*
+    border-right-width: 1px;
+    border-left-width: 1px;
+    border-right-style: solid;
+    border-left-style: solid;
+    border-right-color: #86b2d1;
+    border-left-color: #86b2d1;*/
+}
+/*****************************************
+ * TdList 列表里面的行样式
+ *****************************************/
+.TrListTitle {
+	color: #191919;
+	text-align: center;
+	background-color: #E6E6E6;
+	/*background-image: url(../trtlebg3.gif);*/
+	background-image: url(../theader_bg.gif);
+	background-repeat: repeat-x;
+	background-position: left top;
+	height:30px;
+	border-bottom:1px solid  #7CABFF;
+}
+.TrListTitle  TD{
+	border-bottom:none;
+	border-right:1px solid #BECCF0;
+}
+.TrListOdd {
+    background-color: #FFFFFF;
+}
+.TrListEven {
+    background-color: #EDF3F3;
+}
+.TrListFocus {
+    background-color: #ACE4FF;
+}
+/*****************************************
+ * 输入区域的行样式
+ *****************************************/
+.TrTitle {
+    height:20px;
+    line-height: 20px;
+    background-color: #D1EAFC;
+    text-align: left;
+    vertical-align: middle;
+    padding-left: 10px;
+}
+.TrGroup {
+	height:30px;
+	line-height: 30px;
+	background-color: #D2EAFF;
+	vertical-align: middle;
+	color: #000000;
+}
+.TrSubTitle {
+    height:30px;
+    line-height: 30px;
+/*    font-family: 黑体;*/
+    font-size: 14px;
+    color: #97141A;
+    background-color: #B5E2F5;;
+    text-align: left;
+    vertical-align: middle;
+}
+/*****************************************
+ * 输入区域的单元格样式
+ *****************************************/
+.TdLabel {
+    line-height: 150%;
+    background-color: #F7F7F7;
+    text-align: right;
+    vertical-align: middle;
+	padding-right:5px;
+	height:32px;
+}
+
+.TdInput {
+    line-height: 150%;
+    background-color: #fff;
+    text-align: left;
+    vertical-align: middle;
+	padding-left:5px;
+	padding-right:5px;
+	color:#3C3C3C;
+}
+.TdCommand {
+    line-height: 150%;
+	height:32px;
+	line-height:32px;
+    background-color: #F3F3F3;
+    text-align: center;
+    vertical-align: middle;
+}
+
+/* Button 样式 */
+.btn
+{
+	font-size: 14px;
+	height: 22px;
+	background-image: url(../commonBtnBg.png);
+	background-repeat: repeat-x;
+	background-position: center center;
+	color: #FFF;
+	text-decoration: none;
+	margin-right: 1px;
+	margin-left: 1px;
+	padding-left:10px;
+	padding-right:10px;
+	cursor:pointer;
+	border:0;
+}
+.btn:hover{
+	color:#F90;
+}
+.btn1
+{
+    font-size: 14px;
+    height: 22px;
+    background-image: url(../btnbg1.gif);
+    background-repeat: repeat-x;
+    background-position: center;
+
+    border-right: #CCC 1px solid;
+    border-top: #CCC 1px solid;
+    border-left: #CCC 1px solid;
+    border-bottom: #CCC 1px solid;
+
+    padding-top: 1px;
+    padding-right: 5px;
+    padding-bottom: 1px;
+    padding-left: 5px;
+    color: #363636;
+    text-decoration: none;
+    margin-right: 1px;
+    margin-left: 1px;
+}
+.btn2
+{
+    font-size: 14px;
+    height: 22px;
+    background-image: url(../btnbg2.gif);
+    background-repeat: repeat-x;
+    background-position: center;
+    /*
+    border-right-width: 1px;
+    border-left-width: 1px;
+    border-right-style: solid;
+    border-left-style: solid;
+    border-right-color: #dea303;
+    border-left-color: #dea303;
+    */
+    border-right: #CCC 1px solid;
+    border-top: #CCC 1px solid;
+    border-left: #CCC 1px solid;
+    border-bottom: #CCC 1px solid;
+
+    padding-top: 1px;
+    padding-right: 5px;
+    padding-bottom: 1px;
+    padding-left: 5px;
+    color: #363636;
+    text-decoration: none;
+    margin-right: 1px;
+    margin-left: 1px;
+}
+.btn3
+{
+    font-size: 14px;
+    height: 22px;
+    background-image: url(../btnbg3.gif);
+    background-repeat: repeat-x;
+    background-position: center;
+    /*
+    border-right-width: 1px;
+    border-left-width: 1px;
+    border-right-style: solid;
+    border-left-style: solid;
+    border-right-color: #CCCCCC;
+    border-left-color: #CCCCCC;
+    */
+    border-right: #CCC 1px solid;
+    border-top: #CCC 1px solid;
+    border-left: #CCC 1px solid;
+    border-bottom: #CCC 1px solid;
+
+    padding-top: 1px;
+    padding-right: 5px;
+    padding-bottom: 1px;
+    padding-left: 5px;
+    color: #EEEEEE;
+    text-decoration: none;
+    margin-right: 1px;
+    margin-left: 1px;
+}
+.btn4
+{
+    font-size: 14px;
+    height: 22px;
+    background-image: url(../btnbg4.gif);
+    background-repeat: repeat-x;
+    background-position: center;
+    /*
+    border-right-width: 1px;
+    border-left-width: 1px;
+    border-right-style: solid;
+    border-left-style: solid;
+    border-right-color: #A9D5FC;
+    */
+    border-right: #CCC 1px solid;
+    border-top: #CCC 1px solid;
+    border-left: #CCC 1px solid;
+    border-bottom: #CCC 1px solid;
+
+
+    border-left-color: #A9D5FC;
+    padding-top: 1px;
+    padding-right: 5px;
+    padding-bottom: 1px;
+    padding-left: 5px;
+    color: #363636;
+    text-decoration: none;
+    margin-right: 1px;
+    margin-left: 1px;
+}
+.btn5
+{
+    font-size: 14px;
+    height: 22px;
+    background-image: url(../btnbg5.gif);
+    background-repeat: repeat-x;
+    background-position: center;
+    /*
+    border-right-width: 1px;
+    border-left-width: 1px;
+    border-right-style: solid;
+    border-left-style: solid;
+    border-right-color: #CCCCCC;
+    border-left-color: #CCCCCC;
+    */
+    border-right: #CCC 1px solid;
+    border-top: #CCC 1px solid;
+    border-left: #CCC 1px solid;
+    border-bottom: #CCC 1px solid;
+
+    padding-top: 1px;
+    padding-right: 5px;
+    padding-bottom: 1px;
+    padding-left: 5px;
+    color: #FFFFFF;
+    text-decoration: none;
+    margin-right: 1px;
+    margin-left: 1px;
+}
+
+/*****************************************
+ * 超链接按钮的区域样式和单体样式
+ *****************************************/
+.DivButton {
+    float:left;
+    width:auto;
+    /*width:100%;*/
+    padding:0;
+    margin:0;
+}
+.DivButton a {
+    height:100%;
+    text-decoration: none;
+    color: #1B1B1B;
+    float:left;
+    display:block;
+    text-align:right;
+    background-repeat: no-repeat;
+    background-position: left center;
+    padding-left: 17px;
+    padding-right: 3px;
+    vertical-align: middle;
+    margin-top: 0;
+    margin-right: 3px;
+    margin-bottom: 0;
+    margin-left: 3px;
+    border: 1px solid  #FaFaFa;
+    white-space:nowrap;
+}
+.DivButton a:hover {
+	color: #F60;
+	text-decoration: none;
+	/*    height:100%;
+    text-decoration: none;
+    background-color: #C5C5C5;
+    color: #FFFFFF;
+    float:left;
+    display:block;
+    text-align:right;
+    background-repeat: no-repeat;
+    background-position: left center;
+    padding-left: 17px;
+    padding-right: 3px;
+    vertical-align: middle;
+    margin-top: 0;
+    margin-right: 3px;
+    margin-bottom: 0;
+    margin-left: 3px;*/
+/*    border-right:#FFFFFF 1px solid;
+    border-bottom:#FFFFFF 1px solid;
+    border-top:#999999 1px solid;
+    border-left:#999999 1px solid;*/
+}
+.btnSave {
+    background-image: url(../btnSave.gif);
+}
+.btnOk {
+    background-image: url(../btnOk.gif);
+}
+.btnAdd {
+    background-image: url(../btnAdd.gif);
+}
+.btnDel {
+    background-image: url(../btnDel.gif);
+}
+.btnEdit {
+    background-image: url(../btnEdit.gif);
+}
+.btnSearch {
+    background-image: url(../btnSearch.gif);
+}
+.btnRefresh {
+    background-image: url(../btnRefresh.gif);
+}
+.btnBack {
+    background-image: url(../btnBack.gif);
+}
+.btnKey {
+    background-image: url(../btnKey.gif);
+}
+.btnPrint {
+    background-image: url(../btnPrint.gif);
+}
+.btnPaper {
+    background-image: url(../btnPaper.gif);
+}
+.btnPreview {
+    background-image: url(../btnPreview.gif);
+}
+.btnLock {
+    background-image: url(../btnLock.gif);
+}
+.btnUnLock {
+    background-image: url(../btnUnlock.gif);
+}
+.btnSetting {
+    background-image: url(../btnSetting.gif);
+}
+.btnBad {
+    background-image: url(../btnBad.gif);
+}
+.btnUp {
+    background-image: url(../btnUp.gif);
+}
+.btnDown {
+    background-image: url(../btnDown.gif);
+}
+.btnOrder {
+    background-image: url(../btnOrder.gif);
+}
+
+.btnImport {
+    background-image: url(../btnDown.gif);
+}
+
+.btnExport {
+    background-image: url(../btnUp.gif);
+}
+/*****************************************
+ * 输入框样式
+ *****************************************/
+.input_date {
+    border:1px solid #CCCCCC;
+    background-color:#FFFFFF;
+    background:#fff url(../datePicker.gif) no-repeat right;
+}
+.input_out, .input_move, .input_focus, input_readonly, input_date, select{
+	padding:2px;
+	height:24px;
+	line-height:24px;
+	color: #333333;
+}
+.input_out {
+    background-color:#FFFFFF;
+    border: 1px solid #CCCCCC;
+}
+.input_move {
+    background-color:#FFFFD7;
+    border: 1px solid #999;
+}
+.input_focus {
+    background-color: #FFFFD7;
+    border: 1px solid #FFA86F;
+}
+/*
+.input_readonly1 {
+    padding:2px 8px 0px 3px;
+    height:20px;
+    background-color: #ccc;
+    color: #333333;
+    border: 1px solid #62676d;
+}*/
+/* 文本输入域灰色背景 只读效果*/
+.input_readonly {
+    background-color:#EEEEEE;
+    border: 1px solid #B8B8B8;
+}
+select {
+    color: #333333;
+    background-color: #F5F5F5;
+    padding: 1px;
+    height: 20px;
+    margin-top: 1px;
+    margin-bottom: 1px;
+    border: 1px solid #CCCCCC;
+}
+/*
+input
+{
+    height:20px;
+    background-color: expression(this.readOnly == true?"#f3f3f3":"");
+    border-right: #CCC 1px solid;
+    border-top: #CCC 1px solid;
+    border-left: #CCC 1px solid;
+    border-bottom: #CCC 1px solid;
+    border-top-style:expression((this.type=="radio" || this.type=="checkbox")?"none":"");
+    border-right-style:expression((this.type=="radio" || this.type=="checkbox")?"none":"");
+    border-left-style:expression((this.type=="radio" || this.type=="checkbox")?"none":"");
+    border-bottom-style:expression((this.type=="radio" || this.type=="checkbox")?"none":"");
+}
+*/
+input,select{vertical-align:middle;}
+
+textarea {
+	padding:2px;
+	height:24px;
+	line-height:24px;
+	color: #333333;
+    background-color:#FFFFFF;
+    border: 1px solid #CCCCCC;
+	line-height:1.5;
+}
+/*
+.textmouseover {
+    color:#333333;
+    padding:0px;
+    background-color: #FFFFD7;
+    border: 1px solid #999;
+}
+.textfocus {
+    color:#333333;
+    padding:1px;
+    background-color: #FFFFD7;
+    border: 1px solid #FFA86F;
+}
+.textareareadonly
+{
+    color:#333333;
+    padding:0px;
+    background-color: #f3f3f3;
+    border: 1px solid #DDD;
+}
+*/
+/*提示文本*/
+.tips {
+    color:#0A246A;
+    text-indent:2px;
+    font-size: 14px;
+}
+
+/*-------- 输入域标题图标 -------*/
+.DivIcoSearch {
+    width:auto;
+    height:20px;
+    line-height:20px;
+    padding-left:20px;
+    margin:0px;
+    background-image: url(../search.gif);
+    background-repeat: no-repeat;
+    background-position: left center;
+    float: left;
+    vertical-align:middle;
+}
+.DivIcoEdit {
+    width:auto;
+    height:20px;
+    line-height:20px;
+    padding-left:20px;
+    margin:0px;
+    background-image: url(../icoEdit.gif);
+    background-repeat: no-repeat;
+    background-position: left center;
+    float: left;
+    vertical-align:middle;
+}
+/* 标题图标 */
+.DivIcoRoot {
+    width:auto;
+    height:26px;
+    line-height:26px;
+    padding-left:20px;
+    margin:0px;
+    background-image: url(../screen.gif);
+    background-repeat: no-repeat;
+    background-position: left center;
+    float: left;
+    vertical-align:middle;
+}
+.DivIcoList {
+    width:auto;
+    height:26px;
+    line-height:26px;
+    padding-left:20px;
+    margin:0px;
+    background-image: url(../list.gif);
+    background-repeat: no-repeat;
+    background-position: left center;
+    float: left;
+    vertical-align:middle;
+}
+.DivIcoSheet {
+    width:auto;
+    height:26px;
+    line-height:26px;
+    padding-left:20px;
+    margin:0px;
+    background-image: url(../icons2.gif);
+    background-repeat: no-repeat;
+    background-position: left center;
+    float: left;
+    vertical-align:middle;
+}

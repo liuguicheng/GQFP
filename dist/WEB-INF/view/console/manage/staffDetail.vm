@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  #headInclude()
+  <script type="text/javascript" src="../script/validator.js"></script>
+   <script type="text/javascript" src="../lib/indieui/external/swfobject.js"></script>
+  <script type="text/javascript" src="../lib/indieui/src/jquery.uploadify.me.js"></script>
+  <script type="text/javascript">
+  function doReturn() {                  
+window.history.go(-1);
+}
+</script>
+</head>
+<body class="easyui-layout" style="overflow-y:hidden">
+<div class="InfoBox" >
+  <h2>人员信息详细界面</h2>
+	<table class="TbCommon">
+  <tr>##rowspan="2"
+    <td class="TdLabel" style="width:100px;">#requiredInput('姓名')</td>
+    <td class="TdInput">
+      #htmlEscape($!{staff.name})
+    </td>   
+	<td class="TdLabel" style="width:100px;">#requiredInput('性别')</td>
+    <td class="TdInput">
+      #htmlEscape($!{staff.sex})
+    </td>
+  </tr>
+  <tr>
+	 <td class="TdLabel">#requiredInput('登录名')</td>
+    <td class="TdInput">
+    #htmlEscape($!{staff.loginName})
+	</td>
+    <td class="TdLabel">#requiredInput('编制类型')</td>
+    <td class="TdInput">
+    #lookUpDict($dicData.dicManType $!{staff.staffType} )
+	</td>
+</tr>
+<tr>
+	<td class="TdLabel">职务</td>
+    <td class="TdInput">
+     #htmlEscape($!{staff.duty})
+    </td>
+	 <td class="TdLabel">身份证</td>
+    <td class="TdInput">
+     #htmlEscape($!{staff.idNum})
+    </td>
+</tr>
+<tr>
+	 <td class="TdLabel">手机</td>
+    <td class="TdInput">
+      #htmlEscape($!{staff.mobile})
+    </td>
+	<td class="TdLabel">传真</td>
+    <td class="TdInput">
+     #htmlEscape($!{staff.fax})
+    </td>
+</tr>
+<tr>
+	<td class="TdLabel">座机电话</td>
+    <td class="TdInput">
+     #htmlEscape($!{staff.phone})
+    </td>
+	<td class="TdLabel">Email</td>
+    <td class="TdInput">
+     #htmlEscape($!{staff.email})
+    </td>
+  </tr>
+  <tr>
+	<td class="TdLabel" >房号</td>
+    <td class="TdInput">
+     #htmlEscape($!{staff.roomNum})
+	</td>
+	<td class="TdLabel" >入职时间</td>
+    <td class="TdInput">
+     #formatDate($!{staff.inDate})
+    </td>
+  </tr>
+  <tr>
+    <td class="TdLabel">备注</td>
+    <td class="TdInput" colspan="3">
+      #htmlEscape($!{staff.description})
+    </td>
+  </tr>
+</table>
+</div>
+</body>
+</html>
+</div>
+<div data-options="region:'south'" style="overflow:hidden" >
+  <div class="CommandTool indieui-form">
+      <input type="button" style="width:180px" value="返 回" onclick="javascript:doReturn();"/>
+  </div>
+</div>
+</body>
+</html>

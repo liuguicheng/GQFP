@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  #headInclude()
+  <script type="text/javascript" src="../script/validator.js"></script>
+  <script type="text/javascript">
+  #if($message)alert("#javaScriptEscape($message)");#end
+  validator.formName = "editForm";
+  validator.addNormalCheckPoint("userName", "姓名", "checkNotNull;checkNotEmpty");
+  validator.addNormalCheckPoint("productgradeId", "股权等级", "checkNotNull;checkNotEmpty");
+  validator.addNormalCheckPoint("referenceId", "推荐人", "checkNotNull;checkNotEmpty");
+  #if (!${command.memberId})
+   validator.addNormalCheckPoint("password", "密码", "checkNotNull;checkNotEmpty");
+   #end
+ function confirmPassword()
+  {
+    var e = document.editForm;
+    var password = e.password.value ;
+    var re_letter = /[a-zA-Z]+/.test(password);
+    var re_number = /[0-9]+/.test(password);
+    var re_symbol = /[!@#$%^&*()]+/.test(password);
+    var re_lenght = /[0-9a-zA-Z!@#$%^&*()]{8,18}/.test(password);
+
+    if(password && !re_lenght ){
+      alert("密码长度必须为8-16位!");
+      return false;
+    } else if (password && !re_letter){
+      alert("密码必须包含字母!");
+      return false;
+    } else if (password && !re_number) {
+      alert("密码必须包含数字!");
+      return false;
+    } else if (password && !re_symbol){
+      alert("密码必须包含特殊字符");
+      return false;
+    }
+    if (e.password.value != e.confirm_password.value) {
+      alert('两次输入密码不一样,请重新输入!');
+      return false;
+    }
+   
+    return true;
+  }
+
+
+  function checkInput(e) {
+    if (e.submitFlag.value == "1") {
+      alert("当前页面已经提交，请稍等！");
+      return false;
+    }
+    if (!validator.checkAll()) {
+      return false;
+    }
+    
+    //if (!confirmPassword()) {
+     // return false;
+    //}
+    if (!confirm("您确定要保存人员资料吗？")) {
+      return false;
+    }
+    return true;
+  }
+
+  function doSave()  {
+    // $("select[name='productgradeId'] option:selected").val()
+    var e = document.editForm;
+    if (checkInput(e)) {
+     //document.getElementById("referenceName").value=document.getElementById("referenceId-name").value;
+      e.submitFlag.value = "1";
+      e.submit();
+    }
+  }
+
+  function doReturn() {
+    location.href = "../member/memberManage.do";
+  }
+  </script>
+</head>
+<body  class="easyui-layout indieui-form">
+
+<div data-options="region:'center',title:'编辑人员信息',iconCls:'icon-edit', collapsible:false" >
+<form name="editForm" method="post" action="#getRequestUri()" >
+<input type="hidden" name="submitFlag" value="0" />
+<input type="hidden" name="memberId" value="$!{command.memberId}">
+    <input type="hidden" name="token" value="$!{command.token}">
+<table class="TbCommon">
+  <tr>
+    <td class="TdLabel" style="width:100px;">#requiredInput('姓名')</td>
+    <td class="TdInput">
+      <input type="text" name="userName" value="#htmlEscape($!{command.userName})" style="width:98%;" maxlength="20" #if($lock) readonly #end/>##登录名应小于数据库长度，否则无法做逻辑删除时的改名处理
+    </td>   
+     <td class="TdLabel">#requiredInput('股权等级')</td>
+    <td class="TdInput">
+      #formSingleSelectStock("productgradeId" $!{command.productgradeId} ${dicData.dicStock} "style='width:120'" " ---- 请选择 ---- ")
+    </td>
+  </tr>
+  <tr>
+  <td class="TdLabel" style="width:120px;" >#requiredInput("推荐人")</td>
+    <td    class="TdInput" colspan="3" >
+        <input type="text" readonly  name="referenceName" id="referenceName" value="${command.referenceName}" />
+        <input type="hidden" name="referenceId" value="$!{command.referenceId}" style="width:98%;" maxlength="16" />
+    </td>  
+  </tr>
+  <tr>
+    <td class="TdLabel">密码</td>
+    <td class="TdInput">
+      <input type="password" name="password" value="" style="width:98%;" maxlength="16"/>
+    </td>
+  </tr>
+  <tr>
+    <td class="TdLabel">确认密码</td>
+    <td class="TdInput">
+      <input type="password" name="confirm_password" value="" style="width:98%;" maxlength="16"/>
+    </td>
+  </tr>
+</table>
+</form>
+</div>
+
+<div data-options="region:'south'" style="overflow:hidden">
+  <div class="CommandTool">
+  <input type="button" value="保 存" style="width:100px" onclick="javascript:doSave();"/>
+  <input type="button" value="返 回" style="width:100px" onclick="javascript:doReturn();"/>
+  </div>
+</div>
+</body>
+</html>

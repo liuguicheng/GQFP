@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  #headInclude()
+  <script type="text/javascript">
+  #if($message)alert("#javaScriptEscape($message)");#end
+  </script>
+</head>
+<body>
+<div class="PageHeader">
+  <div class="LeftBox Title">短信回复查询</div>
+</div>
+
+<div class="SearchBox" id="divSearch">
+<form name="queryForm" action="#getRequestUri()" method="post" class="indieui-form">
+  <table class="TbCommon">
+    <tr>
+      <td class="TdLabel" style="width:100px;">回复号码</td>
+      <td class="TdInput" style="width:200px;">
+        <input type="text" name="replyNum" value="#htmlEscape($!{command.replyNum})" maxlength="15"/>
+      </td>
+      <td class="TdLabel" style="width:100px;">回复时间</td>
+      <td class="TdInput">
+        <input type="text" name="replyTimeUp" value="#customFormatDate(${command.replyTimeUp} 'yyyy-MM-dd HH:mm')" style="width:160px;" dateFormat="yyyy-MM-dd HH:mm"/>-
+        <input type="text" name="replyTimeDown" value="#customFormatDate(${command.replyTimeDown} 'yyyy-MM-dd HH:mm')" style="width:160px;" dateFormat="yyyy-MM-dd HH:mm"/>
+      </td>      
+    </tr>
+  </table>
+  <div class="CommandTool">
+    <input type="button" value="确 定" onClick="javascript:document.queryForm.submit();$('body').processMask();"/>
+    <input type="button" value="清 空" onClick="javascript:clearQuery(document.queryForm);"/>
+    <input type="button" value="取 消" onClick="javascript:showDiv('divSearch');">    
+  </div>
+</form>
+</div>
+
+<div class="PageTool">
+  <div class="LeftBox Tool">
+    <input type="button" class="BtnSearch" value="查询"  title="查询" onclick="javascript:showDiv('divSearch');"/>
+  </div>
+  <div class="RightBox Pager">
+    #pageDirector( $page "#getRequestUri()" false)
+  </div>
+</div>
+
+<div class="PageContainer indieui-scroll">
+<form name="listForm" method="post">
+<input type="hidden" name="submitFlag" value="0">
+<input type="hidden" name="token" value="$!{command.token}">
+<table class="TbList">
+  <thead> 
+    <tr>
+      <th style="width:35px;">序号</th>
+      <th style="width:150px;">回复号码</th>
+      <th>内容</th>
+      <th style="width:160px;">回复时间</th>
+    </tr>
+  </thead>
+  <tbody>
+  #foreach( $data in $page.data )
+    <tr>
+      <td>$velocityCount</td>
+      <td>$!{data.replyNum}</td>
+      <td style="text-align:left;" class="TdTxtOver" title="#htmlEscape($!{data.replyInfo})">$!{data.replyInfo}</td>
+      <td>#formatTime($!{data.replyTime})</td>
+    </tr>
+  #end
+  </tbody>   
+</table>
+</form>
+</div>
+</body>
+</html>

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+        
+	 <!-- 字典标识是否定长 -->
+    <bean class="org.springline.beans.dictionary.support.SystemDictionaryInstance">
+        <property name="identifier"><value>dicIsLonger</value></property>
+        <property name="data">
+            <map>
+                <entry key="1"><value>是</value></entry>
+                <entry key="0"><value>否</value></entry>
+            </map>
+        </property>
+    </bean>
+
+	<!-- 字典标识生成方式 -->
+    <bean class="org.springline.beans.dictionary.support.SystemDictionaryInstance">
+        <property name="identifier"><value>dicTypeWay</value></property>
+        <property name="data">
+            <map>
+                <entry key="1"><value>手工录入</value></entry>
+                <entry key="2"><value>系统生成</value></entry>
+            </map>
+        </property>
+    </bean>
+	<!-- helper -->
+	 <bean class="com.plugins.dictionary.support.DictionaryHelperImpl">
+         <property name="dictionaryService"><ref bean="dictionaryService"/></property>
+    </bean>
+    <!-- url mapping -->
+    <bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+        <property name="mappings">
+            <props>
+                <!-- 字典内容主视图 -->
+                <prop key="dictionary/dicDataEdit.do">dicDataEditController</prop>
+                <prop key="dictionary/dicDataList.do">dicDataController</prop>
+                <prop key="dictionary/dicDataInnerList.do">dicDataController</prop>
+                <prop key="dictionary/dicData*.do">dicDataController</prop>
+                <!-- 字典类型视图 -->
+                <prop key="dictionary/dicTypeEdit.do">dicTypeEditController</prop>
+                <prop key="dictionary/dicTypeDelete.do">dicTypeController</prop>
+                <prop key="dictionary/dicTypeQuery.do">dicTypeQueryController</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="dicDataQueryStringUtil" class="org.springline.beans.dataquery.support.SimpleQueryMethod">
+        <property name="valueObjectClassName"><value>com.plugins.dictionary.entity.DicType</value></property>
+        <property name="tableAlias"><value>dicT</value></property>
+        <property name="orderByClause"><value>typeSort Asc</value></property>
+        <property name="queryParam">
+            <list>
+            </list>
+        </property>
+    </bean>
+
+    <!-- Dao -->
+    <bean id="dictionaryDao" class="com.plugins.dictionary.service.dao.hibernate.HibernateDictionaryDao">
+        <property name="sessionFactory"><ref bean="sessionFactory"/></property>
+        <property name="dicDataQueryStringUtil"><ref bean="dicDataQueryStringUtil"/></property>
+    </bean>
+
+    <!-- Service -->
+    <bean id="dictionaryService" class="com.plugins.dictionary.service.spring.SpringDictionaryService">
+        <property name="dictionaryDao"><ref bean="dictionaryDao"/> </property>
+    </bean>
+
+    <!-- spring Proxy -->
+<!--     <bean id="dictionaryServiceProxy" parent="serviceProxyFactory"> -->
+<!--         <property name="target"><ref bean="dictionaryService"/></property> -->
+<!--     </bean> -->
+
+    <!-- Controller -->
+    <bean id="dicDataController" class="com.plugins.dictionary.controller.DicDataController">
+        <property name="dictionaryService"><ref bean="dictionaryService"/></property>
+        <property name="dicDataListView"><value>dictionary/dicDataList</value></property>
+        <property name="dicDataInnerListView"><value>dictionary/dicDataInnerList</value></property>
+
+    </bean>
+
+    <bean id="dicDataEditController" class="com.plugins.dictionary.controller.DicDataEditController">
+        <property name="dictionaryService"><ref bean="dictionaryService"/></property>
+        <property name="commandClass"><value>com.plugins.dictionary.command.DicDataEditInfo</value></property>
+        <property name="formView"><value>dictionary/dicDataEdit</value></property>
+        <property name="successView"><value>../dictionary/dicDataInnerList.do</value></property>
+    </bean>
+
+    <bean id="dicTypeController" class="com.plugins.dictionary.controller.DicTypeController">
+        <property name="dictionaryService"><ref bean="dictionaryService"/></property>
+        <property name="dicTypeQueryView"><value>../dictionary/dicTypeQuery.do</value></property>
+    </bean>
+
+    <bean id="dicTypeEditController" class="com.plugins.dictionary.controller.DicTypeEditController">
+        <property name="dictionaryService"><ref bean="dictionaryService"/></property>
+        <property name="commandClass"><value>com.plugins.dictionary.command.DicTypeEditInfo</value></property>
+        <property name="formView"><value>dictionary/dicTypeEdit</value></property>
+        <property name="successView"><value>../dictionary/dicTypeQuery.do</value></property>
+    </bean>
+
+    <bean id="dicTypeQueryController" class="com.plugins.dictionary.controller.DicTypeQueryController">
+        <property name="dictionaryService"><ref bean="dictionaryService"/></property>
+        <property name="commandClass"><value>com.plugins.dictionary.command.DicTypeQueryInfo</value></property>
+        <property name="successView"><value>dictionary/dicTypeList</value></property>
+    </bean>
+
+</beans>

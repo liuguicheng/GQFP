@@ -1,0 +1,74 @@
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=gbk" />
+  <title>$!{appContext.appName}</title>
+  <link href="../images/right.css" rel="stylesheet" type="text/css" />
+  <script type="text/javascript" src="../script/common.js"></script>
+<script type="text/javascript">
+var keyList = new Array();
+#foreach($dep in $depOriginalList)
+keyList[${dep.id}] = '${dep.name}';
+#end
+//将左边选择的部门移到列表内
+function doSelect() {
+    var leftDatas = parent.getRightSelectData();
+    if (leftDatas != null && leftDatas.length > 0) {
+        addData(leftDatas);
+    }
+}
+//将列表中选中的数据打包成对象返回
+function selectData() {
+    var option = new Object();
+    var optionArray = new Array();
+    for (i = 0; i < s_dep.options.length; i++) {
+        option = new Object()
+        option.key = s_dep.options[i].value;
+        option.text = s_dep.options[i].text;
+        optionArray[i] = option;
+    }
+    return optionArray;
+}
+//将选中的数据从列表中移除
+function removeData() {
+    for (i = s_dep.options.length - 1; i >= 0; i--) {
+        if (s_dep.options[i].selected) {
+            keyList[s_dep.options[i].value] = null;
+            s_dep.options[i] = null;
+        }
+    }
+}
+//天骄数据进列表
+function addData(dataList) {
+    var count = s_dep.length;
+    for (i = 0; i < dataList.length; i++) {
+        data = dataList[i];
+        if (keyList[data.key] == undefined) {
+            option = new Option(data.text, data.key);
+            s_dep.options[count++] = option;
+            keyList[data.key] = data.text;
+        }
+    }
+}
+</script>
+</head>
+<body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+<table width="100%" height="100%" border="0" cellpadding="0" cellspacing="0">
+  <tr>
+    <td height="100%" width="20%">
+      <div align="center">
+        <a href="javascript:doSelect()"><img src="../images/arrow_right.gif" width="40" height="20" border="0" alt=""></a>
+        <br><br><p>
+        <a href="javascript:removeData()"><img src="../images/arrow_left.gif" width="40" height="20" border="0" alt=""></a>
+      </div>
+    </td>
+    <td height="100%" width="80%">
+      <select multiple name="s_dep" id="s_dep" onDblClick="javascript:removeData()" style="width:100%;height:100%" class="inputobject" >
+#foreach($dep in $depOriginalList)
+        <option value="${dep.id}">${dep.name}</option>
+#end
+      </select>
+    </td>
+  </tr>
+</table>
+</body>
+</html>

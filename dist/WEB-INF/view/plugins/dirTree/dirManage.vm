@@ -1,0 +1,45 @@
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=gbk" />
+  <title>$!{appContext.appName}</title>
+  <link href="$!{appContext.skin}/content.css" rel="stylesheet" type="text/css" />
+  <script language="javascript" src="../script/loadingBar.js" type="text/javascript"></script>
+</head>
+<script>
+function showlist(){
+    document.getElementById("dataFrame").src = "../dirTree/dirDataManage.do?dirTypeCode="+document.getElementById("dirTypeCode").value ;
+}
+function changeBoxstate(){
+    var box = document.getElementById("toolbox");
+    if(box.style.display == '') {
+        box.style.display='none';
+    } else {
+        box.style.display='';
+    }
+}
+</script>
+<body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" style="padding:0px;overflow-x:hidden">
+    <div style="position:relative;">
+    <div id="toolbox" style="position:absolute;border:1px solid #0066FF;width:100%;padding:5px;bottom:0px;"><a href="javascript:window.location='../dirTree/dirTypeManage.do';"><img src="$!{appContext.skin}/../btnSetting.gif"/>&nbsp;目录类型管理</a>
+      &nbsp;&nbsp;&nbsp;&nbsp;目录类型：
+<select id="dirTypeCode" name="dirTypeCode" onchange="showlist();">
+#foreach($dirType in $dirtypelist)
+  #if($dirType.dirTypeCode == $selectdirtype)
+  <option value="$dirType.dirTypeCode" selected="selected">
+    #else
+    <option value="$dirType.dirTypeCode">
+      #end
+    $dirType.dirTypeName【$dirType.dirTypeCode】
+    </option>
+#end
+</select>
+    </div>
+
+<img id="showbox" src="$!{appContext.skin}/../box.png" style="bottom:0px;position:absolute;right:0px;" onclick="changeBoxstate();" />
+  <iframe frameborder="0" width="100%" scrolling="no" style="height:100%"
+                        id="dataFrame" name="dataFrame" src="../dirTree/dirDataManage.do?dirTypeCode=$selectdirtype" ></iframe>
+
+    </div>
+</div>
+</body>
+</html>

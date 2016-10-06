@@ -1,0 +1,659 @@
+/* 登录注册 */
+.LoginImgBg{
+	background-image: url(cms/loginBg.jpg);
+	background-repeat: no-repeat;
+	background-position: center center; 
+	height:340px;
+	width:970px;
+	margin:0 auto;
+}
+.LoginPanel{
+	background-image: url(cms/login_panel.png);
+	background-repeat: no-repeat;
+	background-position: center center;
+	width:500px;
+	height:310px;
+	float:left;
+	margin:20px auto auto 235px;
+	_margin:20px auto auto 100px;
+}
+.LoginPanel ul {
+	margin-top:80px;
+	margin-left:70px;
+}
+.LoginPanel ul li{
+	height:25px;
+	line-height:25px;
+	margin:5px;
+	float:left;
+	width:100%;
+}
+.LoginPanel ul li label,.LoginPanel ul li input,.LoginPanel ul li  img{ 
+	float:left;
+	display:block;
+	margin:2px;
+}
+.LoginPanel ul li label{
+	width:60px;
+	height:25px;
+	line-height:25px;
+	text-align:right;
+	font-size: 14px;
+	color: #333;
+}
+.LoginPanel ul li input.RadioBtn{
+	height:25px;
+	line-height:25px;
+	font-size: 14px;
+	margin-left:10px;
+}
+.LoginPanel ul li input.TxtInput,.LoginPanel ul li input.TxtCode{
+	border:1px solid #CCC;
+	background-color: #FFFFE1;
+	height:20px;
+	line-height:20px;
+	font-size: 14px;
+	color: #999;
+}
+.LoginPanel ul li input.TxtInput{ 
+	width:250px;
+}
+.LoginPanel ul li input.TxtCode{
+	width:60px;
+}
+.TextWrap{
+	width:720px;
+	height:650px;
+	margin:20px auto;
+	overflow:auto;
+	border:1px solid  #D1D1D1;
+	background-color:#F2F2F2;
+	color: #333;
+}
+.LoginTips{
+	text-align:center;
+	margin-top:25px;
+	margin-right:20px;
+}
+.LoginTips a{
+	float:right;
+	color: #09C;
+	font-size: 12px;
+	margin:3px;
+}
+.LoginTips a:hover{
+	color: #FC0;
+}
+.LoginPanel ul li.BtnCon{
+	margin-top:5px;
+	padding-left:180px;
+	*padding-left:60px;
+}
+.LoginPanel ul li input.BtnLogin{
+	height:22px;
+	padding-left:20px;
+	padding-right:20px;
+	line-height:22px;
+	background-color: #06C;
+	color: #FFF;
+	display:block;
+	float:left;
+}
+.LoginPanel ul li input.BtnLogin:hover{
+	color: #FFF;
+	background-color: #F90;
+	cursor:pointer;
+}
+/* 页面 */
+.HangBox3,.MainBox3{
+	float:left;
+	height:auto;
+}
+.HangBox3{
+	width:254px;
+	height:605px;
+	margin:2px;
+	background-image: url(cms/pageHangPanel.png);
+	background-repeat: no-repeat;
+	background-position: center top;
+}
+.HangBox3 h1{
+	color: #FFF;
+	text-decoration: none;
+	height:40px;
+	line-height:40px;
+	font-size: 16px;
+	text-align:center;
+	font-weight: bold;
+}
+.HangBox3 ul li{
+	height:40px;
+	line-height:40px;
+	float:left;
+	width:100%;
+	margin:2px 0px;
+}
+.HangBox3 ul li a{
+	color: #09C;
+	width:100%;
+	height:40px;
+	line-height:40px;
+	display:block;
+	text-align:center;
+	/*background-image: url(cms/003_04.png);*/
+	background-repeat: no-repeat;
+	background-position: 55px center;
+}
+.HangBox3 ul li a span{
+	float:left;
+}
+.HangBox3 ul li a span.ALink{
+	float:left;
+	margin-left:90px;
+}
+.HangBox3 ul li a span.Num{
+	color: #FFF;
+	width:20px;
+	height:20px;
+	line-height:20px;
+	text-align:center;
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-image: url(cms/redBallBg.png);
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight: bold;
+	margin-top:2px;
+	margin-left:2px;
+	display:block;
+}
+
+.HangBox3 ul li a.ACurrentNav span.Num{
+	/*display:none;*/
+}
+
+.HangBox3 ul li a:hover,.HangBox3 ul li a.ACurrentNav{
+	background-image: url(cms/002_57.png);
+	color: #F90;
+	font-weight: bold;
+	border-top:1px  dotted #FC0;
+	border-bottom:1px  dotted #FC0;
+
+}
+.AMenuIconScreen{
+	background-image: url(cms/003_24.png);
+}
+.AMenuIconComment{
+	background-image: url(cms/003_31.png);
+}
+.AMenuIconPage{
+	background-image: url(cms/003_18.png);
+}
+.AMenuIconPerson{
+	background-image: url(cms/003_34.png);
+}
+.AMenuIconEdit{
+	background-image: url(cms/003_19.png);
+}
+.AMenuIconPage2{
+	background-image: url(cms/003_70.png);
+}
+.AMenuIconSignal{
+	background-image: url(cms/003_01.png);
+}
+.AMenuIconMail{
+	background-image: url(cms/003_02.png);
+}
+.AMenuIconList{
+	background-image: url(cms/003_44.png);
+}
+
+.MainBox3{
+	width:725px;
+	_width:722px;
+	height:auto;
+	margin:2px;
+	margin-top:0px;
+}
+
+.ZXFTBox,.CommonPanel{
+	width:100%;
+	border:1px solid #C1DAE3;
+	height:auto;
+}
+.CommonPanel{
+	margin-top:4px;
+	height:380px;
+}
+.FullHeightPanel{
+	height:568px;
+	height:568px !important;
+}
+.FullHeightPanel2{
+	height:auto;
+	min-height:600px;
+	min-height:600px !important;
+}
+.ZXFTBox h1{
+	height:32px;
+	line-height:32px;
+	padding-left:10px;
+	background-image: url(cms/titlebg2.jpg);
+	background-repeat: no-repeat;
+	background-position: left bottom;
+}
+.ZXFTBox h1 a.AVideoTitle{
+	color: #FFF;
+	font-size: 14px;
+	font-weight: normal;
+	float:left;
+	background-image: url(cms/video2.gif);
+	background-repeat: no-repeat;
+	background-position: left center;
+	padding-left:15px;
+}
+.ZXFTBox h1 a.AMore,.CommonPanel h1 a.AMore{
+	color: #069;
+	font-size: 12px;
+	font-weight: normal;
+	float:right;
+	margin-right:10px;
+}
+.ZXFTBox h1 a.AVideoTitle:hover,.ZXFTBox h1 a.AMore:hover,.CommonPanel h1 a.AMore:hover{
+	color: #F60;	
+}
+.ZXFTBox  .TitleImgWrap{
+	margin:20px;
+	height:auto;
+	width:auto;
+	float:left;
+	padding-bottom:15px;
+}
+.ZXFTBox  .TitleImgWrap img{
+	border:1px solid #C1DAE3;
+	padding:2px;
+}
+.ZXFTBox ul {
+	margin-top:15px;
+	margin-bottom:10px;
+	height:auto;
+}
+.ZXFTBox ul li{
+	height:28px;
+	line-height:28px;
+	margin:2px;
+	width:470px;
+	border-bottom:1px dotted #CCC; 
+	float:left;
+	font-size: 12px;
+}
+.ZXFTBox ul li.LiInfo,.ZXFTBox ul li.LiInfo2{
+	border:none;
+}
+.ZXFTBox ul li.LiInfo p{
+	text-indent:2em;
+	height:56px;
+	overflow:hidden;
+}
+.ZXFTBox ul li.LiInfo2{
+	height:auto;
+}
+.ZXFTBox ul li.LiInfo2 p{
+	text-indent:2em;
+	height:auto;
+	overflow:hidden;
+}
+.ZXFTBox ul li label,.ZXFTBox ul li span{
+		float:left;
+		margin-right:5px;
+}
+.ZXFTBox ul li span{
+	color: #666;
+	text-overflow:ellipsis;
+    overflow:hidden;
+    white-space: nowrap;
+	width:400px;
+}
+.AVideoLink{
+	background-image: url(cms/video.gif);
+	background-repeat: no-repeat;
+	background-position: right center;
+	padding-right:15px;
+}
+.ZXFTBox ul li span a{
+	color: #069;
+}
+.ZXFTBox ul li span a:hover{
+	color: #F60;
+}
+.ZXFTBox ul li label{
+	width:50px;
+	text-align:right;
+	height:28px;
+	line-height:28px;
+	display:block;
+	font-weight: bold;
+}
+.ZXFTBox ul li span a.AVideoBtn{
+	/*margin-left:10px;*/
+	background-image: url(cms/movie_blue.png);
+	background-repeat: no-repeat;
+	background-position: left center;
+	padding-left:18px;
+	font-weight: bold;
+}
+
+.SearchPanel{
+	height:30px;
+	line-height:30px;
+	background-color: #77b4e2;
+}
+.SearchPanel input,.SearchPanel select, .SearchPanel span {
+	float:left;
+	height:20px;
+	line-height:20px;
+	margin:5px;
+	color: #666;
+}
+.SearchPanel input,.SearchPanel select{
+	font-size: 12px;	
+}
+.SearchPanel span {
+	font-size: 14px;
+	color: #FFF;
+	margin-left:10px;
+}
+.SearchPanel .btnSearch{
+	background-image: url(cms/btnSearch.png);
+	background-repeat: no-repeat;
+	background-position: center center;	
+	height:20px;
+	width:68px;
+	margin-top:5px;
+	background-color: #77b4e2;
+	float:right;
+}
+.SearchPanel .btnSearch:hover{
+	cursor:pointer;
+}
+.CommonPanel h1{
+	height:30px;
+	line-height:30px;
+	padding-left:10px;
+	background-image: url(cms/titlebg1.jpg);
+	background-repeat: repeat-x;
+	background-position: center bottom;
+}
+.CommonPanel h2 {
+	border-bottom:1px solid #E6E6E6;
+	height:30px;
+	background-color: #FFC;
+}
+.CommonPanel h2 span{
+	height:30px;
+	line-height:30px;
+	float:left;
+	color: #09C;
+	font-size: 14px;
+	display:block;
+	font-weight: normal;
+	text-align:center !important;
+}
+.CommonPanel h3{
+	text-align:center;
+	height:50px;
+	line-height:50px;
+	font-size:16px;
+	list-style:none;
+	font-weight: normal;
+	color: #333;
+}
+.CommonPanel h4{
+	text-align:center;
+	height:40px;
+	line-height:40px;
+	font-size:12px;
+	list-style:none;
+	background-image: url(cms/listBg.jpg);
+	background-repeat: no-repeat;
+	background-position: center bottom;
+	font-weight: normal;
+	color: #666;
+}
+.CommonPanel p{
+	/*width:700px;*/
+	font-size:14px;
+	text-indent:2em;
+	line-height:2em;
+	color: #666;
+	padding:10px;
+	/*以下实现长英文自动换行*/
+	white-space:normal;
+	word-break: break-all;
+	table-layout:fixed;
+	overflow:auto;
+}
+.CommonPanel .FixWrap{
+	height:550px;
+	overflow:auto;
+	clear:both;
+}
+.UlTitleTab{
+	height:30px;
+	padding:0;
+	margin:0;
+	width:auto;
+	float:left;
+}
+.UlTitleTab li{
+	height:30px;
+	line-height:30px;
+	width:auto;
+	float:left;
+}
+.UlTitleTab li a{
+	height:30px;
+	line-height:30px;
+	width:110px;
+	float:left;
+	font-size: 14px;
+	color: #666;
+	display:block;
+	text-align:center;
+	font-weight: normal;
+}
+.UlTitleTab li a:hover,.UlTitleTab li a.ACurrentTab{
+	background-image: url(cms/tabBg.png);
+	background-repeat: no-repeat;
+	background-position: -125px bottom;
+	font-weight: bold;
+	color: #FFF;
+}
+
+.UlContenList{
+	height:auto;
+}
+.UlContenList li{
+	background-image: url(cms/gif-0110.gif);
+	background-repeat: no-repeat;
+	background-position: 5px center;
+	height:33px;
+	line-height:33px;
+	_height:30px;
+	_line-height:30px;
+	*height:30px;
+	*line-height:30px;
+}
+.UlContenList li span{
+	height:30px;
+	line-height:30px;
+	float:left;
+	color: #666;
+	font-size: 14px;
+	display:block;
+	font-weight: normal;
+	text-align:center;
+	text-overflow:ellipsis;
+	overflow:hidden;
+	white-space: nowrap;
+}
+.UlContenList li a{
+	color: #069;
+}
+.UlContenList li a:hover{
+	color: #F60;
+	cursor:pointer;
+}
+.TitleInfo{
+	width:254px;
+	padding-left:16px;
+	text-align:left !important;
+}
+.TitleInfo2{
+	width:455px;
+	padding-left:16px;
+	text-align:left !important;
+}
+.TitleInfo3{
+	width:350px;
+	padding-left:16px;
+	text-align:left !important;
+}
+.TitleInfo4{
+	width:400px;
+	padding-left:16px;
+	text-align:left !important;
+}
+.IndexInfo{
+	width:50px;
+}
+.AuthorInfo{
+	width:100px;
+}
+.DateTimeInfo{
+	width:100px;
+}
+.DateTimeInfo2{
+	width:240px;
+}
+
+.StatusInfo{
+	width:110px;
+}
+.StatusIcon{
+	width:60px;
+}
+.DepInfo{
+	width:140px;
+}
+.ABtnAction{
+	font-size: 14px;
+	color: #09C;
+	background-repeat: no-repeat;
+	background-image: url(cms/btnAction.png);
+	float:right;
+	margin:0px 1px;
+	margin-top:6px;
+	font-weight: normal;
+	width:80px;
+	height:36px;
+	line-height:34px;
+	display:block;
+	padding-left:35px;
+}
+.ABtnAction:hover{
+	color: #F90;	
+}
+.ABtnIconSignal{
+	background-position: center 0px;
+}
+.ABtnIconComment{
+	background-position: center -36px;
+}
+.ABtnIconEdit{
+	background-position: center -72px;
+}
+.ABtnIconPerson{
+	background-position: center -108px;
+}
+.ABtnIconPage{
+	background-position: center -144px;
+}
+
+Table.TbCommon TD.TdData span{
+	font-size: 12px;
+	color: #8B8B8B;
+	line-height:20px;
+	padding-left:10px;
+}
+Table.TbCommon TD.TdData label{
+	font-size: 12px;
+	color: #999;
+}
+Table.TbCommon TD.TdLabel center{
+	font-size: 12px;
+	color: #999;
+	line-height:20px;
+}
+Table.TbCommon TD.TdLabel center img{
+	margin:10px;
+	padding:2px;
+	border:1px solid #CCC;
+}
+Table.TbCommon TD.TdLabel center span{
+	margin:0px 10px 10px 10px;
+	display:block;
+}
+Table.TbCommon{
+	border-left:none !important;
+	border-right:none !important;
+	margin-bottom:5px;
+}
+Table.TbCommon TD.TdData .ABtnNormal{
+	float:left;
+	margin:3px;
+}
+Table.TbCommon TD.TdData span.Common{
+	font-size: 14px;
+	color: #666;
+}
+Table.TbCommon TD.TdData .IcoFullStar{
+	background-image: url(cms/star_boxed_full.png);
+	background-repeat: no-repeat;
+	background-position: left center;
+	padding-left:17px;
+	margin-left:1px;
+	color: #060;
+	font-size: 14px;
+/*	font-weight: bold;*/
+}
+Table.TbCommon TD.TdData .IcoHaflStar{
+	background-image: url(cms/star_boxed_half.png);
+	background-repeat: no-repeat;
+	background-position: left center;
+	padding-left:17px;
+	margin:2px;
+	color: #09C;
+	font-size: 14px;
+	/*font-weight: bold;*/
+}
+Table.TbCommon TD.TdData .IcoEmptyStar{
+	background-image: url(cms/star_boxed_empty.png);
+	background-repeat: no-repeat;
+	background-position: left center;
+	padding-left:17px;
+	margin-left:1px;
+	color: #F30;
+	font-size: 14px;
+	/*font-weight: bold;*/
+}
+.validTips{
+	color: #F00 !important;	
+}
+/* 请保持本样式处于样式文件最末端 */
+a:hover{
+	cursor:pointer;
+}
+.AutoHeight{
+	height:auto;
+}

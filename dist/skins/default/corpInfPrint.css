@@ -1,0 +1,185 @@
+@CHARSET "UTF-8";
+BODY
+{
+    font-size: 10px;
+    margin: 0px ;
+    color: #000;
+    font-family: "宋体", Tahoma, sans-serif;
+    padding:2px;
+    height:100%;
+}
+/**Table 打印表格样式*/
+.TbPrint {
+    padding:0;
+    border: none;
+    width: 580px;
+    /*font-size:13px;*/
+    border-top: 2px solid #000000;
+    border-left: 2px solid #000000;
+    border-right: 2px solid #000000;
+    border-bottom:2px solid #000000;
+    border-collapse: collapse;
+}
+/**TD标题  样式*/
+.TdTitle {
+    height: 80px;
+    border-style:none;
+    border-top: none;
+    border-left:none;
+    border-right:none;
+    border-collapse: collapse;
+}
+/**缺少底部边线*/
+.TdNotbottom {
+    border-bottom:none;
+    border-top: 1px solid #000000;
+    border-left: 1px solid #000000;
+    border-right: 1px solid #000000;
+    border-collapse: collapse;
+}
+/**缺少上边线*/
+.TdNottop {
+    border-top:none;
+    border-left: 1px solid #000000;
+    border-right: 1px solid #000000;
+    border-bottom: 1px solid #000000;
+    border-collapse: collapse;
+}
+/**有右边线*/
+.TdHavaright {
+    border-left: none;
+    border-top:none;
+    border-bottom:none;
+    border-right: 1px solid #000000;
+    border-collapse: collapse;
+}
+/**有左边线*/
+.TdHaveleft{
+    border-top:none;
+    border-right:none;
+    border-bottom:none;
+    border-left: 1px solid #000000;
+    border-collapse: collapse;
+}
+
+/**有左右边线*/
+.TdAbeam {
+    text-align: left;
+    border-top: none;
+    border-bottom: none;
+    border-left: 1px solid #000000;
+    border-right: 1px solid #000000;
+    border-collapse: collapse;
+}
+
+/**有上下边线*/
+.TdErect {
+    border-top: 1px solid #000000;
+    border-bottom: 1px solid #000000;
+    border-left: none;
+    border-right: none;
+    border-collapse: collapse;
+}
+
+/**文本居中*/
+.TdCenter {
+    text-align: center;
+    vertical-align: middle;
+    word-break: keep-all;/*强制不换行*/
+    border-top: 1px solid #000000;
+    border-left: 1px solid #000000;
+    border-right: 1px solid #000000;
+    border-bottom: 1px solid #000000;
+    border-collapse:collapse;
+}
+/**文本居左*/
+.TdLeft {
+    text-align: left;
+    vertical-align: middle;
+    word-break: keep-all;/*强制不换行*/
+    border-top: 1px solid #000000;
+    border-left: 1px solid #000000;
+    border-right: 1px solid #000000;
+    border-bottom: 1px solid #000000;
+    border-collapse:collapse;
+}
+/**钱的显示居右*/
+.Tdright {
+    text-align: right;
+    vertical-align: middle;
+    word-break: keep-all;/*强制不换行*/
+    border-top: 1px solid #000000;
+    border-left: 1px solid #000000;
+    border-right: 1px solid #000000;
+    border-bottom: 1px solid #000000;
+    border-collapse:collapse;
+}
+/**输入域样式*/
+.TdInput {
+    background-color: #fff;
+    text-align: left;
+    vertical-align: middle;
+    border-top: 1px solid #000000;
+    border-left: 1px solid #000000;
+    border-right: 1px solid #000000;
+    border-bottom: 1px solid #000000;
+    border-collapse:collapse;
+}
+/*文字竖向显示*/
+.TdLine {
+    text-align:center;/*此处居中已为垂直居中了*/
+    letter-spacing: 8px;/*字间距*/
+    direction: rtl!important;/*设置文字在FF中竖排*/
+    direction:inherit;
+    writing-mode: tb-rl;
+    vertical-align: middle;
+    border-top: 1px solid #000000;
+    border-left: 1px solid #000000;
+    border-right: 1px solid #000000;
+    border-bottom: 1px solid #000000;
+}
+
+
+.TdCommand {
+    line-height: 100px;
+    text-align: center;
+    vertical-align: middle;
+}
+/*****btn样式*****************/
+.btn
+{
+    font-size: 12px;
+    height: 22px;
+    background-image: url(btnbg.gif);
+    background-repeat: repeat-x;
+    background-position: center;
+    border-right: #CCC 1px solid;
+    border-top: #CCC 1px solid;
+    border-left: #CCC 1px solid;
+    border-bottom: #CCC 1px solid;
+
+    padding-top: 1px;
+    padding-right: 5px;
+    padding-bottom: 1px;
+    padding-left: 5px;
+    color: #363636;
+    text-decoration: none;
+    margin-right: 1px;
+    margin-left: 1px;
+}
+
+/************textarea样式**************/
+.TaCenter {
+    width:100%;
+    border:0px;
+    overflow:hidden;
+    text-align:center;
+    vertical-align: middle;
+}
+.TaLeft{
+    width:100%;
+    border:0px;
+    overflow:hidden;
+    text-align:left;
+    vertical-align: middle;
+}

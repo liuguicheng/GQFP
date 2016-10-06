@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping default-lazy="false">
+	<class name="com.console.entity.DBBackup" table="gq_dbbackup"
+		catalog="gqfp">
+		<id name="db_id" type="java.lang.String">
+			<column name="db_id" length="32" />
+			<generator class="uuid.hex"></generator>
+		</id>
+
+		<property name="db_bskcupName" type="java.lang.String">
+			<column name="db_bskcupName" />
+		</property>
+		<property name="db_time" type="java.util.Date">
+			<column name="db_time" length="10" />
+		</property>
+		<property name="db_bskcpuUrl" type="java.lang.String">
+			<column name="db_bskcpuUrl" />
+		</property>
+
+
+	</class>
+
+</hibernate-mapping>

@@ -1,0 +1,131 @@
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=gbk" />
+  <title>$!{appContext.appName}</title>
+ <link href="$!{appContext.skin}/content.css" rel="stylesheet" type="text/css" />
+  <script language="javascript" type="text/javascript" src="../script/common.js"></script>
+  <script language="JavaScript" type="text/javascript" src="../script/validator.js"></script>
+  <script language="JavaScript" type="text/javascript" src="../lib/indieui/external/My97DatePicker/WdatePicker.js"></script>
+</head>
+<script >
+ function topengdingItem(){
+     window.location = "../pendingitem/pendingItemQuery.do";
+ }
+
+  function doQuery() {
+    e =   document.queryForm;
+    if (e.beginTime.value > e.endTime.value){
+        alert("开始时间不能小于结束时间");
+        return false;
+    }
+    document.queryForm.submit();
+}
+
+function clearQueryCondition(){
+   e = document.queryForm ;
+   e.title.value= '';
+   e.beginTime.value= '';
+   e.endTime.value='';
+   e.sender.value='';
+}
+
+  </script>
+
+<body class="main-bgimg1" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+<table class="Right" width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td>
+      <table width="100%" border="0" cellpadding="0" cellspacing="0">
+        <tr>
+          <td width="5" class="Right-left_img">&nbsp;</td>
+          <td valign="middle" class="Right-center_imgbg"> <table width="99%" border="0" cellspacing="0" cellpadding="1">
+              <tr>
+                <td align="center" valign="middle" class="Right-ng_img">&nbsp;</td>
+                <td class="main-lmtxt1"> 已办事宜列表</td>
+                <td align="right" nowrap class="main-lmtxt1">
+                  <!--在此处放置按钮--->
+                    <input type = "button" class ="button" name = "db" value="查看待办事宜" onclick ="topengdingItem()"/><!--在此处修改标题--->
+                    <input type="button" class="button" value="展开查询" onclick="javascript:doExpand('queryBody', this)" />
+                </td>
+              </tr>
+            </table></td>
+          <td width="5" class="Right-right_img">&nbsp;</td>
+        </tr>
+      </table>
+
+
+
+      <!--查询条件、或编辑的输入域所在表格，注意表格样式为mainTable-->
+      <table width="100%" border="0" cellpadding="0" cellspacing="0" class="mainTable">
+            <!--在此增加你的查询条件或者编辑界面-->
+<form name="queryForm" method="post" action="#getRequestUri()"  >
+             <tbody id="queryBody" style="display:none">
+                <tr>
+                <td  align="right" class="textarea"width="20%" >标 题： </td>
+                <td class="inputarea"  colspan="3" width="80%">
+                    <input type="text" name="title" class="inputobject" style="width:90%" value="$!command.title">
+                </td>
+             </tr>
+             <tr>
+                <td  align="right" class="textarea" width="25%" >发送人：</td>
+                <td  class="inputarea" width="20%" colspan="3">
+                    <input type="text" name="sender" class="inputobject" value="$!command.sender"></td>
+             </tr>
+             <tr >
+                <td  align="right" class="textarea" >发送时间： </td>
+                <td   class="inputarea"> 从
+                     #dateEditor("" "beginTime" "#formatDate($!{command.beginTime})" "queryForm") 到
+                     #dateEditor("" "endTime" "#formatDate($!{command.endTime})" "queryForm")
+                </td>
+              </tr>
+
+                <tr>
+                    <td align="left" class="inputarea" colSpan="4">
+                    <input type="button" class="button" value="清空" onclick="javascript:clearQueryCondition()" />
+                    <input type="button" class="button" value="查询" onclick="javascript:doQuery()" />
+                    </td>
+                </tr>
+             </tbody>
+             <input type = "hidden" name ="recipientId" value=$!currentUser.id>
+                  <input type="hidden" name= "notPage" value="true" />
+
+</form>
+      </table><!--mainTable结束-->
+
+      <!--列表界面由此开始，注意此层Table无样式，且其与mainTable为并行关系-->
+      <!--分页及子表包含在此Table中，如果不需分页，子表也可直接套在mainTable的单元格中-->
+      <table width="100%" height="100%" border="0" cellpadding="0" cellspacing="0" class="mainTable">
+        <tr valign="top">
+          <td class="tableArea" ><!--子表所在td的样式，也与以往相同，子表样式改为为subTable，同时增加行的样式-->
+            <table id="myTable" width="100%" border="0" cellpadding="4" cellspacing="0" class="subtable">
+              <tr align="center" class="trTitle"><!--增加对行的样式设置-->
+                 <td width="5%" class="tabletitle">序号</td>
+                    <td width="57%" class="tabletitle">标题</td>
+                    <td width="10%" class="tabletitle">发送人</td>
+                    <td width="10%"class="tabletitle">发送时间</td>
+                    <td width="10%"class="tabletitle">办理人</td>
+                    <td width="10%"class="tabletitle">办理时间</td>
+              </tr>
+<form name="listForm" method="post" action="../filebinding/filedirDelete.do">
+
+               #foreach($rendingItmeBak in ${page.data})
+                 <tr align="center" >
+                    <td class="tabledata">$velocityCount</td>
+                    <td class="tabledata" align="left">$!{rendingItmeBak.finishedItem.title}</td>
+                    <td class="tabledata">$!{rendingItmeBak.finishedItem.senderName}</td>
+                    <td class="tabledata">#formatDate($!{rendingItmeBak.finishedItem.sendTime})</td>
+                    <td class="tabledata">$!{rendingItmeBak.finishedItem.finisher.name}</td>
+                    <td class="tabledata">#formatDate($!{rendingItmeBak.finishedItem.finishTime})</td>
+                 </tr>
+               #end
+</form>
+          </table>
+        </td>
+      </tr>
+    </table><!--列表Table结束-->
+
+  </td>
+</tr>
+</table>
+</body>
+</html>

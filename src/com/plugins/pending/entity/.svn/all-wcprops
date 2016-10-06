@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/GQFP/!svn/ver/2/trunk/src/com/plugins/pending/entity
+END
+PendingItemRecipients.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/GQFP/!svn/ver/2/trunk/src/com/plugins/pending/entity/PendingItemRecipients.hbm.xml
+END
+FinishedItem.java
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/GQFP/!svn/ver/2/trunk/src/com/plugins/pending/entity/FinishedItem.java
+END
+PendingItem.java
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/GQFP/!svn/ver/2/trunk/src/com/plugins/pending/entity/PendingItem.java
+END
+PendingItemRecipients.java
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/GQFP/!svn/ver/2/trunk/src/com/plugins/pending/entity/PendingItemRecipients.java
+END
+PendingItemRecipientsBak.java
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/GQFP/!svn/ver/2/trunk/src/com/plugins/pending/entity/PendingItemRecipientsBak.java
+END
+PendingItemRecipientsBak.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/GQFP/!svn/ver/2/trunk/src/com/plugins/pending/entity/PendingItemRecipientsBak.hbm.xml
+END
+FinishedItem.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/GQFP/!svn/ver/2/trunk/src/com/plugins/pending/entity/FinishedItem.hbm.xml
+END
+PendingItem.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/GQFP/!svn/ver/2/trunk/src/com/plugins/pending/entity/PendingItem.hbm.xml
+END

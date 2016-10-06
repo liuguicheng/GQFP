@@ -1,0 +1,17 @@
+
+<form name="editForm" method="post"  action="#getRequestUri()" class="indieui-form">
+<div class="PageContainer indieui-scroll">
+    <div class="InfoBox">
+    <h2>信息</h2>
+	<table class="TbCommon">
+    <tr >
+      <td width="8%" align="left" class="TdLabel">#requiredInput("类型")</td>
+	  <td  align="left" class="TdInput" >
+       #formSingleSelectDictionary("recordType" $!{command.recordType} ${dicData.dicPayType} "" "--请选择--")
+        <input type="text" id="applyRecordNum" name="applyRecordNum" value="#htmlEscape($!{command.applyRecordNum})" >
+            <input type="button" value="保 存" style="width:100px" onclick="javascript:doSave();"/>
+    	</td>  
+	</tr>
+	</table>
+</div>
+    </div>

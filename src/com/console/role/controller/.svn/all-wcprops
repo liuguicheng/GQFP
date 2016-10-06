@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/GQFP/!svn/ver/2/trunk/src/com/console/role/controller
+END
+RoleEditController.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/GQFP/!svn/ver/2/trunk/src/com/console/role/controller/RoleEditController.java
+END
+RoleController.java
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/GQFP/!svn/ver/2/trunk/src/com/console/role/controller/RoleController.java
+END
+RoleGrantController.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/GQFP/!svn/ver/2/trunk/src/com/console/role/controller/RoleGrantController.java
+END

@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+      <property name="mappings">
+        <props>
+          <prop key="plugins/messageManage.do">pluginMsgController</prop>
+          <prop key="plugins/messageList.do">pluginMsgQueryController</prop>
+          <prop key="plugins/messageInstantList.do">pluginMsgInstantQueryController</prop>
+          <prop key="plugins/messageUnreadedList.do">pluginMsgController</prop>
+          <prop key="plugins/messageAllRemove.do">pluginMsgController</prop>
+          <prop key="plugins/messageRemove.do">pluginMsgController</prop>
+          <prop key="plugins/messageAsyncList.do">pluginMsgController</prop>
+          <!--查询聊天消息  -->
+          <prop key="plugins/messageChatList.do">pluginMsgController</prop>
+          <prop key="plugins/msgAsyncList.action">pluginMsgController</prop>
+          <prop key="plugins/msgAllRemove.action">pluginMsgController</prop>
+          
+          <!-- 公告消息 -->
+          <prop key="plugins/messageNoticeList.do">noticeMsgQueryController</prop>
+          <prop key="plugins/toaddNoticeMessage.do">pluginMsgController</prop>
+          <prop key="plugins/addNoticeMessage.do">pluginMsgController</prop>
+          <prop key="plugins/doDelNoticeMessage.do">pluginMsgController</prop>
+          
+          <!-- 帮助信息 -->
+          <prop key="plugins/messageHelpList.do">helpMsgQueryController</prop>
+          <prop key="plugins/addHelpMessage.do">pluginMsgController</prop>
+          <prop key="plugins/toaddhelpMessage.do">pluginMsgController</prop>
+          <prop key="plugins/doDelHelpMessage.do">pluginMsgController</prop>
+          <!-- 邮件信息 -->
+          <prop key="plugins/messageEmailList.do">emailMsgQueryController</prop>
+          <prop key="plugins/addEmailMessage.do">pluginMsgController</prop>
+          <prop key="plugins/toaddEmailMessage.do">pluginMsgController</prop>
+          <prop key="plugins/doDelEmailMessage.do">pluginMsgController</prop>
+          
+        </props>
+      </property>
+    </bean>
+<!-- 共有部分,DAO查询工具,dao,service,proxy-->
+    <bean id="msgQueryUtil" class="org.springline.beans.dataquery.support.SimpleQueryMethod">
+      <property name="valueObjectClassName"><value>com.plugins.msg.entity.SysMessage</value></property>
+      <property name="tableAlias"><value>msg</value></property>
+      <property name="orderByClause"><value>sendTime DESC</value></property>
+      <property name="queryParam">
+        <list>
+          <value>receiveMan,staffId,EQU</value>
+          <value>isReaded,isReaded,EQU</value>
+          <value>sendMan,sendMan,EQU</value>
+          <value>sendTime,sendTime,GT_EQU</value>
+          <value>chatState,chatState,EQU</value>
+        </list>
+      </property>
+    </bean>
+      <bean id="instantMsgQueryUtil" class="org.springline.beans.dataquery.support.SimpleQueryMethod">
+      <property name="valueObjectClassName"><value>com.plugins.msg.entity.SysMessage</value></property>
+      <property name="tableAlias"><value>msg</value></property>
+      <property name="orderByClause"><value>sendTime ASC</value></property>
+      <property name="queryParam">
+        <list>
+          <value>receiveMan,staffId,EQU</value>
+          <value>isReaded,isReaded,EQU</value>
+          <value>sendMan,sendMan,EQU</value>
+          <value>sendTime,sendTime,GT_EQU</value>
+          <value>chatState,chatState,EQU</value>
+        </list>
+      </property>
+    </bean>
+      <bean id="chatMsgQueryUtil" class="org.springline.beans.dataquery.support.SimpleQueryMethod">
+      <property name="valueObjectClassName"><value>com.plugins.msg.entity.SysMessage</value></property>
+      <property name="tableAlias"><value>msg</value></property>
+      <property name="orderByClause"><value>sendTime ASC</value></property>
+      <property name="queryParam">
+        <list>
+          <value>isReaded,isReaded,EQU</value>
+          <value>sendTime,sendTime,GT_EQU</value>
+          <value>chatState,chatState,EQU</value>
+          <value>content,content,LIKE</value>
+          <value>sendTime,sendTimeUp,GT_EQU</value>
+          <value>sendTime,sendTimeDown,LESS_EQU</value>
+        </list>
+      </property>
+    </bean>
+    <bean id="msgDao" class="com.plugins.msg.service.dao.hibernate.HibernateMsgDao">
+        <property name="sessionFactory"><ref bean="sessionFactory" /></property>
+        <property name="msgQueryUtil"><ref bean="msgQueryUtil"/></property>
+        <property name="instantMsgQueryUtil"><ref bean="instantMsgQueryUtil"/></property>
+        <property name="chatMsgQueryUtil"><ref bean="chatMsgQueryUtil"/></property>
+    </bean>
+
+   <bean id="msgService" class="com.plugins.msg.service.spring.SpringMsgService">
+        <property name="msgDao"><ref bean="msgDao" /></property>
+    </bean>
+
+<!--     <bean id="msgServiceProxy"  parent="serviceProxyFactory">
+        <property name="target"><ref bean="msgService" /></property>
+    </bean> -->
+    <!-- 系统消息控制器 -->
+    <bean id="pluginMsgController" class="com.plugins.msg.controller.MessageController">
+      <property name="msgService"><ref bean="msgService"/></property>
+      <property name="viewMap">
+        <props>
+          <prop key="messageManageView">msg/msgManage</prop>
+          <prop key="messageList">../plugins/messageList.do</prop>
+          <prop key="unreadedView">msg/msgUnreadedQuery</prop>
+          <!-- 公告 -->
+          <prop key="toaddNoticeMessageView">msg/msgnoticeAdd</prop>
+           <prop key="addNoticeMessageView">../plugins/messageNoticeList.do</prop>
+           <!-- 帮助 -->
+            <prop key="addhelpMessageView">../plugins/messageHelpList.do</prop>
+            <prop key="toaddhelpMessageView">msg/msgHelpAdd</prop>
+            <!-- 邮件 -->
+            <prop key="addemailMessageView">../plugins/messageEmailList.do</prop>
+             <prop key="toaddemailMessageView">msg/msgEmailAdd</prop>
+        </props>
+      </property>
+    </bean>
+    <!--聊天消息分页查询  -->
+    <bean id="pluginMsgInstantQueryController" parent="pluginMsgQueryController">
+      <property name="successView"><value>msg/msgInstantQuery</value></property>
+    </bean> 
+    <!-- 系统消息分页查询 -->
+    <bean id="pluginMsgQueryController" class="com.plugins.msg.controller.MessageQueryController">
+      <property name="msgService"><ref bean="msgService"/></property>
+      <property name="commandClass"><value>com.plugins.msg.command.MessageQueryInfo</value></property>
+      <property name="successView"><value>msg/msgQuery</value></property>
+    </bean>
+     <!-- 公告消息分页查询 -->
+    <bean id="noticeMsgQueryController" class="com.plugins.msg.controller.MessageNoticeQueryController">
+      <property name="msgService"><ref bean="msgService"/></property>
+      <property name="commandClass"><value>com.plugins.msg.command.MessageQueryInfo</value></property>
+      <property name="successView"><value>msg/noticemsgQuery</value></property>
+    </bean>    
+    <!-- 帮助消息分页查询 -->
+    <bean id="helpMsgQueryController" class="com.plugins.msg.controller.MessageHelpQueryController">
+      <property name="msgService"><ref bean="msgService"/></property>
+      <property name="commandClass"><value>com.plugins.msg.command.MessageQueryInfo</value></property>
+      <property name="successView"><value>msg/msgHelpQuery</value></property>
+    </bean>  
+    <!-- 邮件消息分页查询 -->
+    <bean id="emailMsgQueryController" class="com.plugins.msg.controller.MessageEmailQueryController">
+      <property name="msgService"><ref bean="msgService"/></property>
+      <property name="commandClass"><value>com.plugins.msg.command.MessageQueryInfo</value></property>
+      <property name="successView"><value>msg/msgEmailQuery</value></property>
+    </bean>
+<!-- 简单工厂 -->
+    <bean class="com.plugins.msg.MsgHelper">
+        <property name="msgService"><ref bean="msgService"/></property>
+    </bean>
+
+<!--该框架需往系统用户表添加message帐号-->
+<!--insert into NNJW.SYS_STAFF (STAFF_ID, DEP_ID, LOGIN_NAME, PASSWORD, VALID, STAFF_NAME) -->
+<!--values ('0', '1', 'message', 'c4ca4238a0b923820dcc509a6f75849b', '0', '系统消息发送者');-->
+
+
+
+</beans>

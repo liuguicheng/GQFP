@@ -1,0 +1,202 @@
+.toptouzi {
+  POSITION: relative; MARGIN-BOTTOM: 16px; HEIGHT: 40px; TOP: 5px;
+  padding:0 20px;
+}
+.toptouzi H1 {
+  font-family: "微软雅黑";
+  font-size: 16px;
+  font-weight: bold;
+  color: #1E1E1E;
+  height:27px;
+  line-height:27px;
+}
+.toptouzi H1 a{
+  font-family: "微软雅黑";
+  font-size: 12px;
+  font-weight: bold;
+  color: #86c440;
+  height:27px;
+  line-height:27px;
+  text-decoration: none;
+}
+.toptouzi H1 a:hover{
+  color: #FF6600;
+}
+.toptouzi .nav22 {
+  POSITION: absolute; WIDTH: 500px; TOP: 0px; RIGHT: 0px
+}
+UL.nav22 LI {
+  TEXT-ALIGN: center; LINE-HEIGHT: 27px; WIDTH: 160px; FLOAT: left; FONT-SIZE: 14px
+}
+UL.nav22 LI A {
+  FONT-WEIGHT: bold;
+  TEXT-DECORATION: none;
+  color: #6688cc;
+}
+UL.nav22 LI A:hover {
+  color: #FF9900;
+}
+UL.nav22 LI.chose A {
+  DISPLAY: block;
+  BACKGROUND: url(tzsp/btn_title_enabled.gif) no-repeat center 50%;
+  HEIGHT: 27px;
+  COLOR: #fff;
+}
+
+/* 流程图 */
+.DivFlowWrap{
+  margin:0 8px 0px 10px;
+}
+.DivFlowWrapTitle{
+  height:83px;
+  background-image: url(tzsp/war_bg.png);
+  background-repeat: repeat-x;
+  background-position: center bottom;
+  width:100%;
+  border-bottom:#CCCCCC 1px solid;
+}
+
+.DivFlowWrapCon{
+  width:100%;
+}
+
+.DivFlowWrapTitle ul{
+  list-style:none;
+  padding:0;
+  margin:0;
+}
+.DivFlowWrapTitle ul li{
+  height:83px;
+  width:auto;
+  float:left;
+  padding:0;
+  margin:0;
+  overflow:hidden;
+}
+.DivFlowWrapTitle ul li.LiSplitLine{
+  background-image: url(tzsp/splitline.png);
+  background-repeat: no-repeat;
+  background-position: center center;
+  width:2px;
+}
+.DivFlowWrapTitle ul li a{
+  padding:0 1px;
+  margin:0;
+  height:83px;
+  width:120px;
+  display:block;
+}
+
+.DivFlowWrapTitle ul li a:hover,.DivFlowWrapTitle ul li a.ACheck{
+  background-image: url(tzsp/tab_invest_arrow.png);
+  background-repeat: no-repeat;
+  background-position: center bottom;
+}
+.SpnAWrapIco, .SpnALayout{
+  margin:2px auto;
+}
+.DivFlowWrapTitle ul li a .SpnAWrapIco{
+  height:30px;
+  width:30px;
+  background-image: url(tzsp/iconbg.png);
+  background-repeat: no-repeat;
+  display:block;
+}
+.DivFlowWrapTitle ul li a .SpnALayout{
+  height:50px;
+  width:100%;
+  overflow:hidden;
+}
+.SpnALayout span{
+  width:100%;
+  line-height:22px;
+  float:left;
+  text-align:center;
+}
+.SpnATitle{
+  color: #333333;
+  font-size: 12px;
+
+}
+.SpnASm{
+  color: #999999;
+  font-size: 12px;
+  display:none;
+}
+.DivFlowWrapTitle ul li a:hover .SpnATitle,.DivFlowWrapTitle ul li a.ACheck .SpnATitle{
+  color: #4799e0;
+}
+.DivFlowWrapTitle ul li a:hover .SpnASm, .DivFlowWrapTitle ul li a.ACheck .SpnASm{
+  color: #84B9EA;
+}
+
+/* icon */
+.Ico1{
+  background-position: 0px -2px;
+}
+.DivFlowWrapTitle ul li a:hover .Ico1,.DivFlowWrapTitle ul li a.ACheck .Ico1{
+  background-position: 0px -32px;
+}
+
+.Ico2{
+  background-position: 0px -62px;
+}
+.DivFlowWrapTitle ul li a:hover .Ico2,.DivFlowWrapTitle ul li a.ACheck .Ico2{
+  background-position: 0px -92px;
+}
+
+.Ico3{
+  background-position: 0px -122px;
+}
+.DivFlowWrapTitle ul li a:hover .Ico3,.DivFlowWrapTitle ul li a.ACheck .Ico3{
+  background-position: 0px -152px;
+}
+
+.Ico4{
+  background-position: 0px -302px;
+}
+.DivFlowWrapTitle ul li a:hover .Ico4,.DivFlowWrapTitle ul li a.ACheck .Ico4{
+  background-position: 0px -332px;
+}
+
+.Ico5{
+  background-position: 0px -182px;
+}
+.DivFlowWrapTitle ul li a:hover .Ico5,.DivFlowWrapTitle ul li a.ACheck .Ico5{
+  background-position: 0px -212px;
+}
+.Ico6{
+  background-position: 0px -242px;
+}
+.DivFlowWrapTitle ul li a:hover .Ico6,.DivFlowWrapTitle ul li a.ACheck .Ico6{
+  background-position: 0px -272px;
+}
+.Ico7{
+  background-position: 0px -362px;
+}
+.DivFlowWrapTitle ul li a:hover .Ico7,.DivFlowWrapTitle ul li a.ACheck .Ico7{
+  background-position: 0px -392px;
+}
+.Ico8{
+  background-position: 0px -422px;
+}
+.DivFlowWrapTitle ul li a:hover .Ico8,.DivFlowWrapTitle ul li a.ACheck .Ico8{
+  background-position: 0px -452px;
+}
+.Ico9{
+  background-position: 0px -482px;
+}
+.DivFlowWrapTitle ul li a:hover .Ico9,.DivFlowWrapTitle ul li a.ACheck .Ico9{
+  background-position: 0px -512px;
+}
+.Ico10{
+  background-position: 0px -542px;
+}
+.DivFlowWrapTitle ul li a:hover .Ico10,.DivFlowWrapTitle ul li a.ACheck .Ico10{
+  background-position: 0px -572px;
+}
+/* 流程图片 */
+.DivImgWrap{
+  text-align:center;
+  display:none;
+}

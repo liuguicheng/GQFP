@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:task="http://www.springframework.org/schema/task"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/task 
+        http://www.springframework.org/schema/task/spring-task-3.0.xsd">
+
+
+	<bean id="taskid" class="com.systemic.gq.bonus.timer.TaskJobController"
+		autowire="byType"></bean>
+	<bean id="eTask"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<!-- 调用的类 -->
+		<property name="targetObject">
+			<ref bean="taskid" />
+		</property>
+		<!-- 调用类中的方法 -->
+		<property name="targetMethod">
+			<value>aTask</value>
+		</property>
+	</bean>
+	<bean id="eTime"
+		class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail">
+			<ref bean="eTask" />
+		</property>
+		<!-- cron表达式 -->
+		<property name="cronExpression">
+			<value>0 0 1 30 * ?</value><!-- 30号凌晨1点 ? -->
+		</property>
+	</bean>
+
+	<bean lazy-init="false"
+		class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+				<!-- 这里添加多个定时任务触发器，对应第2步的bean id -->
+				<ref bean="eTime" />
+			</list>
+		</property>
+	</bean>
+
+	<!-- 启用注解 -->
+	<!-- <context:annotation-config/> -->
+	<!-- 兼容原有的SimpleUrlHandlerMapping -->
+	<bean
+		class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter" />
+	<!-- 控制只有控制器使用注解 -->
+	<context:component-scan base-package="com.systemic.*.*.controller"
+		use-default-filters="false">
+		<context:include-filter type="annotation"
+			expression="org.springframework.stereotype.Controller" />
+		<context:include-filter type="annotation"
+			expression="org.springframework.web.bind.annotation.ControllerAdvice" />
+	</context:component-scan>
+	<!-- 启用RequestMappingHandlerMapping，需在 启用MVC注解前，因为启用MVC注解，会默认实例化RequestMappingHandlerAdapter 
+		和webBindingInitializer -->
+	<bean
+		class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+		<property name="cacheSeconds" value="0" />
+		<property name="webBindingInitializer">
+			<bean class="org.springline.web.SpringlineDataBinder" />
+		</property>
+	</bean>
+	<!-- 启用MVC注解，否则控制器中的RequestMapping等注解不起效果 -->
+	<mvc:annotation-driven />
+
+
+	<!--<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"> 
+		<property name="location"> <value>/WEB-INF/config/applicationContext.properties</value> 
+		</property> <property name="fileEncoding"> <value>GBK</value> </property> 
+		</bean> -->
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
+
+	<bean id="messageSource" class="org.springframework.context.support.StaticMessageSource" />
+
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.velocity.VelocityViewResolver">
+		<property name="exposeSpringMacroHelpers">
+			<value>true</value>
+		</property>
+		<property name="contentType">
+			<value>text/html;charset=GBK</value>
+		</property>
+		<property name="cache">
+		<!-- 设置缓存  false 用于开发 true 用户线上-->
+			<value>true</value>
+		</property>
+		<property name="prefix">
+			<value></value>
+		</property>
+		<property name="suffix">
+			<value>.vm</value>
+		</property>
+		<property name="viewClass">
+			<value>org.springline.web.view.velocity.SpringlineVelocityView
+			</value>
+		</property>
+	</bean>
+	<bean id="viewHelper" class="com.console.support.ContextViewHelper">
+		<property name="appContext">
+			<props>
+				<!-- <prop key="appName">${application.appName}</prop> -->
+				<prop key="skin">../skins/default</prop>
+				<prop key="currentTemplate">../skins/default/content.css</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="velocityConfig"
+		class="org.springline.web.view.velocity.SpringlineVelocityConfigurer">
+		<property name="velocityProperties">
+			<props>
+				<prop key="runtime.log">velocity.log</prop>
+				<prop key="runtime.log.invalid.references">true</prop>
+				<prop key="resource.manager.logwhenfound">true</prop>
+				<prop key="velocimacro.library.autoreload">true</prop>
+				<prop key="velocimacro.library">sysmacroLib.vm, macroLib.vm</prop>
+				<prop key="input.encoding">GBK</prop>
+				<prop key="output.encoding">GBK</prop>
+			</props>
+		</property>
+		<property name="resourceLoaderPath">
+			<value>/WEB-INF/view/console/,/WEB-INF/view/plugins,/WEB-INF/view/systemic,/WEB-INF/view/portal
+			</value>
+		</property>
+	</bean>
+
+	<bean id="exceptionResolver"
+		class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+		<property name="defaultErrorView">
+			<value>main/showError</value>
+		</property>
+	</bean>
+
+
+
+</beans>

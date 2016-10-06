@@ -1,0 +1,106 @@
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=gbk" />
+  <title>$!{appContext.appName}</title>
+  <link href="../script/css.css" rel="stylesheet" type="text/css" />
+  <script type="text/javascript" src="../script/common.js"></script>
+  <script type="text/javascript" src="../script/selectOperator.js"></script>
+<script type="text/javascript">
+function submitEditForm() {
+    if (editSubmitCheck()) {
+        document.editForm.submit();
+    }
+}
+function editSubmitCheck() {
+    var selectCorp = document.getElementById("keyValue");
+    if (selectCorp.options.length == 0) {
+        alert("请设置常用人员信息！");
+        return false;
+    }
+    for (var i = 0; i < selectCorp.options.length; ++i) {
+        selectCorp.options[i].selected = true;
+    }
+    return true;
+}
+</script>
+</head>
+<body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+<table width="100%" height="100%" border="0" cellpadding="0" cellspacing="0">
+  <tr valign="top" height="1">
+    <td>
+      <table width="100%" height="26" border="0" cellpadding="0" cellspacing="0" class="bj">
+        <tr>
+          <td height="24">
+            <table width="100%" height="100%" border="0" cellpadding="0" cellspacing="0" class="sb">
+              <tr>
+                <td>
+                  <table width="100%" border="0" cellpadding="0" cellspacing="0" class="unnamed1">
+                    <tr>
+                      <td width="1%"></td>
+                      <td width="49%" height="24">
+                        <img src="../images/mb_top_zl1.gif" width="16" height="13" align="absmiddle" alt="工具条" />
+                        <span class="text12">设置常用人员信息</span>
+                      </td>
+                      <td width="49%" align="right" valign="middle" class="text12">
+                        <input type="button" class="nv" value="返回" onclick="submitRequest('../general/favoriteList.do?mapId=$generalMap.Id')" />
+                        <input type="button" class="nv" value="再次查询" onclick="submitRequest('../manage/departmentTree.do?mapId=$generalMap.Id&nextUrl=../manage/staffFavoriteConfig.do')" />
+                        <input type="button" class="nv" value="保存" onclick="javascript:submitEditForm();" />
+                        <input type="button" class="nv" value="关闭" onclick="javascript:top.close();" />
+                      </td>
+                      <td width="1%"></td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <tr valign="top">
+    <td>
+      <table width="100%" height="100%" border="0" cellpadding="0" cellspacing="0" class="zyx">
+<form name="editForm" method="post" action="../manage/staffFavoriteConfig.do" onsubmit="return editSubmitCheck();">
+<input type="hidden" name="mapId" id="mapId" value="$generalMap.Id" />
+<input type="hidden" name="depId" id="depId" value="$depId" />
+<input type="hidden" name="valueKeyType" id="valueKeyType" value="$generalMap.GeneralClass.ValueKeyType" />
+        <tr>
+          <td valign="top">
+            <table width="100%" border="0" cellpadding="3" cellspacing="0" class="t">
+              <tr align="center">
+                <td class="t1" width="40%">可用人员信息列表</td>
+                <td class="t1" width="20%" rowspan="2">
+                  <input type="button" value="＞＞" class="nv" style="width: 50px;" onclick="SelectOperator.addAllOption('valueList', 'keyValue')" title="增加所有值" /><br/><br/>
+                  <input type="button" value=" ＞ " class="nv" style="width: 50px;" onclick="SelectOperator.addSelectedOption('valueList', 'keyValue')" title="增加选择值" /><br/><br/>
+                  <input type="button" value=" ＜ " class="nv" style="width: 50px;" onclick="SelectOperator.clearSelectedOption('keyValue')" title="删除选择值" /><br/><br/>
+                  <input type="button" value="＜＜" class="nv" style="width: 50px;" onclick="SelectOperator.clearAllOption('keyValue')" title="删除所有值" />
+                </td>
+                <td class="t1" width="40%">常用人员信息列表</td>
+              </tr>
+              <tr align="center">
+                <td class="t2">
+                  <select id="valueList" name="valueList" multiple="multiple" style="width: 200px;height: 300px;">
+#foreach($value in $staffList)
+                    <option value="$value.Id" title="$value.Name">$value.Name</option>
+#end
+                  </select>
+                </td>
+                <td class="t2">
+                  <select id="keyValue" name="keyValue" multiple="multiple" style="width: 200px;height: 300px;">
+#foreach($favValue in $favoriteList)
+                    <option value="$favValue.Id" title="$favValue.Name">$favValue.Name</option>
+#end
+                  </select>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+</form>
+      </table>
+    </td>
+  </tr>
+</table>
+</body>
+</html>

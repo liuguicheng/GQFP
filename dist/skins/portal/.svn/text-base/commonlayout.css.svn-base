@@ -1,0 +1,469 @@
+@charset "utf-8";
+/* 
+	页面布局样式
+*/
+/* 公共 */
+*{
+	margin:0;
+	padding:0;
+	border:none 0;
+	font-family: "微软雅黑", Tahoma, sans-serif;
+}
+body{
+	margin: 0px;
+	padding: 0px;
+	font-family: "微软雅黑";
+	background-image: url(common/topBg.jpg);
+	background-repeat: no-repeat;
+	background-position: center top;
+	text-decoration: none;
+}
+a{
+	text-decoration: none;
+}
+ul{
+	list-style:none;
+}
+
+
+/*头部样式*/
+.Header{
+	height: 181px;
+	_height: 182px;
+	width: 100%;
+	margin:0;
+}
+
+/* 顶部导航样 */
+.HeaderMenu{
+	height: 36px;
+	width: 1000px;
+	border-bottom:1px solid #FFF;
+	background-image: url(common/headerMenuBg.jpg);
+	margin:0 auto;
+	padding:0px;
+	font-size: 16px;
+	font-weight:bold;
+	background-repeat: no-repeat;
+	background-position: center top;
+	background-color: #006699;
+}
+/* 头部图片轮换 */
+.HeaderPic,.HeaderPic2{
+	height: 113px;
+	width: 1000px;
+	margin:0 auto;
+	position: relative;
+	background-position: left top;
+	background-repeat: no-repeat;
+	background-color: #003366;
+}
+.HeaderPic{
+	background-image: url(common/topPic.jpg);
+}
+.HeaderPic2{
+	height: 113px;
+	width: 1000px;
+	margin:0 auto;
+	position: relative;
+	background-position: left top;
+	background-repeat: no-repeat;
+	background-color: #003366;
+}
+.HeaderPic ul,.HeaderPic2 ul{
+	float: right;
+	overflow: hidden;
+	height: 113px;
+	width: 581px;
+	display: block;
+}
+.HeaderPic ul li,.HeaderPic2 ul li{
+	display: none;
+	height: 113px;
+	width: 581px;
+	position: absolute;
+	left: 419px;
+	top: 0px;
+}
+
+/* 头部站点位置导航 */
+.HeaderGuide{
+	margin: 0 auto;
+	height: 30px;
+	line-height:30px;
+	width: 1000px;
+	position: relative;
+	background-image: url(common/headerGuideBg.png);
+	background-repeat: no-repeat;
+	background-position: right top;
+}
+
+.GuideNav{
+	height: 25px;
+	font-size: 14px;
+	color: #666;
+	padding-top:1px;
+	padding-left: 10px;
+	margin-top: 0px;
+}
+
+/* 内容部分 */
+.CenterContainer{
+	position:relative;
+	margin:0;
+	padding:0;
+	width: 100%;
+	height:100%;
+	background-image: url(common/contentBg.png);
+	background-position: center top;
+	background-repeat: repeat-y;
+	height:auto;
+}
+.Content,.ContentTitle,.ContentTitleIcon,.ContentSubNav,.ContentSearch{
+	margin:0 auto;
+	width: 990px;	
+}
+
+.ContentSubNav{
+	width: 975px;
+	padding-right:25px;
+}
+.Content{
+	height:auto;
+}
+.Content .DivMapImg{
+	width:100%;
+	float:left;
+	text-align:center;
+	margin:20px  auto 10px auto;
+}
+.Content .CenterPanel{
+	text-align:center;
+	height:205px;
+	width:956px;
+	margin:0px auto;
+	margin-top:20px;
+	background-image: url(common/centerPanelBg.png);
+	background-repeat: no-repeat;
+	background-position: center center;
+	_background-image:none;
+	display:none;
+}
+.Content .CenterPanel2{
+	text-align:center;
+	height:300px;
+	width:950px;
+	margin:20px;
+	background-image: url(common/boxBg.jpg);
+	background-repeat: repeat-x;
+	background-position: center top;
+	_background-image:none;
+	float:left;
+	border:1px solid  #C1E8F9;
+}
+
+.ContentTitle{
+	height:50px;
+	line-height:50px;
+}
+.ContentTitleIcon{
+	height:70px;
+	line-height:70px;
+	margin-bottom:0px;
+}
+
+/* 内容二级导航 */
+.ContentSubNav {
+	height: 45px;
+	line-height:45px;
+	background-image: url(common/SubNav2.png);
+	background-repeat: repeat-x;
+	background-position: center top;
+	border-bottom: #E1E1E1 1px solid;
+	border-top:#E1E1E1 1px solid;
+	text-align:center;
+}
+
+.ContentSubNav h1{
+	font-size: 18px;
+	font-weight: normal;
+	color:#4B4B4B;
+	width:300px;
+	float:left;
+	margin:0px;
+	height:45px;
+	line-height:45px;
+	padding-left:5px;
+	white-space:nowrap;
+	text-align:left;
+}
+.ContentSubNav .SubNavLinkTab{
+	height:45px;
+	line-height:45px;
+	float:left;
+	width:auto;
+	*width:320px;
+}
+.ContentSearch{
+	height:35px;
+	line-height:35px;
+	margin:2px auto;
+}
+
+/* 页脚 */
+.Footer{
+	background-image: url(common/bottomBg.png);
+	height: 75px;
+	width: 1020px;
+	background-repeat: no-repeat;
+	margin: 0 auto;
+	background-position: center top;
+	overflow: hidden;
+	clear:both;
+}
+
+/* 页面左右分栏布局 */
+.HangBox,.MainBox,.HangBox2,.MainBox2{
+	float:left;
+	height:auto;
+}
+.HangBox,.HangBox2{
+	width:200px;
+	_width:198px;
+	height:auto;
+	border:1px solid #C1DAE3;
+	margin:2px;
+	background-image: url(common/boxBg.jpg);
+	background-repeat: repeat-x;
+	background-position: center top;
+}
+.HangBox2 h1{
+	background-image: url(common/boxTitle.png);
+	background-repeat: no-repeat;
+	background-position: left center;
+	height:30px;
+	line-height:30px;
+	font-size: 14px;
+	color: #666666;
+	padding-left:30px;
+	border-top: 1px solid #C1DAE3;
+	border-bottom: 1px solid #C1DAE3;
+	background-position: 0px -2px;
+}
+.HangBox h1,.MainBox h1,.MainBoxFull h1{
+	background-image: url(common/boxTitle.png);
+	background-repeat: no-repeat;
+	background-position: left center;
+	height:30px;
+	line-height:30px;
+	font-size: 14px;
+	color: #666666;
+	padding-left:30px;
+	border-bottom: 1px solid #D8D8D8;
+}
+.MainBox h1{
+	background-position: 0px -38px;
+}
+.HangBox h1{
+	background-position: 0px -2px;
+}
+.MainBoxFull h1{
+	height:35px;
+	line-height:35px;
+	padding-left:0px;
+	background-position: 0px -70px;
+}
+.MainBoxFull h3{
+	height:30px;
+	background: #F1F6FE;
+	line-height: 2.2;
+	border-top: 1px solid #ddd;
+	border-bottom: 1px solid #ddd;
+	padding: 0 10px;
+	font-size: 14px;
+	color: #0091c1;
+	margin-top:1px;
+	border-collapse:collapse;
+}
+.MainBox{
+	background-image: url(common/boxBg.jpg);
+	background-repeat: repeat-x;
+	background-position: center top;
+	border:1px solid #C1DAE3;
+	width:780px;
+	margin:2px 1px;
+}
+.MainBox2{
+	background-image: url(common/boxBg.jpg);
+	background-repeat: repeat-x;
+	background-position: center top;
+	border:1px solid #C1DAE3;
+	width:780px;
+	margin:2px 1px;
+	float:left;
+}
+.MainBox2 .DetailPanel{
+	border:none;
+	background:transparent;
+}
+.HighLight{
+	background-color: #FFF9DF;
+	border:1px solid #FFB380;
+}
+/* 满屏清单 */
+.MainBoxFull{
+	border:1px solid #C1DAE3;
+}
+.CommandBtnWrap{
+	height:28px;
+	widows:100%;
+	text-align:center;
+}
+/* 数据列表页面 */
+.TbListNav{
+	height:32px;
+	line-height:32px;
+	width:988px;
+	margin:0px;
+	border:1px solid #A8A8A8;
+	border-bottom:none;
+	white-space:nowrap;
+	overflow:hidden;
+}
+
+Table.TbList {
+	table-layout:fixed;
+	/*position:relative;*/
+	width:100%;
+    padding: 0px;
+	margin:0px;
+	border:#A8A8A8 1px solid;
+	border-collapse:collapse;
+	white-space:nowrap;
+	color: #151515;
+	font-family: "微软雅黑", Tahoma, sans-serif;
+	font-size: 14px;
+}
+
+Table.TbList2 {
+	table-layout:fixed;
+	/*position:relative;*/
+	width:100%;
+    padding: 0px;
+	margin:0px;
+	border:1px solid #DFDFDF;
+	border-collapse:collapse;
+	white-space:normal;
+	color: #151515;
+	font-family: "微软雅黑", "宋体", Tahoma, sans-serif;
+	font-size: 14px;
+}
+Table.TbPageMsg {
+	table-layout:fixed;
+	/*position:relative;*/
+	width:100%;
+    padding: 0px;
+	margin:0px;
+	border:1px solid #DFDFDF;
+	border-collapse:collapse;
+	white-space:normal;
+	color: #151515;
+	font-family: "微软雅黑", "宋体", Tahoma, sans-serif;
+	font-size: 14px;
+}
+
+/* 分页器 */
+.ListPager{
+	margin-top:2px;
+	height:30px;
+	line-height:30px;
+	border:1px solid #CCCCCC;
+	font-size: 14px;
+	color: #006699;
+	overflow:hidden;
+}
+
+/* 文章 */
+.DetailPanel{
+	background-color: #f9fcfd;
+	margin-top:5px;
+	padding:15px;
+	border:1px solid #E1E1E1;
+}
+.DetailPanel2{
+	background-color: #f9fcfd;
+	padding:15px;
+}
+.SubDetailPanel{
+	margin:5px 20px;
+	border-bottom-width: 1px;
+	border-bottom-style: dotted;
+	border-bottom-color: #999999;
+}
+/* 网上办事图标导航 */
+.ContentSubNav2 {
+	height: 30px;
+	line-height:30px;
+	border-bottom: 2px solid #0087ae;
+	border-top:#E1E1E1 1px solid;
+	
+	text-align:center;
+	width: 1000px;
+	margin:0 auto;
+	margin-top:15px;
+	font-size: 14px;
+	
+	background-image: url(common/boxTitle.png);
+	background-repeat: no-repeat;
+	background-position: left -70px;
+}
+
+.ClearFix{
+	clear:both;
+}
+.FullWidth{
+	width:1000px;
+}
+.LeftBox{
+	width:50%;
+	float:left;
+}
+.RightBox{
+	width:50%;
+	float:right;
+}
+.GuideWrap{
+	width:1000px;
+	height:35px;
+	line-height:35px;
+	background-color:#6bb2e5;
+	margin:5px auto;
+}
+.TipsInfo{
+	width:1000px;
+	height:30px;
+	line-height:30px;
+	color: #666;
+	background-color: #FCF3B4;
+	font-size: 14px;
+	margin:-5px  auto 5px auto;
+
+}
+.TipsInfo span{
+	margin:0 10px;
+	background-image: url(common/infoIco.gif);
+	background-repeat: no-repeat;
+	background-position: left center;
+	padding-left:25px;
+}
+.TipsInfo span a{
+	color: #F36;
+	text-decoration: underline;
+}
+.TipsInfo span a:hover{
+	color: #F60;
+	text-decoration: underline;
+}
+.TbMapLink{
+	float:right;
+}

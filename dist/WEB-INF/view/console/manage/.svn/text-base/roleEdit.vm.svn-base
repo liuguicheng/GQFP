@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  #headInclude()
+  <script type="text/javascript" src="../script/validator.js"></script>
+  <script type="text/javascript">
+    #if($message)alert("#javaScriptEscape($message)");#end
+  validator.formName = "editForm";
+  validator.addNormalCheckPoint("name", "角色名称", "checkNotNull;checkNotEmpty");
+
+  function doSave() {
+    if (validator.checkAll()) {
+      document.editForm.submit();
+    }
+  }
+  function doReturn() {
+    document.location.href = "../manage/roleList.do";
+  }
+$(function(){
+  $('body').layout('panel','north').panel('resize', {height:'auto'});
+  $('body').layout('panel','south').panel('resize', {height:'auto'});
+  $('body').layout('resize');
+})
+$(function() {
+
+  var rows1 = [],rows2 = [];
+  #foreach( $data in ${powerList} )
+  #if($!{data.moduleName} == "02")
+    rows2.push({
+      powerId: '$!{data.id}',
+      powerCode: '${data.code}',
+      powerName: '#foreach( $i in [1..$data.layer] )#if($i > 1)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; #end #end#htmlEscape($!{data.name})',
+      flag: #if($!{command.powers.contains($data)})'1'#else'0'#end,
+      moduleName: '#lookUpDict($dicData.dicModuleName $!{data.moduleName})',
+    });
+  #else
+   rows1.push({
+      powerId: '$!{data.id}',
+      powerCode: '${data.code}',
+      powerName: '#foreach( $i in [1..$data.layer] )#if($i > 1)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; #end #end#htmlEscape($!{data.name})',
+      flag: #if($!{command.powers.contains($data)})'1'#else'0'#end,
+      moduleName: '#lookUpDict($dicData.dicModuleName $!{data.moduleName})',
+    });
+  #end
+  #end
+  $('#roleEdit-datagrid1').datagrid("loadData", rows1);
+  $('#roleEdit-datagrid2').datagrid("loadData", rows2);
+});
+
+function loadSuccess(data) {
+  var rows = data.rows
+  $(rows).each(function(index,element){
+     if(element.flag == '1') {
+       $('#roleEdit-datagrid1').datagrid('checkRow', index);
+       $('#roleEdit-datagrid2').datagrid('checkRow', index);
+     }
+  });
+}
+  </script>
+</head>
+<body class="easyui-layout indieui-form">
+<form name="editForm" method="post" action="#getRequestUri()" >
+<input type="hidden" name="id" value="$!{command.id}" />
+<div data-options="region:'north',title:'编辑角色信息',iconCls:'icon-edit', collapsible:false" style="height:120px">##
+<table class="TbCommon">
+  <tr>
+    <td class="TdLabel" style="width:100px;">序号</td>
+    <td class="TdInput">
+      <input type="text" name="sortOrder" value="#showNumber($!{command.sortOrder})" maxlength="2" />
+    </td>
+    <td class="TdLabel" style="width:100px;">#requiredInput("角色名称")</td>
+    <td class="TdInput">
+      <input type="text" name="name" value="#htmlEscape($!{command.name})" maxlength="40" />
+    </td>
+    <td class="TdLabel" style="width:100px;">角色说明</td>
+    <td class="TdInput">
+      <input type="text" name="remark" value="#htmlEscape($!{command.remark})" maxlength="100" />
+    </td>
+  </tr>
+  <tr>
+    <td class="TdLabel" style="width:100px;">角色主页</td>
+    <td class="TdInput" colspan="5">
+      <input type="text" name="homeUrl" value="#htmlEscape($!{command.homeUrl})" maxlength="400" style="width:98%;"/>
+    </td>
+  </tr>  
+</table>
+</div>
+<div data-options="region:'center',border:'no'" class="easyui-tabs" data-option="fit:true">
+  <div   title="电脑端" >
+     <table id="roleEdit-datagrid1" class="easyui-datagrid" fit="true" border="0"  
+            pagination="false" striped="true"
+            rownumbers="false" fitColumns="true" 
+            data-options="onLoadSuccess:loadSuccess">
+        <thead>
+            <tr>
+            <th data-options="field:'powerId',checkbox:true,width:30, fixed:true,align:'center'">
+            </th>
+               <th field="powerCode"  width="100" fixed="true">权限编号</th>
+            <th field="powerName"  width="200">权限名称</th> 
+            <th field="moduleName"  width="100">菜单所属模块名</th> 
+            </tr>
+        </thead>  
+
+        <tbody>
+        </tbody>               
+      </table>
+  </div>
+  <div  title="手机端"  >
+     <table id="roleEdit-datagrid2" class="easyui-datagrid" fit="true" border="0"  
+            pagination="false" striped="true"
+            rownumbers="false" fitColumns="true" 
+            data-options="onLoadSuccess:loadSuccess">
+        <thead>
+            <tr>
+            <th data-options="field:'powerId',checkbox:true,width:30, fixed:true,align:'center'">
+            </th>
+            <th field="powerCode"  width="100" fixed="true">权限编号</th>
+            <th field="powerName"  width="200">权限名称</th> 
+            <th field="moduleName"  width="100">菜单所属模块名</th> 
+            </tr>
+        </thead>  
+
+        <tbody>
+        </tbody>               
+      </table>
+  </div>
+</div>
+<div data-options="region:'south'" style="overflow:hidden">
+  <div class="CommandTool">
+  <input type="button" value="保 存" style="width:100px" onclick="javascript:doSave();"/>
+  <input type="button" value="返 回" style="width:100px" onclick="javascript:doReturn();"/>
+  </div>
+</div>
+</form>
+</body>
+</html>

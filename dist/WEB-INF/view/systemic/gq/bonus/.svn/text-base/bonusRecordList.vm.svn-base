@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        #headInclude()
+        <script type="text/javascript">
+            #if($message)alert("#javaScriptEscape($message)");#end
+        </script>
+    </head>
+    <body>
+        <div class="PageHeader">
+            <div class="LeftBox Title">奖金列表</div>
+        </div>
+        <div class="SearchBox" id="divSearch">
+            <form name="queryForm" action="#getRequestUri()" method="post" class="indieui-form">
+                <table class="TbCommon">
+                    <tr>
+                        <td class="TdLabel" style="width:100px;">股东姓名：</td>
+                        <td class="TdInput">
+                            <input type="text" name="userid" value="#htmlEscape($!{command.username})" >
+</td>
+<td class="TdLabel" style="width:100px;">奖金类型：</td>
+<td class="TdInput">
+    #formSingleSelectDictionary("bonustype" $!{command.bonustype} ${dicData.dicBonusContent} "style='width:140'" " ---- 请选择 ---- ")
+</td>
+</tr>
+<tr>
+    <td class="TdLabel" style="width:100px;">发放时间：</td>
+    <td class="TdInput" colspan="3">
+        <input type="text" name="create_time" value="#customFormatDate($!{command.create_time} 'yyyy-MM-dd')" style="width:30%;" dateFormat="yyyy-MM-dd"/>
+        至
+        <input type="text" name="end_time" value="#customFormatDate($!{command.end_time} 'yyyy-MM-dd')" style="width:30%;" dateFormat="yyyy-MM-dd"/>
+    </td>
+</tr>
+</table>
+<div class="CommandTool">
+    <input type="button" value="确 定" onClick="javascript:document.queryForm.submit();jQuery('body').processMask();"/>
+    <input type="button" value="清 空" onClick="javascript:clearQuery(document.queryForm);"/>
+    <input type="button" value="取 消" onClick="javascript:showDiv('divSearch');">    
+</div>
+</form>
+</div>
+<div class="PageTool">
+    <div class="LeftBox Tool">
+        <input type="button" class="BtnSearch" value="查询"  title="查询" onclick="javascript:showDiv('divSearch');"/>
+    </div>
+</div>
+<div class="PageContainer indieui-scroll">
+    <form name="listForm" method="post">
+        <input type="hidden" name="submitFlag" value="0">
+            <input type="hidden" name="token" value="$!{command.token}">
+                <table class="TbList">
+                    <thead>
+                        <tr>
+                            <th style="width:20px;" nowrap>
+                                ##<input type="checkbox" onclick="javascript:setCheckBoxValue('id', this.checked);">
+</th>
+<th>股东姓名</th>
+<th>奖金金额</th>
+<th>奖金类型</th>
+<th>奖金比例</th>
+<th>结算时间</th>
+<th>是否发放</th>
+<th>发放时间</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+    #foreach( $data in $page.data )
+        <tr>
+            <td>
+                ##<input type="checkbox" name="id" value="$!{data.id}">
+</td>
+<td>$!{data.username}</td>
+<td>$!{data.money}</td>
+<td>
+    <a href="javascript:doEdit('$!{data.id}');;"> #lookUpDict($dicData.dicBonusContent "$!{data.bonustype}") </a>
+</td>
+<td>$!{data.proportion}%</td>
+<td>$!{data.create_time}</td>
+<td>#if($!{data.isSend}==0) <span style='color:red;'>未发放</span>
+        #else  已发放   #end </td>
+        <td>$!{data.send_time}</td>
+        <td>$!{data.remark}</td>
+</tr>
+    #end
+</tbody>
+</table>
+</form>
+</div>
+<div data-options="region:'south'" style="overflow-y:hidden"> 
+    #pageDirector($page "#getRequestUri()" "")
+</div>
+</body>
+</html>

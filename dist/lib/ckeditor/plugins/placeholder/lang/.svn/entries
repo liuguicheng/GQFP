@@ -1,0 +1,52 @@
+8
+
+dir
+6
+https://192.168.1.118/svn/GQFP/trunk/dist/lib/ckeditor/plugins/placeholder/lang
+https://192.168.1.118/svn/GQFP
+
+
+
+2016-09-07T09:42:09.304169Z
+2
+ZBJ
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+7eaa1c50-b5f8-8d46-a0b5-e5067a1f1115
+
+en.js
+file
+
+
+
+
+2016-09-08T07:57:21.731000Z
+e8cce96b4b9164f97ee8c62670d3f6dd
+2016-09-07T09:42:09.304169Z
+2
+ZBJ
+
+he.js
+file
+
+
+
+
+2016-09-08T07:57:21.733000Z
+43839194864a37b4abbc40ed1a397050
+2016-09-07T09:42:09.304169Z
+2
+ZBJ
+

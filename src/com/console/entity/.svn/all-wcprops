@@ -1,0 +1,125 @@
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/GQFP/!svn/ver/69/trunk/src/com/console/entity
+END
+SysWebpagemodule.java
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/GQFP/!svn/ver/2/trunk/src/com/console/entity/SysWebpagemodule.java
+END
+StaffSecurity.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/GQFP/!svn/ver/2/trunk/src/com/console/entity/StaffSecurity.hbm.xml
+END
+Duty.java
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/GQFP/!svn/ver/2/trunk/src/com/console/entity/Duty.java
+END
+SysWebpagemodule.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/GQFP/!svn/ver/2/trunk/src/com/console/entity/SysWebpagemodule.hbm.xml
+END
+StaffSecurity.java
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/GQFP/!svn/ver/2/trunk/src/com/console/entity/StaffSecurity.java
+END
+Staff.java
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/GQFP/!svn/ver/2/trunk/src/com/console/entity/Staff.java
+END
+Role.java
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/GQFP/!svn/ver/2/trunk/src/com/console/entity/Role.java
+END
+OperateLog.java
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/GQFP/!svn/ver/39/trunk/src/com/console/entity/OperateLog.java
+END
+DBBackup.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/GQFP/!svn/ver/78/trunk/src/com/console/entity/DBBackup.hbm.xml
+END
+Operate.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/GQFP/!svn/ver/2/trunk/src/com/console/entity/Operate.hbm.xml
+END
+Power.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/GQFP/!svn/ver/2/trunk/src/com/console/entity/Power.hbm.xml
+END
+DBBackup.java
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/GQFP/!svn/ver/78/trunk/src/com/console/entity/DBBackup.java
+END
+OperateLog.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/GQFP/!svn/ver/2/trunk/src/com/console/entity/OperateLog.hbm.xml
+END
+Power.java
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/GQFP/!svn/ver/2/trunk/src/com/console/entity/Power.java
+END
+Department.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/GQFP/!svn/ver/2/trunk/src/com/console/entity/Department.hbm.xml
+END
+Duty.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/GQFP/!svn/ver/2/trunk/src/com/console/entity/Duty.hbm.xml
+END
+Operate.java
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/GQFP/!svn/ver/2/trunk/src/com/console/entity/Operate.java
+END
+Department.java
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/GQFP/!svn/ver/2/trunk/src/com/console/entity/Department.java
+END
+Role.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/GQFP/!svn/ver/2/trunk/src/com/console/entity/Role.hbm.xml
+END
+Staff.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/GQFP/!svn/ver/69/trunk/src/com/console/entity/Staff.hbm.xml
+END

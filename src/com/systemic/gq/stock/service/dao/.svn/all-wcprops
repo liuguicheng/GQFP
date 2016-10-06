@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/GQFP/!svn/ver/36/trunk/src/com/systemic/gq/stock/service/dao
+END
+IStockDao.java
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/GQFP/!svn/ver/33/trunk/src/com/systemic/gq/stock/service/dao/IStockDao.java
+END
+IBonusContentDao.java
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/GQFP/!svn/ver/36/trunk/src/com/systemic/gq/stock/service/dao/IBonusContentDao.java
+END
+IRuleDao.java
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/GQFP/!svn/ver/33/trunk/src/com/systemic/gq/stock/service/dao/IRuleDao.java
+END

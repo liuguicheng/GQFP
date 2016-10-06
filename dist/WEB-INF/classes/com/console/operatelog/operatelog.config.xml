@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+        
+    <bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+        <property name="mappings">
+            <props>
+            	<!-- 日志信息 -->
+                <prop key="oplog/operateLogDelete.do">operateLogController</prop>
+                <prop key="oplog/operateLogManage.do">operateLogManageController</prop>
+            </props>
+        </property>
+    </bean>
+
+    <!-- 日志信息查询 -->
+	<bean id="operateLogQueryUtil" class="org.springline.beans.dataquery.support.SimpleQueryMethod">
+		<property name="valueObjectClassName"><value>com.console.entity.OperateLog</value></property>
+		<property name="tableAlias"><value>oplog</value></property>
+		<property name="orderByClause"><value>opDate desc</value></property>
+		<property name="queryParam">
+            <list>
+            	<value>logType,logType,EQU</value>
+                <value>operatorId,operatorId,EQU</value>
+                <value>operatorName,operatorName,LIKE</value>
+                <value>logContent,logContent,LIKE</value>
+                <value>opDate,opDateStart,GT_EQU</value>
+                <value>opDate,opDateEnd,LESS_EQU</value>
+
+            </list>
+        </property>
+    </bean>
+
+    <bean id="operateLogDao" class="com.console.operatelog.service.dao.hibernate.HibernateOperateLogDao">
+        <property name="sessionFactory"><ref bean="sessionFactory" /></property>
+        <property name="operateLogQueryUtil"><ref bean="operateLogQueryUtil"/></property>
+    </bean>
+
+    <bean id="operateLogService" class="com.console.operatelog.service.spring.SpringOperateLogService">
+        <property name="operateLogDao"><ref bean="operateLogDao" /></property>
+    </bean>
+
+
+
+    <bean id="operateLogController" class="com.console.operatelog.controller.OperateLogController">
+        <property name="operateLogService"><ref bean="operateLogService" /></property>
+    </bean>
+    <bean id="operateLogManageController" class="com.console.operatelog.controller.OperateLogManageController">
+        <property name="operateLogService"><ref bean="operateLogService"/></property>
+        <property name="commandClass"><value>com.console.operatelog.command.OperateLogQueryInfo</value></property>
+        <property name="successView"><value>manage/operateLogManageList</value></property>
+    </bean>
+</beans>

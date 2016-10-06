@@ -1,0 +1,77 @@
+<!--该vm仅作为选择部门 -->
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=gbk" />
+  <title>$!{appContext.appName}</title>
+  <link href="$!{appContext.skin}/content.css" rel="stylesheet" type="text/css" />
+  <script type="text/javascript" src="../script/common.js"></script>
+<script type="text/javascript">
+function getRightSelectData() {
+    return document.frames["leftFrame"].selectData();
+}
+
+function initForm() {
+    if (top.dialogArguments.CustomValue != null
+        && typeof(top.dialogArguments.CustomValue) != 'function') {
+        if (top.dialogArguments.CustomValue.rightFilter != null) {
+            document.getElementById("rightFrame").src = "${selectRightView}?" + top.dialogArguments.CustomValue.rightFilter;
+        }
+        if (top.dialogArguments.CustomValue.leftFilter != null) {
+            document.getElementById("leftFrame").src = "${selectLeftView}?" + top.dialogArguments.CustomValue.leftFilter;
+        }
+    } else {
+        document.getElementById("rightFrame").src = "${selectRightView}?" + top.dialogArguments.CustomValue.rightFilter;
+        document.getElementById("leftFrame").src = "${selectLeftView}?" + top.dialogArguments.CustomValue.leftFilter;
+    }
+}
+//            document.getElementById("rightFrame").src = selectRightView"../manage/subDepSelect.do"
+
+function submitSelect() {
+    if (top.dialogArguments.CustomValue != null
+        && top.dialogArguments.CustomValue.callback != null) {
+        var selectDatas = document.frames["rightFrame"].selectData();
+
+        top.dialogArguments.CustomValue.callback(selectDatas);
+    }
+    window.close();
+}
+</script>
+</head>
+<body class="main-bgimg1" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" onload="javascript:initForm();">
+<table class="Right" width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td>
+      <table width="100%" border="0" cellpadding="0" cellspacing="0">
+        <tr>
+          <td width="5" class="Right-left_img">&nbsp;</td>
+          <td valign="middle" class="Right-center_imgbg"> <table width="99%" border="0" cellspacing="0" cellpadding="1">
+              <tr>
+                <td align="center" valign="middle" class="Right-ng_img">&nbsp;</td>
+                <td class="main-lmtxt1">选择部门</td>
+                <td align="right" nowrap class="main-lmtxt1">
+                  <input type="button" class="button" value="确 定" onclick="javascript:submitSelect();">
+                  <input type="button" class="button" value="关 闭" onclick="javascript:window.close();">
+                </td>
+              </tr>
+            </table></td>
+          <td width="5" class="Right-right_img">&nbsp;</td>
+        </tr>
+      </table>
+      <table height="100%" width="100%" cellpadding="0" cellspacing="0">
+        <tr>
+          <td valign="top" height="100%" width="45%">
+            <iframe frameborder="0" height="400" width="100%" marginwidth="10" scrolling="auto" id="leftFrame" name="leftFrame" >
+            </iframe>
+          </td>
+<!-- src="../manage/departmentMultiTree.do?rootId=$!{currentUser.department.ancestorDep}" -->
+          <td valign="top" height="100%" width="55%">
+            <iframe frameborder="0" height="400" width="100%" marginwidth="10" scrolling="auto" id="rightFrame" name="rightFrame" >
+            </iframe>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  #headInclude()
+  <script type="text/javascript">
+function selectSubDepartmentList(parentId) {
+    if (!parentId) {
+        parentId = 'root';
+    }
+    document.getElementById("depFrame").src = "../cms/channelManageList.do?parentId=" +parentId ;
+}
+
+
+
+//上移
+function moveUp() {
+    document.frames("depFrame").moveUp();
+}
+//下移
+function moveDown() {
+    document.frames("depFrame").moveDown();
+}
+//排序
+function sort() {
+    document.frames("depFrame").sort();
+}
+//排序
+function deleteDepartment() {
+    document.frames("depFrame").deleteDepartment();
+}
+function showButton(val) {
+    var buttons = document.getElementsByName("actionButton");
+      for (var i = 0; i < buttons.length; i++) {
+          if (val) {
+              buttons[i].style.display = '';
+          } else {
+              buttons[i].style.display = 'none';
+          }
+      }
+}
+</script>
+</head>
+
+<body>
+
+<div class="indieui-scroll">
+  <div class="LeftSide">
+            <input type="hidden" id="parentId" value="$!{parentId}">
+ #showDepTree($dicData.dicCmsChannelTree.children "根目录" 1 "allNode" "selectSubDepartmentList" "2")
+  </div>
+
+  <div class="MainWrap">
+            <iframe frameborder="0" height="95%" width="100%" marginwidth="10" scrolling="auto"
+                        id="depFrame" name="depFrame" ></iframe>
+  </div>
+</div>
+
+</body>
+<script>
+#if($parentId) selectSubDepartmentList('$!{parentId}'); #end
+</script>
+</html>

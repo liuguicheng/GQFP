@@ -1,0 +1,116 @@
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=gbk" />
+  <title>$!{appContext.appName}</title>
+  <link href="$!{appContext.skin}/content.css" rel="stylesheet" type="text/css" />
+  <script type="text/javascript" src="../script/common.js"></script>
+<script type="text/javascript">
+
+function selectData() {
+    var len = deps.options.length;
+    if (len <= 0) {
+        alert("请选择一个单位！");
+        return false;
+    }
+    var obj = new Object();
+    obj.id = deps.options[0].value;
+    obj.name = deps.options[0].text;
+    if (typeof(top.dialogArguments.CustomValue) == 'function') {
+        top.dialogArguments.CustomValue(obj);
+    } else {
+        top.dialogArguments.CustomValue.callback(obj, dialogArguments.CustomValue.custom);
+    }
+    top.close();
+}
+
+function filterDepartment() {
+    document.getElementById("subDepList").src = "../manage/unitDeptFilter.do?filterStr=" + filterStr.value;
+}
+function doSelect() {
+    var target = deps;
+    var source = document.frames('subDepList').document.getElementById('s_dep');
+    var selectOption = source.options[source.selectedIndex];
+    var new_option = new Option(selectOption.text, selectOption.value);
+//    target.options.clear();
+    target.options[0] = new_option;
+}
+
+function cancelSelect() {
+    deps.options[0] = null;
+}
+</script>
+</head>
+<body class="main-bgimg1" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+<table class="Right" width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td>
+      <table width="100%" border="0" cellpadding="0" cellspacing="0">
+        <tr>
+          <td width="5" class="Right-left_img">&nbsp;</td>
+          <td valign="middle" class="Right-center_imgbg"> <table width="99%" border="0" cellspacing="0" cellpadding="1">
+              <tr>
+                <td align="center" valign="middle" class="Right-ng_img">&nbsp;</td>
+                <td class="main-lmtxt1">
+                    选择单位
+                </td>
+                <td align="right" nowrap class="main-lmtxt1">
+                  <!--在此处放置按钮--->
+                </td>
+              </tr>
+            </table></td>
+          <td width="5" class="Right-right_img">&nbsp;</td>
+        </tr>
+      </table>
+
+
+      <table width="100%" border="0" cellpadding="1" cellspacing="0" class="mainTable">
+        <tr valign="top" >
+          <td class="textarea" width="13%" nowrap>按名称过滤：</td>
+          <td valign="top" class="inputarea" width="87%" >
+            <input type='text' name='filterStr' class="inputobject" style="width:300">
+            <input type='button' value='查 询' class="button1" onclick="javascript:filterDepartment()" >
+          </td>
+        </tr>
+
+        <tr valign="top">
+            <td class="inputarea" width="699" height="236" colspan="2">
+                <div align=center id="mcj_ps" valign="top">
+                    <table class="subTable" width=100% align=center cellpadding="0" cellspacing="0" border="0" border="0">
+                        <tr valign="top">
+                            <td class="inputarea" width="50%" height="100%">
+    <IFRAME name="subDepList" src="../manage/unitDeptFilter.do" frameBorder="0" width="100%" scrolling="no" height="100%"> </IFRAME>
+                            </td>
+                            <td class="inputarea" valign="middle">
+                                <div align="center">
+                                    <a href="javascript:doSelect()">
+                                        <img src="../images/arrow_right.gif" width="40" height="20" border="0" alt=""></a>
+                                    <br><br><p>
+                                    <a href="javascript:cancelSelect()">
+                                        <img src="../images/arrow_left.gif" width="40" height="20" border="0" alt=""></a>
+                                </div>
+                            </td>
+                            <td class="inputarea" width="50%">
+                                <SELECT multiple name="deps" onDblClick="javascript:cancelSelect()"
+                                    style="width:100%;height:216px" class="inputobject">
+                                #foreach($dep in $depSelectedList)
+                                    <option value="${dep.id}">$dep.name</option>
+                                #end
+                                </SELECT>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </td>
+        </tr>
+        <tr valign="top">
+            <td class="inputarea" width="100%" align="center" colspan="2">
+                <input type="button" class="button" value="确 定" onclick="javascript:selectData()" />
+                <input type="button" class="button" value="返 回" onclick="javascript:top.close();" />
+            </td></tr>
+
+      </table>
+    </td>
+  </tr>
+</table>
+</body>
+</html>

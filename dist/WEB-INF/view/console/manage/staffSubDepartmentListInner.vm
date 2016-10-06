@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  #headInclude()
+  <script type="text/javascript" src="../script/filevalidate.js"></script>
+  <script type="text/javascript">
+  #if($message)alert("#javaScriptEscape($message)");#end
+
+  //上移
+  function doMoveUp() {
+    var chkbox = document.getElementsByName("staffId");
+    var tbl = document.getElementById("dataTable");
+    if(chkbox.length > 0)  {
+      for(var i=0; i<chkbox.length; ++i) {
+        if (chkbox[i] && chkbox[i].checked) {
+          if(i>0 && !chkbox[(i-1)].checked)  {
+##            var tr1 = document.getElementById("depRow" + i);
+##            var tr2 = document.getElementById("depRow"+(i-1));
+##            var temp1 = tr1.innerHTML;
+##            tr1.innerHTML = tr2.innerHTML;
+##            tr2.innerHTML = temp1;
+            var tr1 = $("#staffRow" + i);
+            var tr2 = $("#staffRow" + (i - 1));
+            var temp = tr1.html();
+            tr1.html(tr2.html());
+            tr2.html(temp);
+			chkbox[i-1].checked = true;
+          }
+        }
+      }
+    }
+  }
+  //下移
+  function doMoveDown() {
+    var chkbox = document.getElementsByName("staffId");
+    var tbl = document.getElementById("dataTable");
+    if(chkbox.length > 0)  {
+      for(var i=chkbox.length - 1; i >= 0; --i) {
+        if (chkbox[i] && chkbox[i].checked) {
+          if(i < chkbox.length - 1 && !chkbox[(i+1)].checked)  {
+##            var tr1 = document.getElementById("depRow" + i);
+##            var tr2 = document.getElementById("depRow"+(i+1));
+##            var temp1 = tr1.innerHTML;
+##            tr1.innerHTML = tr2.innerHTML;
+##            tr2.innerHTML = temp1;
+            var tr1 = $("#staffRow" + i);
+            var tr2 = $("#staffRow" + (i + 1));
+            var temp = tr1.html();
+            tr1.html(tr2.html());
+            tr2.html(temp);
+			chkbox[i+1].checked = true;
+          }
+        }
+      }
+    }
+  }
+
+  function doDelete() {
+    if (!hasCheckBoxSelect("staffId")) {
+      alert("请选择要删除的人员！");
+      return false;
+    }
+    var e = document.listForm;
+    if (e.submitFlag.value == "1") {
+      alert("页面已提交，请稍等");
+      return;
+    }
+
+    var staffId = e.staffId;
+    if (confirm("您确认要删除所有选择的人员吗？")) {
+      e.action = "../manage/staffSubDepartmentDeleteInner.do";
+      e.submitFlag.value = "1";
+      e.submit();
+    }
+  }
+  function doSort() {
+    var chkbox = document.getElementsByName("staffId");
+    if(chkbox.length > 0)  {
+      for(var i=chkbox.length - 1; i >= 0; --i) {
+        chkbox[i].checked = true;
+      }
+    }
+    var e = document.listForm;
+    e.action = "../manage/staffSortInner.do";
+    e.submit();
+  }
+  function doEdit(staffId) {
+    jQuery('body').processMask();
+    location.href = "../manage/staffSubDepartmentInnerEdit.do?departmentId=${parentDep.Id}&staffId=" + staffId;
+  }
+
+//  parent.showButton(true);
+
+function doImport(){
+    var e = document.editForm;
+     var name = e.file.value;
+      if( name.trim() != ''){
+        if(!checkType(name,'TYPE_EXCEL')){
+            return;
+        }
+    }
+        if(checkImportInput(e)){
+            e.action = "../staff/staffExcelImportSave.do";
+            e.importSubmitFlag.value = "1";
+            e.submit();
+             jQuery('body').processMask();
+        }
+}
+function checkImportInput(e) {
+  if(e.importSubmitFlag == "1"){
+    alert("文件已导入，请稍等");
+    return false;
+  }
+    return true;
+}
+  </script>
+</head>
+<body class="easyui-layout">
+
+    #set($depName = $parentDep.name)
+    #if($parentDep.parentDep)
+      #set($depName = $parentDep.parentDep.name + "/" + $depName)
+      #set($parentDep = $parentDep.parentDep)
+    #end
+
+<div data-options="region:'north',title:'$!{depName}人员管理',iconCls:'icon-topic',collapsible:false,height:70">
+<div class="PageTool">
+  <div class="LeftBox Tool">
+    <form name="editForm" method="post" action="#getRequestUri()"  enctype="multipart/form-data">##class="indieui-form" 
+    <input type="hidden" name="importSubmitFlag" value="0"/>
+    <input type="button" class="BtnAdd" value="新增" title="新增" onclick="javascript:doEdit('');"/>
+    <input type="button" class="BtnDel" value="删除" title="删除" onclick="javascript:doDelete();"/>
+    <input type="button" class="BtnSortUp" value="上移" title="上移" onclick="javascript:doMoveUp()"/>
+    <input type="button" class="BtnSortDown" value="下移" title="下移" onclick="javascript:doMoveDown()"/>
+	<input type="button" class="BtnSort" value="排序" title="排序" onclick="javasciprt:doSort()"/>
+	<a href="#getContextPath()/download/excelmodels/staff.xls" class="easyui-linkbutton" iconCls="icon-download" plain="true">下载模板</a>
+	 <a href="#" class="easyui-linkbutton" iconCls="icon-excel" plain="true" >导入
+            <div style="filter:alpha(opacity=0);opacity: 0; position: absolute;  width: 75px;margin: -18px 0 0 -6px ;margin: -16px 0 0 -6px\9;height:20px\9;overflow: hidden; ">
+                <input type="file" onchange="doImport()" name="file" id="file" style="direction: rtl ！important; float: right\9;cursor:pointer; "/>
+            </div>
+        </a>
+    </form>
+  </div>
+</div>
+</div>
+
+<div data-options="region:'center'">
+<form name="listForm" method="post">
+<input type="hidden" name="submitFlag" value="0">
+<input type="hidden" name="token" value="$!{command.token}">
+<input type="hidden" name="departmentId" value="${parentDep.id}">
+<table class="TbList">
+  <thead>
+    <tr>
+      <th style="width:20px;" nowrap>
+        <input type="checkbox" onclick="javascript:setCheckBoxValue('staffId', this.checked);">
+      </th>
+      <th style="width:35px;">序号</th>
+      <th style="width:100px;">姓名</th>
+	  ##<th>性别</th>
+      <th>登录名</th>
+	  <th style="width:100px;">部门</th>
+      <th >职务</th>
+	  ##<th>身份证</th>
+      ##<th>电话</th>
+	  <th>手机电话</th>
+	 ## <th>入职时间</th>
+	  <th>编制类型</th>
+	  <th>在线</th>
+    </tr>
+  </thead>
+  <tbody>
+  #foreach( $data in ${staffList} )
+   #set($index = $velocityCount - 1)
+    <tr id="staffRow$!index">
+      <td><input type="checkbox" name="staffId" value="$!{data.id}"></td>
+      <td>$!{data.orderNumber}</td>
+      <td><a href="javascript:doEdit('$!{data.id}')">#htmlEscape($!{data.name})</a></td>
+     #* <td>#if ($!{data.sex} =='男')
+       <img src="../images/male.gif" title="男" width="16" height="16" />
+	  #elseif ($!{data.sex} =='女')
+	  	<img src="../images/female.gif" title="女" width="16" height="16" />
+	  #else
+	  #end*#
+	  </td>
+      <td>#htmlEscape($!{data.loginName})</td>
+      <td>$!{data.department.name}</td>
+      <td>#htmlEscape($!{data.duty})</td>
+	 ## <td>#htmlEscape($!{data.idNum})</td>
+	  ##<td>#htmlEscape($!{data.mobile})</td>
+	  <td>#htmlEscape($!{data.mobile})</td>
+	  ##<td>#formatDate($!{data.inDate})</td>
+	  <td>#lookUpDict($dicData.dicManType $!{data.staffType})</td>
+	  #if($!{data.isLogin}=="1")
+		 <td><img src="../images/status_online.png" /></td>
+	  #else 
+		<td><img src="../images/status_offline.png" /></td>
+	  #end
+    </tr>
+  #end
+  </tbody>
+</table>
+</form>
+</div>
+</body>
+</html>

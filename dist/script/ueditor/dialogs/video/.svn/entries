@@ -1,0 +1,67 @@
+8
+
+dir
+83
+https://192.168.1.118/svn/GQFP/trunk/dist/script/ueditor/dialogs/video
+https://192.168.1.118/svn/GQFP
+
+
+
+2016-09-26T01:12:08.552569Z
+83
+LGC
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+7eaa1c50-b5f8-8d46-a0b5-e5067a1f1115
+
+images
+dir
+
+video.css
+file
+
+
+
+
+2016-09-24T04:05:47.498000Z
+1bfe9e332a47bae9f8ee7199439299c7
+2016-09-26T01:12:08.552569Z
+83
+LGC
+
+video.html
+file
+
+
+
+
+2016-09-24T04:05:47.499000Z
+cbfadfccb09d7427fcfeb7956f71f632
+2016-09-26T01:12:08.552569Z
+83
+LGC
+
+video.js
+file
+
+
+
+
+2016-09-24T04:05:47.499000Z
+91e6c7b582547c655b8902b04daec15b
+2016-09-26T01:12:08.552569Z
+83
+LGC
+

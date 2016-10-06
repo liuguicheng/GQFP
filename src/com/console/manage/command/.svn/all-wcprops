@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/GQFP/!svn/ver/2/trunk/src/com/console/manage/command
+END
+StaffInfo.java
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/GQFP/!svn/ver/2/trunk/src/com/console/manage/command/StaffInfo.java
+END
+DepartmentInfo.java
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/GQFP/!svn/ver/2/trunk/src/com/console/manage/command/DepartmentInfo.java
+END
+StaffTypeQueryInfo.java
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/GQFP/!svn/ver/2/trunk/src/com/console/manage/command/StaffTypeQueryInfo.java
+END
+StaffQueryInfo.java
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/GQFP/!svn/ver/2/trunk/src/com/console/manage/command/StaffQueryInfo.java
+END
+DepartmentPowerInfo.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/GQFP/!svn/ver/2/trunk/src/com/console/manage/command/DepartmentPowerInfo.java
+END
+DepartmentQueryInfo.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/GQFP/!svn/ver/2/trunk/src/com/console/manage/command/DepartmentQueryInfo.java
+END

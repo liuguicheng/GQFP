@@ -1,0 +1,430 @@
+/* 系统主框架页面CSS样式定义 */
+*{
+	font-family: "微软雅黑", "宋体", Tahoma, sans-serif;
+}
+/*--------公共部分-------------*/
+body {
+    overflow:hidden;
+    font-size:14px;
+    color : #000;
+    text-align : center;
+    margin : 0;
+    background :#fff;
+}
+
+td {
+    font-size:14px;
+}
+
+a {
+    color: #202020;
+    text-decoration: none;
+}
+a:hover {
+    color: #FF6600;
+    text-decoration: underline;
+}
+.toptable{
+	margin:0px;
+	padding:0px;
+	font-size:14px;
+	float:left;
+	background-color: #024f9a;
+	background-image: url(../topbanner.jpg);
+	background-repeat: no-repeat;
+	background-position: left top;
+	border-collapse:collapse;
+}
+.toptable TD{
+	border:none;
+	padding:0;
+	margin:0;
+	
+}
+.DivLogo
+{
+    float:left;
+    width:120px;
+    height:70px;
+    margin-left: 5px;
+    margin-top: 10px;
+    color: #FFFFFF;
+    font-size: 24px;
+    text-align: center;
+    vertical-align: middle;
+}
+/*----------------------- 导航栏   --------------------------- */
+#tabs {
+	margin:0px;
+    margin-top:32px !important;
+	margin-top:34px
+	_margin-top:34px;
+    float:left;
+  }
+#tabs ul {
+  margin:0;
+  padding:0px;
+  list-style:none;
+  }
+#tabs li {
+  margin:0;
+  padding:0;
+  float:left;
+  }
+#tabs a {
+  float:left;
+  background:url("../tableft6.gif") no-repeat left top;
+  margin:0;
+  padding:0 0 0 4px;
+  text-decoration:none;
+  white-space:nowrap;
+  height:auto;
+  *width:auto;
+	_width:auto;
+  }
+#tabs a span {
+    float:left;
+    display:block;
+    background:url("../tabright6.gif") no-repeat right top;
+    /*padding:8px 8px 6px 6px;*/
+	padding-left:6px;
+	padding-right:10px;
+    color:#E9F4FF;
+    font-size: 14px;
+	*width:80px;
+	height:34px;
+	line-height:34px;
+    filter:blendtrans(duration=0.5);
+	cursor:pointer;
+}
+/* Commented Backslash Hack hides rule from IE5-Mac \*/
+#tabs a span {float:none;}
+/* End IE5-Mac hack */
+
+#tabs a:hover span {
+  color:#fff;
+  }
+#tabs a:hover {
+  background-position:0% -42px;
+  }
+#tabs a:hover span {
+  background-position:100% -42px;
+  color:#222;
+  }
+
+#tabs LI a.selectTab
+{
+  background-position:0% -42px;
+}
+#tabs LI a.selectTab span
+{
+  background-position:100% -42px;
+  color:#222;
+}
+/* ---------------  常用工具栏样式定义  ------------------- */
+.tbtooltop
+{
+	background-color: #c3daf9;
+	height: 5px;
+	margin: 0px;
+	/*border-bottom:1px solid #069;*/
+}
+.tbtoolbottom
+{
+	background-color: #1291A9;
+	background-image: url(../botbg.gif);
+	background-repeat: repeat-x;
+	color: #282828;
+	height: 22px;
+	width: 100%;
+	margin: 0px;
+}
+.tbtoolbottom a{
+	font-weight: bold;
+	color: #F60;
+	text-decoration: none;
+	font-size: 12px;
+}
+.tdright
+{
+    text-align: right;
+    padding-right: 10px;
+	font-size: 12px;
+}
+.tdleft
+{
+    text-align: left;
+    padding-left: 10px;
+	font-size: 10px;
+}
+.tdframe
+{
+    padding:1px;
+    BACKGROUND-COLOR: #fff;
+    font-size: 14px;
+    border-bottom:#a0a0a0 1px solid;
+    border-left:#a0a0a0 1px solid;
+    border-right:#a0a0a0 1px solid;
+}
+/* --------- 选项卡样式定义 ---------- */
+.tabbar
+{
+    width:100%;
+    overflow:hidden;
+    overflow:hidden !important;
+    height:29px;
+    margin:0px;
+    float:left;
+    display:inline;
+    background-image: url(../tabbarbg.gif);
+    background-repeat: repeat-x;
+    background-position: top;
+    position:absolute;
+    border-left:#C8C8C8 1px solid;
+}
+#tags {
+    padding:0px;
+    MARGIN: 5px 0px 0px 0px;
+    HEIGHT: 23px;
+    display:inline;
+    float:left;
+    border-bottom:#a0a0a0 1px solid;
+}
+#tags LI {
+    FLOAT: left;
+    MARGIN-RIGHT: 1px;
+    LIST-STYLE-TYPE: none;
+    HEIGHT: 23px;
+    display:block;
+    background-image: url(../tagleft.gif);
+    background-repeat: no-repeat;
+    background-position: left bottom;
+    /*position:relative;*/
+}
+#tags LI A {
+    PADDING-RIGHT: 10px;
+    PADDING-LEFT: 10px;
+    FLOAT: left;
+    PADDING-BOTTOM: 0px;
+    COLOR: #666666;
+    LINE-HEIGHT: 23px;
+    PADDING-TOP: 0px;
+    HEIGHT: 23px;
+    TEXT-DECORATION: none;
+    white-space:nowrap;
+    background-image: url(../tagright.gif);
+    background-repeat: no-repeat;
+    background-position: right bottom;
+    filter:DropShadow(Color=#FFFFFF,OffX=1,OffY=1);
+    /*font-size: 14px*/
+}
+
+#tags LI.selectTag {
+    BACKGROUND-POSITION: left top; MARGIN-BOTTOM: -2px; POSITION: relative; HEIGHT: 25px;
+    background-image: url(../tagleft.gif);
+    background-repeat: no-repeat;
+
+}
+#tags LI.selectTag A {
+    BACKGROUND-POSITION: right top; COLOR: #262626; LINE-HEIGHT: 25px; HEIGHT: 27px;
+    background-image: url(../tagright.gif);
+    background-repeat: no-repeat;
+    font-size:13px;
+    padding-top: 2px;
+}
+#tags LI.selectTag A SPAN
+{
+    width:16px !important;
+    width:20px;
+    color: #FF3300;
+    height:23px;
+    cursor:pointer;
+    line-height:23px;
+    padding-left:4px;
+    font-weight: bold;
+}
+
+/*---------  选项卡工具栏工具箱 ----------*/
+.tabtoolbox
+{
+    margin:0px;
+    width:50px;
+    height:29px;
+    float:right;
+    position:relative;
+    background-image: url(../tabbarbg.gif);
+    background-repeat: repeat-x;
+    background-position: top;
+    border-left: #E1E1E1 1px solid;
+    border-right:#C8C8C8 1px solid;
+}
+.tabtoolbox a
+{
+    height:29px;
+    width: 16px;
+    line-height:29px;
+    float:left;
+    display:block;
+    text-decoration:none;
+    text-align:center;
+    font-size: 14px;
+    color: #35689B;
+}
+.tabtoolbox a:hover
+{
+    height:29px;
+    width: 16px;
+    float:left;
+    display:block;
+    background-image: url(../arrowtabbg.gif);
+    background-repeat: repeat-x;
+    background-position: center;
+    cursor:pointer;
+    color: #FF6633;
+    text-decoration: none;
+    font-weight: bold;
+}
+.arrowtoleft
+{
+    height:29px;
+    background-image: url(../toleft.gif);
+    background-repeat: no-repeat;
+    background-position: center center;
+    width: 16px;
+    float:left;
+    display:block;
+}
+.arrowtoright
+{
+    height:29px;
+    background-image: url(../toright.gif);
+    background-repeat: no-repeat;
+    background-position: center center;
+    width: 16px;
+    float:left;
+    display:block;
+}
+.arrowcloseall
+{
+    height:29px;
+    background-image: url(../closeall.gif);
+    background-repeat: no-repeat;
+    background-position: center center;
+    width: 16px;
+    float:left;
+    display:block;
+}
+/* ------------ 进度条 ---------------- */
+.LoadingBar {
+    position: absolute;
+    background-position:center center;
+    width:340px;
+    height:65px;
+    background-color:#FFFFFF;
+    left: 50%;
+    top: 45%;
+    *left: expression((document.body.offsetWidth - 340)/2);
+    *top: expression((document.body.offsetHeight - 120)/2);
+    background-image: url(../pressbar.gif);
+    background-repeat: no-repeat;
+    font-family: "宋体", Tahoma, sans-serif;
+    font-size: 14px;
+    color: #666666;
+    padding-top: 10px;
+    border: 1px solid #2F5F86;
+    padding-left: 8px;
+    z-index:2;
+}
+.TdLeftMenu{
+	width:177px;
+	background:#c9defa;
+	padding:0px;
+}
+.TdLeftMenu iframe{
+	width: 177px;
+	background:url(../skins/leftop.gif) no-repeat;
+	padding:0px;
+}
+.TdHandle {
+	width:9px;
+	border-left:1px solid #417eb7;
+}
+.TdMain{
+	background-color: #FFF;
+	_width:100%;
+}
+.TdMain .TbMain{
+	background-color: #FFF;
+}
+.navpoint{
+cursor:pointer;
+
+}
+/*  标题按钮 */
+SPAN.SpnUser{
+	color: #FFCC33;
+	font-weight: bold;
+}
+.spnSysInfo, .ABtnIco{
+	font-size: 12px;
+	text-decoration: none;
+	width:auto;
+	padding:0 2px 0 18px;
+	height:24px;
+	line-height:24px;
+	float:right;
+	background-repeat: no-repeat;
+	background-position: 0 -87px;
+	display:block;
+	margin:0 1px;
+	white-space:nowrap;
+	color: #FFF;
+}
+
+/* IcoButton Style Begin */
+.ABtnIco{
+	background-image: url(../headButton.png);
+}
+.ABtnIco:Hover{
+	text-decoration: none;
+	color: #FFCC33;
+}
+.AIcoQuit{
+	background-position: 0 -147px;
+}
+.AIcoSeting{
+	background-position: 0 3px;
+}
+.AIcoHelp{
+	background-position: 0 -27px;
+}
+.AIcoGis{
+	background-position: 0 -206px;
+}
+.AIcoLogOut{
+	background-position: 0 -147px;
+}
+.AIcoPage{
+	background-position: 0 -58px;
+}
+.AIcoMail{
+	background-position: 0 -236px;
+}
+/* 菜单展开关闭控制按钮 */
+
+.SpanExpand{
+	height:90px;
+	width:10px;
+	display:block;
+	background-image: url(../swithexpand.gif);
+	background-repeat: no-repeat;
+	cursor:pointer;
+}
+.SpanUnExpand{
+	height:90px;
+	width:10px;
+	display:block;
+	background-image: url(../swithHide.gif);
+	background-repeat: no-repeat;
+	cursor:pointer;
+}

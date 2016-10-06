@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  #headInclude()
+  <script type="text/javascript" src="../lib/indieui/src/jquery.processmask.js"></script>
+  <script type="text/javascript">
+  // 显示已选的部门工作人员
+  function showSelMan (result) {
+    top.setDialogParam("staffSelDlgParam","");
+    try {
+      // 转换对象
+      var data = eval("(" + result + ")");
+      var e = document.editForm;
+      var opt;
+      jQuery.each(data, function(i) {
+        jQuery("#ul_selected").append("<li manId='" + data[i].id + "' "
+          + "text='" + data[i].name + "' "
+          + "value='" + data[i].id + "' "
+          + "depId='" + data[i].department.id + "' "
+          + "depName='" + data[i].department.name + "' "
+          + "mobile='" + data[i].mobile + "' "
+          + "onselectstart='javascript:return false;' "
+          + "onclick='javascript:clickOption(this)' "
+          + "ondblclick='javascript:dblclickOption(this)'>" + data[i].name + "</li>");
+      });
+    } catch (e) {
+      alert(e);
+    }
+    $('body').processUnMask();
+  }
+
+  // 选择部门的工作人员
+  function selectDepMan (objId) {
+    // 清空可选列表
+    jQuery("#ul_selectable").children().remove();
+    // 发送数据请求
+    var theUrl = "../manage/staffDWRList.do?depId=" + objId + "&time=" + new Date();
+    jQuery.ajax({
+      url: theUrl,
+      cache: false,
+      type: 'POST',
+      error: function(r) {
+        alert(r);
+      },
+      success: showDepMan
+    });
+  }
+
+  // 显示选中部门的工作人员
+  function showDepMan (result) {
+    try {
+      // 转换对象
+      var data = eval("(" + result + ")");
+      var e = document.editForm;
+      var opt;
+      jQuery.each(data, function(i) {
+        jQuery("#ul_selectable").append("<li manId='" + data[i].id + "' "
+          + "text='" + data[i].name + "' "
+          + "value='" + data[i].id + "' "
+          + "depId='" + data[i].department.id + "' "
+          + "depName='" + data[i].department.name + "' "
+          + "mobile='" + data[i].mobile + "' "
+          + "onselectstart='javascript:return false;' "
+          + "onclick='javascript:clickOption(this)' "
+          + "ondblclick='javascript:dblclickOption(this)'>" + data[i].name + "</li>");
+      });
+
+    } catch (e) {
+      alert(e);
+    }
+  }
+  // 按姓名查询
+  function doQuery () {
+    // 清空可选列表
+    jQuery("#ul_selectable").children().remove();
+    //alert(encodeURI(document.editForm.staffName.value));
+    // 发送数据请求
+    var theUrl = "../manage/staffDWRList.do"; //会超长，改为data传参 ?staffName=" + document.editForm.staffName.value + "&time=" + new Date();
+    jQuery.ajax({
+      url: theUrl,
+      //contentType : 'application/x-www-form-urlencoded;charset=GBK',//不起效，还是乱码
+      cache: false,
+      type: 'POST',
+      data: {staffName:encodeURI(document.editForm.staffName.value), time:new Date()},
+      error: function(r) {
+        alert(r);
+      },
+      success: showDepMan
+    });
+  }
+  // 单击选项
+  function clickOption (target) {
+    if (jQuery(target).hasClass('Li_selected')) {
+      jQuery(target).removeClass('Li_selected');
+    } else {
+      jQuery(target).addClass('Li_selected');
+    }
+  }
+
+  // 双击选项
+  function dblclickOption (target) {
+    if (target!=null) {
+      if (jQuery(target).parent().attr('id')=="ul_selectable") {
+        // 在可选列表中双击：添加选项到已选列表
+        if (jQuery("#ul_selected").children().filter("[value='" + target.value + "']").length < 1) {
+          // 已选列表中不存在该选项，可以添加
+          jQuery(target).removeClass('Li_selected');
+          jQuery("#ul_selected").append(jQuery(target).clone());
+        }
+      } else {
+        // 在已选列表中双击：删除选项
+        jQuery(target).remove();
+      }
+    }
+  }
+
+  // 添加选中
+  function addSelection () {
+    jQuery("#ul_selectable").children().filter(".Li_selected").each(function () {
+      jQuery(this).removeClass('Li_selected');
+      if (jQuery("#ul_selected").children().filter("[value='" + this.value + "']").length < 1) {
+        // 已选列表中没有此选项，可以添加
+        jQuery("#ul_selected").append(jQuery(this).clone());
+      }
+    });
+  }
+
+  // 全选
+  function allSelection () {
+    jQuery("#ul_selectable").children().each(function () {
+      jQuery(this).removeClass('Li_selected');
+      if (jQuery("#ul_selected").children().filter("[value='" + this.value + "']").length < 1) {
+        // 已选列表中没有此选项，可以添加
+        jQuery("#ul_selected").append(jQuery(this).clone());
+      }
+    });
+  }
+
+  // 清空选中
+  function clearSelection () {
+    jQuery("#ul_selected").children().remove();
+  }
+
+  // 移除选中
+  function removeSelection () {
+    jQuery("#ul_selected").children().filter(".Li_selected").remove();
+  }
+
+  // 确认选择
+  function doSelect () {
+    var sels = jQuery("#ul_selected").children();
+    if (sels.length < 1) {
+      alert("请选择人员！");
+    } else {
+      var returnVal = getSelectValue();
+      if (typeof(top.dialogArguments.CustomValue) == "function") {
+        top.dialogArguments.CustomValue(returnVal);
+        top.closeDialog();
+      }
+    }
+  }
+
+  function getSelectValue () {
+    var sels = jQuery("#ul_selected").children();
+    var returnVal = new Array();
+    var person;
+    for (var i = 0; i < sels.length; i++) {
+      person = new Object();
+      person.id = jQuery(sels[i]).attr("manId");
+      person.name = jQuery(sels[i]).attr("text");
+      person.depId = jQuery(sels[i]).attr("depId");
+      person.depName = jQuery(sels[i]).attr("depName");
+      person.mobile = jQuery(sels[i]).attr("mobile");
+      returnVal[i] = person;
+    };
+    return returnVal;
+  }
+
+  // 关闭窗口
+  function doClose() {
+    top.closeDialog();
+  }
+  </script>
+  <style type="text/css">
+  .MultiSelect {list-style-type:none;border: 1px #B8B5B5 solid;background-color: #EEEEEE; padding-left: 0px;margin-top:5px;margin-bottom:5px;overflow:auto;height:270px;min-width:100px;}
+  .MultiSelect li {padding-left:5px;text-align:left;line-height:150%;white-space:nowrap;cursor:pointer}
+  .Li_selected {background-color:#AAAAAA;}
+  .DivUl {float:left;padding:5px;}
+  </style>
+</head>
+<body>
+<form name="editForm" method="post">
+<input type="hidden" name="deptId" id="deptId" value="$!{parentDep}"/>
+<input type="hidden" name="selDeptId" id="selDeptId"/>
+<input type="hidden" name="selDepName" id="selDepName"/>
+
+<div class="CommandTool indieui-form">
+##  <span style="float:left;margin-top:4px">&nbsp;姓名：<input type="text" name="staffName" value="$!{command.staffName}" queryformat="doQuery" style="width:300px"/>
+##  <input type="button" value="查询" title="查询" onclick="javascript:doQuery();"/>
+##  </span>
+   
+  <div style="float:right;">
+  <input type="button" value="确定" title="确定" onclick="javascript:doSelect();"/>
+  <input type="button" value="关闭" title="关闭" onclick="javascript:doClose();"/>
+  </div></div>
+<div class="indieui-scroll">
+<div class="LeftSide">
+  #showDepTree($departmentTree "部门列表" 1 "allNode" "selectDepMan" "1")
+</div>
+
+<div class="MainWrap indieui-form">
+  <table style="width:100%;height:100%;">
+    <tr valign="top">
+      <td align="center" >
+        <span class="text12" nowrap>可选人员</span>
+        <ul id="ul_selectable" class="MultiSelect"></ul>
+      </td>
+      <td align="center" valign="middle">
+        <input type="button" value="全选" onclick="javascript:allSelection();"/>
+        <br/><br/>
+        <a href="#" onclick="addSelection()" style="padding-left:2px;">
+          <img src="../images/tree/arrow_right.gif" width="40" height="20" border="0" alt=""></a>
+        <br/><br/>
+        <a href="#" onclick="removeSelection()" style="padding-left:2px;">
+          <img src="../images/tree/arrow_left.gif" width="40" height="20" border="0" alt=""></a>
+        <br/><br/>
+        <input type="button" value="清空" onclick="javascript:clearSelection()"/>
+      </td>
+      <td align="center">
+        <span class="text12" nowrap>已选人员</span>
+        <ul id="ul_selected" class="MultiSelect">
+        #foreach( $staff in $!{staffList} )
+          <li manId="$!{staff.id}" text="$!{staff.name}" value="$!{staff.id}" depId="$!{staff.department.id}" depName="$!{staff.department.name}" 
+            onselectstart="javascript:return false;" onclick="javascript:clickOption(this);" ondblclick="javascript:dblclickOption(this);">${staff.name}</li>
+        #end
+        </ul>
+      </td>
+    </tr>
+  </table>
+</div>
+</div>
+</form>
+</body>
+<script type="text/javascript">
+// 初始化
+$(document).ready(function() {
+  #if($departmentTree && $departmentTree.size() > 0)
+    selectDepMan('$!{departmentTree.get(0).data.id}')
+  #end   
+  // 数据用逗号隔开
+  var val = top.getDialogParam("staffSelDlgParam");
+  if (val != undefined && val != null && val.replace(/\s+/g,"") != "") {
+    // 设置预填值
+    var theUrl = "../manage/staffDWRList.do?staffs=" + val;
+    $("body").processMask();
+    jQuery.ajax({
+      url: theUrl,
+      type: 'POST',
+      success: showSelMan,
+      error: function(e) {
+        $('body').processUnMask();
+        alert(e);
+      }
+    });    
+  }
+});
+
+</script>
+</html>

@@ -1,0 +1,154 @@
+package com.systemic.gq.bonus.settlement;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Observable;
+
+import org.apache.commons.lang.StringUtils;
+
+import com.systemic.gq.bonus.command.BonusRecordEdit;
+import com.systemic.gq.bonus.service.IBonusRecordServcie;
+import com.systemic.gq.entity.BonusContent;
+import com.systemic.gq.entity.Member;
+import com.systemic.gq.entity.Stock;
+import com.systemic.gq.stock.service.IBonusContentService;
+
+public abstract class SettlementHelper extends Observable {
+
+	
+	private static SettlementHelper instance=null;
+	/**
+	 * @return the instance
+	 */
+	public static SettlementHelper getInstance() {
+		if (instance == null) {
+			throw new RuntimeException("未创建SettlementHelper的实例对象！");
+		}
+		return instance;
+	}
+	/**
+	 * @param instance the instance to set
+	 */
+	protected void setInstance(SettlementHelper instance) {
+		SettlementHelper.instance = instance;
+	}
+	
+	//每日奖金结算
+	public static void doBonusSettlementForEveryDay(Member member){
+		
+	}
+	/**
+	 * 一次性奖金结算
+	 * member 推荐的会员
+	 * bonusType 奖励类型
+	 */
+	public static double doBonusSettlementForDisposable(Member member,String bonusType){
+		double bonusMoney=0;//奖金金额
+		double totalbonusMoney=0;//总奖金
+		if(member!=null){
+			Stock stock=member.getStock();
+			double stockMoney=stock.getMoney();//股权金额
+			if(stock!=null){
+				
+				String bonusContentStr=stock.getBonusContentID()==null
+						?"":stock.getBonusContentID();//根据股权等级，获取奖励发放方案
+				
+				List<BonusContent> bonusContentList=
+						queryBonusContentListForUser(bonusContentStr);
+				
+				if(!bonusContentList.isEmpty()){
+					for (BonusContent bonusContent : bonusContentList) {
+						if("".equals(bonusType)){
+							//不输入奖励类型标识结算全部，没有任何限制
+								bonusMoney = saveBonusRecord(member, stockMoney, bonusContent);	
+								totalbonusMoney+=bonusMoney;
+						}else{
+							//输入奖励类型标识，则只算该类型的奖金
+							if(bonusType.equals(bonusContent.getBonusType())){
+								switch (bonusType) {
+								case "01"://静态奖
+									/**
+									 * 1.注册30天后
+									 * 2.每天按百分比计算
+									 * 3.没有30号发放
+									 */
+									
+									break;
+								case "02"://推荐奖
+									bonusMoney = saveBonusRecord(member, stockMoney, bonusContent);	
+									totalbonusMoney+=bonusMoney;
+									break;
+								case "03"://互助奖
+									/**
+									 * 1.从第三代开始，一直算到第七代
+									 */
+									break;
+								case "04"://对碰奖
+									/**
+									 * 规则 1：1 以小区业绩的百分比计算
+									 * 步骤：
+									 *   1.对应区域推荐人是否一致
+									 *   2.以金额小方，为获取奖金参数基准
+									 */
+									
+									break;
+								default:
+									System.out.println("股权奖励类型无效");
+									break;
+								}
+								
+							}
+						}
+						
+					}
+				}
+				
+			}
+		}
+		
+		return totalbonusMoney;
+	}
+	
+	/**
+	 * 
+	 * @param member 会员
+	 * @param stockMoney 股权金额
+	 * @param bonusContent 股权奖励方案
+	 * @return
+	 */
+	private static double saveBonusRecord(Member member, double stockMoney,BonusContent bonusContent) {
+		
+		String bonustype=bonusContent.getBonusType();
+		double bonusMoney=stockMoney*bonusContent.getProportion();
+		
+		BonusRecordEdit bonusRecordEdit=new BonusRecordEdit(bonusMoney,member.getMemberId()
+				,new Date(),bonustype,bonusContent.getProportion(),"");
+		SettlementHelper.getInstance().getBonusRecordService().insertBonusRecor(bonusRecordEdit);
+		return bonusMoney;
+	}
+	
+	/**
+	 * 根据会员股权等级，获取该等级的奖励方案
+	 * @param bonusContentStr 会员的股权等级的奖励方案-（集合）
+	 * @return
+	 */
+	private static List<BonusContent> queryBonusContentListForUser(String bonusContentStr) {
+		List<BonusContent> bonusContentList=null;
+		if(StringUtils.isNotBlank(bonusContentStr)){
+			String[] sz=bonusContentStr.split(",");
+			BonusContent bonuscontent=null;
+			bonusContentList=new ArrayList<BonusContent>();
+			for (String szstr : sz) {
+				bonuscontent= SettlementHelper.getInstance().getBonuscontentService().selectBonusContentByid(szstr);
+				bonusContentList.add(bonuscontent);
+			}
+			bonuscontent=null;
+		}
+		return bonusContentList;
+	}
+	
+	public abstract IBonusContentService getBonuscontentService();
+	public abstract IBonusRecordServcie  getBonusRecordService();
+	
+}

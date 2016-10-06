@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/GQFP/!svn/ver/36/trunk/src/com/systemic/gq/stock/service/dao/hibernate
+END
+HinbernateStockDao.java
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/GQFP/!svn/ver/33/trunk/src/com/systemic/gq/stock/service/dao/hibernate/HinbernateStockDao.java
+END
+HinbernateRuleDao.java
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/GQFP/!svn/ver/33/trunk/src/com/systemic/gq/stock/service/dao/hibernate/HinbernateRuleDao.java
+END
+HinbernateBonusContentDao.java
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/GQFP/!svn/ver/36/trunk/src/com/systemic/gq/stock/service/dao/hibernate/HinbernateBonusContentDao.java
+END

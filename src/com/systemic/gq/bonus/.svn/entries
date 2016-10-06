@@ -1,0 +1,58 @@
+8
+
+dir
+72
+https://192.168.1.118/svn/GQFP/trunk/src/com/systemic/gq/bonus
+https://192.168.1.118/svn/GQFP
+
+
+
+2016-09-18T02:31:58.642492Z
+67
+LGC
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+7eaa1c50-b5f8-8d46-a0b5-e5067a1f1115
+
+bonus.config.xml
+file
+
+
+
+
+2016-09-14T06:05:01.305000Z
+a935357bb9e6d4ca5da74e9643fe15ff
+2016-09-18T02:31:58.642492Z
+67
+LGC
+
+command
+dir
+
+controller
+dir
+
+service
+dir
+
+settlement
+dir
+
+test
+dir
+
+timer
+dir
+

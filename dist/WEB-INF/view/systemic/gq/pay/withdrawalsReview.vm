@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  #headInclude()
+   <script type="text/javascript" src="../script/validator.js"></script>
+    <script type="text/javascript">
+	  #if($message)alert("#javaScriptEscape($message)");#end
+		function ons(){
+		$.ajax({
+        url: '../withdrawals/withdrawalsReview.do',
+        type: 'POST',
+		data:$('#form1').serialize(),// 你的formid
+        cache: false,
+        success: function(result) {
+			if(result==1){
+			alert("操作成功");
+			  top.closeDialog();
+			}
+        }
+   		 });
+		}
+ 		
+    </script>
+</head>   
+<body>
+<form id="form1" name="editForm" method="post"  action="" class="indieui-form">
+<div class="PageContainer indieui-scroll">
+    <div class="InfoBox">
+    <h2>提现审核</h2>
+	<table class="TbCommon">
+      <tr >
+		<td width="10%" align="left" class="TdLabel">提现币种：</td>
+		<td  align="left" class="TdInput" >
+			#lookUpDict($dicData.dicPayType $!{withdrawals.WAccountType})
+			<input type="hidden" name="WAccountType" value="$!{withdrawals.WAccountType}"/>
+			<input type="hidden" name="WId" value="$!{withdrawals.WId}"/>
+    	</td>
+		<td width="10%" align="left" class="TdLabel">提现金额：</td>
+		<td  align="left" class="TdInput" >
+			<input type="hidden" name="WMoney" value="$!{withdrawals.WMoney}"/>
+            <font color="red">￥#showMoney($!{withdrawals.WMoney})</font>
+		</td> 
+		<td width="10%" align="left" class="TdLabel">提现时间：</td>
+		<td  align="left" class="TdInput" >
+			<input  type="hidden" name="applyTime"  value="$!{withdrawals.applyTime}" >
+				$!{withdrawals.applyTime}
+    	</td> 
+    </tr>
+    
+    <tr >
+		<td width="10%" align="left" class="TdLabel">提现手续费：</td>
+		<td  align="left" class="TdInput" >
+			<font color="red">$!{withdrawals.WCounterfree}%</font>
+    	</td>
+		<td width="10%" align="left" class="TdLabel">实际金额：</td>
+		<td  align="left" class="TdInput" colspan="3">
+			<font color="red">￥#showMoney($!{withdrawals.actualMoeny})</font>
+			<input type="hidden" id="" name="actualMoeny" value="$!{withdrawals.actualMoeny}"  >
+		</td> 
+	</tr>
+	<tr>
+		<td width="10%" align="left" class="TdLabel">审核结果：</td>
+		<td  align="left" class="TdInput" colspan="5">
+			<input type="radio" id="male" name="istrue" value="2"/><label for="male"  >同意</label>&nbsp;&nbsp;
+			<input type="radio" id="male" name="istrue" value="3" checked="checked"/><label for="male"  >拒绝</label>
+			
+    	</td>
+	</tr>
+	</table>
+</div>  
+</div>
+	<div class="CommandTool indieui-form">
+		<input type="button"  onclick="ons();"   id="btnconfirm" value="提交"/>
+	</div>
+	
+</form> 
+
+</body>
+</html>

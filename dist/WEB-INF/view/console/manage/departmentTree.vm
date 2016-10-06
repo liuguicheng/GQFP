@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  #headInclude()
+  <script type="text/javascript">
+  function selectDepMan(dataId, dataName) {
+    var returnVal = new Object();
+    returnVal.id = dataId;
+    returnVal.name = dataName;
+    if (typeof(top.dialogArguments.CustomValue) == "function") {
+      top.dialogArguments.CustomValue(returnVal);
+    }
+    top.closeDialog();
+  }
+</script>
+</head>
+<body>
+<form name="editForm" method="post">
+<div class="CommandTool indieui-form" style="text-align:right;">
+  <input type="button" value="关闭" title="关闭" onclick="javascript:top.closeDialog();"/>
+</div>
+
+<div class="indieui-scroll">
+  #showDepTree($departmentTree "部门列表" 1 "allNode" "selectDepMan" "1")
+</div>
+</form>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping default-lazy="false" >
+<!--
+    Created by the Middlegen Hibernate plugin 2.1
+
+    http://boss.bekk.no/boss/middlegen/
+    http://www.hibernate.org/
+-->
+
+<class
+    name="com.console.entity.SysWebpagemodule"
+    table="sys_webpagemodule"
+>
+    <meta attribute="class-description" inherit="false">
+       @hibernate.class
+        table="sys_webpagemodule"
+    </meta>
+
+    <id
+        name="pagemodid"
+        type="java.lang.String"
+        column="pagemodid"
+    >
+
+        <generator class="assigned">
+        </generator>
+    </id>
+
+    <property
+        name="pagemodname"
+        type="java.lang.String"
+        column="pagemodname"
+        length="50"
+    >
+        <meta attribute="field-description">
+           @hibernate.property
+            column="pagemodname"
+            length="50"
+        </meta>
+    </property>
+    <property
+        name="webpagemodpath"
+        type="java.lang.String"
+        column="webpagemodpath"
+        length="200"
+    >
+        <meta attribute="field-description">
+           @hibernate.property
+            column="webpagemodpath"
+            length="200"
+        </meta>
+    </property>
+    <property
+        name="remark"
+        type="java.lang.String"
+        column="remark"
+        length="250"
+    >
+        <meta attribute="field-description">
+           @hibernate.property
+            column="remark"
+            length="250"
+        </meta>
+    </property>
+    <property
+        name="exampleurl"
+        type="java.lang.String"
+        column="exampleurl"
+        length="200"
+    >
+        <meta attribute="field-description">
+           @hibernate.property
+            column="exampleurl"
+            length="200"
+        </meta>
+    </property>
+
+    <!-- Associations -->
+
+
+</class>
+</hibernate-mapping>

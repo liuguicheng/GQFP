@@ -1,0 +1,90 @@
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=GBK" />
+  <title>$!{appContext.appName}</title>
+  <link href="$!{appContext.skin}/content.css" rel="stylesheet" type="text/css" />
+  <script type="text/javascript" src="../script/common.js"></script>
+  <script type="text/javascript" src="../script/validator.js"></script>
+<script language="javascript">
+function submitGrant() {
+    var e = document.editForm;
+    if (e.depId.value == "") {
+        alert("请先选择要授权的单位！");
+        return;
+    }
+    e.submit();
+}
+function selectSingleUnitDept(data) {
+    var e = document.editForm;
+    e.depId.value = data.id;
+    e.depName.value = data.name;
+    submitRequest("../manage/grantPowerToDepartment.do?depId=" + data.id);
+}
+</script>
+</head>
+
+<body class="main-bgimg1" bgcolor="#ffffff" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+<form name="editForm" method="post" action="#getRequestUri()">
+<table class="Right" width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr valign="top" height="1">
+    <td>
+
+      <table width="100%" border="0" cellpadding="0" cellspacing="0">
+        <tr>
+          <td width="5" class="Right-left_img">&nbsp;</td>
+          <td valign="middle" class="Right-center_imgbg"> <table width="99%" border="0" cellspacing="0" cellpadding="1">
+              <tr>
+                <td align="center" valign="middle" class="Right-ng_img">&nbsp;</td>
+                <td class="main-lmtxt1"> 部门权限设置</td>
+                <td align="right" nowrap class="main-lmtxt1">
+                    <input type="hidden" id="depId" name="depId" value="$!{department.id}"/>
+                    <input type="text" id="depName" name="depName" value="$!{department.name}" class='inputobject'/>
+
+                    #selectSingleUnitDeptAction("selectSingleUnitDept")
+                        <input type="button" class="button" value="保 存" onclick="javascript:submitGrant()" />
+                        <input type="button" class="button" value="复 位" onclick="document.editForm.reset();" />
+                </td>
+              </tr>
+            </table></td>
+          <td width="5" class="Right-right_img">&nbsp;</td>
+        </tr>
+      </table>
+
+      <table width="100%" border="0" cellpadding="0" cellspacing="0" class="mainTable">
+        <tr height="1">
+          <td valign="top" class="pageArea">#checkboxSelectFunc("powerId")
+          </td>
+        </tr>
+        <tr>
+          <td valign="top" class="tableArea">
+            <table width="100%" border="0" cellpadding="3" cellspacing="0" class="subTable">
+              <tr align="center" class="trTitle">
+                <td width="5%" class="tabletitle">授权</td>
+                <td width="30%" class="tabletitle">权限编号</td>
+                <td width="65%" class="tabletitle">权限名称</td>
+              </tr>
+          #foreach($power in ${powerList})
+             #if("$!{power.typeFlag}" == "0")
+              <tr align="center"class="trData" onMouseOver="this.className='trData2'" onMouseOut="this.className='trData'">
+                <td class="tabledata">
+                    #if($power.code.length() >= 8)
+                        <input type="checkbox" name="powerId" value="$power.id"
+                        #if($department.powerSet.contains($power)) checked #end>
+                    #end
+                </td>
+                <td class="tabledata" align="left">$power.code</td>
+                <td class="tabledata" align="left">#foreach($i in [1..$power.code.length()])&nbsp;#end$power.name</td>
+              </tr>
+             #end
+          #end
+            </table>
+          </td>
+        </tr>
+      </table>
+
+    </td>
+  </tr>
+</table>
+</form>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  #headInclude()
+  <script type="text/javascript">
+  #if($message) alert("$message"); #end
+function toDel(){
+    if(hasCheckBoxSelect("typeId")) {
+        if(confirm("你确定要删除选中的数据？")){
+            if(confirm("删除此数据会带来不可预期的影响，会把该类型下的所有字典内容的数据删除及其本字典类型数据删除，不可恢复，你确定要删除吗？")){
+            document.formList.submit();
+            }
+        }
+    } else {
+        alert("请选择一条数据！")
+    }
+}
+  </script>
+</head>
+<body class="easyui-layout">
+
+ <div data-options="region:'center',title:'字典类型管理',iconCls:'icon-topic'">
+  <form name="formList" method="post" action="../dictionary/dicTypeDelete.do">
+  <table id="dg" class="easyui-datagrid" fit="true" border="0" 
+            toolbar="#toolbar" striped="true"
+            rownumbers="false" fitColumns="true">
+    <thead>
+      <tr>
+        <th data-options="field:'typeId',checkbox:true,fixed:true"></th>
+        <th data-options="field:'typeSort', width:50, align:'center',fixed:true">序号</th>
+        <th data-options="field:'typeCode', width:150">字典标识</th>
+        <th data-options="field:'typeName', width:250">字典名称</th>
+        <th data-options="field:'typeWay', width:80, fit:true">编码方式</th>
+        <th data-options="field:'dataLength', width:80, fit:true">编码长度</th>
+        <th data-options="field:'isLonger', width:80, fit:true">是否定长</th>    
+      </tr>
+    </thead>
+    <tbody>
+#foreach( $dicType in ${page.getData()} )
+#if($velocityCount % 2 == 0) #set($css = "TrListEven") #else #set($css = "TrListOdd") #end
+      <tr align="center" class="$css" onMouseOver="this.className='TrListFocus'" onMouseOut="this.className='$css'">
+        <td>$!{dicType.typeId}</td>
+        <td align="center">$dicType.typeSort</td>
+        <td align="center"><a href="../dictionary/dicTypeEdit.do?typeId=$!{dicType.typeId}">$dicType.typeCode</a></td>
+        <td align="center">$dicType.typeName</td>
+        <td align="center">#lookUpDict($dicData.dicTypeWay $!{dicType.typeWay})</td>
+        <td align="center">$dicType.dataLength</td>
+        <td align="center">#lookUpDict($dicData.dicIsLonger $!{dicType.isLonger})</td>
+      </tr>
+#end
+    </tbody>
+  </table>
+  </form>
+</div>
+ 
+<div id="toolbar" class="easyui-layout">
+  <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="submitRequest('../dictionary/dicTypeEdit.do')">新 增</a>
+  <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="toDel()">删 除</a>
+</div>
+
+<div data-options="region:'south'" style="overflow-y:hidden"> 
+#pageDirector($page "#getRequestUri()" "")
+</div>
+
+</body>
+</html>

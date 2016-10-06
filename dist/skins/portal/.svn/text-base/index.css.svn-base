@@ -1,0 +1,341 @@
+﻿html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, dd, dl, dt, li, ol, ul, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-family: "微软雅黑", "宋体", Tahoma, sans-serif;
+}
+ol, ul {
+	list-style: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+q:before, q:after, blockquote:before, blockquote:after {
+	content: "";
+}
+a:link, a:visited, a:hover, a:active {
+	text-decoration:none;
+}
+body {
+	color:#000000;
+	font-size:12px;
+	font-family:Arial;
+}
+.clear {
+	clear:both;
+}
+/* Public-End */ 
+.home 
+{
+	width:1000px;
+	height:574px;
+	margin:0 auto;
+	z-index:12px;
+	position:relative;
+}
+.homeBg
+{
+    position:absolute;
+    top:0px;
+    left:0px;
+	width:1000px;
+	height:574px;
+}
+.homeBg img
+{
+    position:absolute;
+    left:0px;
+    top:0px;    
+}
+.homeMenu {
+	width:645px;
+	_width:645px;
+	height:156px;
+	padding-top:249px;
+	margin:0 auto;
+	overflow:hidden;
+}
+.homeMenu li {
+	float:left;
+	width:123px;
+	height:144px;
+}
+.homeMenu li a {
+	outline:none;
+	margin:0 10px;
+}
+.homeMenu li a img {
+	width:103px;
+	height:105px;
+	margin-top:12px;
+	display: inline-block; 
+	overflow: hidden;
+}
+.homeMenu li.liMenu {
+	width:153px;
+	height:135px;
+}
+.homeMenu li.liMenu a {
+}
+.homeMenu li.liMenu a img {
+	width:130px;
+	height:156px;
+	margin-top:0;
+}
+.home .button {
+	display:block;
+	float:right;
+	width:299px;
+	height:51px;
+	margin-top:110px;
+	background:url(index/button1.png) left top no-repeat;
+}
+.home .button:hover {
+	background:url(index/button2.png) left top no-repeat;
+}
+.home .buttonQX {
+	display:block;
+	float:left;
+	width:300px;
+	height:51px;
+	margin-top:110px;
+	background-image: url(index/btnIndex.png);
+	background-repeat: no-repeat;
+	background-position: left 0px;
+	margin-left:30px;
+}
+.home .buttonQX:hover {
+	background-position: left -51px;
+}
+
+.home .buttonSJ {
+	display:block;
+	float:right;
+	width:299px;
+	height:51px;
+	margin-top:110px;
+	background:url(index/button1_jz.png) left top no-repeat;
+}
+.home .buttonSJ:hover {
+	background:url(index/button2_jz.png) left top no-repeat;
+}
+.home .buttonJZ {
+	display:block;
+	float:left;
+	width:300px;
+	height:51px;
+	margin-top:110px;
+	background-image: url(index/btnIndex_jz.png);
+	background-repeat: no-repeat;
+	background-position: left 0px;
+	margin-left:30px;
+}
+.home .buttonJZ:hover {
+	background-position: left -51px;
+}
+
+.header {
+	width:1000px;
+	height:268px;
+	margin:0 auto;
+	overflow:hidden;
+}
+.govOpen {
+	background:url(index/govOpen_bg.jpg) left top no-repeat;
+}
+.approve {
+	background:url(index/approve_bg.jpg) left top no-repeat;
+}
+.webService {
+	background:url(index/webService_bg.jpg) left top no-repeat;
+}
+.interaction {
+	background:url(index/interaction_bg.jpg) left top no-repeat;
+}
+.supervise {
+	background:url(index/supervise_bg.jpg) left top no-repeat;
+}
+.header ul {
+	clear:both;
+}
+.header ul li {
+	float:left;
+}
+.topMenu {
+	width:205px;
+	margin:0 auto;
+}
+.topMenu li {
+	line-height:24px;
+	background:url(index/topMenuList_bg.gif) right 6px no-repeat;
+}
+.topMenu li.last {
+	background:none;
+}
+.topMenu li a {
+	margin-right:12px;
+	margin-left:8px;
+	color:#333;
+}
+.homeNav {
+	width:410px;
+	margin:0 auto;
+	padding-top:8px;
+}
+.homeNav li {
+	line-height:24px;
+	background:url(index/homeNavList_bg.gif) right 6px no-repeat;
+}
+.homeNav li.last {
+	background:none;
+}
+.homeNav li a {
+	margin-right:12px;
+	margin-left:8px;
+	color:#fee34c;
+	font-weight:bold;
+}
+.homeNav a.color_orange {
+	color:#ff8800;
+}
+.mainMenu {
+	height:41px;
+	margin-top:195px;
+*+margin-top:172px;
+	background:url(index/mainMenu_bg.png) left top repeat-x;
+}
+.govOpen .mainMenu {
+	padding-left:60px;
+}
+.approve .mainMenu {
+	padding-left:60px;
+}
+.webService .mainMenu {
+	padding-left:60px;
+}
+.interaction .mainMenu {
+	padding-left:60px;
+}
+.supervise .mainMenu {
+	padding-left:60px;
+}
+.mainMenu li {
+	line-height:41px;
+	background:url(index/mainMenuList_bg.png) right 5px no-repeat;
+}
+.mainMenu li.last {
+	background:none;
+}
+.mainMenu li a {
+	margin-right:35px;
+	margin-left:26px;
+	color:#fff;
+	font-size:14px;
+	font-weight:bold;
+}
+.mainMenu a.color_orange {
+	color:#fee34c;
+}
+.footer {
+	width:1000px;
+	height:89px;
+	margin:0 auto;
+	margin-top:1px;
+	background:url(index/footer_bg.jpg) left top no-repeat;
+	overflow:hidden;
+}
+.footerLeft {
+	float:left;
+	margin-left:95px;
+	_margin-left:45px;
+	margin-top:24px;
+	line-height:24px;
+	color:#fff;
+	font-size:12px;
+}
+.footerLeft .color_blue {
+	color:#66ccff;
+}
+.footerRight {
+	float:right;
+	margin-right:20px;
+	margin-top:24px;
+	line-height:24px;
+	font-size:12px;
+}
+.footerRight a {
+	display:block;
+	float:right;
+	margin-left:9px;
+	color:#66ccff;
+	font-weight:bold;
+}
+.footerRight .color_yellow {
+	color:#ffff00;
+}
+.container {
+}
+.home .slideDownBlock {
+	position: absolute;
+	height: 120px;
+	width: 275px;
+	background-image: url(index/sec_icon_bg.png);
+	background-repeat: no-repeat;
+	padding-top: 32px;
+	padding-left: 12px;
+	left: 355px;
+	top: 390px;
+	display: none;
+}
+.home .slideDownBlock a {
+	float: left;
+	display: block;
+	height: 80px;
+	width: 80px;
+	margin-right: 10px;
+}
+.home .slideDownBlock a:hover
+{
+	position: relative;
+	top: 2px;
+}
+/* 页脚 */
+.Footer{
+	/*background-image: url(index/bottomBg.png);
+	height: 75px;
+	width: 1020px;*/
+	background-repeat: no-repeat;
+	/*margin: 0 auto;*/
+	background-position: center top;
+	overflow: hidden;
+	clear:both;
+	
+	width:1000px;
+	height:89px;
+	margin:0 auto;
+	margin-top:1px;
+	background:url(index/footer_bg.jpg) left top no-repeat;
+	overflow:hidden;
+}
+
+/* 页脚 */
+.Footer div{
+	float:left;
+}
+.Footer .LeftHolder{
+	width:90px;
+	height:70px;
+}
+.Footer .Info{
+	font-size: 12px;
+	line-height: 1.5;
+	color: #F6F6F6;
+	padding-top:30px;
+}
+
+.Footer .Info .CopyRight{
+	color:#66ccff;
+	font-size: 9px;
+	font-family: Verdana, Geneva, sans-serif;
+}

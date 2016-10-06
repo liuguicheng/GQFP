@@ -1,0 +1,66 @@
+.toptouzi {
+	POSITION: relative; MARGIN-BOTTOM: 16px; HEIGHT: 40px; TOP: 5px;
+	padding:0 20px;
+}
+.toptouzi H1 {
+	font-family: "微软雅黑";
+	font-size: 16px;
+	font-weight: bold;
+	color: #1E1E1E;
+	height:27px;
+	line-height:27px;
+}
+.toptouzi .nav22 {
+	POSITION: absolute; WIDTH: 500px; TOP: 0px; RIGHT: 0px
+}
+UL.nav22 LI {
+	TEXT-ALIGN: center; LINE-HEIGHT: 27px; WIDTH: 160px; FLOAT: left; FONT-SIZE: 14px
+}
+UL.nav22 LI A {
+	FONT-WEIGHT: bold;
+	TEXT-DECORATION: none;
+	color: #6688cc;
+}
+UL.nav22 LI A:hover {
+	color: #FF9900;
+}
+UL.nav22 LI.chose A {
+	DISPLAY: block;
+	BACKGROUND: url(xnjc/btn_title_enabled.gif) no-repeat center 50%;
+	HEIGHT: 27px;
+	COLOR: #fff;
+}
+hr{
+	color: #CCCCCC;
+}
+.DataList {
+	BORDER-BOTTOM: #c0c0c0 1px solid;
+	TEXT-ALIGN: center;
+	BORDER-LEFT: #c0c0c0 1px solid;
+	FONT-FAMILY: "微软雅黑";
+	FONT-SIZE: 16px;
+	BORDER-TOP: #c0c0c0 1px solid;
+	BORDER-RIGHT: #c0c0c0 1px solid;
+	TEXT-DECORATION: none;
+	color: #333333;
+	border-collapse:collapse;
+	width:99%;
+	margin:5px auto;
+}
+
+.DataList TR {
+padding:0;
+margin:0;
+height:30px;
+}
+.DataList TD {
+	BORDER: 1px solid #c0c0c0;
+	width:140px;
+	PADDING-BOTTOM: 0px;
+	MARGIN: 0px;
+	PADDING-LEFT: 0px;
+	OUTLINE-WIDTH: 0px;
+	PADDING-RIGHT: 0px;
+	PADDING-TOP: 0px;
+	font-size: 16px;
+}

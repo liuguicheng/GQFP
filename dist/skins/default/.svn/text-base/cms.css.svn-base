@@ -1,0 +1,300 @@
+/* 
+	layout style
+	create by huanganzhi 2012-12-18
+	version v.0.1.0
+	support ie6.0+/ff/chrome
+*/
+/*公共属性*/
+*{
+	margin:0;
+	padding:0;
+	font-weight: normal;
+	text-decoration: none;
+	list-style:none;
+	border:none;
+	border-width:0px;
+	scrollbar-face-color: #dbebfe; 
+    scrollbar-shadow-color: #b8d6fa; 
+    scrollbar-highlight-color: #ffffff; 
+    scrollbar-3dlight-color: #dbebfe; 
+    scrollbar-darkshadow-color:#458ce4; 
+    scrollbar-track-color: #f3f3f3; 
+    scrollbar-arrow-color: #b8d6fa;
+	
+}
+ 
+html{
+	height:100%;
+	width:100%;
+	margin:0px;
+	padding:0px;
+}
+body{
+	color: #151515;
+	font-family:  "微软雅黑","宋体",Verdana, Geneva, sans-serif;
+	background-color: #F5F5F5;
+	width:100%;
+	border-top:3px solid #c00;
+}
+form{
+    margin:0;
+	padding:0;
+	height:100%;
+	width:100%;
+}
+img{
+    text-align: center;
+    vertical-align: middle;
+    border:none;
+}
+a{
+    color: #1e1e1e;
+    text-decoration: none;
+}
+a:visited {
+    color: #552d0b;
+}
+a:hover {
+	color: #f30;
+	text-decoration: underline;
+}
+fieldset{
+	margin:5px;
+	border:#dfdfdf 1px solid;
+	padding:5px;
+}
+fieldset legend{
+	color:#666666;
+	font-size:12px;
+	margin:2px;
+	font-weight: bold;
+}
+.MarginHolder {
+	line-height: 0px;
+	height: 0px;
+	width: 0px;
+	margin: 0;
+	padding: 0;
+}
+.Container{
+	height:auto;
+	width:930px;
+	margin:0 auto;
+	padding:30px;
+	background-color: #FFF;
+	border:1px solid #E3E3E3;
+	border-bottom:3px solid #c00;
+}
+.Container .TypeTips{
+	font-size: 32px;
+	font-family: "MS Serif", "New York", serif;
+	height:40px;
+	line-height:40px;
+	width:40px;
+	position:absolute;
+	margin-left:900px;
+}
+.Container .Title{
+	width:100%;
+	height:auto;
+}
+.Container .Title h1{
+	font-size:20px;
+	line-height:2.5;
+	text-align:center;
+	margin:5px auto;
+	color: #1C1C1C;
+}
+.Container .Title h2{
+	text-align:center;
+	margin:10px auto;
+}
+.Container .Title h3{
+	text-align:center;
+	font-size: 14px;
+	line-height:2;
+	margin:10px auto;
+	border:1px solid #EAEAEA;
+	background-color: #EFEFEF;
+	color: #999;
+}
+.Container .Red h1{
+	color: #FF0000;
+	font-size: 46px;
+	font-family: '黑体';
+	font-weight: bold;
+}
+.Container .Red h2{
+	text-align:center;
+	margin:5px auto;
+	color: #333;
+	font-size: 18px;
+}
+.Container .Red h3{
+	text-align:center;
+	font-size: 14px;
+	line-height:2;
+	margin:10px auto;
+	border:none;
+	border-top:1px solid #f00;
+	background-color: #FFF;
+	color: #FF0000;
+	font-weight: bold;
+}
+.Container .Red2{
+	color: #F00;
+}
+.Container .Red2 h1{
+	height:45px;
+	line-height:45px;
+	font-size:36px;
+	font-family: "宋体", Verdana, Geneva, sans-serif;
+	font-weight: bold;
+	text-align:center;
+	color: #F00;
+}
+.Container .Red2 h2{
+	height:35px;
+	line-height:35px;
+	font-size:16px;
+	text-align:center;
+	font-weight: normal;
+	color: #F00;
+}
+.Container .Red2 h2 .PrintBtn{
+	background-image: url(cms/print.png);
+	background-repeat: no-repeat;
+	background-position: left center;
+	padding-left:18px;
+	margin-left:10px;
+	color: #999;
+}
+.Container .Red2 h3{
+	height:35px;
+	line-height:35px;
+	font-size:16px;
+	text-align:center;
+	font-weight: normal;
+	color: #F00;
+	border:none;
+	background:none;
+}
+.Container .Red2 h3 .Center{
+	width:130px;
+	height:35px;
+	display:block;
+	text-align:center;
+	margin:0 	auto;
+}
+.Container .Red2 h3 .Right{
+	width:auto;
+	height:35px;
+	display:block;
+	float:right;
+	margin-right:10px;
+	position:relative;
+}
+
+.Container .Content{
+	padding:10px;
+	line-height: 2;
+	font-size: 16px;
+	min-height:500px;
+	color: #333;
+}
+.Container .Tools{
+	height:30px;
+	line-height:30px;
+	margin:10px 0px;
+}
+.Container .Tools a{
+	width:80px;
+	height:28px;
+	line-height:28px;
+	display:block;
+	color: #FFF;
+	background-color: #910000;
+	font-size: 14px;
+	text-align:center;
+	margin:0px auto;
+}
+.Container .Tools a:hover{
+	color: #FFF;
+	text-decoration: none;
+	background-color: #F00;
+}
+.Container .Float a{
+	float:right;
+	margin-left:1px;
+}
+.Container .Footer{
+	background-color:#efefef;
+	border:1px dotted #CCC;
+	padding:10px;
+}
+.Container .Footer li{
+	line-height:28px;
+	background-image: url(cms/gif-0110.gif);
+	background-repeat: no-repeat;
+	background-position: left center;
+	padding-left:13px;
+}
+.Container .Footer li a{
+	color: #830111;
+}
+.Container .Footer li a:hover{
+	color: #F30;
+}
+
+.TbCommon{
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	border-collapse: collapse;
+	table-layout: fixed;
+	border: #FF0000 2px solid;
+}
+.TbCommon td{
+	border: #FF0000 1px solid;
+	line-height: 150%;
+	height: 45px;
+	word-break: break-all;
+	overflow: hidden;
+	background-color:#FFF;
+	font-size: 18px;	
+	
+}
+.TbCommon td.TdLabel{
+	text-align:center;
+	vertical-align: middle;
+	background-color:#FFF;
+	color: #FF0000;
+	padding: 3px 5px;
+}
+ .TbCommon td.TdInput{
+	text-align: left;
+	vertical-align: middle;
+	background-color:#FFF;
+	color: #333;
+	padding: 3px 5px;
+}
+.TbCommonTop, .TbCommonTop  td{
+	border-bottom:none;
+}
+.TbCommonCenter{
+	border-bottom:none;
+	border-top:none;
+}
+ .TbCommonCenter  td{
+	border-bottom:none;
+}
+.TbCommonBottom{
+	border-top:none;
+}
+.TbCommonInner{
+	border:none;
+}
+.TbCommonInner .ClaerTop td{
+	border-top:none;
+	
+}

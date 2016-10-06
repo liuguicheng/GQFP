@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  #headInclude()
+  <script type="text/javascript" src="../lib/indieui/src/jquery.processmask.js"></script>
+  <script type="text/javascript">
+  // 显示已选的部门工作人员
+  function showSelMan (result) {
+    top.setDialogParam("staffSelDlgParam","");
+    try {
+      // 转换对象
+      var data = eval("(" + result + ")");
+      var e = document.editForm;
+      var opt;
+      jQuery.each(data, function(i) {
+        $("#tbStaff").append("<tr>" 
+          + "<td style='width:80px;'><input name='staffId' type='radio' class='staff' value='" + data[i].id + "' " 
+          + "manId='" + data[i].id + "' " 
+          + "manName='" + data[i].name + "' " 
+          + "depId='" + data[i].department.id + "' " 
+          + "depName='" + data[i].department.name + "' " 
+          + "mobile='" + data[i].mobile + "' "
+      + "staffType='" + data[i].staffType + "' "
+      + "duty='" + data[i].duty + "' "
+       + "sex='" + data[i].sex + "' "
+      + "regDate='" + data[i].regDate + "' "
+      + "inDate='" + data[i].inDate + "' "
+      + "roomNum='" + data[i].roomNum + "' "
+      + "loginName='" + data[i].loginName + "' "
+          + "onclick='javascript:clickOption(this)' checked/></td>" 
+          + "<td>"+data[i].name+"</td></tr>");
+      });    
+    } catch (e) {
+      alert(e);
+    }
+    $('body').processUnMask();
+  }
+
+  // 选择部门的工作人员
+  function selectDepMan (objId) {
+    // 清空数据
+    $("#tbStaff").find("tbody").empty();
+    // 发送数据请求
+    var theUrl = "../manage/staffDWRList.do?depId=" + objId + "&time=" + new Date();
+    jQuery.ajax({
+      url: theUrl,
+      cache: false,
+      type: 'POST',
+      error: function(r) {
+        alert(r);
+      },
+      success: showDepMan
+    });
+  } 
+  // 显示选中部门的工作人员
+  function showDepMan (result) {
+    try {
+      // 转换对象
+      var data = eval("(" + result + ")");
+      var e = document.editForm;
+      var opt;
+      jQuery.each(data, function(i) {
+        $("#tbStaff").append("<tr>" 
+          + "<td style='width:80px;'><input name='staffId' type='radio' class='staff' value='" + data[i].id + "' " 
+          + "manId='" + data[i].id + "' " 
+          + "manName='" + data[i].name + "' " 
+          + "depId='" + data[i].department.id + "' " 
+          + "depName='" + data[i].department.name + "' "
+          + "mobile='" + data[i].mobile + "' "
+      + "staffType='" + data[i].staffType + "' "
+      + "duty='" + data[i].duty + "' "
+      + "sex='" + data[i].sex + "' "
+      + "regDate='" + data[i].regDate + "' "
+      + "inDate='" + data[i].inDate + "' "
+      + "roomNum='" + data[i].roomNum + "' "
+      + "loginName='" + data[i].loginName + "' "
+          + "onclick='javascript:clickOption(this)'/></td>" 
+          + "<td>"+data[i].name+"</td></tr>");
+      });
+    } catch (e) {
+      alert(e);
+    }
+  }
+
+  function doSelect() {
+    if ($(".staff").filter(":checked").size() < 0) {
+      alert("请选择人员！");
+    } else {
+      var returnVal = getSelectValue();
+      if (typeof(top.dialogArguments.CustomValue) == "function") {
+        top.dialogArguments.CustomValue(returnVal);
+        top.closeDialog();
+      }      
+    }  
+  }
+  // 单击选项
+  function clickOption (target) {
+    if ($(".staff").filter(":checked").size() < 0) {
+      alert("请选择人员！");
+    } else {
+      var returnVal = getSelectValue();
+      if (typeof(top.dialogArguments.CustomValue) == "function") {
+        top.dialogArguments.CustomValue(returnVal);
+        top.closeDialog();
+      }      
+    }
+  }
+
+  function getSelectValue () {
+    var sel = $(".staff").filter(":checked");
+    var returnVal = new Object();
+    returnVal.id = $(sel).val();
+    returnVal.name = $(sel).attr("manName");
+    returnVal.depId = $(sel).attr("depId");
+    returnVal.depName = $(sel).attr("depName");
+    returnVal.mobile = $(sel).attr("mobile");
+  returnVal.staffType = $(sel).attr("staffType");
+  returnVal.duty = $(sel).attr("duty");
+      
+  returnVal.sex = $(sel).attr("sex");
+  returnVal.inDate = $(sel).attr("inDate");
+  returnVal.regDate = $(sel).attr("regDate");
+  returnVal.roomNum = $(sel).attr("roomNum");
+  returnVal.loginName = $(sel).attr("loginName");
+    return returnVal;
+  }  
+  </script>
+</head>
+<body>
+<form name="editForm" method="post">
+<input type="hidden" name="nodeType" value=$!{nodeType}>
+<div class="indieui-scroll">
+<div class="LeftSide">
+  #showDepTree($departmentTree "部门列表" 1 "allNode" "selectDepMan" "1")
+</div>
+<div class="MainWrap indieui-form" style="margin-left:260px;">
+  <div style=" height:100%; overflow:auto">
+  <table id="tbStaff" width="100%" border="0" cellpadding="0" cellspacing="0" class="TbList">
+  </table>
+  </div>
+</div>
+</div>
+</form>
+</body>
+<script type="text/javascript">
+// 初始化
+$(document).ready(function() {
+  // 数据用逗号隔开
+  #if($departmentTree && $departmentTree.size() > 0)
+    selectDepMan('$!{departmentTree.get(0).data.id}')
+  #end
+});
+</script>
+</html>

@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/GQFP/!svn/ver/72/trunk/dist/WEB-INF/view/systemic/gq/member
+END
+memberEdit.vm
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/GQFP/!svn/ver/72/trunk/dist/WEB-INF/view/systemic/gq/member/memberEdit.vm
+END
+singleMember.vm
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/GQFP/!svn/ver/51/trunk/dist/WEB-INF/view/systemic/gq/member/singleMember.vm
+END
+memberManage.vm
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/GQFP/!svn/ver/72/trunk/dist/WEB-INF/view/systemic/gq/member/memberManage.vm
+END

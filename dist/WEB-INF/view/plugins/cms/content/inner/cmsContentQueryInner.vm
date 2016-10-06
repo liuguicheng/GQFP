@@ -1,0 +1,25 @@
+<div class="SearchBox indieui-form" id="divSearch">
+<form name="queryForm" action="#getRequestUri()" method="post" class="indieui-form">
+	<input type="hidden" name="channelPath" value="$!{command.channelPath}"/>	
+  <table class="TbCommon">
+    <tr>
+      <td class="TdLabel" style="width:100px">标题</td>
+      <td class="TdInput" colspan="3">
+        <input type="text" name="title" value="$!{command.title}" maxlength="100" style="width:90%">
+      </td>
+    </tr>
+    <tr>
+      <td class="TdLabel">发布时间</td>
+      <td class="TdInput" colspan="3" >
+#formTextInput("releaseDateUp" "#customFormatDate(${command.releaseDateUp} 'yyyy-MM-dd HH:mm')" "style='width:160px' dateFormat='yyyy-MM-dd HH:mm'")-
+#formTextInput("releaseDateDown" "#customFormatDate(${command.releaseDateDown} 'yyyy-MM-dd HH:mm')" "style='width:160px' dateFormat='yyyy-MM-dd HH:mm'")
+      </td>
+    </tr>
+  </table>
+  <div class="CommandTool">
+        <input type="button" value="确 定" onClick="javascript:$('body').processMask();document.queryForm.submit();"/>
+        <input type="button" value="清 空" onClick="javascript:clearQuery(document.queryForm);"/>
+        <input type="button" value="取 消" onClick="javascript:showDiv('divSearch');">
+  </div>
+</form>
+</div>

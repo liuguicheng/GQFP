@@ -1,0 +1,157 @@
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=gbk" />
+  <title>$!{appContext.appName}</title>
+  <link href="$!{appContext.skin}/content.css" rel="stylesheet" type="text/css" />
+  <script language="javascript" type="text/javascript" src="../script/common.js"></script>
+  <script language="javascript" type="text/javascript" src="../script/validator.js"></script>
+  <script language="javascript" type="text/javascript" src="../script/loadingBar.js"></script>
+</head>
+<script>
+
+//上移
+function moveUp() {
+    var chkbox = document.getElementsByName("dirId");
+    var tbl = document.getElementById("dataTable");
+    if(chkbox.length > 0)  {
+        for(var i=0; i<chkbox.length; ++i) {
+           if (chkbox[i] && chkbox[i].checked) {
+                if(i>0 && !chkbox[(i-1)].checked)  {
+                    var tr1 = document.getElementById("dirDataRow" + i);
+                    var tr2 = document.getElementById("dirDataRow"+(i-1));
+                    var temp1 = tr1.innerHTML;
+                    tr1.innerHTML = tr2.innerHTML;
+                    tr2.innerHTML = temp1;
+                }
+           }
+        }
+    }
+}
+//下移
+function moveDown() {
+    var chkbox = document.getElementsByName("dirId");
+    var tbl = document.getElementById("dataTable");
+    if(chkbox.length > 0)  {
+        for(var i=chkbox.length - 1; i >= 0; --i) {
+           if (chkbox[i] && chkbox[i].checked) {
+                if(i < chkbox.length - 1 && !chkbox[(i+1)].checked)  {
+                    var tr1 = document.getElementById("dirDataRow" + i);
+                    var tr2 = document.getElementById("dirDataRow"+(i+1));
+                    var temp1 = tr1.innerHTML;
+                    tr1.innerHTML = tr2.innerHTML;
+                    tr2.innerHTML = temp1;
+                }
+           }
+        }
+    }
+}
+function sort() {
+    var chkbox = document.getElementsByName("dirId");
+    if(chkbox.length > 0)  {
+        for(var i=chkbox.length - 1; i >= 0; --i) {
+           chkbox[i].checked = true;
+        }
+    }
+    var e = document.listForm;
+    e.action = "../dirTree/dirDataSort.do";
+    e.submit();
+}
+function editDirData(dirDataid) {
+    location.href = "../dirTree/dirDataEdit.do?dirTypeCode=$!{dirTypeCode}&dirParentId=$!{dirParentId}&dirDataid="+dirDataid;
+}
+
+
+#if($message)
+  alert("$message");
+#end
+</script>
+
+<body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+<form name="listForm">
+	<input type="hidden" name="dirTypeCode" value="$!{dirTypeCode}"/>
+	<input type="hidden" name="dirParentId" value="$!{dirParentId}"/>
+<table width="100%" height="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td height="28" valign="top">
+      <table cellspacing="0" cellpadding="0" class="TbTitle" align="center">
+        <tr>
+            <td height="24">
+               <div class="DivIcoList">
+				#if($listtitle)
+                    $!{listtitle}
+				#else
+					目录
+				#end
+
+            </div>
+            </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+
+  <tr valign="top">
+    <td height="28" align="center" >
+        <table cellpadding="0" cellspacing="0" class="tbtool">
+          <tr>
+            <td width="50%" align="left">
+                <div class="DivButton">
+                    <a href="javascript:editDirData('');" class="btnAdd" > 新 增&nbsp; </a>
+                    <a href="javascript:moveUp('')" class="btnUp" > 上 移&nbsp; </a>
+                    <a href="javascript:moveDown();" class="btnDown" > 下 移&nbsp; </a>
+                    <a href="javascript:sort();" class="btnOrder"> 排 序&nbsp;</a>
+
+                </div>
+            </td>
+          </tr>
+        </table>
+    </td>
+  </tr>
+
+        <tr>
+          <td valign="top" >
+           <div >
+            <table width="100%" border="0" cellpadding="3" cellspacing="0" class="TbList">
+              <tr align="center" class="TrListTitle">
+                <td width="5%" class="tabletitle" nowrap><input type="checkbox" onclick="javascript:setCheckBoxValue('dirId', this.checked);"></td>
+                <td width="7%" class="tabletitle">序号</td>
+                <td width="38%" class="tabletitle">目录名称</td>
+                <td width="28%" class="tabletitle">创建时间</td>
+				<td width="20%" class="tabletitle">操作</td>
+              </tr>
+            </table>
+           </div >
+           #foreach($dirdata in ${dirDataList})
+                #if($velocityCount % 2 == 0) #set($css = "TrListEven") #else #set($css = "TrListOdd") #end
+
+                #set($index = $velocityCount - 1)
+           <div id="dirDataRow${index}">
+            <table width="100%" border="0" cellpadding="3" cellspacing="0" class="TbList">
+              <tr   align="center"class="$css" onMouseOver="this.className='TrListFocus'" onMouseOut="this.className='$css'">
+                <td width="5%" class="tabledata">
+                    <input type="checkbox" name="dirId" value="$!{dirdata.dirId}" #if($lock) disabled="true" #end/>
+                </td>
+                <td width="7%" class="tabledata">$!{dirdata.sortOrder}</td>
+                <td width="38%" class="tabledata">$!{dirdata.dirName}</td>
+                <td width="28%" class="tabledata">#formatTime($!{dirdata.createTime})</td>
+				<td width="20%" nowrap>
+				<a href="../dirTree/dirDataEdit.do?dirTypeCode=$!{dirTypeCode}&dirParentId=$!{dirParentId}&dirDataid=$!{dirdata.dirId}">编辑</a>
+					&nbsp;|&nbsp;
+						#if($dirdata.isValid == "0")
+						<a href="../dirTree/dirDataUse.do?dirTypeCode=$!{dirTypeCode}&dirParentId=$!{dirParentId}&dirDataid=$!{dirdata.dirId}"
+          onclick="javascript:return(confirm('是否确定启用此项，启用后目录恢复使用！'))">启用</a>
+        #elseif($dirdata.isValid == "1")
+                  <a href="../dirTree/dirDataDelete.do?dirTypeCode=$!{dirTypeCode}&dirParentId=$!{dirParentId}&dirDataid=$!{dirdata.dirId}"
+          onclick="javascript:return(confirm('是否确定禁用此项，禁用后目录不能显示！'))">禁用</a>
+        #end
+				</td>
+              </tr>
+              </table>
+           </div>
+              #end
+          </td>
+        </tr>
+</table>
+</form>
+</body>
+</html>

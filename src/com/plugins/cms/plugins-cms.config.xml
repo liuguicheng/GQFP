@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+  <!-- 栏目及内容管理-->
+  <import resource="classpath:com/plugins/cms/channel/cms.channel.config.xml" />
+  <import resource="classpath:com/plugins/cms/content/cms.content.config.xml" />
+
+    <bean class="com.plugins.cms.core.CmsHelperSupport">
+        <property name="contentService"><ref bean="cmsContentService" /></property>
+        <property name="channelService"><ref bean="cmsChannelService" /></property>
+    </bean>
+</beans>

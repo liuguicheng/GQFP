@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  #headInclude()
+  <script type="text/javascript">
+  #if($message)alert("#javaScriptEscape($message)");#end
+
+  function doEdit(operateId) {
+    var url = "../gq/stockEdit.do?token=$!{command.token}&id=" + operateId;
+    document.location.href = url;
+  }
+
+  function doDelete() {
+    if (!hasCheckBoxSelect("id")) {
+      alert("请选择要删除的功能菜单！");
+      return;
+    }
+    if (confirm("您确定要删除所选择的功能菜单吗?")) {
+      var f =  document.listForm;
+      f.action = "../gq/stockDel.do";
+      f.submit();      
+    }
+  }
+  </script>
+</head>
+<body>
+<div class="PageHeader">
+  <div class="LeftBox Title">股权种类列表</div>
+</div>
+
+
+
+<div class="PageTool">
+  <div class="LeftBox Tool">
+    <input type="button" class="BtnAdd" value="新增"  title="新增" onclick="javascript:doEdit('');"/>
+  </div>
+</div>
+
+<div class="PageContainer indieui-scroll">
+<form name="listForm" method="post">
+<input type="hidden" name="submitFlag" value="0">
+<input type="hidden" name="token" value="$!{command.token}">
+<table class="TbList">
+  <thead> 
+    <tr>
+      <th style="width:20px;" nowrap>
+        <input type="checkbox" onclick="javascript:setCheckBoxValue('id', this.checked);">
+      </th>
+      <th>股权等级</th>
+      <th>所需金额(元)</th>
+      <th>股权(股)</th>
+	  <th>投资封顶值(元)</th>
+	  <th>是否开放</th>
+    </tr>
+  </thead>
+  <tbody>
+  #foreach( $data in $page.data )
+    <tr>
+      <td><input type="checkbox" name="id" value="$!{data.id}"></td>
+      <td><a href="javascript:doEdit('$!{data.id}');;"> #lookUpDict($dicData.dicStockLevel "$!{data.gradeNum}") </a></td>
+      <td>$!{data.money}(元)</td>
+      <td>$!{data.stockMoney}(股)</td>
+	  <td>$!{data.cap}(元)</td>
+	  <td>#if($!{data.istrue} ==1) 已开放 #elseif($!{data.istrue}==0) 未开放   #end  </td>
+	  
+    </tr>
+  #end
+  </tbody>   
+</table>
+</form>
+</div>
+
+<div data-options="region:'south'" style="overflow-y:hidden"> 
+#pageDirector($page "#getRequestUri()" "")
+</div>
+</body>
+</html>

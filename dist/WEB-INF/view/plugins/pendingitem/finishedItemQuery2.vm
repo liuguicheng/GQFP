@@ -1,0 +1,180 @@
+
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=gbk" />
+  <title>$!{appContext.appName}</title>
+  <link href="../script/css.css" rel="stylesheet" type="text/css" />
+  <script language="javascript" type="text/javascript" src="../script/common.js"></script>
+  <script language="JavaScript" type="text/javascript" src="../lib/indieui/external/My97DatePicker/WdatePicker.js"></script>
+
+  <script >
+ function topengdingItem(){
+     window.location = "../pendingitem/pendingItemQuery.do";
+ }
+
+  function doQuery() {
+    e =   document.queryForm;
+    if (e.beginTime.value > e.endTime.value){
+        alert("开始时间不能小于结束时间");
+        return false;
+    }
+    document.queryForm.submit();
+}
+
+function clearQueryCondition(){
+   e = document.queryForm ;
+   e.title.value= '';
+   e.beginTime.value= '';
+   e.endTime.value='';
+   e.sender.value='';
+}
+
+  </script>
+
+</head>
+<body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+<table width="100%" height="100%" border="0" cellpadding="0" cellspacing="0">
+  <tr valign="top" height="1">
+    <td>
+      <table width="100%" height="26" border="0" cellpadding="0" cellspacing="0" class="bj">
+        <tr>
+          <td height="24">
+            <table width="100%" height="100%" border="0" cellpadding="0" cellspacing="0" class="sb">
+              <tr>
+                <td>
+                  <table width="100%" border="0" cellpadding="0" cellspacing="0" class="unnamed1">
+                    <tr> <!-- 页面标题及相关按钮 begin --->
+                      <td width="1%"></td>
+                      <td width="49%" height="24">
+                        <img src="../images/mb_top_zl1.gif" width="16" height="13" align="absmiddle" alt="工具条" />
+                        <span class="text12">已办事项列表</span>
+                      </td>
+                      <td width="49%" align="right" valign="middle" class="text12">
+                      </td>
+                      <td width="1%">
+                         <input type = "button" class ="nv" name = "db" value="查看待办事项" onclick ="topengdingItem()"/>
+                      </td>
+                    </tr> <!-- 页面标题及相关按钮 end --->
+                  </table>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <tr valign="top">
+    <td>
+
+      <table width="100%" height="100%" border="0" cellpadding="0" cellspacing="0" class="zyx">
+        <tr valign="top" height="1">
+            <td >
+                <form name="queryForm" method="post" action="#getRequestUri()"  >
+              <table width="100%" border="0" cellpadding="3" cellspacing="0" class="t">
+
+
+
+             <tbody id="queryBody" style="display:none">
+             <tr>
+                <td  align="right" class="textarea"width="20%" >标 题： </td>
+                <td class="inputarea"  colspan="3" width="80%">
+                    <input type="text" name="title" class="inputobject" style="width:90%" value="$!command.title">
+                </td>
+             </tr>
+             <tr>
+                <td  align="right" class="textarea" width="25%" >发送人：</td>
+                <td  class="inputarea" width="20%" colspan="3">
+                    <input type="text" name="sender" class="inputobject" value="$!command.sender"></td>
+             </tr>
+             <tr >
+                <td  align="right" class="textarea" >发送时间： </td>
+                <td   class="inputarea"> 从
+                     #dateEditor("" "beginTime" "#formatDate($!{command.beginTime})" "queryForm") 到
+                     #dateEditor("" "endTime" "#formatDate($!{command.endTime})" "queryForm")
+                </td>
+              </tr>
+             </tbody>
+                <tr align="center">
+                <td class="inputarea" colspan="4" align="right">
+                    <input type="button" class="button" value="清空" onclick="javascript:clearQueryCondition()" />
+                    <input type="button" class="nv" value="查询" onclick="javascript:doQuery()" />
+
+                </td>
+              </tr>
+
+
+                </table>
+
+                  <input type = "hidden" name ="recipientId" value=$!currentUser.id>
+                  <input type="hidden" name= "notPage" value="true" />
+
+             </form>
+         <table width="100%" border="0" cellpadding="2" cellspacing="0" class="t">
+            <tr >
+            <td colspan="4" class="tablearea">
+              <table id="myTable" width="100%" border="0" cellspacing="0" cellpadding="1" class="detailTable">
+
+                <tr align="center" >
+                    <td width="5%" class="tabletitle">序号</td>
+                    <td width="57%" class="tabletitle">标题</td>
+                    <td width="10%" class="tabletitle">发送人</td>
+                    <td width="10%"class="tabletitle">发送时间</td>
+                    <td width="10%"class="tabletitle">办理人</td>
+                    <td width="10%"class="tabletitle">办理时间</td>
+                </tr>
+
+               #foreach($rendingItmeBak in ${page.data})
+               #set($css = "#tableCellCss($velocityCount)")
+                 <tr align="center" >
+                    <td class = $css>$velocityCount</td>
+                    <td class = $css align="left">$!{rendingItmeBak.finishedItem.title}</td>
+                    <td class = $css>$!{rendingItmeBak.finishedItem.senderName}</td>
+                    <td class = $css>#formatDate($!{rendingItmeBak.finishedItem.sendTime})</td>
+                    <td class = $css>$!{rendingItmeBak.finishedItem.finisher.name}</td>
+                    <td class = $css>#formatDate($!{rendingItmeBak.finishedItem.finishTime})</td>
+                 </tr>
+               #end
+            </table>
+            </td>
+         </tr></table>
+    <!--
+            <br />
+            <table id="myTable" width="100%" border="0" cellspacing="0" cellpadding="1" class="detailTable">
+                <tr >
+                    <td class="tabletitle" colspan="4"> 合同入帐 </td>
+                </tr>
+                <tr align="center" >
+                    <td width="5%" class="tabletitle">序号</td>
+                    <td width="55%" class="tabletitle">标题</td>
+                    <td width="20%" class="tabletitle">发送人</td>
+                    <td width="20%"class="tabletitle">发送时间</td>
+
+                </tr>
+
+            </table>
+            <br />
+           <table id="myTable" width="100%" border="0" cellspacing="0" cellpadding="1" class="detailTable">
+                <tr >
+            <td class="tabletitle" colspan="4">
+                请购单入帐
+            </td>
+        </tr>
+        <tr align="center" >
+                   <td width="5%" class="tabletitle">序号</td>
+                   <td width="55%" class="tabletitle">标题</td>
+                   <td width="20%" class="tabletitle">发送人</td>
+                   <td width="20%"class="tabletitle">发送时间</td>
+
+        </tr>
+            </table>
+    --->
+          </td>
+        </tr>
+
+
+
+
+    </table></td>
+</tr></table>
+</body></html>

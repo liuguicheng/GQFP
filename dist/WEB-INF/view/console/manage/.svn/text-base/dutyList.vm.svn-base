@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  #headInclude()
+  <script type="text/javascript">
+  #if($message)alert("#javaScriptEscape($message)");#end
+
+  function doEdit(objId) {
+    var theUrl = "../manage/dutyEdit.do?token=$!{command.token}&id=" + objId;
+    document.location.href = theUrl;
+  }
+
+  function doDelete() {
+    var e = document.listForm;
+    if (e.submitFlag.value == "1") {
+      alert("请求已提交，请稍候！");
+      return false;
+    }  
+    if (!hasCheckBoxSelect("id")) {
+      alert("请选择要删除的职务");
+      return;
+    }
+    if (confirm("数据删除之后将无法恢复\n\n您确定要删除所选职务吗？")) {
+      e.action = "../manage/dutyDelete.do";
+      e.submitFlag.value = "1";
+      $('body').processMask();
+      e.submit();
+    }
+  }
+  </script>
+</head>
+<body>
+<div class="PageHeader">
+  <div class="LeftBox Title">职务管理</div>
+</div>
+
+<div class="SearchBox" id="divSearch">
+<form name="queryForm" action="#getRequestUri()" method="post" class="indieui-form">
+  <table class="TbCommon">
+    <tr>
+      <td class="TdLabel" style="width:100px;">职务名称</td>
+      <td class="TdInput">
+        <input type="text" name="name" value="#htmlEscape($!{command.name})" maxlength="15"/>
+      </td>
+    </tr>
+  </table>
+  <div class="CommandTool">
+    <input type="button" value="确 定" onClick="javascript:document.queryForm.submit();$('body').processMask();"/>
+    <input type="button" value="清 空" onClick="javascript:clearQuery(document.queryForm);"/>
+    <input type="button" value="取 消" onClick="javascript:showDiv('divSearch');">    
+  </div>
+</form>
+</div>
+
+<div class="PageTool">
+  <div class="LeftBox Tool">
+    <input type="button" class="BtnSearch" value="查询"  title="查询" onclick="javascript:showDiv('divSearch');"/>
+    <input type="button" class="BtnAdd" value="新增"  title="新增" onclick="javascript:doEdit('');"/>
+    <input type="button" class="BtnDel" value="删除"  title="删除" onclick="javascript:doDelete();"/>
+  </div>
+</div>
+
+<div class="PageContainer indieui-scroll">
+<form name="listForm" method="post">
+<input type="hidden" name="submitFlag" value="0">
+<input type="hidden" name="token" value="$!{command.token}">
+<table class="TbList">
+  <thead> 
+    <tr>
+      <th style="width:20px;" nowrap>
+        <input type="checkbox" onclick="javascript:setCheckBoxValue('id', this.checked);">
+      </th>
+      <th style="width:35px;">序号</th>
+      <th>名称</th>
+    </tr>
+  </thead>
+  <tbody>
+  #foreach( $data in $!{dutyList} )
+    <tr>
+      <td><input type="checkbox" name="id" value="$!{data.id}"></td>
+      <td>$velocityCount</td>
+      <td><a href="javascript:doEdit('$!{data.id}')">#htmlEscape($!{data.name})</a></td>
+    </tr>
+  #end
+  </tbody>   
+</table>
+</form>
+</div>
+</body>
+</html>

@@ -1,0 +1,144 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping default-lazy="false" >
+    <class
+        name="com.console.entity.Department"
+        table="sys_department"
+        dynamic-update="true"
+        dynamic-insert="false"
+    >
+
+        <id
+            name="id"
+            column="dep_id"
+            type="java.lang.String"
+        >
+            <generator class="assigned">
+            </generator>
+        </id>
+
+        <property
+            name="alias"
+            type="java.lang.String"
+            update="true"
+            insert="true"
+            access="property"
+            column="dep_alias"
+            length="20"
+            not-null="false"
+        />
+        <property
+            name="code"
+            type="java.lang.String"
+            update="true"
+            insert="true"
+            access="property"
+            column="dep_code"
+            length="40"
+            not-null="false"
+        />
+        <property
+            name="inf"
+            type="java.lang.String"
+            update="true"
+            insert="true"
+            access="property"
+            column="dep_inf"
+            length="100"
+            not-null="false"
+        />
+
+        <property
+            name="lead"
+            type="java.lang.String"
+            update="true"
+            insert="true"
+            access="property"
+            column="dep_lead"
+            length="20"
+            not-null="false"
+        />
+
+        <property
+            name="name"
+            type="java.lang.String"
+            update="true"
+            insert="true"
+            access="property"
+            column="dep_name"
+            length="60"
+            not-null="true"
+        />
+
+        <property
+            name="state"
+            type="java.lang.String"
+            update="true"
+            insert="true"
+            access="property"
+            column="dep_state"
+            length="1"
+            not-null="true"
+        />
+
+        <property
+            name="parentId"
+            type="java.lang.String"
+            update="true"
+            insert="true"
+            access="property"
+            column="parent_dep"
+        />
+
+        <property
+            name="ancestorDep"
+            type="java.lang.String"
+            update="true"
+            insert="true"
+            access="property"
+            column="ancestor_dep"
+        />
+        <property
+            name="orderNumber"
+            type="java.lang.Integer"
+            update="true"
+            insert="true"
+            access="property"
+            column="order_number"
+        />
+
+        <set
+            name="powerSet"
+            table="sys_dept_power"
+            lazy="true"
+            inverse="false"
+            cascade="none"
+            sort="unsorted"
+            order-by="power_id asc"
+        >
+
+              <key
+                  column="dep_id"
+              >
+              </key>
+
+              <many-to-many
+                  class="com.console.entity.Power"
+                  column="power_id"
+                  outer-join="auto"
+               />
+
+        </set>
+        <!--
+            To add non XDoclet property mappings, create a file named
+                hibernate-properties-Department.xml
+            containing the additional properties and place it in your merge dir.
+        -->
+
+    </class>
+
+</hibernate-mapping>

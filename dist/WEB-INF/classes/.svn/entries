@@ -1,0 +1,43 @@
+8
+
+dir
+6
+https://192.168.1.118/svn/GQFP/trunk/dist/WEB-INF/classes
+https://192.168.1.118/svn/GQFP
+
+
+
+2016-09-07T09:42:09.304169Z
+2
+ZBJ
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+7eaa1c50-b5f8-8d46-a0b5-e5067a1f1115
+
+com
+dir
+
+log4j.properties
+file
+
+
+
+
+2016-09-08T07:57:12.840000Z
+acaa8964e0216361c5c6e07b0c95177a
+2016-09-07T09:42:09.304169Z
+2
+ZBJ
+

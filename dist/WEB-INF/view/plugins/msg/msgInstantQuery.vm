@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  #headInclude()
+  <link rel="stylesheet" type="text/css" href="../lib/easyui/themes/$!{appContext.theme}/easyui.css"/>
+  <link rel="stylesheet" type="text/css" href="../lib/easyui/themes/icon.css"/>
+  <link rel="stylesheet" href="../skins/skin2/oa/personal/instant/instant.css" type="text/css" />
+  <script type="text/javascript" src="../lib/indieui/src/lunarCalendar.js"></script>
+  <script type="text/javascript" src="../lib/indieui/src/jquery.processmask.js"></script>
+  <script type="text/javascript" src="../lib/easyui/jquery.easyui.min.js"></script>
+  <script type="text/javascript" src="../lib/easyui/locale/easyui-lang-zh_CN.js"></script>  
+  <script type="text/javascript">
+  function removeHTMLTag(str) {
+        str = str.replace(/<\/?[^>]*>/g,''); //去除HTML tag
+        str = str.replace(/[ | ]*\n/g,'\n'); //去除行尾空白
+        str=str.replace(/&nbsp;/ig,'');//去掉&nbsp;
+        return str;
+    }
+   $(document).ready(function(){
+	   $(".TbList tr").not(":first").each(function(i){
+		  var content = $(this).children("td").eq(1).text();
+		  $(this).children("td").eq(1).text(removeHTMLTag(content));
+		 
+       });
+    })
+  function readMsg() {
+    var e = document.listForm;
+    if (e.submitFlag.value=="1") {
+      alert("页面已提交，请稍候！");
+      return;
+    }
+    if (!hasCheckBoxSelect("msgId")) {
+      return;
+    }
+    e.submitFlag.value = "1";
+    e.submit();    
+  }
+   //组建聊天窗口
+   if ($("#winChat").window('options').closed) {
+      $("#winChat").window('open');
+	  $("#btnChat span").removeClass("newmessage newchat");
+    } else {
+      $("#winChat").window('close');
+	  
+    }
+	
+  // 打开聊天窗口
+  function showManage (objId,objName,chatFlag,chatState,sendTime) {
+     $("#winChat").window('open');
+	 chatFrame.addChatPanelFromCollect(objName,"../oa/personalInstantChat.do?staffId="+objId+"&chatFlag="+chatFlag+"&chatState="+chatState+"&sendTime="+sendTime,true);
+	 parent.closeDialog();
+  }
+  </script>
+</head>
+<body>
+<div class="PageTool">
+  <div class="RightBox Pager">
+    #pageDirector( $page "#getRequestUri()" false)
+  </div>
+</div>
+
+<div class="PageContainer indieui-scroll">
+<form name="listForm" method="post">
+<input type="hidden" name="submitFlag" value="0">
+<input type="hidden" name="token" value="$!{command.token}">
+<table class="TbList">
+  <thead> 
+    <tr>
+      <th style="width:35px;">序号</th>
+      <th>消息内容</th>
+      <th style="width:140px;">发送时间</th>
+	  <th style="width:50px;">状态</th>
+    </tr>
+  </thead>
+  <tbody>
+  #foreach( $data in $page.data )
+    <tr>
+      <td>$velocityCount</td>
+      <td style="text-align:left;" class="TdTxtover">
+           #htmlEscape($!{data.content})
+      </td>
+      <td>#customFormatDate(${data.sendTime} "yyyy-MM-dd HH:mm")</td>
+	  <td>#if ("$!{data.chatState}" == "0") <img src="../images/mail.jpg"/>#end</td>
+    </tr>
+  #end
+  </tbody>   
+</table>
+</form>
+<div id="winChat" class="easyui-window" title="即时消息" data-options="iconCls:'icon-chat',closed:true,closable:true,minimizable:false,maximizable:false,collapsible:false"
+    style="width:685px;height:540px;margin:auto;top:1px;">
+	<iframe id='chatFrame' name="chatFrame" frameborder='0' scrolling='no' src='../oa/personalInstantDialog.do' style='width:100%;height:480px;'></iframe>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  #headInclude()
+   <script type="text/javascript" src="../script/validator.js"></script>
+   <script type="text/javascript" src="../lib/indieui/external/My97DatePicker/WdatePicker.js"></script>
+  <script type="text/javascript">
+  #if($message)alert("#javaScriptEscape($message)");#end
+	validator.formName = "queryForm";
+  function doQuery() {
+      var e = document.queryForm;
+      if(checkInput(e)){
+          e.submit();
+          jQuery('body').processMask();
+      }
+    }
+    
+    function checkInput(e) {
+         return validator.checkAll();
+    }
+    function doEdit(memberId) {
+		 var url = "../patrolmember/staffDetail.do?memberId="+memberId;
+        document.location.href = url;
+}
+  </script>
+</head>
+<body>
+<div class="PageTool">
+  <div class="LeftBox Tool">
+  </div>
+  <div class="RightBox Pager">
+    #pageDirector( $page "#getRequestUri()" false)
+  </div>
+</div>
+
+<div class="PageContainer indieui-scroll">
+  <form name="listForm" method="post"  action="#getRequestUri()">
+    <input type="hidden" name="submitFlag" value="0">
+    <input type="hidden" name="token" value="$!{token}">
+    <table class="TbList">
+        <thead>
+    <tr>
+      <th style="width:35px;">序号</th>
+      <th style="width:100px;">姓名</th>
+      <th>登录名</th>
+	  <th style="width:100px;">部门</th>
+      <th >职务</th>
+	  <th>手机电话</th>
+	  <th>编制类型</th>
+	  <th>在线</th>
+    </tr>
+  </thead>
+      #foreach( $data in ${page.data} )
+   #set($index = $velocityCount)
+    <tr id="staffRow$!index">
+      <td>$index</td>
+      <td><a href="javascript:doEdit('$!{data.id}')">#htmlEscape($!{data.name})</a></td>
+	  </td>
+      <td>#htmlEscape($!{data.loginName})</td>
+      <td>$!{data.department.name}</td>
+      <td>#htmlEscape($!{data.duty})</td>
+	  <td>#htmlEscape($!{data.mobile})</td>
+	  <td>#lookUpDict($dicData.dicManType $!{data.staffType})</td>
+	  #if($!{data.isLogin}=="1")
+		 <td><img src="../images/status_online.png" /></td>
+	  #else 
+		<td><img src="../images/status_offline.png" /></td>
+	  #end
+    </tr>
+  #end
+    </table>
+  </form>
+</div>
+</body>
+</html>

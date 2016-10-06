@@ -1,0 +1,127 @@
+<! DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=GBK" />
+  <meta http-equiv="pragma" content="no-cache">
+  <meta http-equiv="Cache-Control" content="no-cache, must-revalidate">
+  <title>文件列表</title>
+  <script type="text/javascript" src="../script/jquery-1.8.3.min.js"></script>
+  <script type="text/javascript" src="../ui/src/jquery.uploadify.me.js"></script>
+  <script type="text/javascript" src="../ui/external/swfobject.js"></script>
+  <script type="text/javascript">
+  /**
+ * 封装打开对话框操作
+ */
+var FCKDialog = new Object();
+/**
+ * 打开一个对话框
+ * dialogName   ：对话框的名字
+ * dialogTitle  ：对话框的标题
+ * dialogPage   ：对话框显示页面的URL
+ * width        ：对话框的宽度
+ * height       ：对话框的高度
+ * customValue  ：传递给对话框的自定义对象（在对话框内嵌页面中可通过window.parent.dialogArguments.CustomValue取回）
+ * parentWindow ：用来打开的对话框的窗口（对话框的父窗口）
+ */
+FCKDialog.OpenDialog = function(dialogName, dialogTitle, dialogPage, width, height, customValue, parentWindow) {
+    var oDialogInfo = new Object();
+    oDialogInfo.Title = dialogTitle;
+    oDialogInfo.Page = dialogPage;
+    oDialogInfo.OpenWindow = window;
+    oDialogInfo.CustomValue = customValue;
+
+    if (!parentWindow) {
+        parentWindow = window;
+    }
+    var sUrl = '../html/fckdialog.html';
+    this.Show(oDialogInfo, dialogName, sUrl, width, height, parentWindow);
+}
+if (document.all) { // IE
+    FCKDialog.Show = function(dialogInfo, dialogName, pageUrl, dialogWidth, dialogHeight, parentWindow) {
+        ##parentWindow.showModalDialog(pageUrl, dialogInfo, "dialogWidth:" + dialogWidth + "px;dialogHeight:" + dialogHeight + "px;help:no;scroll:no;status:no;resizable:yes;");
+        parentWindow.showModelessDialog(pageUrl, dialogInfo, "dialogWidth:" + dialogWidth + "px;dialogHeight:" + dialogHeight + "px;help:no;scroll:no;status:no;resizable:yes;");
+    }
+} else {
+    FCKDialog.Show = function(dialogInfo, dialogName, pageUrl, dialogWidth, dialogHeight, parentWindow) {
+        var iTop = (screen.height - dialogHeight) / 2;
+        var iLeft = (screen.width - dialogWidth) / 2;
+        var sOption = "location=no,menubar=no,resizable=no,toolbar=no,dependent=yes,dialog=yes,minimizable=no,modal=yes,alwaysRaised=yes,width=" + dialogWidth + ",height=" + dialogHeight + ",top=" + iTop + ",left=" + iLeft;
+        var oWindow = parentWindow.open('', 'FCKEditorDialog_' + dialogName, sOption, true);
+        oWindow.moveTo(iLeft, iTop);
+        oWindow.resizeTo(dialogWidth, dialogHeight);
+        oWindow.focus();
+        oWindow.location.href = pageUrl;
+        oWindow.dialogArguments = dialogInfo;
+        parentWindow.FCKLastDialogInfo = dialogInfo;
+    }
+}
+  </script>
+</head>
+<body>
+  <table border="1px" width="100%">
+    <script type="text/javascript">
+      jQuery(document).ready(
+        function(){
+          $("#lala5").uploadify({
+            'ownerType':'corp.b7',
+            'ownerId':'402893022a178a62012a178bc3e40033',
+            'fileType': TYPE_FILE
+          });
+        });
+    </script>
+    <tr>
+      <td width="19%">888</td>
+      <td>
+      <div id="lala5">
+      </div>
+      </td>
+    </tr>
+    <script type="text/javascript">
+      jQuery(document).ready(
+        function(){
+          $("#lala6").uploadify({
+            'ownerType':'com.systemic.product.entity.ProductInfo',
+            'ownerId':'113',
+            'fileType': TYPE_IMAGE
+          });
+        });
+    </script>
+    <tr>
+      <td width="19%">999</td>
+      <td>
+      <div id="lala6">
+      </div>
+      </td>
+    </tr>
+    <script type="text/javascript">
+     jQuery(document).ready(
+      function(){
+        $("#lala7").uploadify({
+        'ownerType':'corp.b9',
+        'ownerId':'402893022a178a62012a178bc3888888',
+        'fileType': TYPE_VIDEO,
+        'buttonText': '添加视频',
+        'fileExt': "*.mp4",
+        'fileDesc': "视频文件(*.mp4)",
+        'sizeLimit': 1024*1024*2*1024
+        });
+      });
+      function _lalaisUploading(){
+        return jQuery("#lala7").isUploading();
+      }
+    </script>
+    <tr>
+      <td width="19%">101010</td>
+      <td>
+      <div id="lala7">
+      </div>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <input type="submit" name="test" onclick="javascript:alert(_lalaisUploading());"/>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>

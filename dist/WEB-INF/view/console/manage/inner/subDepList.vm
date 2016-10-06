@@ -1,0 +1,30 @@
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=gbk" />
+  <title>$!{appContext.appName}</title>
+  <link href="../images/right.css" rel="stylesheet" type="text/css" />
+  <script type="text/javascript" src="../script/common.js"></script>
+<script type="text/javascript">
+function selectedData(dataId, dataName) {
+    parent.document.getElementById("subDepList").src = "../manage/subDepList.do?parentId=1";
+    parent.document.getElementById("mcj").style.display = "none";
+}
+</script>
+</head>
+<body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+<table width="100%" height="100%" border="0" cellpadding="0" cellspacing="0">
+        <tr>
+          <td height="100%" width="100%">
+            <SELECT multiple name="s_dep" id="s_dep"  onDblClick="javascript:parent.doSelect()"
+                   style="width:100%;height:216px" class="inputobject" >
+            #foreach($dep in $depOriginalList)
+                <option value="$dep.id">$dep.name</option>
+            #end
+            </SELECT>
+
+
+    </td>
+  </tr>
+</table>
+</body>
+</html>

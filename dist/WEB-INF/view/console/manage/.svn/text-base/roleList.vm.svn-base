@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  #headInclude()
+  <script type="text/javascript">
+  #if($message)alert("#javaScriptEscape($message)");#end
+  function doDelete() {
+    if (hasCheckBoxSelect("roleId")) {
+      if (confirm("您确定要删除该角色吗?")) {
+        document.formList.action = "../manage/roleDelete.do";
+        document.formList.submit();
+      }
+    } else {
+      alert("请选择要删除的角色！");
+      return;  
+    }
+
+  }
+
+  function doEdit (objId) {
+    document.location.href = "../manage/roleEdit.do?roleId=" + objId;
+  }
+  
+  </script>
+</head>
+<body class="easyui-layout">
+  
+<form name="formList" method="post" action="">
+<input type="hidden" name="submitFlag" value="0">
+<input type="hidden" name="token" value="$!{command.token}">
+ <div data-options="region:'center',title:'系统角色管理',iconCls:'icon-topic'">
+    <table id="dg" class="easyui-datagrid" fit="true" border="0" 
+            toolbar="#toolbar" pagination="false" striped="true"
+            autoRowHeight="false" checkOnSelect="false"
+            rownumbers="false" fitColumns="true">
+        <thead>
+            <tr>
+                <th data-options="field:'roleId',checkbox:true,fixed:true, width:30"></th>
+                <th data-options="field:'sortOder', width:50, align:'center',fixed:true">序号</th>
+                <th field="name" width="150">角色名称</th>
+               <th field="homeUrl" width="350">角色主页</th>
+               <th field="remark" width="350">角色说明</th>
+            </tr>
+        </thead>
+  <tbody>
+  #foreach( $data in ${roleList} )
+    <tr>
+      <td>$!{data.id}</td>
+      <td>$!{data.sortOrder}</td>
+      <td><a href="javascript:doEdit('$!{data.id}')">#htmlEscape($!{data.name})</a></td>
+      <td style="text-align:left;">#htmlEscape($!{data.homeUrl})</td>
+      <td style="text-align:left;">#htmlEscape($!{data.remark})</td>
+    </tr>
+  #end
+  </tbody>             
+        </thead>
+    </table>
+    <div id="toolbar">
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="doEdit('')">新 增</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="doDelete()">删 除</a>
+    </div>  
+
+
+ </div>
+</form>
+
+</body>
+</html>

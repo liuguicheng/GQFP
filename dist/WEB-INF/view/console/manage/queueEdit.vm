@@ -1,0 +1,102 @@
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=GBK" />
+  <title>$!{appContext.appName}</title>
+  <link href="$!{appContext.skin}/content.css" rel="stylesheet" type="text/css" />
+  <script language="javascript" type="text/javascript" src="../script/common.js"></script>
+  <script language="javascript" type="text/javascript" src="../script/validator.js"></script>
+  <script language="javascript" src="../script/loadingBar.js" type="text/javascript"></script>
+<script type="text/javascript">
+    validator.formName = "editForm";
+    validator.addNormalCheckPoint("queueName", "角色名称", "checkNotNull;checkNotEmpty");
+    validator.addNormalCheckPoint("orderNumber", "序号", "checkNotNull;checkNotEmpty;checkInt");
+function doSave() {
+    if (validator.checkAll()) {
+       document.editForm.submit();
+    }
+}
+function doReturn() {
+    document.location.href = "../manage/queueList.do";
+}
+</script>
+</head>
+<body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+<table width="100%"  cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td height="28" valign="top">
+      <table cellspacing="0" cellpadding="0" class="TbTitle" align="center">
+        <tr>
+            <td height="24">
+                 <div class="DivIcoEdit">编辑流程角色</div>
+            </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+
+  <tr valign="top">
+    <td height="28" align="center" >
+        <table cellpadding="0" cellspacing="0" class="tbtool">
+          <tr>
+            <td width="50%" align="left">
+                <div class="DivButton">
+                    <a href="javascript:doSave()" class="btnSave" > 保 存&nbsp; </a>
+                    <a href="javascript:doReturn();" class="btnBack" > 返 回&nbsp; </a>
+                </div>
+            </td>
+          </tr>
+        </table>
+    </td>
+  </tr>
+
+  <tr valign="top">
+    <td align="center" height="100%" >
+      <table width="100%" height="100%" border="0" cellpadding="0" cellspacing="0" class="TbCommon">
+<form name="editForm" method="post" action="../manage/queueEdit.do">
+                <input type="hidden" name="queueId" value="$!{command.queueId}" />
+
+<!--
+              <tr align="center">
+                <td width="30%" align="right" class="t3">#requiredInput("角色编号")</td>
+                <td width="70%" align="left" class="t2">
+                  <input type="text" name="id" value="$!{status.value}" #if($isModify) readOnly="true" #end/>
+                </td>
+              </tr>
+            -->
+              <tr align="center">
+                <td width="19%" align="right" class="TdLabel">#requiredInput("角色名称")</td>
+                <td width="31%" align="left" class="TdInput">
+                  ##<input type="text" name="name" value="$!{command.name}"  maxlength='40' />
+                  <input type="text" name="queueName" value="#htmlEscape($!{command.queueName})" maxlength='40'/>
+                </td>
+                <td width="19%" align="right" class="TdLabel">#requiredInput("序号")</td>
+                <td width="31%" align="left" class="TdInput">
+                    <input type="text" name="orderNumber" value="#showNumber(($!{command.orderNumber})" maxlength='40'/>
+                  ##<input type="text" name="remark" value="$!{command.remark}" maxlength='40'/>
+                </td>
+              </tr>
+
+              <tr align="center">
+                <td width="19%" align="right" class="TdLabel">角色说明</td>
+                <td colspan="3" align="left" class="TdInput">
+                  <input type="text" name="remark" value="#htmlEscape($!{command.remark})" maxlength='200' style='width:80%'/>
+                </td>
+              </tr>
+
+              <tr align="center">
+                <td align="right" class="TdLabel">人员名单：</td>
+                <td align="left" class="TdInput" colspan="3">
+                    #selectMultiStaff("staffId" "$!{command.queueStaffIds}" "$!{command.queueStaffNames}" "" "class='input_readonly' style='width:80%'")
+                </td>
+              </tr>
+              <tr align="center">
+                <td align="left" class="inputarea" colspan="4">
+                </td>
+              </tr>
+</form>
+      </table>
+    </td>
+  </tr>
+</table>
+</body>
+</html>

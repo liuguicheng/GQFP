@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- QueryStringUtil -->
+    <bean id="memberQueryStringUtil" class="org.springline.beans.dataquery.support.SimpleQueryMethod">
+        <property name="valueObjectClassName"><value>com.systemic.gq.entity.Member</value></property>
+        <property name="tableAlias"><value>me</value></property>
+        <property name="orderByClause"><value>memberId asc</value></property>
+       <property name="queryParam">
+            <list>
+              <value>stock,stock,LIKE</value>
+              <value>isActivation,isActivation,GT_EQU</value>
+              <value>referenceId,referenceId,GT_EQU</value>
+            </list>
+        </property>
+    </bean>
+    <bean id="memberDao" class="com.systemic.gq.member.service.dao.hibernate.HibernateMemberDao">
+        <property name="sessionFactory"><ref bean="sessionFactory" /></property>
+        <property name="memberQueryStringUtil"><ref bean="memberQueryStringUtil" /></property>
+    </bean>    
+    <bean id="springMemberService" class="com.systemic.gq.member.service.spring.SpringMemberSerivce"  autowire="byType"/>
+</beans>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  #headInclude()
+  <script type="text/javascript" src="../script/validator.js"></script>
+  <script type="text/javascript">
+  validator.formName = "editForm";
+  validator.addNormalCheckPoint("bonusType", "奖励类型", "checkNotNull;checkNotEmpty");
+  validator.addNormalCheckPoint("proportion", "奖励比例", "checkNotNull;checkNotEmpty");
+
+  function doSave(){
+    var e = document.editForm;
+    if (checkInput(e)) {
+      e.submitFlag.value = "1";
+      e.submit();
+    }
+  }
+  function checkInput(e) {
+    if (e.submitFlag.value == "1") {
+      alert("当前页面已经提交，请稍等！");
+      return false;
+    }
+    return validator.checkAll();
+  }
+  function doReturn() {
+    document.location.href = "../gq/bonusContentList.do?token=$!{token}";
+  }
+  </script>
+</head>
+<body>
+<div class="PageHeader">
+  <div class="LeftBox Title">#if($!{command.id} ==0) 添加 #else 修改  奖励种类 #end</div>
+</div>
+
+<div class="indieui-scroll">
+<form name="editForm" method="post" action="#getRequestUri()" class="indieui-form">
+  <input type="hidden" name="token" value="$!{token}" />
+  <input type="hidden" name="submitFlag" value="0" />
+  <input type="hidden" name="id" value="$!{command.id}" />
+  <table class="TbCommon">
+    <tr>
+      <td class="TdLabel" style="width:150px;">#requiredInput("奖励类型")</td>
+      <td class="TdInput">
+		#formSingleSelectDictionary("bonusType" $!{command.bonusType} ${dicData.dicBonusContent} "style='width:120'" " ---- 请选择 ---- ")
+      </td>
+    </tr>
+    <tr>
+      <td class="TdLabel">#requiredInput("奖励比例")</td>
+      <td class="TdInput">
+    	  <input type="text" name="proportion" value="$!{command.proportion}" style="width:30%" />%
+      </td>
+    </tr>
+	<tr>
+      <td class="TdLabel">奖励发放时间</td>
+      <td class="TdInput">
+		<input type="text" name="releaseTime" value="#customFormatDate($!{command.releaseTime} 'yyyy-MM-dd')" style="width:30%;" dateFormat="yyyy-MM-dd"/>
+      </td>
+    </tr>
+	<tr>
+      <td class="TdLabel">奖励发放开始条件</td>
+      <td class="TdInput">
+    	  <input type="text" name="begin" value="$!{command.begin}" style="width:30%" />
+      </td>
+    </tr>
+	<tr>
+      <td class="TdLabel">奖励结束条件</td>
+      <td class="TdInput">
+    	  <input type="text" name="end" value="$!{command.end}" style="width:30%" />
+      </td>
+    </tr>
+    <tr>
+      <td class="TdLabel">备注</td>
+      <td class="TdInput">
+        <input type="text" name="bz" value="#htmlEscape($!{command.bz})" style="width:50%"/>
+      </td>
+    </tr>
+  </table>
+</form>
+</div>
+
+<div class="CommandTool indieui-form">
+  <input type="button" id="btnconfirm" value="保存" onclick="javascript:doSave();"/>
+  <input type="button" id="btnback" value="返回" onclick="javascript:doReturn();"/>
+</div>
+</body>
+</html>

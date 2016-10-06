@@ -1,0 +1,64 @@
+8
+
+dir
+75
+https://192.168.1.118/svn/GQFP/trunk/dist/WEB-INF/view/plugins
+https://192.168.1.118/svn/GQFP
+
+
+
+2016-09-07T09:42:09.304169Z
+2
+ZBJ
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+7eaa1c50-b5f8-8d46-a0b5-e5067a1f1115
+
+cms
+dir
+
+dictionary
+dir
+
+dirTree
+dir
+
+holiday
+dir
+
+listener
+dir
+
+msg
+dir
+
+pendingitem
+dir
+
+sms
+dir
+
+sysmacroLib.vm
+file
+
+
+
+
+2016-09-08T07:57:17.729000Z
+786148bb297fc2a08dbf1933abda8ac4
+2016-09-07T09:42:09.304169Z
+2
+ZBJ
+

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="GQFP">
+        <wb-resource deploy-path="/" source-path="/dist"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/dist/WEB-INF/config"/>
+        <property name="java-output-path" value="/GQFP/dist/WEB-INF/classes"/>
+        <property name="context-root" value="/GQFP"/>
+    </wb-module>
+</project-modules>

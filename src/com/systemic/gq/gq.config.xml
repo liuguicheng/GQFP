@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+  <!-- 股权管理 -->
+  <import resource="classpath:com/systemic/gq/stock/stock.config.xml"/>
+  <import resource="classpath:com/systemic/gq/member/member.config.xml"/>
+   <!-- 股权奖励管理 -->
+  <import resource="classpath:com/systemic/gq/stock/bonuscontent.config.xml"/>
+  <!-- 充值管理 -->
+  <import resource="classpath:com/systemic/gq/pay/pay.config.xml"/>
+  <!-- 规则管理 -->
+  <import resource="classpath:com/systemic/gq/stock/rule.config.xml"/>
+  <!-- 奖金管理 -->
+  <import resource="classpath:com/systemic/gq/bonus/bonus.config.xml"/>
+  
+  
+</beans>

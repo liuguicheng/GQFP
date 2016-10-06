@@ -1,0 +1,43 @@
+8
+
+dir
+72
+https://192.168.1.118/svn/GQFP/trunk/src/com/plugins/pending/service/dao
+https://192.168.1.118/svn/GQFP
+
+
+
+2016-09-07T09:42:09.304169Z
+2
+ZBJ
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+7eaa1c50-b5f8-8d46-a0b5-e5067a1f1115
+
+IPendingItemDao.java
+file
+
+
+
+
+2016-09-08T07:57:33.572000Z
+a3f3e2f6e36e84d586ff2cfe24d0f718
+2016-09-07T09:42:09.304169Z
+2
+ZBJ
+
+hibernate
+dir
+

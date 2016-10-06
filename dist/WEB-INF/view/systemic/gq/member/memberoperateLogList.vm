@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  #headInclude()
+  <script type="text/javascript">
+  #if($message) alert("$message"); #end
+
+function clearQueryCondition() {
+  var e = document.queryForm;
+  e.logType.value = "";
+  e.operator.value = "";
+  e.operatorName.value = "";
+  e.logContent.value = "";
+  e.opDateStart.value = "";
+  e.opDateEnd.value = "";
+}
+function deleteOperate() {
+    if (!hasCheckBoxSelect("id")) {
+        alert("请选择要删除的日志信息！");
+        return;
+    }
+    if (confirm("您确定要删除所选择的日志信息吗?")) {
+    }
+    var f =  document.formList;
+    f.action = "../oplog/operateLogDelete.do";
+    f.submit();
+}
+
+//选择人员
+function selectStaffInf(data) {
+    var e = document.queryForm;
+    e.operator.value = data.staffId;
+    e.operatorName.value = data.staffName;
+}
+function doQuery() {
+  var e = document.queryForm;
+  if (e.opDateStart.value && e.opDateEnd.value && e.opDateStart.value > e.opDateEnd.value) {
+     alert("开始时间不能晚于截止时间");
+     return;
+  }
+  e.submit();
+  jQuery('body').processMask();
+}
+  </script>
+
+</head>
+<body class="easyui-layout">
+ <div data-options="region:'center',title:'系统日志管理',iconCls:'icon-topic'">
+    <table id="datagrid" class="easyui-datagrid" fit="true" border="0" 
+            toolbar="#toolbar" striped="true"
+            autoRowHeight="false" checkOnSelect="false" selectOnCheck="false"
+            rownumbers="true" fitColumns="true" >
+  <thead> 
+    <tr>
+                ##<th data-options="field:'caseNo', width:35, fixed:true">序号</th>
+                <th data-options="field:'caseTime', width:140, fixed:true">日志分类</th>
+                <th data-options="field:'areaId', width:160,fixed:true, align:'center'">操作时间</th>
+                <th data-options="field:'caseSource', width:90,fixed:true, align:'center'">操作人</th>
+                <th data-options="field:'casePlace', width:200, align:'left'">日志内容</th>
+    </tr>
+  </thead>
+  <tbody> 
+  #foreach( $operateLog in $page.data )
+    ##set($index = ($page.pageNumber - 1) * $page.pageSize + $velocityCount)
+    <tr>
+      ##<td><input type="checkbox" name="id" value="$!{operateLog.id}"></td>
+    ##<td>$index</td>
+      <td> $!{operateLog.logType}</td>
+    <td>#formatTime($!{operateLog.opDate})</a></td>
+      <td>$!{operateLog.operatorName}</td>
+      <td style="text-align:left;">#htmlEscape($!{operateLog.logContent})</td>
+    </tr>
+  #end    
+  </tbody>   
+    </table>
+ </div>
+<div id="toolbar">
+<form name="queryForm" action="../memberOperateLog/operatelog.do" method="post" class="indieui-form">
+  <table  cellpadding="5">
+    <tr>
+	  <td style="width:80px;height:30px;text-align:right">操作时间：</td>
+      <td colspan="3">
+		<input type="text" name="opDateStart" value="#customFormatDate($!{command.opDateStart} 'yyyy-MM-dd')" style="width:110px;" dateFormat="yyyy-MM-dd"/>-
+        <input type="text" name="opDateEnd" value="#customFormatDate($!{command.opDateEnd} 'yyyy-MM-dd')" style="width:110px;" dateFormat="yyyy-MM-dd"/>
+            <a href="javascript:doQuery()" class="easyui-linkbutton" iconCls="icon-search">查 询</a>
+            <a href="javascript:clearQuery(document.queryForm)" class="easyui-linkbutton" iconCls="icon-cut">清 空</a>
+      </td>
+    </tr>
+    <!--
+	<tr>
+      <td class="TdLabel">日志内容</td>
+      <td class="TdInput" colspan="3">
+        <input type="text" name="logContent" value="$!{command.logContent}" style="width:98%;" maxlength="10"/>
+      </td>
+  </tr>-->
+  </table>
+</form>
+</div>
+
+<div data-options="region:'south'" style="overflow-y:hidden"> 
+#pageDirector($page "#getRequestUri()" "")
+</div>
+</body>
+</html>

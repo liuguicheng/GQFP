@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/GQFP/!svn/ver/75/trunk/dist/WEB-INF/view/systemic/gq/pay
+END
+withdrawalsReview.vm
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/GQFP/!svn/ver/97/trunk/dist/WEB-INF/view/systemic/gq/pay/withdrawalsReview.vm
+END
+payReview.vm
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/GQFP/!svn/ver/94/trunk/dist/WEB-INF/view/systemic/gq/pay/payReview.vm
+END
+payEdit.vm
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/GQFP/!svn/ver/94/trunk/dist/WEB-INF/view/systemic/gq/pay/payEdit.vm
+END
+withdrawalsManage.vm
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/GQFP/!svn/ver/100/trunk/dist/WEB-INF/view/systemic/gq/pay/withdrawalsManage.vm
+END
+payManage.vm
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/GQFP/!svn/ver/94/trunk/dist/WEB-INF/view/systemic/gq/pay/payManage.vm
+END
+transferAccountManage.vm
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/GQFP/!svn/ver/100/trunk/dist/WEB-INF/view/systemic/gq/pay/transferAccountManage.vm
+END
+payAuditManage.vm
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/GQFP/!svn/ver/75/trunk/dist/WEB-INF/view/systemic/gq/pay/payAuditManage.vm
+END

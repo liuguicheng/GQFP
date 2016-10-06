@@ -1,0 +1,43 @@
+8
+
+dir
+72
+https://192.168.1.118/svn/GQFP/trunk/src/com/plugins/memory
+https://192.168.1.118/svn/GQFP
+
+
+
+2016-09-07T09:42:09.304169Z
+2
+ZBJ
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+7eaa1c50-b5f8-8d46-a0b5-e5067a1f1115
+
+controller
+dir
+
+plugins-memory.config.xml
+file
+
+
+
+
+2016-09-08T07:57:33.367000Z
+4e41f296248bb14a55153a1c2bd145ac
+2016-09-07T09:42:09.304169Z
+2
+ZBJ
+

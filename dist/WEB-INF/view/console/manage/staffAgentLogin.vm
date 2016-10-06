@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  #headInclude()
+  <script type="text/javascript" src="../script/validator.js"></script>
+  <script type="text/javascript">
+  validator.formName = "editForm";
+  validator.addNormalCheckPoint("agentId","代理用户","checkNotNull;checkNotEmpty");
+  // 发送
+  function doSave () {
+    var e = document.editForm;
+    if (validator.checkAll() && confirm("您确定要切换代理吗？")) {
+      var returnVal = new Object();
+      returnVal.staffId = e.staffId.value;
+      returnVal.agentId = e.agentId.value;
+      if (typeof(top.dialogArguments.CustomValue) == 'function') {
+        top.dialogArguments.CustomValue(returnVal);
+        top.closeDialog();
+      }      
+    }
+  }
+  </script>
+</head>
+<body>
+<div class="indieui-scroll">
+<form name="editForm" method="post" action="../oa/docWorkPress.do">
+<input type="hidden" name="submitFlag" value="0" />
+<input type="hidden" name="workId" value="$!{work.workId}" />
+<input type="hidden" name="staffId" value="$!{work.staffId}" />
+<table class="TbCommon">
+  <tr>
+    <td class="TdLabel" style="width:100px;">当前用户</td>
+    <td class="TdInput">
+      <input type="hidden" name="staffId" value="$!{currentUser.id}"/>
+      <font style="font-weight:bold;">$!{currentUser.department.name}&nbsp;$!{currentUser.name}</font>
+    </td>
+  </tr>
+  <tr>
+    <td class="TdLabel">代理用户</td>
+    <td class="TdInput">
+      <select name="agentId" style='width:150px;'>
+        <option value="" selected="selected">-----请选择-----</option>
+        #foreach( $agent in $!{agentList} )
+          <option value="$!{agent.loginName}">$!{agent.name}</option>
+        #end
+      </select>
+    </td>           
+  </tr>                                              
+</table>
+</form>
+</div>
+
+<div class="CommandTool indieui-form">
+  <input type="button" value="切换代理" onclick="javascript:doSave();"/>
+</div>
+</body>
+</html>  

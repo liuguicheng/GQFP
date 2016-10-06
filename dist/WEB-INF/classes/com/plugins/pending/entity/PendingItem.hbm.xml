@@ -1,0 +1,98 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping default-lazy="false">
+<!--
+    Created by the Middlegen Hibernate plugin 2.1
+
+    http://boss.bekk.no/boss/middlegen/
+    http://www.hibernate.org/
+-->
+
+<class
+    name="com.plugins.pending.entity.PendingItem"
+    table="sys_fd_fordo"
+>
+    <id
+        name="forDoId"
+        type="java.lang.String"
+        column="fordo_id"
+        unsaved-value="0"
+    >
+        <generator class="uuid" />
+    </id>
+
+    <property
+        name="title"
+        type="java.lang.String"
+        column="title"
+        length="255"
+    >
+    </property>
+    <property
+        name="moduleName"
+        type="java.lang.String"
+        column="module_name"
+        length="120"
+    >
+    </property>
+
+
+
+    <property
+        name="flagId"
+        type="java.lang.String"
+        column="flag_id"
+        length="80"
+    >
+    </property>
+    <property
+        name="url"
+        type="java.lang.String"
+        column="url"
+        length="255"
+    >
+    </property>
+    <property
+        name="senderName"
+        type="java.lang.String"
+        column="sender_name"
+        length="20"
+    >
+    </property>
+    <property
+        name="sendTime"
+        type="java.sql.Timestamp"
+        column="send_time"
+        length="23"
+    >
+    </property>
+    <property
+        name="status"
+        type="java.lang.String"
+        column="status"
+        length="1"
+    >
+    </property>
+    <property
+        name="jsonData"
+        type="java.lang.String"
+        column="json_data"
+        length="1000"
+    >
+    </property>
+    <!-- Associations -->
+
+    <!-- bi-directional many-to-one association to Staff -->
+    <many-to-one
+        name="sender"
+        class="com.console.entity.Staff"
+        not-null="false"
+    >
+        <column name="sender" />
+    </many-to-one>
+
+</class>
+</hibernate-mapping>

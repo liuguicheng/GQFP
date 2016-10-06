@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+    <bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+        <property name="mappings">
+            <props>
+                <prop key="main/*">mainController</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="mainDao" class="com.console.main.service.dao.hibernate.HibernateMainDao">
+        <property name="sessionFactory"><ref bean="sessionFactory" /></property>
+    </bean>
+
+    <bean id="mainService" class="com.console.main.service.spring.SpringMainService">
+        <property name="mainDao"><ref bean="mainDao" /></property>
+    </bean>
+
+    <bean id="mainController" class="com.console.main.controller.MainController">
+        <property name="mainService"><ref bean="mainService" /></property>
+    </bean>
+
+</beans>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  #headInclude()
+  <script type="text/javascript">
+  function readMsg() {
+    var e = document.listForm;
+    if (e.submitFlag.value=="1") {
+      alert("页面已提交，请稍候！");
+      return;
+    }
+    if (!hasCheckBoxSelect("msgId")) {
+      return;
+    }
+    e.action = "../plugins/messageRemove.do";
+    e.submitFlag.value = "1";
+    e.submit();    
+  }
+  
+  var itemValue = new Array();
+  </script>
+</head>
+<body>
+<div class="PageContainer indieui-scroll">
+<form name="listForm" method="post">
+<input type="hidden" name="submitFlag" value="0">
+<input type="hidden" name="token" value="$!{command.token}">
+<table class="TbList">
+  <thead> 
+    <tr>
+##      <th style="width:20px;" nowrap>
+##        <input type="checkbox" onclick="javascript:setCheckBoxValue('msgId', this.checked);">
+##      </th>      
+      <th style="width:35px;">序号</th>
+      <th>消息内容</th>
+      <th style="width:150px;">发送时间</th>
+    </tr>
+  </thead>
+  <tbody>
+  #foreach( $data in ${msgList} )
+    <tr>
+      <script type="text/javascript">
+        itemValue[${velocityCount}-1] = "$!{data.sysMessageInfoId}";
+        top.setDialogParam("unreadMsgIds",itemValue);
+      </script>
+##      <td><input type="checkbox" name="msgId" value="$!{data.sysMessageInfoId}"></td>
+      <td>$velocityCount</td>
+      <td style="text-align:left;" class="TdTxtover">#htmlEscape($!{data.content})</td>
+      <td>#customFormatDate(${data.sendTime} "yyyy-MM-dd HH:mm")</td>
+    </tr>
+  #end
+  </tbody>   
+</table>
+</form>
+</div>  
+</body>
+</html>

@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/GQFP/!svn/ver/68/trunk/dist/WEB-INF/view/systemic/gq/gq
+END
+bonusContentEdit.vm
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/GQFP/!svn/ver/34/trunk/dist/WEB-INF/view/systemic/gq/gq/bonusContentEdit.vm
+END
+ruleEdit.vm
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/GQFP/!svn/ver/94/trunk/dist/WEB-INF/view/systemic/gq/gq/ruleEdit.vm
+END
+stockEdit.vm
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/GQFP/!svn/ver/38/trunk/dist/WEB-INF/view/systemic/gq/gq/stockEdit.vm
+END
+stockList.vm
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/GQFP/!svn/ver/34/trunk/dist/WEB-INF/view/systemic/gq/gq/stockList.vm
+END
+bonusContentList.vm
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/GQFP/!svn/ver/21/trunk/dist/WEB-INF/view/systemic/gq/gq/bonusContentList.vm
+END

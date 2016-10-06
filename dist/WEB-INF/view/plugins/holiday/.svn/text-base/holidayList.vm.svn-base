@@ -1,0 +1,83 @@
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=gbk" />
+        <title>$!{appContext.appName}</title>
+        <link href="../skins/css/mainpage.css" rel="stylesheet" type="text/css" />
+        <script language="javascript" type="text/javascript" src="../script/common.js"></script>
+        <script language="javascript" type="text/javascript" src="../script/validator.js"></script>
+        <script language="javascript" type="text/javascript" src="../script/loadingBar.js"></script>
+        <script language="javascript" type="text/javascript" src="../lib/indieui/external/My97DatePicker/WdatePicker.js"></script>
+    </head>
+    <script>
+        function HolidayEdit(holidayId) {
+        location.href = "../holiday/holidayEdit.do?token=$!{command.token}&holidayId="+holidayId;
+        }
+        function HolidayDel(){
+        if (!hasCheckBoxSelect("holidayId")) {
+        alert("请选择要删除的节日信息！");
+        return ;
+        }
+        if (confirm("删除数据后，将不能在日历中显示该节日，是否要删除？")) {
+        document.DelForm.submit();}
+        }
+        function Holidayinit( ){
+          if (confirm("初始化后，数据库中该年原有的所有数据将被删除，是否要初始化？")) {
+             var e=document.initForm;
+             e.action="../holiday/holidayinit.do";
+             //location.href = "../holiday/holidayinit.do";
+             e.submit();
+          }
+        }
+        function clearQuery(){
+           var e=document.queryForm;
+           e.holidayName.value="";
+           e.minHolidayDate.value="";
+           e.maxHolidayDate.value="";
+           e.isLeave.value="";
+           e.holidayReason.value="";
+        }
+       function checkData(timeStr){
+          if(timeStr==""){
+             return true;
+          }
+          var patrn=/[0-9]{4}[-][0-9]{2}[-][0-9]{2}$/;
+          if (!patrn.exec(timeStr)) {
+            return false
+          }else{
+            return true
+          }
+       }
+       function check(){
+           var e=document.queryForm;
+           if(!checkData(e.minHolidayDate.value) || !checkData(e.maxHolidayDate.value) ){
+               alert("请填写正确的时间格式，如2010-01-10");
+               return false;
+           }
+           document.queryForm.submit();
+       }
+       function Holidayinit(year){
+          if (confirm("初始化后，数据库中该年原有的所有数据将被删除，是否要初始化？")) {
+             location.href = "../holiday/holidayinit.do?year="+year;
+          }
+        }
+    </script>
+    <body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" >
+        <table width="100%" height="100%" cellpadding="0" cellspacing="0">
+            <tr valign="top">
+                <td height="28" valign="top">
+                    <table cellspacing="0" cellpadding="0" class="TbTitle" align="center">
+                        <tr>
+                            <td height="100%">
+                                <div class="DivIcoList">工作日管理
+                                </div>
+                <div id="divholiday">#parse("holiday/rili.vm")</div>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+          <tr>
+        </tr>
+     </table>
+  </body>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<HTML xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=gb2312" />
+<title>$!{appContext.appName}</title>
+<link href="$!{appContext.skin}/menu.css" rel="stylesheet" type="text/css" />
+<script language="JavaScript" type="text/javascript" src="../script/jquery-1.8.3.min.js"></script>
+<script type="text/javascript">
+<!--
+
+function SetStyle(obj) {
+    var menuItems = document.getElementsByName("menuItem");
+    for (var i = 0; i < menuItems.length; i++)  {
+    /* Fix By HuangAnzhi 2010-12-09
+        if (menuItems[i].id == obj.id) {
+           menuItems[i].className="menubar_move";
+        } else {
+           menuItems[i].className="menubar_out";
+        }
+    */
+    menuItems[i].className="menubar_out";
+    }
+    $(obj).toggleClass("menubar_move");
+}
+function selectMenu(menu) {
+    var menuUrl = jQuery("#" + menu.id).attr("url");
+    doNavigate(menu.title, menu.id, (menuUrl == undefined ? "" : menuUrl));
+    var menuItems = document.getElementsByName("menuItem");
+    for (var i = 0; i < menuItems.length; i++)  {
+        if (menuItems[i].level == menu.level) { //只对相同层次做处理
+            var subMenu = document.getElementById("subMenu" + menuItems[i].id);
+            if (menuItems[i].id == menu.id) {
+                /* Fix By HuangAnzhi 2010-12-09
+                menuItems[i].className="menubar_move";
+                */
+                $(menuItems[i]).toggleClass("menubar_move");
+                if (subMenu) {
+                    /* Fix By HuangAnzhi 2010-12-09
+                    subMenu.style.display = "";
+                    */
+                    $(subMenu).slideToggle("fast");
+                }
+            } else {
+                menuItems[i].className="menubar_out";
+                if (subMenu) {
+                   subMenu.style.display = "none";
+                }
+            }
+        }
+    }
+}
+
+function doNavigate(title, code, url) {
+    if (url != "") {
+        parent.addContentPanel(title, code, url);
+        //parent.document.frmContent.document.location.href = url;
+    }
+}
+//-->
+
+function openWindow(uri,title){
+  truckMonitorWin=window.open(uri,title,'channelmode=yes,fullscreen=yes,directories=no,scrollbars=yes',true);
+  truckMonitorWin.focus();
+}
+
+</script>
+</head>
+<BODY>
+
+<table width="100%" height="100%" border="0" cellpadding="0" cellspacing="0">
+  <tr>
+    <td valign="top" class="left_color" id="menubar">
+            <div id="left0" style="display:">
+            <div class="leftbanner">$!{menuTree.data.name}</div>
+            <div>
+#foreach($menu in ${menuTree.getChildren()})
+              #if($!{menu.data.moduleName} == '01')
+                <a id="${menu.data.code}" level="1" name="menuItem" class="menubar_out" title="$!{menu.data.name}" url="$!{menu.data.url}" href="#this" 
+                    #if($isOpenWindow) onclick="javascript:openWindow('$!{menu.data.url}','$!{menu.data.name}')" #else onclick="javascript:selectMenu(this)" #end >$!{menu.data.name}</a>
+    #if (${menu.children} && ${menu.children.size()} > 0)
+                <div id="subMenu${menu.data.code}" name="subMenuDiv" class="SubMenu"
+                    #if ($velocityCount == 1) style="display:''" #else  style="display:none" #end>
+                    <ul class="SubMenu_ul">
+        #foreach($childMenu in ${menu.children})
+                         #if($!{childMenu.data.moduleName} == '01')
+                        <li><a title="$!{childMenu.data.name}"  id="${childMenu.data.code}" href="javascript:doNavigate('$!{childMenu.data.name}','$!{childMenu.data.code}', '$!{childMenu.data.url}');">$!{childMenu.data.name}</a></li>
+                        #end
+        #end
+        <div class="ClearFix"></div>
+                    </ul>
+                </div>
+    #end
+    #end
+#end
+<div class="ClearFix"></div>
+                </div>
+            </div>
+
+    </td>
+ </tr>
+</table>
+</body>
+</html>

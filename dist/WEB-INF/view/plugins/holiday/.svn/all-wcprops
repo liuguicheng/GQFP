@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/GQFP/!svn/ver/2/trunk/dist/WEB-INF/view/plugins/holiday
+END
+rili.vm
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/GQFP/!svn/ver/2/trunk/dist/WEB-INF/view/plugins/holiday/rili.vm
+END
+holidayEdit.vm
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/GQFP/!svn/ver/2/trunk/dist/WEB-INF/view/plugins/holiday/holidayEdit.vm
+END
+holidayList.vm
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/GQFP/!svn/ver/2/trunk/dist/WEB-INF/view/plugins/holiday/holidayList.vm
+END
+holidaySubList.vm
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/GQFP/!svn/ver/2/trunk/dist/WEB-INF/view/plugins/holiday/holidaySubList.vm
+END

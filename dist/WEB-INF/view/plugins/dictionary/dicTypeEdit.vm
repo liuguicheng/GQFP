@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  #headInclude()
+  <script language="javascript" type="text/javascript" src="../script/validator.js"></script>
+  <script type="text/javascript">
+  validator.formName = "editForm";
+  validator.addNormalCheckPoint("typeCode","字典标识","checkNotNull;checkNotEmpty");
+  validator.addNormalCheckPoint("typeName","字典名称","checkNotNull;checkNotEmpty");
+  validator.addNormalCheckPoint("typeSort","序号","checkInt");
+  validator.addNormalCheckPoint("typeWay","编码方式","checkNotNull;checkNotEmpty");
+  validator.addNormalCheckPoint("dataLength","字典长度","checkNotNull;checkNotEmpty;checkInt");
+  validator.addNormalCheckPoint("isLonger","是否定长","checkNotNull;checkNotEmpty");
+function doSave(){
+    var e = document.editForm;
+    var reg = /^[a-zA-Z]+$/;
+    if(validator.checkAll()){
+        if(!reg.test(e.typeCode.value)) {
+            alert("字典标识输入的类型不匹配");
+            e.typeCode.focus();
+        } else {
+            document.editForm.submit();
+        }
+    }
+}
+
+function doReturn() {
+     document.location.href  = "../dictionary/dicTypeQuery.do";
+}
+
+function showLonger() {
+  var typeWay = document.all("typeWay");
+  var isLonger = document.all("isLonger");
+  var showLongerDiv = document.getElementById("showLongerDiv");
+  var showLongerTdDiv = document.getElementById("showLongerTdDiv");
+  for (var i = 0; i < typeWay.length; i++) {
+    if (typeWay[i].checked) {
+      if (typeWay[i].value == "1") {
+        showLongerDiv.style.display = "none";
+        showLongerTdDiv.style.display = "none";
+        for (var j = 0; j < isLonger.length; j++) {
+          if (isLonger[j].value == "0") {
+            isLonger[j].checked = true;
+          }
+        }
+      } else {
+        showLongerTdDiv.style.display = "";
+        showLongerDiv.style.display = "";
+      }
+    }
+  }
+}
+  </script>
+</head>
+<body class="easyui-layout indieui-form">
+      <form name="editForm" method="POST" action="../dictionary/dicTypeEdit.do" >
+        <input type="hidden" name="typeId" value="$!{dicTypeInfo.typeId}"/>
+<div data-options="region:'center',title:'字典类型编辑',iconCls:'icon-edit', collapsible:false" style="height:120px">##        
+        <table cellpadding="0" cellspacing="0" class="TbCommon">
+          <tr align="center">
+            <td class="TdLabel" style="width:120px">#requiredInput("字典标识")</td>
+            <td class="TdInput" colspan="3" >
+              <input type="text" name="preTypeNo" value="dic" readonly='true' size='3'/>
+              <input type="text" name="typeCode" value="#htmlEscape($!{dicTypeInfo.typeCode})" maxlength='27'/>
+              <span class="tips">注：字典标识只能用英文表示</span>
+            </td>
+          </tr>
+          <tr align="center">
+            <td align="right" class="TdLabel" >#requiredInput("字典名称")</td>
+            <td class="TdInput" align="left" ><input type="text" name="typeName" value="#htmlEscape($!{dicTypeInfo.typeName})" maxlength='20'/></td>
+            <td align="right" class="TdLabel" >序号</td>
+            <td class="TdInput" align="left" ><input type="text" name="typeSort" value="#showNumber($!{dicTypeInfo.typeSort})" /></td>
+          </tr>
+          <tr align="center">
+            <td class="TdLabel" >#requiredInput("编码方式")</td>
+            <td class="TdInput" colspan="3" >
+        #formRadioButtonDictionary("typeWay" "$!{dicTypeInfo.typeWay}" $dicData.dicTypeWay "&nbsp;&nbsp;" "")
+            </td>
+          </tr>
+          <tr align="center">
+            <td align="right" class="TdLabel" >#requiredInput("编码长度")</td>
+            <td class="TdInput" align="left" ><input type="text" name="dataLength" value="#showNumber($!{dicTypeInfo.dataLength})"/></td>
+            <td align="right" class="TdLabel" >
+        &nbsp;<span id="showLongerTdDiv">
+               #requiredInput("是否定长")</span>
+      </td>
+            <td class="TdInput" align="left" >
+              &nbsp;<span id="showLongerDiv">
+        #formRadioButtonDictionary("isLonger" "$!{dicTypeInfo.isLonger}" $dicData.dicIsLonger "&nbsp;&nbsp;" "")</span>
+      </td>
+          </tr>
+
+        </table>
+</div>
+
+<div data-options="region:'south'" style="overflow:hidden">
+  <div class="CommandTool">
+  <input type="button" value="保 存" style="width:100px" onclick="javascript:doSave();"/>
+  <input type="button" value="返 回" style="width:100px" onclick="javascript:doReturn();"/>
+  </div>
+</div>
+      </form>
+
+</body>
+</html>

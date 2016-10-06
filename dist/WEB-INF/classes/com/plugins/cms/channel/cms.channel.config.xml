@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+
+    <bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+        <property name="mappings">
+            <props>
+                <!-- 服务项目信息 -->
+                <prop key="cms/channelEdit.do">cmsChannelEditController</prop>
+                <prop key="cms/channel*.do">cmsChannelController</prop>
+
+            </props>
+        </property>
+    </bean>
+    <bean id="cmsChannelQueryUtil" class="org.springline.beans.dataquery.support.SimpleQueryMethod">
+        <property name="valueObjectClassName"><value>com.plugins.cms.entity.CmsChannel</value></property>
+        <property name="tableAlias"><value>channel</value></property>
+        <property name="orderByClause"><value>sortOrder</value></property>
+        <property name="queryParam">
+            <list>
+                <value>channelPath,channelPath,EQU</value>
+                <value>channelTime,channelTimeUp,GT_EQU</value>
+                <value>channelTime,channelTimeDown,LESS_EQU</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="cmsChannelDao" class="com.plugins.cms.channel.service.dao.hibernate.HibernateCmsChannelDao">
+        <property name="sessionFactory"><ref bean="sessionFactory" /></property>
+        <property name="cmsChannelQueryUtil"><ref bean="cmsChannelQueryUtil" /></property>
+    </bean>
+
+
+    <bean id="cmsChannelService" class="com.plugins.cms.channel.service.spring.SpringCmsChannelService">
+        <property name="channelDao"><ref bean="cmsChannelDao" /></property>
+        <property name="contentService"><ref bean="cmsContentService" /></property>
+    </bean>
+
+	<!-- 
+    <bean id="cmsChannelServiceProxy" parent="serviceProxyFactory">
+        <property name="target"><ref local="cmsChannelService" /></property>
+    </bean> -->
+
+    <bean id="cmsChannelEditController" class="com.plugins.cms.channel.controller.CmsChannelEditController">
+        <property name="sessionForm"><value>true</value></property>
+        <property name="commandClass"><value>com.plugins.cms.channel.command.CmsChannelEditInfo</value></property>
+        <property name="formView"><value>cms/channel/channelEdit</value></property>
+        <property name="channelService"><ref bean="cmsChannelService" /></property>
+        <property name="successView"><value>../cms/channelManageList.do</value></property>
+    </bean>
+
+    <bean id="cmsChannelController" class="com.plugins.cms.channel.controller.CmsChannelController">
+        <property name="channelService"><ref bean="cmsChannelService" /></property>
+    </bean>
+
+
+</beans>

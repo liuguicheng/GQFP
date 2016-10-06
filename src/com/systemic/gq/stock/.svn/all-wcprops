@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/GQFP/!svn/ver/67/trunk/src/com/systemic/gq/stock
+END
+bonuscontent.config.xml
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/GQFP/!svn/ver/29/trunk/src/com/systemic/gq/stock/bonuscontent.config.xml
+END
+stock.config.xml
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/GQFP/!svn/ver/33/trunk/src/com/systemic/gq/stock/stock.config.xml
+END
+rule.config.xml
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/GQFP/!svn/ver/33/trunk/src/com/systemic/gq/stock/rule.config.xml
+END

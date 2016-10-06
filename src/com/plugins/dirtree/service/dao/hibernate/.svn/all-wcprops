@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/GQFP/!svn/ver/2/trunk/src/com/plugins/dirtree/service/dao/hibernate
+END
+HibernateDirTypeDao.java
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/GQFP/!svn/ver/2/trunk/src/com/plugins/dirtree/service/dao/hibernate/HibernateDirTypeDao.java
+END
+HibernateDirDataDao.java
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/GQFP/!svn/ver/2/trunk/src/com/plugins/dirtree/service/dao/hibernate/HibernateDirDataDao.java
+END

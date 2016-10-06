@@ -1,0 +1,49 @@
+8
+
+dir
+72
+https://192.168.1.118/svn/GQFP/trunk/src/com/systemic
+https://192.168.1.118/svn/GQFP
+
+
+
+2016-09-19T01:34:36.140115Z
+70
+ZBJ
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+7eaa1c50-b5f8-8d46-a0b5-e5067a1f1115
+
+basic
+dir
+
+gq
+dir
+
+systemic.config.xml
+file
+
+
+
+
+2016-09-08T07:57:32.039000Z
+be16546c049046615aba411677d5e7a6
+2016-09-08T07:53:35.048555Z
+5
+ZBJ
+
+unit
+dir
+

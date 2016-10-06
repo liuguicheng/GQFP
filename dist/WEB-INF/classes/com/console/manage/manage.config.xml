@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+        
+    <bean id="urlManageMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+        <property name="mappings">
+            <props>
+				<!--部门数据维护:主视图-->
+                <prop key="manage/departmentManage.do">manageController</prop>
+                <prop key="manage/subDepartmentList.do">manageController</prop>
+				<!--部门数据维护:删除、修改、排序-->
+                <prop key="manage/departmentEdit.do">departmentEditController</prop>
+                <prop key="manage/departmentDelete.do">manageController</prop>
+                <prop key="manage/departmentSort.do">manageController</prop>
+                <prop key="manage/departmentTree.do">manageController</prop>
+                <prop key="manage/insuDepartmentTree.do">manageController</prop>
+                <prop key="manage/selectAllStaffList.do">manageController</prop>
+
+            	<!-- 部门选择 -->
+            	<prop key="manage/departmentMultiTree.do">manageController</prop>
+            	<prop key="manage/deptMultiSelect.do">manageController</prop>
+
+				<!--对单位授权、两种授权方式    -->
+                <prop key="manage/grantPowerToDepartment.do">departmentPowerController</prop>
+
+				<!--人员数据维护: 主视图 -->
+                <prop key="manage/staffManage*.do">manageController</prop>
+                <prop key="manage/staffSubDepartmentList*.do">manageController</prop>
+				<!--人员数据维护: 删除、修改、排序 -->
+                <prop key="manage/staffSubDepartmentDelete*.do">manageController</prop>
+                <prop key="manage/staffSubDepartmentEdit.do">staffSubDepartmentEditController</prop>
+                <!-- 编制人员 -->
+                <prop key="manage/staffSubDepartmentInnerEdit.do">staffSubDepartmentInnerEditController</prop>
+                <prop key="manage/staffQueryList.do">satffQueryController</prop>
+                <prop key="manage/staffQueryInList.do">satffQueryInController</prop>
+                <prop key="manage/staffSort*.do">manageController</prop>
+				<!--修改个人资料   -->
+                <prop key="manage/staffEditSelf.do">staffEditSelfController</prop>
+                
+                <!-- 人员通讯录 -->
+                <prop key="manage/staffContacts.do">manageController</prop>
+
+				<!-- 人员选择-->
+                <prop key="manage/staffSingleSelect.do">staffSingleSelectController</prop>
+                <prop key="manage/staffMultiSelect.do">staffMultiSelectController</prop>
+                <prop key="manage/staffDWRList.do">manageController</prop>
+
+		        <!-- 企业行为 . 审核人员选择-->
+		        <prop key="selectdata/selectOperateStaff.do">selectOperateStaffController</prop>
+		        <!-- 企业行为 . 录入人员选择-->
+		        <prop key="selectdata/selectInputerStaff.do">selectOperateStaffController</prop>
+
+
+               <!--  <prop key="manage/dutyDelete.do">dutyDeleteController</prop>-->
+               <!--  <prop key="manage/dutyList.do">dutyQueryController</prop>-->
+               <!--  <prop key="manage/dutyEdit.do">dutyEditController</prop>-->
+                <prop key="manage/testXinFangTmp.do">manageController</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="manageDao" class="com.console.manage.service.dao.hibernate.HibernateManageDao">
+        <property name="sessionFactory"><ref bean="sessionFactory" /></property>
+        <property name="staffStringUtil"><ref bean="staffStringUtil"/></property>
+    </bean>
+
+    <bean id="manageService" class="com.console.manage.service.spring.SpringManageService">
+        <property name="manageDao"><ref bean="manageDao" /></property>
+<!--        <property name="ldapManageDao"><ref bean="ldapManageDao" /></property>-->
+        <property name="mainService"><ref bean="mainService" /></property>
+    </bean>
+
+
+    <bean id="manageController" class="com.console.manage.controller.ManageController">
+        <property name="manageService"><ref bean="manageService" /></property>
+         <property name="selectAllStaffListView"><value>manage/selectAllStaffList</value></property>
+        
+        <property name="departmentManageView"><value>manage/departmentManage</value></property>
+        <property name="departmentListView"><value>manage/departmentList</value></property>
+        <property name="departmentTreeView"><value>manage/departmentTree</value></property>
+        <property name="departmentMultiTreeView"><value>manage/departmentMultiTree</value></property>
+        <property name="deptMultiSelectVile"><value>manage/departmentFilterMultSelect</value></property>
+<!--     单位选择   -->
+        <property name="depInnerFilterListView"><value>manage/inner/subDepList</value></property>
+
+<!--        <property name="departmentStaffListView"><value>manage/departmentStaffList</value></property>-->
+        <property name="subDepSelectView"><value>manage/inner/subDepList2</value></property>
+        <property name="staffSelectView"><value>manage/staffSelect</value></property>
+        <property name="staffManageView"><value>manage/staffManage</value></property>
+        <property name="staffSubDepartmentListView"><value>manage/staffSubDepartmentList</value></property>
+        <property name="staffListUrl"><value>../manage/staffSubDepartmentList.do</value></property>
+        <!-- 编制外聘  -->
+        <property name="staffSubDepartmentListInnerView"><value>manage/staffSubDepartmentListInner</value></property>
+		<property name="staffContactsView"><value>manage/staffContacts</value></property>
+		<property name="staffListUrlInner"><value>../manage/staffSubDepartmentListInner.do</value></property>
+    </bean>
+    <!-- 在编查询 -->
+  <bean id="satffQueryController" class="com.console.manage.controller.SatffQueryController">
+    <property name="manageService"><ref bean="manageService" /></property>
+    <property name="commandClass"><value>com.console.manage.command.StaffTypeQueryInfo</value></property>
+    <property name="successView"><value>manage/staffQueryList</value></property>
+  </bean>
+  <!-- 聘用查询 -->
+  <bean id="satffQueryInController" class="com.console.manage.controller.SatffQueryInController">
+    <property name="manageService"><ref bean="manageService" /></property>
+    <property name="commandClass"><value>com.console.manage.command.StaffTypeQueryInfo</value></property>
+    <property name="successView"><value>manage/staffQueryInList</value></property>
+  </bean>
+<!-- 部门权限设置-->
+    <bean id="departmentPowerController" class="com.console.manage.controller.DepartmentPowerController" autowire="byType">
+        <property name="commandClass"><value>com.console.manage.command.DepartmentPowerInfo</value></property>
+        <property name="formView"><value>manage/departmentPower</value></property>
+        <property name="successView"><value>../manage/grantPowerToDepartment.do</value></property>
+    </bean>
+
+  <!-- 企业行为 . 审核人员选择-->
+  <bean id="selectOperateStaffController" class="com.console.manage.controller.SelectOperateStaffController">
+        <property name="manageService"><ref bean="manageService" /></property>
+    </bean>
+<!--人员选择-->
+    <bean id="staffSelectController" class="com.console.manage.controller.StaffSelectController" lazy-init="true">
+        <property name="manageService"><ref bean="manageService" /></property>
+    </bean>
+    <bean id="staffSingleSelectController" parent="staffSelectController">
+        <property name="selectStaffView"><value>manage/staffSingleSelect</value></property>
+    </bean>
+    <bean id="staffMultiSelectController" parent="staffSelectController">
+        <property name="selectStaffView"><value>manage/staffMultiSelect</value></property>
+    </bean>
+
+    <bean id="staffEditSelfController" parent="staffSubDepartmentEditController" autowire="byType">
+        <property name="formView"><value>manage/staffEditSelf</value></property>
+        <property name="successView"><value>manage/staffEditSelf</value></property>
+    </bean>
+    
+    <bean id="staffSubDepartmentEditController" class="com.console.manage.controller.StaffSubDepartmentEditController" autowire="byType">
+        <property name="sessionForm"><value>true</value></property>
+        <property name="commandClass"><value>com.console.manage.command.StaffInfo</value></property>
+<!--        <property name="validator"><ref bean="staffEditValidator" /></property>-->
+        <property name="formView"><value>manage/staffSubDepartmentEdit</value></property>
+        <property name="successView"><value>../manage/staffSubDepartmentList.do</value></property>
+    </bean>
+    
+    <!-- 编制人员 -->
+     <bean id="staffSubDepartmentInnerEditController" class="com.console.manage.controller.StaffSubDepartmentInnerEditController" autowire="byType">
+        <property name="sessionForm"><value>true</value></property>
+        <property name="commandClass"><value>com.console.manage.command.StaffInfo</value></property>
+<!--        <property name="validator"><ref bean="staffEditValidator" /></property>-->
+        <property name="formView"><value>manage/staffSubDepartmentInnerEdit</value></property>
+        <property name="successView"><value>../manage/staffSubDepartmentListInner.do</value></property>
+    </bean>
+    
+    <bean id="departmentEditController" class="com.console.manage.controller.DepartmentEditController">
+        <property name="sessionForm"><value>true</value></property>
+        <property name="commandClass"><value>com.console.manage.command.DepartmentInfo</value></property>
+        <property name="formView"><value>manage/departmentEdit</value></property>
+        <property name="manageService"><ref bean="manageService" /></property>
+        <property name="successView"><value>../manage/subDepartmentList.do</value></property>
+    </bean>
+    
+    <bean id="manageDwrController" class="com.console.manage.controller.ManageDwrController">
+        <property name="manageService"><ref bean="manageService"/> </property>
+    </bean>
+    
+    <bean id="staffStringUtil" class="org.springline.beans.dataquery.support.SimpleQueryMethod">
+    <property name="valueObjectClassName"><value>com.console.entity.Staff</value></property>
+    <property name="tableAlias"><value>staff</value></property>
+    <property name="orderByClause"><value>id desc</value></property>
+    <property name="queryParam">
+      <list>
+       <value>staffType,staffType,LIKE</value>
+       <value>valid,valid,LIKE</value>
+       <value>department,department,LIKE</value>
+      </list>
+    </property>
+  </bean>  
+</beans>
+   

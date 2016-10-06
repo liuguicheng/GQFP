@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/GQFP/!svn/ver/2/trunk/src/com/plugins/dirtree/service/dao
+END
+IDirDataDao.java
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/GQFP/!svn/ver/2/trunk/src/com/plugins/dirtree/service/dao/IDirDataDao.java
+END
+IDirTypeDao.java
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/GQFP/!svn/ver/2/trunk/src/com/plugins/dirtree/service/dao/IDirTypeDao.java
+END

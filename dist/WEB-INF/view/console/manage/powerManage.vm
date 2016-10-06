@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  #headInclude()
+  <script type="text/javascript">
+   #if($message) alert("$message"); #end
+  $(document).ready(function() {
+        $("#powerTabs").tabs({ selected: '0'+$!{tab} });
+         $('#powerTabs').tabs({ 
+            border:false, 
+            onSelect:function(title){ 
+                    var tab = $('#powerTabs').tabs('getSelected');   
+                     tab.find('iframe').attr('src','../manage/powerInnerList.do?token=$!{token}&tab='+tab.attr('tab'));
+            }
+        });
+  });
+
+  </script>
+</head>
+<body class="easyui-layout indieui-form">
+<div data-options="region:'center',border:'no'" class="easyui-tabs" id="powerTabs" data-option="fit:true">
+  <div  tab="01"  title="µçÄÔ¶Ë" >
+     <iframe frameborder="0" style="width:100%;height:99%;" scrolling="no" id="01powerFrame" name="01powerFrame" src="../manage/powerInnerList.do?token=$!{token}&tab=01"></iframe>
+  </div>
+  <div   tab="02" title="ÊÖ»ú¶Ë"  >
+     <iframe frameborder="0" style="width:100%;height:99%;" scrolling="no" id="02powerFrame" name="02powerFrame" src="../manage/powerInnerList.do?token=$!{token}&tab=02"></iframe>
+  </div>
+</div>
+</body>
+</html>

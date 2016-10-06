@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping default-lazy="false">
+	<class name="com.console.entity.Staff" table="sys_staff"
+		dynamic-update="true" dynamic-insert="false">
+
+		<id name="id" column="staff_id" type="java.lang.String">
+			<generator class="assigned">
+			</generator>
+		</id>
+
+		<many-to-one name="department" class="com.console.entity.Department"
+			cascade="none" outer-join="auto" update="true" insert="true" access="property"
+			column="dep_id" not-null="true" />
+
+
+		<property name="description" type="java.lang.String" update="true"
+			insert="true" access="property" column="description" length="200"
+			not-null="false" />
+
+
+
+		<property name="email" type="java.lang.String" update="true"
+			insert="true" access="property" column="email" length="60" not-null="false" />
+
+		<property name="fax" type="java.lang.String" update="true"
+			insert="true" access="property" column="fax" length="40" not-null="false" />
+
+		<property name="loginName" type="java.lang.String" update="true"
+			insert="true" access="property" column="login_name" length="40"
+			not-null="true" unique="true" />
+
+		<property name="mobile" type="java.lang.String" update="true"
+			insert="true" access="property" column="mobile_phone" length="11"
+			not-null="false" />
+
+		<property name="name" type="java.lang.String" update="true"
+			insert="true" access="property" column="staff_name" length="20"
+			not-null="true" />
+
+		<property name="password" type="java.lang.String" update="true"
+			insert="true" access="property" column="password" length="40"
+			not-null="true" />
+
+		<property name="phone" type="java.lang.String" update="true"
+			insert="true" access="property" column="phone" length="40" not-null="false" />
+
+		<property name="regDate" type="java.util.Date" update="true"
+			insert="true" access="property" column="reg_date" not-null="false" />
+
+		<property name="valid" type="java.lang.String" update="true"
+			insert="true" access="property" column="valid" length="1" not-null="true" />
+		<property name="orderNumber" type="java.lang.Integer" update="true"
+			insert="true" access="property" column="order_number" />
+		<property name="duty" type="java.lang.String" update="true"
+			insert="true" access="property" column="duty" />
+
+		<set name="systemRole" table="sys_staff_role_rel" lazy="true"
+			inverse="false" cascade="none" sort="unsorted" order-by="role_id asc">
+			<key column="staff_id">
+			</key>
+			<many-to-many class="com.console.entity.Role" column="role_id"
+				outer-join="auto" />
+		</set>
+	</class>
+
+</hibernate-mapping>

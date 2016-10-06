@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/GQFP/!svn/ver/2/trunk/src/com/plugins/holiday
+END
+IHolidayObserver.java
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/GQFP/!svn/ver/2/trunk/src/com/plugins/holiday/IHolidayObserver.java
+END
+plugins-holiday.config.xml
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/GQFP/!svn/ver/2/trunk/src/com/plugins/holiday/plugins-holiday.config.xml
+END
+HolidayHelper.java
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/GQFP/!svn/ver/2/trunk/src/com/plugins/holiday/HolidayHelper.java
+END

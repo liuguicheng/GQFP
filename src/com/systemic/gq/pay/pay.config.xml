@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- QueryStringUtil -->
+    <bean id="payQueryStringUtil" class="org.springline.beans.dataquery.support.SimpleQueryMethod">
+        <property name="valueObjectClassName"><value>com.systemic.gq.entity.PayInfo</value></property>
+        <property name="tableAlias"><value>me</value></property>
+        <property name="orderByClause"><value>applyTime desc</value></property>
+        <property name="queryParam">
+            <list>
+            <value>memberId,memberId,EQU</value>
+            <value>applyTime,applyTimeUp,GT_EQU</value>
+            <value>applyTime,applyTimeDown,LESS_EQU</value>
+            </list>
+        </property>
+    </bean>
+    <bean id="payDao" class="com.systemic.gq.pay.service.dao.hibernate.HibernatePayDao">
+        <property name="sessionFactory"><ref bean="sessionFactory" /></property>
+        <property name="payQueryStringUtil"><ref bean="payQueryStringUtil" /></property>
+    </bean>    
+    <bean id="springPayService" class="com.systemic.gq.pay.service.spring.SpringPayService"  autowire="byType"/>
+    
+     <!-- QueryStringUtil -->
+    <bean id="payLogQueryStringUtil" class="org.springline.beans.dataquery.support.SimpleQueryMethod">
+        <property name="valueObjectClassName"><value>com.systemic.gq.entity.PayLog</value></property>
+        <property name="tableAlias"><value>pl</value></property>
+        <property name="orderByClause"><value>recordTime asc</value></property>
+        <property name="queryParam">
+            <list>
+            <value>recordTime,recordTimeUp,GT_EQU</value>
+            <value>recordTime,recordTimeDown,LESS_EQU</value>
+            </list>
+        </property>
+    </bean>
+    <bean id="payLogDao" class="com.systemic.gq.pay.service.dao.hibernate.HibernatePayLogDao">
+        <property name="sessionFactory"><ref bean="sessionFactory" /></property>
+        <property name="payLogQueryStringUtil"><ref bean="payLogQueryStringUtil" /></property>
+    </bean>    
+    <bean id="springPayLogService" class="com.systemic.gq.pay.service.spring.SpringPayLogService"  autowire="byType"/>
+    
+    
+    
+    <!-- 提现管理 -->
+    
+     <bean id="withdrawalsQueryStringUtil" class="org.springline.beans.dataquery.support.SimpleQueryMethod">
+        <property name="valueObjectClassName"><value>com.systemic.gq.entity.Withdrawals</value></property>
+        <property name="tableAlias"><value>pl</value></property>
+        <property name="orderByClause"><value>applyTime desc</value></property>
+        <property name="queryParam">
+            <list>
+            <value>applyTime,applyTimeUp,GT_EQU</value>
+            <value>applyTime,applyTimeDown,LESS_EQU</value>
+            </list>
+        </property>
+    </bean>
+     <bean id="withdrawalsDao" class="com.systemic.gq.pay.service.dao.hibernate.HibernateWithdrawalsDao">
+        <property name="sessionFactory"><ref bean="sessionFactory" /></property>
+        <property name="withdrawalsQueryStringUtil"><ref bean="withdrawalsQueryStringUtil" /></property>
+    </bean>    
+    <bean id="springwithdrawalsService" class="com.systemic.gq.pay.service.spring.SpringWithdrawalsService"  autowire="byType"/>
+    
+    <!-- 转账管理 -->
+    <bean id="transferAccountStringUtil" class="org.springline.beans.dataquery.support.SimpleQueryMethod">
+        <property name="valueObjectClassName"><value>com.systemic.gq.entity.TransferAccounts</value></property>
+        <property name="tableAlias"><value>pl</value></property>
+        <property name="orderByClause"><value>taTime desc</value></property>
+        <property name="queryParam">
+            <list>
+            <value>taTime,applyTimeUp,GT_EQU</value>
+            <value>taTime,applyTimeDown,LESS_EQU</value>
+            </list>
+        </property>
+    </bean>
+    <bean id="transferAccountDao" class="com.systemic.gq.pay.service.dao.hibernate.HibernateTransferAccountsDao">
+        <property name="sessionFactory"><ref bean="sessionFactory" /></property>
+        <property name="transferAccountStringUtil"><ref bean="transferAccountStringUtil" /></property>
+    </bean>    
+    <bean id="transferAccountService" class="com.systemic.gq.pay.service.spring.SpringTransferAccountService"  autowire="byType"/>
+    
+    
+</beans>

@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping default-lazy="false">
+<!--
+    Created by the Middlegen Hibernate plugin 2.1
+
+    http://boss.bekk.no/boss/middlegen/
+    http://www.hibernate.org/
+-->
+
+<class
+    name="com.plugins.pending.entity.PendingItemRecipients"
+    table="sys_fd_recipient"
+>
+
+    <composite-id>
+        <key-property name="recipientId" column="recipient_id" type="java.lang.String" length="18"/>
+        <key-property name="forDoId" column="fordo_id" type="java.lang.String" length="18"/>
+    </composite-id>
+
+    <property
+        name="readTime"
+        type="java.sql.Timestamp"
+        column="read_time"
+        length="23"
+    >
+    </property>
+    <property
+        name="status"
+        type="java.lang.String"
+        column="status"
+        length="1"
+    >
+    </property>
+
+    <!-- Associations -->
+
+    <!-- bi-directional many-to-one association to Staff -->
+
+     <many-to-one
+        name="forDoc"
+        class="com.plugins.pending.entity.PendingItem"
+        not-null="false"
+        insert="false"
+        update="false"
+    >
+        <column name="fordo_id" />
+    </many-to-one>
+
+</class>
+</hibernate-mapping>

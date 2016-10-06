@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/GQFP/!svn/ver/2/trunk/src/com/plugins/dictionary/controller
+END
+DicTypeQueryController.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/GQFP/!svn/ver/2/trunk/src/com/plugins/dictionary/controller/DicTypeQueryController.java
+END
+DicDataEditController.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/GQFP/!svn/ver/2/trunk/src/com/plugins/dictionary/controller/DicDataEditController.java
+END
+DicTypeEditController.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/GQFP/!svn/ver/2/trunk/src/com/plugins/dictionary/controller/DicTypeEditController.java
+END
+DicDataController.java
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/GQFP/!svn/ver/2/trunk/src/com/plugins/dictionary/controller/DicDataController.java
+END
+DicTypeController.java
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/GQFP/!svn/ver/2/trunk/src/com/plugins/dictionary/controller/DicTypeController.java
+END

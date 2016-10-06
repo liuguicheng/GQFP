@@ -1,0 +1,95 @@
+K 25
+svn:wc:ra_dav:version-url
+V 44
+/svn/GQFP/!svn/ver/2/trunk/dist/lib/ckeditor
+END
+INSTALL.html
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/GQFP/!svn/ver/2/trunk/dist/lib/ckeditor/INSTALL.html
+END
+ckeditor_basic_source.js
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/GQFP/!svn/ver/2/trunk/dist/lib/ckeditor/ckeditor_basic_source.js
+END
+contents.css
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/GQFP/!svn/ver/2/trunk/dist/lib/ckeditor/contents.css
+END
+ckeditor.asp
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/GQFP/!svn/ver/2/trunk/dist/lib/ckeditor/ckeditor.asp
+END
+ckeditor.php
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/GQFP/!svn/ver/2/trunk/dist/lib/ckeditor/ckeditor.php
+END
+config.js
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/GQFP/!svn/ver/2/trunk/dist/lib/ckeditor/config.js
+END
+.htaccess
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/GQFP/!svn/ver/2/trunk/dist/lib/ckeditor/.htaccess
+END
+CHANGES.html
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/GQFP/!svn/ver/2/trunk/dist/lib/ckeditor/CHANGES.html
+END
+ckeditor.js
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/GQFP/!svn/ver/2/trunk/dist/lib/ckeditor/ckeditor.js
+END
+ckeditor_basic.js
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/GQFP/!svn/ver/2/trunk/dist/lib/ckeditor/ckeditor_basic.js
+END
+LICENSE.html
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/GQFP/!svn/ver/2/trunk/dist/lib/ckeditor/LICENSE.html
+END
+ckeditor_php4.php
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/GQFP/!svn/ver/2/trunk/dist/lib/ckeditor/ckeditor_php4.php
+END
+ckeditor.pack
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/GQFP/!svn/ver/2/trunk/dist/lib/ckeditor/ckeditor.pack
+END
+ckeditor_php5.php
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/GQFP/!svn/ver/2/trunk/dist/lib/ckeditor/ckeditor_php5.php
+END
+ckeditor_source.js
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/GQFP/!svn/ver/2/trunk/dist/lib/ckeditor/ckeditor_source.js
+END

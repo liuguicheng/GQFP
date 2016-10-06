@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  #headInclude()
+  <script type="text/javascript">
+  </script>
+</head>
+<body>
+<div class="PageHeader">
+  <div class="LeftBox Title">系统通讯录</div>
+</div>
+ 
+<div class="PageContainer indieui-scroll">
+<form name="listForm" method="post">
+<input type="hidden" name="submitFlag" value="0">
+<input type="hidden" name="token" value="$!{command.token}">
+<table class="TbList">
+  <thead>
+    <tr> 
+      <th style="width:65px;">序号</th>
+      <th>人员姓名</th>
+      <th style="width:150px;">房间号</th>
+      <th style="width:150px;">办公电话</th>
+      <th style="width:200px;">手机</th>
+      <th style="width:150px;">住宅电话</th>
+    </tr>
+  </thead>
+  <tbody> 
+    #set( $levelArray = [1] )
+    #showStaffContacts($departmentData $staffList $levelArray)
+  </tbody>   
+</table>
+</form>
+</div>
+</body>
+</html>

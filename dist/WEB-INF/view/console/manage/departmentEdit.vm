@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  #headInclude()
+  <script type="text/javascript" src="../script/validator.js"></script>
+  <script type="text/javascript">
+  #if($message)alert("#javaScriptEscape($message)");#end
+  validator.formName = "editForm";
+  validator.addNormalCheckPoint("name", "部门名称", "checkNotNull;checkNotEmpty");
+  validator.addNormalCheckPoint("orderNumber", "顺序号", "checkNotNull;checkNotEmpty;checkInt");
+  validator.addRangeCheckPoint("orderNumber", "顺序号", "checkEquGreater", 0, 99999999, "");
+  validator.addRangeCheckPoint("inf", "描述信息", "checkLength", null, "100", "描述信息的长度超过限制！");
+
+  function doSave()  {
+    var e = document.editForm;
+    if (checkInput(e)) {
+      e.submitFlag.value = "1";
+      e.submit();
+    }
+  }
+  function checkInput(e) {
+    if (e.submitFlag.value == "1") {
+      alert("当前页面已经提交，请稍等！");
+      return false;
+    }
+    if (e.parentId.value == e.id.value) {
+      alert("请选择正确的上级部门！");
+      return false;
+    }
+    if (!validator.checkAll()) {
+      return false;
+    }
+
+    return true;
+  }
+  function selectedDepartment(data) {
+    var e = document.editForm;
+    e.parentId.value = data.id;
+    e.parentName.value = data.name;
+  }
+
+  function doReturn() {
+    location.href = "../manage/subDepartmentList.do?parentId=" + "$!{command.parentId}";
+  }
+  </script>
+</head>
+<body class="easyui-layout indieui-form">
+
+<div data-options="region:'center',title:'编辑部门信息',iconCls:'icon-edit', collapsible:false" >
+<form name="editForm" method="post" action="#getRequestUri()" class="indieui-form">
+<input type="hidden" name="submitFlag" value="0" />
+<input type="hidden" name="isIndependent" value="$!{command.isIndependent}" />
+<input type="hidden" name="id" value="$!{command.id}">
+<input type="hidden" name="rank" value="$!{command.rank}"/>
+
+<table class="TbCommon">
+  <tr>
+    <td class="TdLabel" style="width:100px;">上级部门</td>
+    <td class="TdInput" colspan="3">
+      <input type="hidden" id="depName" name="depName" value="$!{depName}"/>
+      <input type="hidden" name="parentId" value="$!{command.parentId}" />
+      ##<input type="text" name="parentName" value="$!{command.parentName}" readonly="y" class="inputobject"/>
+      #if(${command.id})
+        <input type="text" name="parentName" value="#htmlEscape($!{command.parentName})" readonly="y" class="inputobject"/>
+        #selectDepartmentAction("选择部门" "$!{currentUser.belong.id}" "selectedDepartment")
+      #else #lookUpDict($dicData.dicDepartment "$!{command.parentId}")
+      #end
+      </td>
+  </tr>
+
+  <tr>
+    <td class="TdLabel">#requiredInput("名称")</td>
+    <td class="TdInput">
+      <input type="text" name="name" value="#htmlEscape($!{command.name})" style="width:98%;"/>
+    </td>
+    <td class="TdLabel">#requiredInput("序号")</td>
+    <td class="TdInput">
+      <input type="text" name="orderNumber" value="#showNumber($!{command.orderNumber})" style="width:98%;" maxlength="9"/>
+    </td>    
+  </tr>
+  <tr>
+    <td class="TdLabel">简称</td>
+    <td class="TdInput" colspan="3">
+      <input type="text" name="alias" value="#htmlEscape($!{command.alias})" style="width:98%;" maxlength="20"/>
+    </td>
+  </tr>
+  <tr>
+    <td class="TdLabel">区域编码</td>
+    <td class="TdInput" colspan="3">
+      <input type="text" name="code" value="#htmlEscape($!{command.code})" maxlength="6"/>
+      <span class="tips">六位行政区域编码，仅在录入城区单位时填写。</span>
+      ##<span class="tips">六位行政区域编码。</span>
+    </td>    
+    
+  </tr>
+  <tr>
+    <td class="TdLabel">描述信息</td>
+    <td class="TdInput" colspan="3">
+      <textarea name="inf" style="width:98%;height:50px;" >#htmlEscape($!{command.inf})</textarea>
+    </td>
+  </tr>
+</table>
+</form>
+</div>
+
+<div data-options="region:'south'" style="overflow:hidden">
+  <div class="CommandTool">
+  <input type="button" value="保 存" style="width:100px" onclick="javascript:doSave();"/>
+  <input type="button" value="返 回" style="width:100px" onclick="javascript:doReturn();"/>
+  </div>
+</div>
+</body>
+</html>

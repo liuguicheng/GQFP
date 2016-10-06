@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  #headInclude()
+  <script type="text/javascript" src="../script/validator.js"></script>
+  <script src="../lib/ckeditor/ckeditor.js" type="text/javascript"></script>
+  <script type="text/javascript">
+  #if($message)alert("#javaScriptEscape($message)");#end
+  $(document).ready(function(){
+      CKEDITOR.replace('contentText' );
+  });
+  <!--
+  validator.formName = "editForm";
+  validator.addNormalCheckPoint("channelId", "栏目", "checkNotNull;checkNotEmpty", "请选择具体子栏目");
+  validator.addNormalCheckPoint("title", "标题", "checkNotNull;checkNotEmpty");
+
+  function checkInput(e) {
+    if (e.submitFlag.value == "1") {
+      alert("当前页面已经提交，请稍等！");
+      return false;
+    }
+    if (!validator.checkAll()) {
+      return false;
+    }
+
+    return true;
+  }
+
+  function doSave()  {
+    var e = document.editForm;
+    if (checkInput(e)) {
+      e.submitFlag.value = "1";
+      e.submit();
+    }
+  }
+
+  function doReturn() {
+    location.href = "../cms/contentManageList.do?channelId=$!{command.channelId}";
+  }
+
+  function editServiceWindowCallback(data) {
+    alert(data);
+  }
+  function selectChannel() {
+    var url = "../cms/channelSelect.do";
+    top.openDialog("选择栏目", url, selectOrgCallback);
+  }
+  function selectOrgCallback(obj) {
+    $("#channelId").val(obj.channelId);
+    $("#channelIdText").val(obj.channelName);
+    //alert($("#${nameField}").val());
+  }
+  -->
+  </script>
+</head>
+<body>
+<form name="editForm" method="post" action="#getRequestUri()">
+<input type="hidden" name="submitFlag" value="0" />
+<input type="hidden" name="token" value="$!{token}" />
+<input type="hidden" id="contentId" name="contentId" value="$!{command.contentId}">
+<input type="hidden" id="channelPath" name="channelPath" value="$!{channelPath}">
+
+<div class="PageHeader" onDblClick="javascript: if (event.button == 1) $('#channelSelectArea').show();">
+  <div class="LeftBox Title">编辑#lookUpDict($dicData.dicCmsChannel "$!{command.channelId}")内容信息  </div>
+</div>
+
+<div class="indieui-scroll indieui-form">
+  <table class="TbCommon">
+    <tr id="channelSelectArea" style="display:none">
+      <td class="TdLabel" style="width:100px">#requiredInput('所属栏目')</td>
+      <td  class="TdInput">
+        <input type="hidden" id="channelId" name="channelId" value="$!{command.channelId}"/>
+        #if (${command.channelId})
+        #set($cname = "#lookUpDict($dicData.dicCmsChannel ${command.channelId})")
+        #else #set($cname="根目录") #end
+        <input type="text" id="channelIdText" name="channelIdText" value="$cname"/>
+        <input type="button" value="选择" onclick="javascript:selectChannel()"/>
+      </td>
+    </tr>
+    <tr class="ClearBottom">
+      <td class="TdLabel" style="width:100px">#requiredInput('标题')</td>
+      <td  class="TdInput">
+          <input type="text" name="title" value="#htmlEscape($!{command.title})"  maxlength='100' style="width:90%" />
+      </td>
+    </tr>
+  </table>
+  <table class="TbCommon">
+    <tr>
+      <td class="TdLabel" style="width:100px">状态</td>
+      <td class="TdInput">
+        #formSingleSelectDictionary2("status" "$!{command.status}" $dicData.dicCmsContentStatus "")
+      </td>
+      <td class="TdLabel" style="width:100px">发布时间</td>
+      <td class="TdInput">
+        <input type="text" name="releaseDate" value="#formatTime(${command.releaseDate})" dateformat="yyyy-MM-dd HH:mm:ss"/>
+      </td>
+    </tr>
+    <tr>
+      <td class="TdLabel">是否置顶</td>
+      <td class="TdInput">
+        #formRadioButtonDictionary("topLevel" "$!{command.topLevel}" $dicData.dicWhether "" "")
+      </td>
+      <td class="TdLabel"></td>
+      <td class="TdInput">
+      </td>
+    </tr>
+    <tr align="center">
+      <td class="TdLabel">内容</td>
+      <td class="TdInput" colspan="3">
+        <textarea name="contentText" id="contentText" style="height:180px;width:90%">#htmlEscape($!{command.contentText})</textarea>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="CommandTool indieui-form">
+  <input type="button"  value="保存" onclick="doSave();" />
+  <input type="button"  value="返回" onclick="doReturn();" />
+</div>
+</form>
+
+</body>
+</html>

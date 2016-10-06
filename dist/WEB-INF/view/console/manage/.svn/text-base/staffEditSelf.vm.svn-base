@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  #headInclude()
+  <script type="text/javascript" src="../script/validator.js"></script>
+  <script type="text/javascript">
+  #if($message)alert("#javaScriptEscape($message)");#end
+  <!--
+validator.formName = "editForm";
+    validator.addNormalCheckPoint("loginName", "登陆名", "checkNotNull;checkNotEmpty");
+    validator.addRangeCheckPoint("description", "备注", "checkLength", null, "100", "备注不能超过100个字符！");
+
+#if($templeteUpdate)
+  parent.location.reload();
+#end
+function confirmPassword()
+  {
+    var e = document.editForm;
+    var password = e.password.value ;
+    var re_letter = /[a-zA-Z]+/.test(password);
+    var re_number = /[0-9]+/.test(password);
+    var re_symbol = /[!@#$%^&*()]+/.test(password);
+    var re_lenght = /[0-9a-zA-Z!@#$%^&*()]{8,18}/.test(password);
+
+    if(password && !re_lenght ){
+      alert("密码长度必须为8-16位!");
+      return false;
+    } else if (password && !re_letter){
+      alert("密码必须包含字母!");
+      return false;
+    } else if (password && !re_number) {
+      alert("密码必须包含数字!");
+      return false;
+    } else if (password && !re_symbol){
+      alert("密码必须包含特殊字符");
+      return false;
+    }
+    if (e.password.value != e.confirm_password.value) {
+      alert('两次输入密码不一样,请重新输入!');
+      return false;
+    }
+   
+    return true;
+  }
+  
+  function checkInput(e) {
+    if (e.submitFlag.value == "1") {
+        alert("当前页面已经提交，请稍等！");
+        return false;
+    }
+    return validator.checkAll();
+  }
+
+function showimg(){
+e = document.editForm;
+if (e.n_flag_webModule.checked == true) {
+    webPageModel.style.display = "";
+    advance.innerText="选择模板"
+}else{
+    webPageModel.style.display = "none";
+    advance.innerText="选择模板"
+}
+}
+
+function saveData(){
+var e = document.editForm;
+var pass = e.password.value;
+    if (checkInput(e) &&confirmPassword() && confirm("您确定要更改个人资料吗？")) {
+       e.submitFlag.value = "1";
+       e.submit();
+    }
+}
+
+function setRadioValue(obj){
+  obj.checked = true;
+}
+  -->
+  
+  </script>
+  <style type="text/css" media=print>
+.noprint{display : none }
+</style>
+</head>
+
+<body>
+<form name="editForm" method="post" action="#getRequestUri()" class="indieui-form">
+<input type="hidden" name="submitFlag" value="0" />
+<input type="hidden" name="id" value="$!{staff.id}" />
+<input type="hidden" name="valid" value="$!{staff.valid}" />
+<input type="hidden" name="orderNumber" value="$!{staff.orderNumber}" />
+<input type="hidden" name="memberId" value="$!{staff.memberId}"/>
+#foreach($item in $staff.workQueue)
+<input type="hidden" name="queueName" value="$!{item}" />
+#end
+#foreach($data in $staff.systemRole)
+<input type="hidden" name="roleId" value="$!{data.id}"/>
+#end
+<div class="indieui-scroll ">
+  <table cellpadding="0" cellspacing="0" class="TbCommon noprint">
+      <tr align="center">
+        <td class="TdLabel" style="width:100px;">#requiredInput('姓名')：</td>
+        <td class="TdInput">$!{staff.name}
+          <input type="hidden" name="name" value="$!{staff.name}"/>
+        </td>
+         <td class="TdLabel" style="width:100px;">#requiredInput('登陆名')：</td>
+        <td class="TdInput">$!{staff.loginName}
+          <input type="hidden" name="loginName" value="$!{staff.loginName}"/>
+        </td>
+      </tr>
+     <tr align="center">
+        <td class="TdLabel" style="width:100px;">#requiredInput('部门')：</td>
+        <td class="TdInput" colspan=3>$!{staff.department.name}
+          <input type="hidden" name="department" value="$!{staff.department.id}" />
+          <input type="hidden" name="departmentName" value="$!{staff.department.name}" readonly="y"/>
+        </td>
+      </tr>
+      <tr align="center">
+        <td class="TdLabel">新密码：</td>
+        <td class="TdInput">
+          <input type="password" name="password" value="" maxlength='16'/>
+        </td>
+         <td  class="TdInput" colspan=2>
+            <font color=#ff0000>（如修改密码，请确认新密码；留空，则保留原密码）</font>
+         </td>
+      </tr>
+      <tr align="center">
+         <td class="TdLabel">确认新密码：</td>
+        <td class="TdInput">
+          <input type="password" name="confirm_password" value="" maxlength='16'/>
+        </td>
+        <td  class="inputarea" colspan=2 align="left"><font color=#ff0000>密码长度为8-16位，区分字母大小写。登录密码必须同时包含字母和数字，也可以使用特殊字符组成。 </font></td>
+      </tr>
+      <tr align="center">
+        <td class="TdLabel">电话：</td>
+        <td class="TdInput">
+          <input type="text" name="phone" value="#htmlEscape($!{staff.phone})"  maxlength='20'/>
+        </td>
+        <td class="TdLabel">分机号：</td>
+        <td class="TdInput">
+          <input type="text" name="extensionNumber" value="#htmlEscape($!{staff.extensionNumber})" maxlength='10'/>
+        </td>
+      </tr>
+      <tr align="center">
+        <td class="TdLabel">传真：</td>
+        <td class="TdInput">
+          <input type="text" name="fax" value="#htmlEscape($!{staff.fax})" maxlength='20'/>
+        </td>
+         <td class="TdLabel">手机：</td>
+        <td class="TdInput">
+          <input type="text" name="mobile" value="#htmlEscape($!{staff.mobile})" maxlength='20'/>
+        </td>
+      </tr>
+
+      <tr align="center">
+        <td class="TdLabel">email：</td>
+        <td colspan="3"  class="TdInput">
+          <input type="text" name="email" value="#htmlEscape($!{staff.email})"  style="width:90%"  maxlength='60'/>
+        </td>
+      </tr>
+      <tr align="center">
+        <td class="TdLabel">备注：</td>
+        <td  class="TdInput" colspan=3>
+            <textarea name="description" style="width:90%"    style='height:50px'>#htmlEscape($!{staff.description})</textarea>
+        </td>
+      </tr>
+        <!--
+        <tr align="center">
+          <td class="TdLabel">模板选择：</td>
+          <td  class="TdInput" colspan=3>
+              ##<input type="checkbox" name="n_flag_webModule" value=1 onClick=showimg()><span id=advance>选择模板</span>style="display: none"
+               <table width="94%" border="1" align="center" cellpadding="4" cellspacing="0" bordercolor="#EFEFEF" class="table-line" id="webPageModel" >
+                  <tr>
+                      #foreach($webModId in ${dicWebpagemodule.keySet()})
+                          #set( $webMod = $dicWebpagemodule.get($webModId))
+                  <td align="center" height="133" class="lm_table_bs">
+                     <table width="100%" border="0" cellspacing="1" cellpadding="3" align="center" class="lm_table_ds">
+                        <label for="allradio$velocityCount" style="CURSOR:hand" >
+                        <tr>
+                           <td  align="center" height="133" class="lm_table_bs">
+                           <img src="$webMod.data.exampleurl" width="150" height="111" border="1" onclick="javascript:setRadioValue(document.getElementById('allradio$velocityCount'));">
+                           </td>
+                        </tr>
+                        <tr align="center">
+                           <td  height="28" class="lm_table_top">
+                             <input type="radio" name="sysTemplate"  id="allradio$velocityCount" style="CURSOR:hand" onclick="javascript:setRadioValue(this);"  value="$webModId" #if($webModId == $staff.sysTemplate) checked #end>
+                              模板的名称 : $webMod.data.pagemodname
+                           </td>
+                        </tr>
+                        </label>
+                     </table>
+                  </td>
+                  #if($velocityCount % 3 == 0 && ${dicWebpagemodule.size()} != $velocityCount)
+                        </tr><tr>
+                  #end
+                  #end
+                 </tr>
+               </table>
+              </td>
+            </tr>
+            -->
+  </table>
+  <!--
+  <p style="text-align:center;">
+  <img src="../main/getQRCode.do"/>
+  </p>
+  
+  -->
+</div>
+
+<div class="CommandTool noprint">
+  <input type="button" value="保存" onclick="javascript:saveData();"/>
+  ##<input type="button" value="打印二维码" onclick="javascript:window.print();"/>
+</div>
+</form>
+
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  #headInclude()
+  <script type="text/javascript">
+  function selectStaffSubDepartmentList(departmentId, depName) {
+    document.getElementById("departmentId").value = departmentId;
+    document.getElementById("staffFrame").src = "../manage/staffSubDepartmentListInner.do?departmentId=" + departmentId;
+  }
+  //上移
+  function moveUp() {
+    document.frames("staffFrame").moveUp();
+  }
+  //下移
+  function moveDown() {
+    document.frames("staffFrame").moveDown();
+  }
+  //排序
+  function sort() {
+    document.frames("staffFrame").sort();
+  }
+  //删除人员
+  function deleteStaff() {
+    document.frames("staffFrame").deleteStaff();
+  }
+  function showButton(val) {
+    var buttons = document.getElementsByName("actionButton");
+    for (var i = 0; i < buttons.length; i++) {
+      if (val) {
+        buttons[i].style.display = '';
+      } else {
+        buttons[i].style.display = 'none';
+      }
+    }
+  }
+  </script>
+</head>
+<body class="easyui-layout">
+  <div data-options="region:'west',title:'科室人员管理',iconCls:'icon-topic',split:true, width:300">
+    <input type="hidden" id="departmentId" value="$!{departmentId}">
+    #showTree($departmentTree "$!{appContext.depName}" 1 "allNode" "selectStaffSubDepartmentList")
+  </div>
+  <div data-options="region:'center'" style="overflow:hidden">
+    <iframe id="staffFrame" name="staffFrame" src="" style="width:100%;height:100%"></iframe>
+  </div>
+</body>
+<script type="text/javascript">
+#if($departmentId) selectStaffSubDepartmentList('$!departmentId'); #end
+</script>
+</html>

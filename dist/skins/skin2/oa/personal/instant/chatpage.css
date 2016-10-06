@@ -1,0 +1,373 @@
+
+*{
+	padding:0;
+	margin:0;
+	border:none;
+	*border-width:0px;
+	_border-width:0px;
+	list-style:none;
+	font-family:  "微软雅黑","宋体",Verdana, Geneva, sans-serif;
+	
+	scrollbar-face-color: #dbebfe; 
+    scrollbar-shadow-color: #b8d6fa; 
+    scrollbar-highlight-color: #ffffff; 
+    scrollbar-3dlight-color: #dbebfe; 
+    scrollbar-darkshadow-color:#458ce4; 
+    scrollbar-track-color: #f3f3f3; 
+    scrollbar-arrow-color: #b8d6fa;
+}
+html{
+	height:100%;
+	width:100%;
+}
+body {
+	color: #333;
+	font-size: 14px;
+	line-height: 1.5;
+	background-color:;
+	min-height:600px;
+	min-width:900px;
+	height:100%;
+	width:100%;
+	background-repeat: repeat;
+	*overflow:hidden;
+	_overflow:hidden;
+	overflow:auto;
+}
+img {
+	vertical-align:middle;
+}
+ul {
+	padding:0;
+	margin:0;
+}
+a {
+	color:#333;
+	text-decoration:none;
+	overflow:hidden;
+	text-overflow:ellipsis;
+	-webkit-text-overflow: ellipsis;
+	-o-text-overflow: ellipsis;
+	white-space:nowrap;
+}
+a:hover {
+	color:#F60;
+}
+.Header,.Body,.Footer{
+	width:100%;
+}
+.Body{
+	height:715px;
+}
+.Header{
+	height:80px;
+}
+.Footer{
+	height:40px;
+}
+
+/* 附加样式 */
+.ClearFix,Clear {
+	clear:both;
+}
+.Show{
+	display:block;
+}
+.Hide{
+	display:none;
+}
+.MarginHolder {
+	line-height:0px;
+	height:0px;
+	width:0px;
+	margin:0;
+	padding:0;
+}
+label.Error{color:red;display:block;padding:3px 0px;}
+label.Generated{display:none;}
+
+.ChatWin{
+	width:850px;
+	height:500px;
+	background-color: #FFF;
+	position:absolute;
+	left:50%;
+	top:50%;
+	margin-left:-425px;
+	margin-top:-250px;
+	
+	-moz-border-radius: 2px;
+	-webkit-border-radius: 2px;
+	border-radius: 2px;
+	
+	-moz-box-shadow: 0 2px 3px 0 rgba(0,0,0,.1) inset;
+	-webkit-box-shadow: 0 2px 3px 0 rgba(0,0,0,.1) inset;
+	box-shadow: 0 2px 3px 0 rgba(0,0,0,.1) inset;
+	
+	border:1px solid  #d4d4d4;
+}
+.ChatWin .ChatHeader{
+	background-color: #f5f5f5;
+	border-bottom:1px solid  #d4d4d4;
+}
+.ChatWin .ChatHeader, .ChatWin .ChatHeader .Icon, .ChatWin .ChatHeader .Title{
+		height:39px;
+		line-height:39px;
+}
+.ChatWin .ChatHeader .Icon{
+	width:55px;
+	display:block;
+	float:left;
+	background-image: url(images/chat.png);
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+.ChatWin .ChatHeader .Title{
+	display:block;
+	float:left;
+	color: #8a8a8a;
+}
+.ChatWin .ChatBody, .ChatWin .ChatBody .ChatDlg, .ChatWin .ChatBody .ChatSide{
+	height:460px;
+}
+.ChatWin .ChatBody .ChatDlg{
+	position:relative;
+	margin-left:250px;
+}
+.ChatWin .ChatBody .ChatDlg iframe{
+	width:100%;
+	height:100%;
+	border:none;
+}
+.ChatWin .ChatBody .ChatSide{
+	width:249px;
+	float:left;
+	border-right:1px solid  #d4d4d4;
+}
+.ChatWin .ChatBody .ChatSide .ChatGroup{
+	height:425px;
+}
+.ChatWin .ChatBody .ChatSide .Tools{
+	height:34px;
+	background-color:#f7f7f7;
+	border-top:1px solid  #d4d4d4;
+}
+
+/* 聊天内容页面 */
+.ChatContentTool{
+	width:670px;
+	height:350px;
+	/*border:#000000 solid 1px;*/
+}
+.ChatContainer{
+	width:495px;
+	height:350px;
+	float:left;
+	background-color: #FFF;
+	border-right:#FFCC66 solid 1px;
+	overflow:auto;
+}
+.ChatSender{
+	height:100px;
+	background-color: #f8f8f8;
+}
+.ChatSender .Txt{
+	margin:3px;
+	border:1px solid #ccc;
+	height:53px;
+	width:99%;
+	font-size: 14px;
+	color: #666;
+	padding:2px;
+	display:block;
+}
+.ChatSender .Txt:-moz-placeholder { color: #ccc; font-size:14px;}
+.ChatSender .Txt:-ms-input-placeholder { color: #ccc; font-size:14px;}
+.ChatSender .Txt::-webkit-input-placeholder { color: #ccc; font-size:14px; }
+
+.ChatSender .ChatTools{
+	height:35px;
+	line-height:35px;
+	background-color:#f3f3f3;
+	padding-left:5px;
+	padding-right:5px;
+	color: #CCC;
+}
+.ChatSender .ChatTools a{
+	height:35px;
+	width:36px;
+	display:block;
+	float:left;
+	background-image: url(images/chat_tool.png);
+	background-repeat: no-repeat;
+	
+}
+.ChatSender .ChatTools a:hover{
+	cursor:pointer;
+	background-color: #CCC;
+}
+.ChatSender .ChatTools a.Smiley{
+	background-position: center -2px;
+}
+.ChatSender .ChatTools a.Picture{
+	background-position: center -82px;
+}
+.ChatSender .ChatTools .Attachment{
+	background-position: center -42px;
+}
+.ChatSender .ChatTools .Btn{
+	width:73px;
+	height:23px;
+	line-height:23px;
+	border: 1px solid #ccc;
+	-moz-border-radius: 3px;      /* Gecko browsers */
+	-webkit-border-radius: 3px;   /* Webkit browsers */
+	border-radius:3px;
+	float:right;
+	margin-top:5px;
+	background-color: #090;
+	color: #FFF;
+}
+.tools{
+  width:170px;
+  height:350px;
+  background-color: #FFF;
+  float:right;
+  overflow:auto;
+}
+.ChatSender .ChatTools .Btn:hover{
+	background-color: #F60;
+	cursor:pointer;
+}
+.ChatContainer .ChatList{
+	margin:5px;
+	display:block;
+}
+.ChatContainer .ChatList li.ChatItem{
+	margin-top:12px;
+	display:block;
+	clear:both;
+	height:auto;
+}
+.ChatContainer .ChatList  .ChatItem  .Head,
+.ChatContainer .ChatList  .ChatItem  .Split,
+.ChatContainer .ChatList  .ChatItem  .Content{
+	float:left;
+}
+.ChatContainer .ChatList .ChatItem .Head{
+	width:60px;
+	text-align:center;
+}
+.ChatContainer .ChatList .ChatItem .Split{
+	width:10px;
+	height:60px;
+	background-image: url(images/chat_dlg.png);
+	background-repeat: no-repeat;
+	background-position: left center;
+	margin-right:-1px;
+	position:relative;
+}
+.ChatContainer .ChatList  .Content{
+	*width:440px;
+	_width:440px;
+	max-width:440px;
+}
+.ChatContainer .ChatList  .Content  h2.SenderInfo span{
+	display:block;
+	float:left;
+}
+.ChatContainer .ChatList  .Content  h2.SenderInfo{
+	height:20px;
+	line-height:20px;
+	font-weight: normal;
+	white-space:nowrap;
+	overflow:hidden;
+	text-overflow:ellipsis;
+	-webkit-text-overflow: ellipsis;
+	-o-text-overflow: ellipsis;
+}
+.ChatContainer .ChatList  .Content  h2.SenderInfo .Name{
+	color: #069;
+	font-size: 12px;
+	font-weight: bold;
+	padding-left:5px;
+	padding-right:10px;
+}
+.ChatContainer .ChatList  .Content  h2.SenderInfo .Time{
+	font-size: 12px;
+	color: #a6a6a6;	
+}
+.ChatContainer .ChatList  .Content .ChatContent{
+	font-size: 14px;
+	color: #333;
+	background-color: #f7f7f7;
+	padding:8px 10px;
+	 -moz-border-radius: 3px;      /* Gecko browsers */
+	-webkit-border-radius: 3px;   /* Webkit browsers */
+	border-radius:3px;
+	border:1px solid #bdbcbd;
+	line-height:1.8;
+	word-break:break-all;
+	max-width:370px;
+	
+	-moz-box-shadow: 0 1px 1px 0 rgba(0,0,0,.1) inset;
+	-webkit-box-shadow: 0 1px 1px 0 rgba(0,0,0,.1) inset;
+	box-shadow: 0 1px 1px 0 rgba(0,0,0,.1) inset;
+}
+.ChatContainer .ChatList .ChatItem .Head img{
+	width:49px;
+	height:49px;
+	border:1px solid #ccc;
+	 -moz-border-radius: 3px;      /* Gecko browsers */
+	-webkit-border-radius: 3px;   /* Webkit browsers */
+	border-radius:3px;
+}
+
+.ChatContainer .ChatList  .Self  .Head,
+.ChatContainer .ChatList  .Self  .Split,
+.ChatContainer .ChatList  .Self  .Content{
+	float:right;
+}
+.ChatContainer .ChatList  .Self .Content .ChatContent{
+	background-color: #a8d44c;
+	border:1px solid #060;
+	color: #242424;
+}
+.ChatContainer .ChatList  .Self .Content  h2.SenderInfo span{
+	float:right;
+}
+.ChatContainer .ChatList .Self .Split{
+	margin-right:0;
+	margin-left:-1px;
+	background-position: -94px center;
+}
+
+/* 添加人员样式 */
+  .FormatInputBtn{
+	margin:3px 1px;
+	border:#83B1F2 1px solid;
+	/*background-image: url(images/common_btn_bg.png);
+	background-repeat: repeat-x;
+	background-position: center center;*/
+	padding: 2px 15px 2px 15px;
+	*padding: 1px 10px 1px 10px;
+	_padding: 1px 10px 1px 10px;
+	white-space:nowrap;
+	text-align:center;
+	width:auto;
+	height:auto;
+	line-height:1.5;
+	vertical-align:middle;
+	background-color: #09C;
+	color: #FFF;
+	cursor:pointer;
+	border-radius: 2px;
+}
+.FormatInputBtn:hover{
+	/*background-image: url(images/btn_bg_hover.gif);*/
+	border:1px solid #096;
+	color: #FFF;
+	background-color: #093;
+}
+
+   

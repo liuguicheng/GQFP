@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/GQFP/!svn/ver/2/trunk/dist/WEB-INF/view/plugins/dirTree
+END
+dirManage.vm
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/GQFP/!svn/ver/2/trunk/dist/WEB-INF/view/plugins/dirTree/dirManage.vm
+END
+dirDataManage.vm
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/GQFP/!svn/ver/2/trunk/dist/WEB-INF/view/plugins/dirTree/dirDataManage.vm
+END
+dirTypeList.vm
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/GQFP/!svn/ver/2/trunk/dist/WEB-INF/view/plugins/dirTree/dirTypeList.vm
+END
+selectDirData.vm
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/GQFP/!svn/ver/2/trunk/dist/WEB-INF/view/plugins/dirTree/selectDirData.vm
+END
+dirTypeEdit.vm
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/GQFP/!svn/ver/2/trunk/dist/WEB-INF/view/plugins/dirTree/dirTypeEdit.vm
+END
+dirDataList.vm
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/GQFP/!svn/ver/2/trunk/dist/WEB-INF/view/plugins/dirTree/dirDataList.vm
+END
+dirDataEdit.vm
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/GQFP/!svn/ver/2/trunk/dist/WEB-INF/view/plugins/dirTree/dirDataEdit.vm
+END

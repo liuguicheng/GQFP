@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/GQFP/!svn/ver/2/trunk/dist/WEB-INF/view/plugins/sms
+END
+smsSendQuery.vm
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/GQFP/!svn/ver/2/trunk/dist/WEB-INF/view/plugins/sms/smsSendQuery.vm
+END
+smsReplyQuery.vm
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/GQFP/!svn/ver/2/trunk/dist/WEB-INF/view/plugins/sms/smsReplyQuery.vm
+END
+smsSendManage.vm
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/GQFP/!svn/ver/2/trunk/dist/WEB-INF/view/plugins/sms/smsSendManage.vm
+END
+smsSendFailQuery.vm
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/GQFP/!svn/ver/2/trunk/dist/WEB-INF/view/plugins/sms/smsSendFailQuery.vm
+END
+smsEdit.vm
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/GQFP/!svn/ver/2/trunk/dist/WEB-INF/view/plugins/sms/smsEdit.vm
+END

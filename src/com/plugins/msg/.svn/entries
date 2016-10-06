@@ -1,0 +1,64 @@
+8
+
+dir
+72
+https://192.168.1.118/svn/GQFP/trunk/src/com/plugins/msg
+https://192.168.1.118/svn/GQFP
+
+
+
+2016-09-07T09:42:09.304169Z
+2
+ZBJ
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+7eaa1c50-b5f8-8d46-a0b5-e5067a1f1115
+
+MsgHelper.java
+file
+
+
+
+
+2016-09-08T07:57:33.375000Z
+ad94dc33b0fd37fbc81b3eb347d95b1c
+2016-09-07T09:42:09.304169Z
+2
+ZBJ
+
+command
+dir
+
+controller
+dir
+
+entity
+dir
+
+plugins-msg.config.xml
+file
+82
+
+
+
+2016-09-24T08:28:29.831000Z
+92dc70239f057e80306dacadd5afdc85
+2016-09-26T01:11:33.015779Z
+82
+LGC
+
+service
+dir
+

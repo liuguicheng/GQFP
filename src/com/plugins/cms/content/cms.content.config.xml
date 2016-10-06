@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+
+    <bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+        <property name="mappings">
+            <props>
+
+                <!-- 服务项目信息 -->
+                <prop key="cms/contentEdit.do">cmsContentEditController</prop>
+                <prop key="cms/content*.do">cmsContentController</prop>
+
+            </props>
+        </property>
+    </bean>
+    <bean id="cmsContentQueryUtil" class="org.springline.beans.dataquery.support.SimpleQueryMethod">
+        <property name="valueObjectClassName"><value>com.plugins.cms.entity.CmsContent</value></property>
+        <property name="tableAlias"><value>content</value></property>
+        <property name="orderByClause"><value>topLevel desc, releaseDate desc</value></property>
+        <property name="queryParam">
+            <list>
+                <value>channelId,channelId,EQU</value>
+                <value>title,title,LIKE</value>
+                <value>status,status,EQU</value>
+                <value>releaseDate,releaseDateUp,GT_EQU</value>
+                <value>releaseDate,releaseDateDown,LESS_EQU</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="cmsContentDao" class="com.plugins.cms.content.service.dao.hibernate.HibernateCmsContentDao">
+        <property name="sessionFactory"><ref bean="sessionFactory" /></property>
+        <property name="cmsContentQueryUtil"><ref bean="cmsContentQueryUtil" /></property>
+    </bean>
+
+
+    <bean id="cmsContentService" class="com.plugins.cms.content.service.spring.SpringCmsContentService">
+        <property name="contentDao"><ref bean="cmsContentDao" /></property>
+    </bean>
+
+	<!-- 
+    <bean id="cmsContentServiceProxy" parent="serviceProxyFactory">
+        <property name="target"><ref local="cmsContentService" /></property>
+    </bean>
+     -->
+
+    <bean id="cmsContentEditController" class="com.plugins.cms.content.controller.CmsContentEditController">
+        <property name="sessionForm"><value>true</value></property>
+        <property name="commandClass"><value>com.plugins.cms.content.command.CmsContentEditInfo</value></property>
+        <property name="formView"><value>cms/content/contentEdit</value></property>
+        <property name="contentService"><ref bean="cmsContentService" /></property>
+        <property name="successView"><value>../cms/contentManageList.do</value></property>
+    </bean>
+
+    <bean id="cmsContentController" class="com.plugins.cms.content.controller.CmsContentController">
+        <property name="contentService"><ref bean="cmsContentService" /></property>
+    </bean>
+
+<bean class="org.springline.beans.dictionary.support.SystemDictionaryInstance">
+   <property name="identifier"><value>dicCmsContentStatus</value></property>
+   <property name="data">
+          <map>
+            <entry key="0"><value>草稿</value></entry>
+<!--            <entry key="1"><value>审核中</value></entry>-->
+            <entry key="2"><value>审核通过</value></entry>
+<!--            <entry key="3"><value>回收站</value></entry>-->
+          </map>
+   </property>
+</bean>
+</beans>

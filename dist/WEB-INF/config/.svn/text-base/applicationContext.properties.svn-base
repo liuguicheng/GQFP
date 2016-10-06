@@ -1,0 +1,10 @@
+application.appName=\u80A1\u6743\u5206\u914D\u7CFB\u7EDF
+fileserver.rootDirectory=/upfiles/
+fileserver.fileSizeLimit=100
+fileserver.storeType=fs
+fileserver.ftp.url=10.10.0.3
+fileserver.ftp.port=21
+fileserver.ftp.userName=ftp
+fileserver.ftp.password=ftp_user
+smsIP.authority.url=172.17.12.7
+smsPort.authority.url=6800

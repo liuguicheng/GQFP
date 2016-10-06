@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+
+	<!-- 短信发送基础 -->
+	<import resource="classpath:com/systemic/basic/sms/sms.config.xml"/>
+
+	<bean class="org.springline.beans.dictionary.support.SystemDictionaryInstance">
+	   <property name="identifier"><value>dicSmsType</value></property>
+	   <property name="data">
+          <map>
+          	<entry key="00"><value>案件撤回</value></entry>
+			<entry key="A9"><value>立案审批</value></entry>
+			<entry key="C9"><value>处罚审批</value></entry>
+            <entry key="E9"><value>结案审批</value></entry>
+          </map>
+	   </property>
+	</bean>
+</beans>

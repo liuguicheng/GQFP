@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="GQFP"
+  id="myeclipse.1462500218122"
+  context-root="/GQFP"
+  j2ee-spec="5.0"
+  archive="GQFP.war">
+  <attributes>
+    <attribute name="webrootdir" value="dist" />
+  </attributes>
+</project-module>
+

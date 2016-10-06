@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+  <!-- 短信状态 -->
+  <bean class="org.springline.beans.dictionary.support.SystemDictionaryInstance">
+    <property name="identifier"><value>dicSmsState</value></property>
+    <property name="data">
+      <map>
+        <entry key="0"><value>已提交</value></entry>
+        <entry key="1"><value>发送成功</value></entry>
+        <entry key="2"><value>已回复</value></entry>
+        <entry key="8"><value>提交失败</value></entry>
+        <entry key="9"><value>发送失败</value></entry>
+      </map>
+    </property>
+  </bean>
+  <!-- mappings -->
+  <bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+    <property name="mappings">
+      <props>
+        <prop key="plugins/smsSendList.do">pluginsSmsQueryController</prop>
+        <prop key="plugins/smsReplyList.do">pluginsSmsReplyQueryController</prop>
+        <prop key="plugins/smsEdit.do">pluginsSmsController</prop>
+        <prop key="plugins/smsSend.do">pluginsSmsController</prop>
+        <prop key="plugins/smsResend.do">pluginsSmsController</prop>
+        <prop key="plugins/smsAllResend.do">pluginsSmsController</prop>
+        <prop key="plugins/smsSendManage.do">pluginsSmsController</prop>
+        <prop key="plugins/smsSendFailList.do">pluginsSmsFailQueryController</prop>
+      </props>
+    </property>
+  </bean>
+  <!-- query util -->
+  <bean id="pluginsSmsQueryUtil" class="org.springline.beans.dataquery.support.SimpleQueryMethod">
+    <property name="valueObjectClassName"><value>com.plugins.sms.entity.SysSms</value></property>
+    <property name="tableAlias"><value>s</value></property>
+    <property name="orderByClause"><value>sendTime DESC,smsState ASC</value></property>
+    <property name="queryParam">
+      <list>
+        <value>recordId,recordId,EQU</value>
+        <value>receiveNum,receiveNum,LIKE</value>
+        <value>receiveName,receiveName,LIKE</value>
+        <value>receiveId,receiveId,EQU</value>
+        <value>senderName,senderName,LIKE</value>
+        <value>senderId,senderId,EQU</value>
+        <value>smsState,smsState,EQU</value>
+        <value>smsId,smsId,EQU</value>
+        <value>createTime,createTimeUp,GT_EQU</value>
+        <value>createTime,createTimeDown,LESS_EQU</value>
+        <value>smsInfo,smsInfo,LIKE</value>
+      </list>
+    </property>
+  </bean>
+  <bean id="pluginsSmsHistoryQueryUtil" class="org.springline.beans.dataquery.support.SimpleQueryMethod">
+    <property name="valueObjectClassName"><value>com.plugins.sms.entity.SysSmsHistory</value></property>
+    <property name="tableAlias"><value>sh</value></property>
+    <property name="orderByClause"><value>sendTime DESC,smsState ASC</value></property>
+    <property name="queryParam">
+      <list>
+        <value>recordId,recordId,EQU</value>
+        <value>receiveNum,receiveNum,LIKE</value>
+        <value>receiveName,receiveName,LIKE</value>
+        <value>receiveId,receiveId,EQU</value>
+        <value>senderName,senderName,LIKE</value>
+        <value>senderId,senderId,EQU</value>
+        <value>smsState,smsState,EQU</value>
+        <value>smsId,smsId,EQU</value>
+        <value>createTime,createTimeUp,GT_EQU</value>
+        <value>createTime,createTimeDown,LESS_EQU</value> 
+        <value>smsInfo,smsInfo,LIKE</value>       
+      </list>
+    </property>
+  </bean>
+  <bean id="pluginsVSmsQueryUtil" class="org.springline.beans.dataquery.support.SimpleQueryMethod">
+    <property name="valueObjectClassName"><value>com.plugins.sms.entity.VSysSms</value></property>
+    <property name="tableAlias"><value>vs</value></property>
+    <property name="orderByClause"><value>sendTime DESC, createTime DESC, smsState ASC</value></property>
+    <property name="queryParam">
+      <list>
+        <value>recordId,recordId,EQU</value>
+        <value>receiveNum,receiveNum,LIKE</value>
+        <value>receiveName,receiveName,LIKE</value>
+        <value>receiveId,receiveId,EQU</value>
+        <value>senderName,senderName,LIKE</value>
+        <value>senderId,senderId,EQU</value>
+        <value>smsState,smsState,EQU</value>
+        <value>smsId,smsId,EQU</value>
+        <value>createTime,createTimeUp,GT_EQU</value>
+        <value>createTime,createTimeDown,LESS_EQU</value>
+        <value>smsInfo,smsInfo,LIKE</value>      
+      </list>
+    </property>
+  </bean> 
+  <bean id="pluginsSmsReplyQueryUtil" class="org.springline.beans.dataquery.support.SimpleQueryMethod">
+    <property name="valueObjectClassName"><value>com.plugins.sms.entity.SysSmsReply</value></property>
+    <property name="tableAlias"><value>s</value></property>
+    <property name="orderByClause"><value>replyTime DESC</value></property>
+    <property name="queryParam">
+      <list>
+        <value>replyId,replyId,EQU</value>
+        <value>recordId,recordId,EQU</value>
+        <value>smsId,smsId,EQU</value>
+        <value>replyNum,replyNum,LIKE</value>
+        <value>replyInfo,replyInfo,LIKE</value>
+      </list>
+    </property>
+  </bean>
+  <bean id="pluginsSmsReplyHistoryQueryUtil" class="org.springline.beans.dataquery.support.SimpleQueryMethod">
+    <property name="valueObjectClassName"><value>com.plugins.sms.entity.SysSmsReplyHistory</value></property>
+    <property name="tableAlias"><value>sh</value></property>
+    <property name="orderByClause"><value>replyTime DESC</value></property>
+    <property name="queryParam">
+      <list>
+        <value>replyId,replyId,EQU</value>
+        <value>recordId,recordId,EQU</value>
+        <value>smsId,smsId,EQU</value>
+        <value>replyNum,replyNum,LIKE</value>
+        <value>replyInfo,replyInfo,LIKE</value>
+      </list>
+    </property>
+  </bean>
+  <bean id="pluginsVSmsReplyQueryUtil" class="org.springline.beans.dataquery.support.SimpleQueryMethod">
+    <property name="valueObjectClassName"><value>com.plugins.sms.entity.VSysSmsReply</value></property>
+    <property name="tableAlias"><value>vs</value></property>
+    <property name="orderByClause"><value>replyTime DESC</value></property>
+    <property name="queryParam">
+      <list>
+        <value>replyId,replyId,EQU</value>
+        <value>recordId,recordId,EQU</value>
+        <value>smsId,smsId,EQU</value>
+        <value>replyNum,replyNum,LIKE</value>
+        <value>replyInfo,replyInfo,LIKE</value>
+      </list>
+    </property>
+  </bean>     
+  
+  <!-- dao -->
+  <bean id="pluginsSmsDao" class="com.plugins.sms.service.dao.hibernate.HibernateSmsDao">
+    <property name="sessionFactory"><ref bean="sessionFactory"/></property>
+    <property name="smsQueryUtil"><ref bean="pluginsSmsQueryUtil"/></property>
+    <property name="smsHistoryQueryUtil"><ref bean="pluginsSmsHistoryQueryUtil"/></property>
+    <property name="vsmsQueryUtil"><ref bean="pluginsVSmsQueryUtil"/></property>
+    <property name="replyQueryUtil"><ref bean="pluginsSmsReplyQueryUtil"/></property>
+    <property name="replyHistoryQueryUtil"><ref bean="pluginsSmsReplyHistoryQueryUtil"/></property>
+    <property name="vReplyQueryUtil"><ref bean="pluginsVSmsReplyQueryUtil"/></property>
+  </bean>
+  
+   
+  <!-- service -->
+  <bean id="pluginsSmsService" class="com.plugins.sms.service.spring.SpringSmsService">
+    <property name="smsDao"><ref bean="pluginsSmsDao"/></property>
+  </bean>
+  
+  <!-- service proxy -->
+  <!-- 
+  <bean id="pluginsSmsServiceProxy" parent="serviceProxyFactory">
+    <property name="target"><ref local="pluginsSmsService"/></property>
+  </bean> -->
+
+  <bean id="pluginsSmsController" class="com.plugins.sms.controller.SmsController">
+    <property name="smsService"><ref bean="pluginsSmsService"/></property>
+    <property name="viewMap">
+      <props>
+        <prop key="smsEdit">sms/smsEdit</prop>
+        <prop key="smsSend">../plugins/smsEdit.do</prop>
+        <prop key="smsResend">../plugins/smsSendFailList.do</prop>
+        <prop key="smsManage">sms/smsSendManage</prop>
+      </props>
+    </property>
+  </bean>
+  
+  <bean id="pluginsSmsQueryController" class="com.plugins.sms.controller.SmsQueryController">
+    <property name="smsService"><ref bean="pluginsSmsService"/></property>
+    <property name="commandClass"><value>com.plugins.sms.command.SmsQueryInfo</value></property>
+    <property name="successView"><value>sms/smsSendQuery</value></property>
+  </bean>
+  <bean id="pluginsSmsFailQueryController" parent="pluginsSmsQueryController">
+    <property name="successView"><value>sms/smsSendFailQuery</value></property>
+    <property name="queryType"><value>fail</value></property>
+  </bean>
+  <bean id="pluginsSmsReplyQueryController" class="com.plugins.sms.controller.SmsReplyQueryController">
+    <property name="smsService"><ref bean="pluginsSmsService"/></property>
+    <property name="commandClass"><value>com.plugins.sms.command.SmsReplyQueryInfo</value></property>
+    <property name="successView"><value>sms/smsReplyQuery</value></property>
+  </bean>
+  <bean id="pluginsSmsHelperImple" class="com.plugins.sms.support.SmsHelperImpl">
+    <property name="smsService"><ref bean="pluginsSmsService"/></property>
+  </bean> 
+ 
+</beans>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  #headInclude()
+  <script type="text/javascript" src="../script/validator.js"></script>
+  <script type="text/javascript">
+  validator.formName = "editForm";
+  validator.addNormalCheckPoint("operateCode", "菜单编号", "checkNotNull;checkNotEmpty");
+  validator.addNormalCheckPoint("operateName", "菜单名称", "checkNotNull;checkNotEmpty");
+
+  function doSave(){
+    var e = document.editForm;
+    if (checkInput(e)) {
+      e.submitFlag.value = "1";
+      e.submit();
+    }
+  }
+  function checkInput(e) {
+    if (e.submitFlag.value == "1") {
+      alert("当前页面已经提交，请稍等！");
+      return false;
+    }
+    return validator.checkAll();
+  }
+  function doReturn() {
+    document.location.href = "../manage/operateList.do?token=$!{token}";
+  }
+  </script>
+</head>
+<body>
+<div class="PageHeader">
+  <div class="LeftBox Title">编辑页面操作权限</div>
+</div>
+
+<div class="indieui-scroll">
+<form name="editForm" method="post" action="#getRequestUri()" class="indieui-form">
+  <input type="hidden" name="token" value="$!{token}" />
+  <input type="hidden" name="submitFlag" value="0" />
+  <input type="hidden" name="operateId" value="$!{command.operateId}" />
+  <table class="TbCommon">
+    <tr>
+      <td class="TdLabel" style="width:150px;">#requiredInput("页面操作编号")</td>
+      <td class="TdInput">
+    	  <input type="text" name="operateCode" value="#htmlEscape($!{command.operateCode})" style="width:98%" />
+      </td>
+    </tr>
+    <tr>
+      <td class="TdLabel">#requiredInput("页面操作名称")</td>
+      <td class="TdInput">
+    	  <input type="text" name="operateName" value="#htmlEscape($!{command.operateName})" style="width:98%" />
+      </td>
+    </tr>
+    <tr>
+      <td class="TdLabel">备注</td>
+      <td class="TdInput">
+        <input type="text" name="remark" value="#htmlEscape($!{command.remark})" style="width:98%"/>
+      </td>
+    </tr>
+  </table>
+</form>
+</div>
+
+<div class="CommandTool indieui-form">
+  <input type="button" id="btnconfirm" value="保存" onclick="javascript:doSave();"/>
+  <input type="button" id="btnback" value="返回" onclick="javascript:doReturn();"/>
+</div>
+</body>
+</html>

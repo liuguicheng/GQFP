@@ -1,0 +1,27 @@
+/* 整体样式 */
+body{ margin:0px; repeat-x; font:normal 14px "微软雅黑",Arial, Helvetica, sans-serif; color:#333333;scroll:no}
+h1,h2,h3,h4,h5,h6,ul,li,p,span{list-style-type:none;margin:0px;padding:0px;}
+img{ border: none;}
+a { color:#333; text-decoration:none; }
+a:hover { color: #F60;}
+
+/* 信息 */
+.msg{ height:23px; margin:auto; background:url(../msg_bg_s1.jpg) repeat-x; line-height:23px; clear:both;}
+.msg span{ padding-left:15px; color:#006699;}
+
+/* 内容 */
+.con{ height:2555px; margin:auto;}
+
+
+.subNav{ width:179px; height:100%; background:url(../left_bg_s1.jpg) repeat-y; float:left;}
+.leftbanner{ background:url(../leftbanner_s1.jpg) no-repeat; width:177px; height:36px; margin-left:1px;font: bold 14px "宋体"; color:#FFF; text-align:center; line-height:36px;}
+.subNav ul{}
+.subli{ width:179px; height:39px; line-height:38px; background: url(../subNav_li_bg2_s1.jpg) bottom no-repeat;color:#FFF; font-size:14px; font-weight:bold;}
+.subli:hover{ color: #FFF; background:url(../subNav_li_bg_h_s1.jpg) no-repeat; height:39px;}
+.subli span{ padding-left:43px;cursor:hand;color:#FFF}
+
+.subli2{ color: #000; background:url(../subNav_li_bg_f2_s1.jpg) bottom no-repeat; height:39px;line-height:36px; font-size:14px; font-weight:bold;}
+.subli2 span{ padding-left:43px; color: #000}
+
+.t11 {  PADDING-RIGHT: 2px; PADDING-LEFT: 2px; PADDING-BOTTOM: 2px; PADDING-TOP: 2px; background-color:#D9DEE8; height: 25px; width: 150px; text-align: center; ; border: #D9DEE8; border-style: outset; border-top-width: 2px; border-right-width: 2px; border-bottom-width: 2px; border-left-width: 2px}
+.t11:hover {    BORDER-RIGHT: #99CCFF 1px outset; PADDING-RIGHT: 2px; BORDER-TOP: #99CCFF 1px outset; PADDING-LEFT: 2px; PADDING-BOTTOM: 2px; BORDER-LEFT: #99CCFF 1px outset; PADDING-TOP: 2px; BORDER-BOTTOM: #99CCFF 1px outset;background-color:#C8D8F0; height: 25px; width: 150px; text-align: center; }

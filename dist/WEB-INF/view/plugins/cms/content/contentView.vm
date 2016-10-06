@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <title>新闻中心</title>
+  <link href="$!{appContext.skin}/cms.css" rel="stylesheet" type="text/css"/>
+  <script src ="script/jquery-1.8.0.min.js" type="text/javascript"></script>
+  <script src ="../lib/indieui/src/jquery.format.js" type="text/javascript"></script>
+  <script type="text/javascript">
+  
+function doReturn() {
+    location.href = "../cms/contentList.do?token=$!{token}";
+}
+
+  </script>
+</head>
+
+
+<body>
+    <p class="MarginHolder">&nbsp;</p>
+    <div class="Container">
+        <div class="Title">
+        <h1>$!{content.title}</h1>
+        <h3>
+        #if ("$!{content.author}" != "")作者：$!{content.author}&nbsp;&nbsp;&nbsp; #end
+        发布时间：#customFormatDate($!{content.releaseDate} 'yyyy-MM-dd HH:mm')
+      </h3>
+        </div>
+        <div class="Content">$!{content.contentText}</div>
+     
+    <div class="Tools">
+      #if ("$!{channel.isBlank}" == "1")
+        <a href="javascript:window.close()">关闭窗口</a>
+      #else
+        <a href="javascript:doReturn()">返 回</a>
+      #end         
+    </div>
+    <div class="Footer">
+      <!--
+           <ul>
+          #if($!{newsUp.newsId})
+                <li><p>&gt;&gt;上一条:<a href="javascript:doOpen('$!{newsUp.newsId}','$!{newsChannel}');">$!{newsUp.title}</a></p></li>
+                #else
+                <li><p>&gt;&gt;上一条:没有了</p></li>
+                #end
+                #if($!{newsDown.newsId})
+                <li><p>&gt;&gt;下一条:<a href="javascript:doOpen('$!{newsDown.newsId}','$!{newsChannel}');">$!{newsDown.title}</a></p></li>
+                #else
+                <li><p>&gt;&gt;下一条:没有了</p></li>
+                #end
+           </ul>
+           -->
+       </div>
+    </div>
+
+
+
+
+</body>
+</html>

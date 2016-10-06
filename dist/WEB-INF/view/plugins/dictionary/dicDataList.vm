@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  #headInclude()
+  <script type="text/javascript">
+
+function toSel(typeIdValue){
+   document.getElementById('dictionaryFrm').src = '../dictionary/dicDataInnerList.do?typeCode='+typeIdValue;
+}
+
+function toHidden(DivId,ImgId) {
+    divobj = eval(DivId);
+    imgobj = eval(ImgId);
+    if(divobj.style.display =="none")  {
+        divobj.style.display = "";
+        imgobj.src = "../images/tree/minus_last.gif";
+    } else  {
+        divobj.style.display = "none";
+        imgobj.src = "../images/tree/plus_last.gif";
+    }
+}
+
+function loadSub() {
+    var typeValue = document.getElementById("typeValue");
+    if(typeValue!=null){
+      document.getElementById('dictionaryFrm').src = '../dictionary/dicDataInnerList.do?typeCode=' + typeValue.value;
+    }else{
+      document.getElementById('dictionaryFrm').src = '../dictionary/dicDataInnerList.do?typeCode=';
+    }
+}
+</script>
+</head>
+<body  class="easyui-layout" onload="loadSub()">
+ <div data-options="region:'west',title:'字典内容管理',iconCls:'icon-topic',width:'250',split:true">
+            <div class="divScroll">
+              <table border="0" cellpadding="0" cellspacing="0" class="text12">
+                <tbody>
+                  <tr>
+                    <td align="left" height="16" width="16"><img alt="" border="0" height="8" width="16"
+                      src="../images/tree/space.gif" /></td>
+                    <td align="left" height="16" width="16"><img alt="" border="0" height="16" width="16"
+                      src="../images/tree/item_root.gif" /></td>
+                    <td align="left" height="10" width="3"><img alt="" border="0" height="10" width="3"
+                      src="../images/tree/space.gif" /></td>
+                    <td align="left">字典管理</td>
+                  </tr>
+                </tbody>
+              </table>
+              <table border="0" cellpadding="0" cellspacing="0" class="text12">
+                <tbody>
+                  <tr>
+                    <td align="left" height="16" width="16"><img alt="" border="0" height="16" width="16"
+                      src="../images/tree/space.gif" /></td>
+                    <td align="left" height="16" width="16">
+                      <img alt="" border="0" height="16" width="16" src="../images/tree/minus_last.gif"
+                       onclick="toHidden('DivHidden','ImgChange')" id="ImgChange"/>
+                    </td>
+                    <td align="left" height="16" width="16"><img alt="" border="0" height="16" width="16"
+                      src="../images/tree/item_dir.gif" /></td>
+                    <td align="left" height="10" width="3"><img alt="" border="0" height="10" width="3"
+                      src="../images/tree/space.gif" /></td>
+                    <td align="left">字典名称</td>
+                  </tr>
+                </tbody>
+                <div>
+                  <table border="0" cellpadding="0" cellspacing="0" class="text12">
+                    <tbody id="DivHidden">
+                      #foreach($dicType in $dicTypeList)
+                      <tr>
+                        <td align="left" height="16" width="16"><img alt="" border="0" height="16" width="16"
+                          src="../images/tree/space.gif" /></td>
+                        <td align="left" height="16" width="16"><img alt="" border="0" height="16" width="16"
+                        src="../images/tree/space.gif" /></td>
+                        <td align="left" height="16" width="16"><img alt="" border="0" height="16" width="16"
+                        src="../images/tree/line_notlast.gif"/></td>
+                        <td align="left" height="16" width="16"><img alt="" border="0" height="16" width="16"
+                          src="../images/tree/item_leaf.gif" /></td>
+                        <td align="left" height="10" width="3"><img alt="" border="0" height="10" width="3"
+                          src="../images/tree/space.gif" /></td>
+                        <td align="left">
+                          #if($velocityCount == 1)
+                            <input type="hidden" name="typeValue" id="typeValue" value="$!{dicType.typeCode}"/>
+                          #end
+                          <a href="javascript:toSel('$!{dicType.typeCode}')">$dicType.typeName</a>
+                        </td>
+                      </tr>
+                      #end
+                    </tbody>
+                  </table>
+                </div>
+              </table>
+            </div>
+ </div>
+<div data-options="region:'center'" style="overflow:hidden">          
+            <iframe frameborder="0" height="100%" width="100%" scrolling="auto"
+                        id="dictionaryFrm" name="dictionaryFrm" ></iframe>
+</div>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping default-lazy="false">
+	<class name="com.console.entity.Power" table="sys_power"
+		dynamic-update="true" dynamic-insert="false">
+
+		<id name="id" column="power_id" type="java.lang.String" length="18">
+			<generator class="assigned">
+			</generator>
+		</id>
+
+		<property name="code" type="java.lang.String" update="true"
+			insert="true" access="property" column="power_code" length="40"
+			not-null="true" />
+
+		<property name="name" type="java.lang.String" update="true"
+			insert="true" access="property" column="power_name" length="30"
+			not-null="true" />
+
+		<property name="url" type="java.lang.String" update="true"
+			insert="true" access="property" column="url" length="100" />
+
+		<property name="imgUrl" type="java.lang.String" update="true"
+			insert="true" access="property" column="imgurl" length="100" />
+
+		<property name="moduleName" type="java.lang.String" update="true"
+			insert="true" access="property" column="module_name" length="20" />
+
+		<property name="typeFlag" type="java.lang.String" update="true"
+			insert="true" access="property" column="power_type_flag" length="1"
+			not-null="true" />
+
+		<set name="departments" table="sys_dept_power" lazy="true"
+			inverse="false" cascade="none" sort="unsorted" order-by="power_id asc">
+
+			<key column="power_id">
+			</key>
+
+			<many-to-many class="com.console.entity.Department"
+				column="dep_id" outer-join="auto" />
+
+		</set>
+	</class>
+
+</hibernate-mapping>

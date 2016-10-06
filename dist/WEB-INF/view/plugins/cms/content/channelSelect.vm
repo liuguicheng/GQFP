@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  #headInclude()
+<script>
+function doSelect(id, name) {
+    var obj = new Object();
+    obj.channelId = id;
+    obj.channelName = name;
+    if (typeof(top.dialogArguments.CustomValue) == 'function') {
+        top.dialogArguments.CustomValue(obj);
+    }
+   top.closeDialog();
+}
+</script>
+</head>
+<body >
+
+  <div class="indieui-scroll">
+            <input type="hidden" id="parentId" value="$!{parentId}">
+            #showDepTree($dicData.dicCmsChannelTree.children "¸ùÄ¿Â¼" 1 "allNode" "doSelect" "2")
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  #headInclude()
+  <script type="text/javascript">
+  #if($message)alert("#javaScriptEscape($message)");#end
+
+   function doEdit(powerId) {
+    var url = "../manage/powerEdit.do?token=$!{command.token}&tab=$!{tab}&powerId=" + powerId;
+    document.location.href = url;
+  }
+    function doDelete() {
+    if (!hasCheckBoxSelect("powerId")) {
+      alert("请选择要删除的功能菜单！");
+      return;
+    }
+    if (confirm("您确定要删除所选择的功能菜单吗?")) {
+      var f =  document.listForm;
+      f.action = "../manage/powerDelete.do";
+      f.submit();      
+    }
+  }
+  </script>
+</head>
+<body class="easyui-layout">
+<div id="toolbar$!{tab}" style="padding:5px;height:auto">
+  <div style="margin-bottom:5px">
+      <a href="javascript:doEdit('');" class="easyui-linkbutton" iconCls="icon-add" plain="true">新 增</a>
+      <a href="javascript:doDelete();" class="easyui-linkbutton" iconCls="icon-remove" plain="true">删 除</a>
+  </div>
+  <div>
+    <form name="queryForm" action="#getRequestUri()" method="post" class="indieui-form">
+          <input type="hidden" name="tab" value="$!{tab}" />
+                      菜单编号：<input type="text" name="powerCode" value="#htmlEscape($!{command.powerCode})" >
+                      菜单名称：<input type="text" name="powerName" value="#htmlEscape($!{command.powerName})" >
+        <a href="javascript:document.queryForm.submit();jQuery('body').processMask();" class="easyui-linkbutton" iconCls="icon-search">查 询</a>
+    </form>          
+  </div>
+</div>
+<form name="listForm" method="post">
+<input type="hidden" name="submitFlag" value="0">
+<input type="hidden" name="token" value="$!{command.token}">  
+  <input type="hidden" name="tab" value="$!{tab}" />
+  <table id="dg$!{tab}" class="easyui-datagrid" fit="true" border="0" 
+            toolbar="#toolbar$!{tab}" striped="true" 
+            autoRowHeight="false" checkOnSelect="false" selectOnCheck="false"
+            rownumbers="false" fitColumns="true">
+
+  <thead> 
+    <tr>
+                <th data-options="field:'powerId',checkbox:true,fixed:true,width:30"></th>
+                <th data-options="field:'powerCode', width:100, fixed:true">菜单编号</th>
+                <th data-options="field:'powerName', width:200">菜单名称</th>
+                <th data-options="field:'url', width:200">菜单功能url</th>
+                <th data-options="field:'imgUrl', width:200">菜单图标url</th>
+                <th data-options="field:'moduleName', width:100">所属模块名</th>
+    </tr>
+  </thead>
+  <tbody>
+  #foreach( $data in ${powerList} )
+    #set($index = ($page.pageNumber - 1) * $page.pageSize + $velocityCount)
+    <tr>
+      <td>$!{data.id}</td>
+      <td style="text-align:left;">#htmlEscape($!{data.code})</td>
+      <td style="text-align:left;">&nbsp;
+        #foreach( $layer in [1..$!{data.layer}] )#if($layer > 1) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; #end #end
+        <a href="javascript:doEdit('$!{data.id}')">#htmlEscape($!{data.name})</a>
+      </td>
+      <td style="text-align:left;">#htmlEscape($!{data.url})</td>
+      <td>#htmlEscape($!{data.imgUrl})</td>
+      <td>#lookUpDict($dicData.dicModuleName $!{data.moduleName})</td>
+    </tr>
+  #end
+  </tbody>   
+</table>
+</form>
+</body>
+</html>

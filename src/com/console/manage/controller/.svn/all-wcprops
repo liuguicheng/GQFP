@@ -1,0 +1,77 @@
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/GQFP/!svn/ver/2/trunk/src/com/console/manage/controller
+END
+ManageDwrController.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/GQFP/!svn/ver/2/trunk/src/com/console/manage/controller/ManageDwrController.java
+END
+SelectOperateStaffController.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/GQFP/!svn/ver/2/trunk/src/com/console/manage/controller/SelectOperateStaffController.java
+END
+ManageController.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/GQFP/!svn/ver/2/trunk/src/com/console/manage/controller/ManageController.java
+END
+StaffSelectController.java
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/GQFP/!svn/ver/2/trunk/src/com/console/manage/controller/StaffSelectController.java
+END
+SatffQueryController.java
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/GQFP/!svn/ver/2/trunk/src/com/console/manage/controller/SatffQueryController.java
+END
+StaffSubDepartmentInnerEditController.java
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/GQFP/!svn/ver/2/trunk/src/com/console/manage/controller/StaffSubDepartmentInnerEditController.java
+END
+SelectMainFrameController.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/GQFP/!svn/ver/2/trunk/src/com/console/manage/controller/SelectMainFrameController.java
+END
+DepartmentSelectController.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/GQFP/!svn/ver/2/trunk/src/com/console/manage/controller/DepartmentSelectController.java
+END
+DepartmentPowerController.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/GQFP/!svn/ver/2/trunk/src/com/console/manage/controller/DepartmentPowerController.java
+END
+DepartmentEditController.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/GQFP/!svn/ver/2/trunk/src/com/console/manage/controller/DepartmentEditController.java
+END
+StaffSubDepartmentEditController.java
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/GQFP/!svn/ver/2/trunk/src/com/console/manage/controller/StaffSubDepartmentEditController.java
+END
+SatffQueryInController.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/GQFP/!svn/ver/2/trunk/src/com/console/manage/controller/SatffQueryInController.java
+END

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  #headInclude()
+  <script language="javascript" type="text/javascript" src="../script/validator.js"></script>
+  <script type="text/javascript">
+  validator.formName = "editForm";
+  validator.addNormalCheckPoint("typeCode","字典类型","checkNotNull;checkNotEmpty");
+  validator.addNormalCheckPoint("dataCode","编码","checkNotNull;checkNotEmpty;checkEnglish");
+  validator.addNormalCheckPoint("dataName","名称","checkNotNull;checkNotEmpty");
+  validator.addNormalCheckPoint("dataSort","排序","checkInt");
+function doSave(){
+    var e = document.editForm;
+  var nI = strlen(e.dataCode.value);
+  var typeWay = '$!{dicType.typeWay}';
+    if(validator.checkAll()){
+    if ("$!{dicType.isLonger}" == "1") {
+      if (parseInt(nI) != parseInt($!{dicType.dataLength})) {
+        alert("您录入的编码必须是$!{dicType.dataLength}位\n请重新录入");
+        return false;
+      }
+      document.editForm.submit();
+    } else {
+        if (parseInt(nI) > parseInt($!{dicType.dataLength})) {
+          if (typeWay == "1") {
+            alert('您录入的编码已超过定义的$!{dicType.dataLength}个字符长度\n请重新录入！');
+          } else {
+            alert('编码已超过规定长度，无法再添加字典数据 \n请联系管理员修改数据字典的定义\n或者启用被禁用的字典内容！');
+          }
+          return false;
+        } else {
+          var dataIdValue = e.dataId.value;
+          if (dataIdValue == "") {
+              if (confirm("请仔细检查编码：" + e.dataCode.value + "\n一旦保存后不能再进行编辑\n是否确认保存？")) {
+                document.editForm.submit();
+              }
+          } else {
+            document.editForm.submit();
+          }
+        }
+    }
+    }
+
+}
+
+function doReturn() {
+    document.location.href  = "../dictionary/dicDataInnerList.do?typeCode=$!{dicType.typeCode}";
+}
+
+function strlen(str) {
+    var len = 0;
+    for (var i = 0; i < str.length; i++) {
+        if (str.charCodeAt(i) > 255 || str.charCodeAt(i) < 0){
+      len += 2;
+    } else {
+      len ++;
+    }
+    }
+    return len;
+}
+  </script>
+</head>
+<body class="easyui-layout indieui-form">
+
+<div data-options="region:'center',title:'字典内容编辑',iconCls:'icon-edit'" >##
+  <form name="editForm" method="POST" action="../dictionary/dicDataEdit.do"  >
+        <input type="hidden" name="dataId" value="$!{dicDataInfo.dataId}"/>
+        <input type="hidden" name="isValid" value="$!{dicDataInfo.isValid}"/>
+        <input type="hidden" name="typeCode" value="$!{dicType.typeCode}"/>
+        <input type="hidden" name="typeWay" value="$!{dicType.typeWay}"/>
+        <input type="hidden" name="dataLength" value="$!{dicType.dataLength}"/>
+        <input type="hidden" name="isLonger" value="$!{dicType.isLonger}"/>
+        <table class="TbCommon">
+          <tr>
+            <td align="right" class="TdLabel" style="width:120px;">说明：</td>
+            <td >
+        <span class="tips">
+          标识的生成方式为：#lookUpDict($dicData.dicTypeWay $!{dicType.typeWay})，
+          #if($!{dicType.isLonger} == '1')长度必须是$!{dicType.dataLength}位#else 且最大长度是$!{dicType.dataLength}位#end
+        </span>
+            </td>
+          </tr>
+          <tr align="center">
+            <td align="right" class="TdLabel">#requiredInput("字典名称")</td>
+            <td class="TdInput" align="left">${dicType.typeName}&nbsp;</td>
+          </tr>
+      <tr align="center">
+            <td align="right" class="TdLabel" >序号</td>
+            <td class="TdInput" align="left">
+              <input type="text" name="dataSort" value="#showNumber($!{dicDataInfo.dataSort})" />
+            </td>
+          </tr>
+          <tr align="center">
+            <td align="right" class="TdLabel" >#requiredInput("编码")</td>
+            <td class="TdInput" align="left">
+        #if($!{dicDataInfo.dataId})
+         <input type="hidden" name="dataCode" value="$!{dicDataInfo.dataCode}" id="dataCode">
+           $!{dicDataInfo.dataCode}&nbsp;
+        #else
+        #if($!{dicType.typeWay} != "1")
+          <input type="hidden" name="dataCode" value="$!{dicDataInfo.dataCode}" id="dataCode" maxlength="$!{dicType.dataLength}">
+            $!{dicDataInfo.dataCode}&nbsp;
+          #else
+            <input type="text" name="dataCode" value="#htmlEscape($!{dicDataInfo.dataCode})" id="dataCode" maxlength="$!{dicType.dataLength}">
+        #end
+        #end
+              <span class="tips">注：此项数据一旦生成后不能再进行编辑</span>
+      </td>
+          </tr>
+          <tr align="center">
+            <td align="right" class="TdLabel" >#requiredInput("名称")</td>
+            <td class="TdInput" align="left">
+              <input type="text" name="dataName" value="#htmlEscape($!{dicDataInfo.dataName})" maxlength="30" />
+            </td>
+          </tr>
+          <tr align="center">
+            <td align="right" class="TdLabel" >说明</td>
+            <td class="TdInput" align="left">
+        <textarea name="remark" style='height:40px;width:100%'>#htmlEscape($!{dicDataInfo.remark})</textarea>
+      </td>
+          </tr>
+
+        </table>
+  </form>
+</div>
+
+<div data-options="region:'south'"  class="CommandTool">
+  <input type="button" id="btnconfirm" value="保存" onclick="javascript:doSave();"/>
+  <input type="button" id="btnback" value="返回" onclick="javascript:doReturn();"/>
+</div>
+</body>
+</html>

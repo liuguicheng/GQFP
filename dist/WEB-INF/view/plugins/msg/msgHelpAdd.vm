@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  #headInclude()
+  <script type="text/javascript" src="../script/validator.js"></script>
+   <script type="text/javascript" src="../script/ueditor/ueditor.config.js"></script>
+    <script type="text/javascript" src="../script/ueditor/ueditor.all.min.js"></script>
+	 <script type="text/javascript" src="../script/ueditor/lang/zh-cn/zh-cn.js"></script>
+</head>
+<body>
+<div class="PageHeader">
+  <div class="LeftBox Title">添加帮助信息</div>
+</div>
+
+<div class="indieui-scroll">
+<form name="editForm" method="post" action="../plugins/addHelpMessage.do" class="indieui-form">
+  <input type="hidden" name="token" value="$!{token}" />
+  <input type="hidden" name="submitFlag" value="0" />
+  <input id="comid" type="hidden" name="sysMessageInfoId" value="$!{command.sysMessageInfoId}" />
+  <table class="TbCommon">
+    <tr>
+      <td class="TdLabel" style="width:150px;">#requiredInput("标题")</td>
+      <td class="TdInput" >
+		<input type="text" name="messageTitel" value="$!{command.messageTitel}"  />
+      </td>
+    </tr>
+    <tr>
+      <td class="TdLabel">#requiredInput("内容")</td>
+      <td class="TdInput" >
+		<input id="contentid" type="hidden" name="content" value="$!{command.content}"  />
+		 <script id="editor" type="text/plain" style="width:1024px;height:500px;"></script>
+      </td>
+    </tr>
+	
+  </table>
+</form>
+</div>
+
+<div class="CommandTool indieui-form">
+  <input type="button" id="btnconfirm" value="保存" onclick="javascript:doSave();"/>
+   <input type="button" id="btnconfirm" value="返回" onclick="javascript:doReturn();"/>
+</div>
+<script type="text/javascript">  
+validator.formName = "editForm";
+  validator.addNormalCheckPoint("messageTitel", "标题不能为空", "checkNotNull;checkNotEmpty");
+  
+  var ue = UE.getEditor('editor');
+  
+  function doSave(){
+    ue.ready(function() {
+		var arr=ue.getPlainTxt();
+		if($.trim(arr)==""){
+	 		alert("请填写内容信息！");
+			return false;
+		}else{
+			$("#contentid").val(arr);
+		 	var e = document.editForm;
+    		if (checkInput(e)) {
+     		 	e.submitFlag.value = "1";
+      		 	e.submit();
+    		}
+		}
+		
+	});
+	
+   
+  }
+  function checkInput(e) {
+    if (e.submitFlag.value == "1") {
+      alert("当前页面已经提交，请稍等！");
+      return false;
+    }
+    return validator.checkAll();
+  }
+  
+  function doReturn() {
+    document.location.href = "../plugins/messageHelpList.do";
+  }
+
+var comid=$("#comid").val();
+  if(comid!=""){
+   var valueds= $("#contentid").val();
+  ue.ready(function() {
+    ue.setContent(valueds);
+});
+   
+  } 
+</script>
+</body>
+</html>

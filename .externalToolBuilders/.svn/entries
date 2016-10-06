@@ -1,0 +1,52 @@
+8
+
+dir
+6
+https://192.168.1.118/svn/GQFP/trunk/.externalToolBuilders
+https://192.168.1.118/svn/GQFP
+
+
+
+2016-09-07T09:42:09.304169Z
+2
+ZBJ
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+7eaa1c50-b5f8-8d46-a0b5-e5067a1f1115
+
+org.eclipse.wst.jsdt.core.javascriptValidator.launch
+file
+
+
+
+
+2016-09-08T07:57:33.823000Z
+de88b161a3cb00866c10815ece07891c
+2016-09-07T09:42:09.304169Z
+2
+ZBJ
+
+org.eclipse.wst.validation.validationbuilder.launch
+file
+
+
+
+
+2016-09-08T07:57:33.824000Z
+7721e1fc5c665ecbfdf634fa8cb8bc02
+2016-09-07T09:42:09.304169Z
+2
+ZBJ
+

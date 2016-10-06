@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  #headInclude()
+  <script type="text/javascript">
+    #if($message) alert("$message"); #end
+function toDel(){
+    if(hasCheckBoxSelect("dataId")) {
+        if(confirm("你确定要删除选中的数据？")){
+            document.formList.submit();
+        }
+    } else {
+        alert("请选择一条数据！")
+    }
+}
+  </script>
+</head>
+<body class="easyui-layout">
+<div data-options="region:'center',title:'$!{dicType.typeName}定义',iconCls:'icon-topic'">
+  <form action="../dictionary/dicDataDelete.do" method="POST" name="formList">
+    <input type="hidden" id="typeId" name="typeId" value="$!{typeId}"/>
+    <input type="hidden" name="typeName" value="$!{typeName}"/>
+  <table id="dg" class="easyui-datagrid" fit="true" border="0" 
+            toolbar="#toolbar" striped="true"
+            rownumbers="false" fitColumns="true">
+    <thead>
+      <tr>
+        <th data-options="field:'dataSort', width:40, align:'center',fixed:true">序号</th>
+        <th data-options="field:'dataCode', width:80, align:'center',fixed:true">编码</th>
+        <th data-options="field:'dataName', width:150">名称</th>
+        <th data-options="field:'op', width:100, align:'center', fixed:true">操作</th>
+      </tr>
+    </thead>
+      <tbody>
+          #foreach( $dicData in ${dicDataList} )
+            #if($velocityCount % 2 == 0) #set($css = "TrListEven") #else #set($css = "TrListOdd") #end
+            <tr >
+              <td >$!{dicData.dataSort}</td>
+              <td >$!{dicData.dataCode}</td>
+              <td >$!{dicData.dataName}</td>
+              <td >
+                <a href="../dictionary/dicDataEdit.do?dataId=$!{dicData.dataId}">编辑</a>&nbsp;|&nbsp;
+                #if($dicData.isValid == "0")
+          <a href="../dictionary/dicDataUse.do?dataId=$!{dicData.dataId}&typeCode=$!{dicData.typeCode}"
+          onclick="javascript:return(confirm('是否确定启用此项，启用后字典内容恢复使用！'))">启用</a>
+        #elseif($dicData.isValid == "1")
+                  <a href="../dictionary/dicDataDelete.do?dataId=$!{dicData.dataId}&typeCode=$!{dicData.typeCode}"
+          onclick="javascript:return(confirm('是否确定禁用此项，禁用后字典内容只能显示不能选择！'))">禁用</a>
+                #end
+        </td>
+            </tr>
+          #end
+      </tbody>
+        </table>
+      </form>
+</div>
+
+            <div id="toolbar">
+              <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="submitRequest('../dictionary/dicDataEdit.do?typeCode=$!{dicType.typeCode}')">新 增</a>
+            </div>
+</body>
+</html>

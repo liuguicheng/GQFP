@@ -1,0 +1,30 @@
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=gbk" />
+  <title>$!{appContext.appName}</title>
+  <link href="../script/css.css" rel="stylesheet" type="text/css" />
+  <script type="text/javascript" src="../script/common.js"></script>
+<script type="text/javascript">
+function selectedData(dataId, dataName) {
+    parent.selectParentDepartment(dataId, dataName);
+}
+</script>
+</head>
+<body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+<table width="100%" height="100%" border="0" cellpadding="0" cellspacing="0">
+
+  <tr valign="top">
+    <td>
+      <table width="100%" height="100%" border="0" cellpadding="0" cellspacing="0" class="zyx">
+        <tr>
+          <td valign="top">
+
+#showTree($departmentTree "部门列表" 1 "allNode" "selectedData")
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+</body>
+</html>

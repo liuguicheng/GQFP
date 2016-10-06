@@ -1,0 +1,97 @@
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=gbk" />
+  <title>$!{appContext.appName}</title>
+  <link href="$!{appContext.skin}/content.css" rel="stylesheet" type="text/css" />
+  <script type="text/javascript" src="../script/common.js"></script>
+<script type="text/javascript">
+function selectData() {
+  var returnVal = getSelectDeptValue();
+    if (typeof(top.dialogArguments.CustomValue) == 'function') {
+        top.dialogArguments.CustomValue(returnVal);
+    } else {
+        top.dialogArguments.CustomValue.callback(returnVal, dialogArguments.CustomValue.custom);
+    }
+    top.close();
+}
+
+function getSelectDeptValue() {
+  var len = deps.options.length;
+    var selectList = new Array(len);
+  var returnVal = new Object();
+    returnVal.dept = "";
+    returnVal.deptName = "";
+    for(i = 0; i < len; i++)  {
+    returnVal.dept += deps.options[i].value + ",";
+        returnVal.deptName += deps.options[i].text + ",";
+        var obj = new Object();
+        obj.id = deps.options[i].value;
+        obj.name = deps.options[i].text;
+        selectList[i] = obj;
+    }
+  if (returnVal.dept.length > 0) {
+         returnVal.dept = returnVal.dept.substring(0, returnVal.dept.length - 1);
+         returnVal.deptName = returnVal.deptName.substring(0, returnVal.deptName.length - 1);
+    }
+    return returnVal;
+}
+</script>
+</head>
+<body class="main-bgimg1" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+<table class="Right" width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr valign="top">
+    <td height="28" valign="top">
+      <table cellspacing="0" cellpadding="0" class="TbTitle" align="center">
+        <tr>
+          <td height="24" align="right">
+            <div class="DivIcoEdit"> 选择部门</div>
+              <input type="button" value="确 定" onclick="javascript:selectData()"/>
+              <input type="button" value="关 闭" onclick="javascript:window.close();"/>
+            </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <tr valign="top">
+    <td align="center">
+      <table width="100%" border="0" cellpadding="1" cellspacing="0" class="mainTable">
+        <tr valign="top">
+            <td class="inputarea" width="699" height="236" colspan="2">
+                <div align=center id="mcj_ps" valign="top">
+                    <table class="subTable" width=100% align=center cellpadding="0" cellspacing="0" border="0" border="0">
+                        <tr valign="top">
+                            <td class="inputarea" width="50%" height="100%">
+                            <span class="text12" nowrap>部门列表</span>
+              <SELECT multiple name="subDepList" onDblClick="listbox_item_add(subDepList,deps)"
+                                    style="width:100%;height:216px" class="inputobject">
+              #foreach($dept in $depList)
+                              <option value="$!{dept.id}">$!{dept.name}</option>
+              #end
+                            </SELECT>
+                            </td>
+                            <td class="inputarea" valign="middle">
+                                <div align="center">
+                                    <a href="javascript:listbox_item_add(subDepList,deps);">
+                                        <img src="../images/tree/arrow_right.gif" width="40" height="20" border="0" alt=""></a>
+                                    <br><br><p>
+                                    <a href="javascript:listbox_selecteditem_move(deps);">
+                                        <img src="../images/tree/arrow_left.gif" width="40" height="20" border="0" alt=""></a>
+                                </div>
+                            </td>
+                            <td class="inputarea" width="50%">
+                <span class="text12" nowrap>已选部门</span>
+                              <SELECT multiple name="deps" onDblClick="listbox_selecteditem_move(deps)"
+                                    style="width:100%;height:216px" class="inputobject">
+                              </SELECT>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+</body>
+</html>

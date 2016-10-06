@@ -1,0 +1,123 @@
+<?xml version="1.0" ?>
+<!DOCTYPE web-app PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN" "http://java.sun.com/dtd/web-app_2_3.dtd">
+<!-- Copyright (c) 2002 by ObjectLearn. All Rights Reserved. -->
+<web-app>
+
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>
+      /WEB-INF/config/hibernate.cfg.xml
+      classpath:com/console/console.config.xml
+      classpath:com/plugins/plugins.config.xml
+      classpath:com/systemic/systemic.config.xml
+    </param-value>
+  </context-param>
+
+
+  <filter>
+    <filter-name>encodingFilter</filter-name>
+    <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+    <init-param>
+      <param-name>encoding</param-name>
+      <param-value>GBK</param-value>
+    </init-param>
+    <init-param>
+      <param-name>forceEncoding</param-name>
+      <param-value>true</param-value>
+    </init-param>
+  </filter>
+
+  <filter>
+    <filter-name>AuthenticationFilter</filter-name>
+    <filter-class>org.springline.web.filter.AuthenticationFilter</filter-class>
+    <init-param>
+      <param-name>failPage</param-name>
+      <param-value>/index.html</param-value>
+    </init-param>
+  </filter>
+  
+  <!--PowerFilter过滤器 -->
+  <filter>
+    <filter-name>PowerFilter</filter-name>
+    <filter-class>com.console.main.filter.PowerFilter</filter-class>
+    <init-param>
+      <param-name>failPage</param-name>
+      <param-value>/jump.html</param-value>
+    </init-param>
+  </filter>
+
+  <filter-mapping>
+    <filter-name>encodingFilter</filter-name>
+    <url-pattern>*.do</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>encodingFilter</filter-name>
+    <url-pattern>*.po</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>encodingFilter</filter-name>
+    <url-pattern>*.action</url-pattern>
+  </filter-mapping>
+
+   <filter-mapping> 
+     <filter-name>AuthenticationFilter</filter-name> 
+     <url-pattern>*.do</url-pattern> 
+   </filter-mapping> 
+
+    <!--PowerFilter过滤.do资源-->
+   <filter-mapping>
+       <filter-name>PowerFilter</filter-name>
+       <url-pattern>*.do</url-pattern>
+   </filter-mapping>
+   
+  <listener>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
+	
+
+  <servlet>
+    <servlet-name>spring</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <init-param>
+      <param-name>contextConfigLocation</param-name>
+      <param-value>/WEB-INF/config/ApplicationContext.xml</param-value>
+    </init-param>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>spring</servlet-name>
+    <url-pattern>*.do</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>spring</servlet-name>
+    <url-pattern>*.action</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>spring</servlet-name>
+    <url-pattern>*.po</url-pattern>
+  </servlet-mapping>
+
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+  </welcome-file-list>
+ <!--
+  <error-page>
+
+    <error-code>500</error-code>
+    <location>/error.html</location>
+  </error-page>
+  <error-page>
+    <error-code>400</error-code>
+    <location>/error.html</location>
+  </error-page>
+  <error-page>
+    <error-code>403</error-code>
+    <location>/error.html</location>
+  </error-page>
+  <error-page>
+    <error-code>404</error-code>
+    <location>/error.html</location>
+  </error-page> -->
+</web-app>

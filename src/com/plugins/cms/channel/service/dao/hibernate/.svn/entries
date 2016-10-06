@@ -1,0 +1,40 @@
+8
+
+dir
+72
+https://192.168.1.118/svn/GQFP/trunk/src/com/plugins/cms/channel/service/dao/hibernate
+https://192.168.1.118/svn/GQFP
+
+
+
+2016-09-07T09:42:09.304169Z
+2
+ZBJ
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+7eaa1c50-b5f8-8d46-a0b5-e5067a1f1115
+
+HibernateCmsChannelDao.java
+file
+
+
+
+
+2016-09-08T07:57:32.839000Z
+037aa6fe50d30b65d6a323488f63bb42
+2016-09-07T09:42:09.304169Z
+2
+ZBJ
+

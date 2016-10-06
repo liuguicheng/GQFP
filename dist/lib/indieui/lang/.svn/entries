@@ -1,0 +1,43 @@
+8
+
+dir
+6
+https://192.168.1.118/svn/GQFP/trunk/dist/lib/indieui/lang
+https://192.168.1.118/svn/GQFP
+
+
+
+2016-09-07T09:42:09.304169Z
+2
+ZBJ
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+7eaa1c50-b5f8-8d46-a0b5-e5067a1f1115
+
+formatinput
+dir
+
+jquery.formatinput.zh_CN.js
+file
+
+
+
+
+2016-09-08T07:57:24.602000Z
+55c45f085368ad2d1163146e5254c0ed
+2016-09-07T09:42:09.304169Z
+2
+ZBJ
+

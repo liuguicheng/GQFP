@@ -1,0 +1,136 @@
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=GBK" />
+  <title>$!{appContext.appName}</title>
+  <link href="$!{appContext.skin}/content.css" rel="stylesheet" type="text/css" />
+  <script type="text/javascript" src="../script/common.js"></script>
+  <script type="text/javascript" src="../script/validator.js"></script>
+<script type="text/javascript">
+function selectPower(powerId) {
+    var e = document.editForm;
+    submitRequest("../manage/powerGrant.do?powerId=" + powerId);
+}
+
+function submitGrant() {
+    var e = document.editForm;
+    var hasPower = false;
+    if (isArrayObject(e.powerId)) {
+        for (var i = 0; i < e.powerId.length; i++) {
+            if (e.powerId[i].checked) {
+                hasPower = true;
+            }
+        }
+    } else {
+        hasPower = e.powerId.checked;
+    }
+    if (!hasPower) {
+        alert("请先选择要授权的权限！");
+        return;
+    }
+    if (trim(e.depId.value) == "") {
+        alert("请先选择要授权的单位！");
+        return;
+    }
+    e.submit();
+}
+
+</script>
+</head>
+<body class="main-bgimg1" bgcolor="#ffffff" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+<form name="editForm" method="post" action="#getRequestUri()">
+
+<table class="Right" width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr valign="top" height="1">
+    <td>
+
+        <table width="100%" border="0" cellpadding="0" cellspacing="0">
+        <tr>
+          <td width="5" class="Right-left_img">&nbsp;</td>
+          <td valign="middle" class="Right-center_imgbg"> <table width="99%" border="0" cellspacing="0" cellpadding="1">
+              <tr>
+                <td align="center" valign="middle" class="Right-ng_img">&nbsp;</td>
+                <td class="main-lmtxt1"> 设置单位权限</td>
+                <td align="right" nowrap class="main-lmtxt1">
+                        <input type="button" class="button" value="保 存" onclick="javascript:submitGrant()" />
+                        <input type="button" class="button" value="复 位" onclick="document.editForm.reset();" />
+                </td>
+              </tr>
+            </table></td>
+          <td width="5" class="Right-right_img">&nbsp;</td>
+        </tr>
+      </table>
+
+      <table width="100%" border="0" cellpadding="0" cellspacing="0" class="mainTable">
+        <tr>
+          <TD class="tablearea" width="62%">
+            <table width="100%" border="0" cellpadding="0" cellspacing="0" class="subTable">
+                <tr class="trTitle" height="31">
+                    <td class="tabletitle" colspan="4">权限列表</td>
+                </tr>
+
+ #set($mods = 0)   #set($index = 0)
+ #foreach($power in $powerList)
+    #if($power.code.length() == 4)
+        #set($mods = $index % 4)
+        #set($index = 0)
+             #if($mods != 0)
+                #set($mods = 4 - $mods)
+                <td class="tabledata" colspan="$mods">&nbsp;</td></TR>
+             #end
+        <TR class="trTitle"><TD class="tabletitle" colspan="4">$power.name </TD></TR>
+        <TR class="trdata">
+    #else
+                  #set($index = $index + 1)
+                        <td class="tabledata">
+                            #if("$!{power.typeFlag}" == "0")
+                           <input type="radio" name="powerId" value="$!{power.id}" id="cb_powerId_$!power.id"
+                            #if($!{currentPower.id} == $!{power.id}) checked #end
+                            onclick="selectPower('$!{power.id}')">
+                             #end
+                            <label for="cb_powerId_$!power.id" style="CURSOR:hand">
+                                #if("$!{power.typeFlag}" == "0") <font color="blue">$!power.name</font>
+                                #else $!power.name #end
+                            </label>
+                        </td>
+
+                   #set($mods = $index % 4)
+                   #if($mods == 0)
+                     </tr>
+                     <tr class="trData">
+                   #end
+    #end
+ #end
+             #set($mods = $index % 4)
+             #if($mods != 0)
+                #set($mods = 4 - $mods)
+                <td class="tabledata" colspan="$mods">&nbsp;</td></TR>
+             #end
+
+                </table>
+          </TD>
+
+          <td width="3" class="tablearea"></td>
+
+          <td valign="top" width="38%" class="tablearea" height="100%">
+            <table height="100%" width="100%" border="0" cellpadding="3" cellspacing="0" class="subTable">
+                <tr class="trTitle" height="31">
+                    <td class="tabletitle">授权单位列表</td>
+                </tr>
+                <tr class="trData">
+                    <td class="tabledata" width="5%" height="100%">
+                        #selectMultiUnitDept("depId" "$!{currentPower.departmentIdString}" "$!{currentPower.departmentNameString}" "class='inputobject' style='width:100%;height:90%'")
+                    </td>
+                </tr>
+            </table>
+          </td>
+
+        </tr>
+      </table>
+
+
+    </td>
+  </tr>
+</table>
+</form>
+</body>
+</html>

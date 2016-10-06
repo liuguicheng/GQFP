@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  #headInclude()
+  <script type="text/javascript" src="../script/validator.js"></script>
+  
+</head>
+<body>
+<div class="PageHeader">
+  <div class="LeftBox Title">规则设置</div>
+</div>
+
+<div class="indieui-scroll">
+<form name="editForm" method="post" action="#getRequestUri()" class="indieui-form">
+  <input type="hidden" name="token" value="$!{token}" />
+  <input type="hidden" name="submitFlag" value="0" />
+  <input type="hidden" name="id" value="$!{command.id}" />
+  <table class="TbCommon">
+	<tr>
+      <td class="TdLabel" style="width:150px;">#requiredInput("前台开关")</td>
+      <td class="TdInput" >
+			#formSingleSelectDictionary("front_switch" $!{command.front_switch} ${dicData.dicIsopen} "style='width:120'" " ---- 请选择 ---- ")
+	  </td>
+	  <td class="TdLabel" style="width:150px;">#requiredInput("网络图开关")</td>
+      <td class="TdInput" >
+			#formSingleSelectDictionary("network_diagram_switch" $!{command.network_diagram_switch} ${dicData.dicIsopen} "style='width:120'" " ---- 请选择 ---- ")
+      </td>
+    </tr>
+	<tr>
+      <td class="TdLabel" style="width:150px;">#requiredInput("关闭说明")</td>
+      <td class="TdInput" colspan="3">
+		<input type="text" name="front_switch_content" value="$!{command.front_switch_content}" style="width:100%;" />
+      </td>
+    </tr>
+    <tr>
+      <td class="TdLabel" style="width:150px;">#requiredInput("提现规则")</td>
+      <td class="TdInput" colspan="3">
+		<input type="hidden" name="withdrawals_time" value="$!{command.withdrawals_time}" id="withdrawals_time_id"/>
+		提现时间：<input type="checkbox"  name="withdrawals"  value="1" /><label for="male"  >周一</label>&nbsp;&nbsp;
+		<input type="checkbox" name="withdrawals"  value="2" /><label for="male"  >周二</label>&nbsp;&nbsp;
+		<input type="checkbox" name="withdrawals" value="3" /><label for="male"  >周三</label>&nbsp;&nbsp;
+		<input type="checkbox" name="withdrawals" value="4" /><label for="male"  >周四</label>&nbsp;&nbsp;
+		<input type="checkbox" name="withdrawals"  value="5" /><label for="male"  >周五</label>&nbsp;&nbsp;
+		<input type="checkbox" name="withdrawals"  value="6" /><label for="male"  >周六</label>&nbsp;&nbsp;
+		<input type="checkbox" name="withdrawals" value="7" /><label for="male"  >周日</label>&nbsp;&nbsp;<br/>
+		提现手续费：<input type="text" name="withdrawals_counter_fee" value="$!{command.withdrawals_counter_fee}" />%<br/>
+		提现日封顶金额：<input type="text" name="withdrawals_money" value="$!{command.withdrawals_money}"  />(元)<br/>
+		提现日封顶次数：<input type="text" name="withdrawals_count" value="$!{command.withdrawals_count}" />
+      </td>
+    </tr>
+	 <tr>
+      <td class="TdLabel" style="width:150px;">#requiredInput("转账规则")</td>
+      <td class="TdInput" colspan="3">
+		<input type="hidden" name="transfer_time" value="$!{command.transfer_time}" id="transfer_time_id"/>
+		转账时间：<input type="checkbox" name="transfertim"  value="1" /><label for="male"  >周一</label>&nbsp;&nbsp;
+		<input type="checkbox" name="transfertim"   value="2" /><label for="male"  >周二</label>&nbsp;&nbsp;
+		<input type="checkbox" name="transfertim"   value="3" /><label for="male"  >周三</label>&nbsp;&nbsp;
+		<input type="checkbox" name="transfertim"   value="4" /><label for="male"  >周四</label>&nbsp;&nbsp;
+		<input type="checkbox" name="transfertim"   value="5" /><label for="male"  >周五</label>&nbsp;&nbsp;
+		<input type="checkbox" name="transfertim"   value="6" /><label for="male"  >周六</label>&nbsp;&nbsp;
+		<input type="checkbox" name="transfertim"   value="7" /><label for="male"  >周日</label>&nbsp;&nbsp;<br/>
+		转账手续费：<input type="text" name="transfer_counter_fee" value="$!{command.transfer_counter_fee}"  />%<br/>
+		转账日封顶金额：<input type="text" name="transfer_money" value="$!{command.transfer_money}" />(元)<br/>
+		转账日封顶次数：<input type="text" name="transfer_count" value="$!{command.transfer_count}" />
+      </td>
+    </tr>
+    <tr>
+      <td class="TdLabel">#requiredInput("每日奖金封顶金额")</td>
+      <td class="TdInput" colspan="3">
+    	  <input type="text" name="dayCap" value="$!{command.dayCap}" />(元)
+      </td>
+    </tr>
+	<tr>
+      <td class="TdLabel">#requiredInput("区域数量")</td>
+      <td class="TdInput" colspan="3">
+		<input type="text" name="areaNumber" value="$!{command.areaNumber}"  />只能填写整数
+      </td>
+    </tr>
+	#***<tr>
+      <td class="TdLabel">#requiredInput("区域优先级")</td>
+      <td class="TdInput">
+    	 <input type="text" name="regionPriority" value="$!{command.regionPriority}" style="width:30%" />根据区域数量决定,从左往右排序,左1=A,左2=B
+      </td>
+    </tr>*#
+	<tr>
+      <td class="TdLabel">#requiredInput("会员激活条件")</td>
+      <td class="TdInput" colspan="3">
+    	  电子币：<input type="text" name="activationConditionOne" value="$!{command.activationConditionOne}" style="width:5%" />% 
+		 奖金币：<input type="text" name="activationConditionTwo" value="$!{command.activationConditionTwo}" style="width:5%" />% 
+	  </td>
+    </tr>
+	<tr>
+      <td class="TdLabel">#requiredInput("电子币")</td>
+      <td class="TdInput">
+		是否可提现
+		 #if ($!{command.electronic_Currency_TX}== 1)
+			<input type="radio" id="male" name="electronic_Currency_TX" value="1" checked="checked"/><label for="male"  >是</label>&nbsp;&nbsp;
+			<input type="radio" id="male" name="electronic_Currency_TX" value="0" /><label for="male"  >否</label>
+			#elseif ($!{command.electronic_Currency_TX}==0)
+			<input type="radio" id="male" name="electronic_Currency_TX" value="1"/><label for="male"  >是</label>&nbsp;&nbsp;
+			<input type="radio" id="male" name="electronic_Currency_TX" value="0" checked="checked"/><label for="male"  >否</label>
+			#else
+			<input type="radio" id="female" name="electronic_Currency_TX" value="1" /><label for="female"  >是</label>&nbsp;&nbsp;
+			<input type="radio" id="female" name="electronic_Currency_TX" value="0"/><label for="male"  >否</label>
+         #end
+	  </td>
+	  <td class="TdInput">
+		是否可转换
+		 #if ($!{command.electronic_Currency_ZH}== '1')
+			<input type="radio" id="male1" name="electronic_Currency_ZH" value="1" checked="checked"/><label for="male1"  >是</label>&nbsp;&nbsp;
+			<input type="radio" id="male1" name="electronic_Currency_ZH" value="0" /><label for="male1"  >否</label>
+			#elseif ($!{command.electronic_Currency_ZH}==0)
+			<input type="radio" id="male1" name="electronic_Currency_ZH" value="1"/><label for="male1"  >是</label>&nbsp;&nbsp;
+			<input type="radio" id="male1" name="electronic_Currency_ZH" value="0" checked="checked"/><label for="male1"  >否</label>
+			#else
+			<input type="radio" id="female1" name="electronic_Currency_ZH" value="1"/><label for="female1"  >是</label>&nbsp;&nbsp;
+			<input type="radio" id="female1" name="electronic_Currency_ZH" value="0" /><label for="female1"  >否</label>
+         #end
+	  </td>
+	  <td class="TdInput">
+		是否可转账
+		 #if ($!{command.electronic_Currency_ZZ}== 1)
+			<input type="radio" id="male2" name="electronic_Currency_ZZ" value="1" checked="checked"/><label for="male2"  >是</label>&nbsp;&nbsp;
+			<input type="radio" id="male2" name="electronic_Currency_ZZ" value="0" /><label for="male2"  >否</label>
+			#elseif ($!{command.electronic_Currency_ZZ}==0)
+			<input type="radio" id="male2" name="electronic_Currency_ZZ" value="1"/><label for="male2"  >是</label>&nbsp;&nbsp;
+			<input type="radio" id="male2" name="electronic_Currency_ZZ" value="0" checked="checked"/><label for="male2"  >否</label>
+			#else
+			<input type="radio" id="female2" name="electronic_Currency_ZZ" value="1"/><label for="female2"  >是</label>&nbsp;&nbsp;
+			<input type="radio" id="female2" name="electronic_Currency_ZZ" value="0" /><label for="female2"  >否</label>
+         #end
+	  </td>
+    </tr>
+	<tr>
+      <td class="TdLabel">#requiredInput("奖金币")</td>
+       <td class="TdInput">
+		是否可提现
+		#if ($!{command.gold_Award_TX}== 1)
+			<input type="radio" id="male3" name="gold_Award_TX" value="1" checked="checked"/><label for="male4"  >是</label>&nbsp;&nbsp;
+			<input type="radio" id="male3" name="gold_Award_TX" value="0" /><label for="male4"  >否</label>
+			#elseif ($!{command.gold_Award_TX}==0)
+			<input type="radio" id="male3" name="gold_Award_TX" value="1"/><label for="male3"  >是</label>&nbsp;&nbsp;
+			<input type="radio" id="male3" name="gold_Award_TX" value="0" checked="checked"/><label for="male3"  >否</label>
+			#else
+			<input type="radio" id="female3" name="gold_Award_TX" value="1"/><label for="female3"  >是</label>&nbsp;&nbsp;
+			<input type="radio" id="female3" name="gold_Award_TX" value="0" /><label for="female3"  >否</label>
+         #end
+	  </td>
+	  <td class="TdInput">
+		是否可转换
+		#if ($!{command.gold_Award_ZH}== 1)
+			<input type="radio" id="male4" name="gold_Award_ZH" value="1" checked="checked"/><label for="male4"  >是</label>&nbsp;&nbsp;
+			<input type="radio" id="male4" name="gold_Award_ZH" value="0" /><label for="male4"  >否</label>
+			#elseif ($!{command.gold_Award_ZH}==0)
+			<input type="radio" id="male4" name="gold_Award_ZH" value="1"/><label for="male4"  >是</label>&nbsp;&nbsp;
+			<input type="radio" id="male4" name="gold_Award_ZH" value="0" checked="checked"/><label for="male4"  >否</label>
+			#else
+			<input type="radio" id="female4" name="gold_Award_ZH" value="1"/><label for="female4"  >是</label>&nbsp;&nbsp;
+			<input type="radio" id="female4" name="gold_Award_ZH" value="0"/><label for="female4"  >否</label>
+         #end
+	  </td>
+	  <td class="TdInput">
+		是否可转账
+		#if ($!{command.gold_Award_ZZ}== 1)
+			<input type="radio" id="male5" name="gold_Award_ZZ" value="1" checked="checked"/><label for="male5"  >是</label>&nbsp;&nbsp;
+			<input type="radio" id="male5" name="gold_Award_ZZ" value="0" /><label for="male5"  >否</label>
+			#elseif ($!{command.gold_Award_ZZ}==0)
+			<input type="radio" id="male5" name="gold_Award_ZZ" value="1"/><label for="male5"  >是</label>&nbsp;&nbsp;
+			<input type="radio" id="male5" name="gold_Award_ZZ" value="0" checked="checked"/><label for="male5"  >否</label>
+			#else
+			<input type="radio" id="female5" name="gold_Award_ZZ" value="1"/><label for="female5"  >是</label>&nbsp;&nbsp;
+			<input type="radio" id="male5" name="gold_Award_ZZ" value="0" /><label for="male5"  >否</label>
+         #end
+	  </td>
+    </tr>
+  </table>
+</form>
+</div>
+
+<div class="CommandTool indieui-form">
+  <input type="button" id="btnconfirm" value="保存" onclick="javascript:doSave();"/>
+</div>
+
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		onxscheck();
+	});
+
+  validator.formName = "editForm";
+  validator.addNormalCheckPoint("counterFee", "提现手续费", "checkNotNull;checkNotEmpty;checkInt");
+  validator.addNormalCheckPoint("dayCap", "每日奖金封顶金额", "checkNotNull;checkNotEmpty;checkFloat");
+  validator.addNormalCheckPoint("areaNumber", "区域数量", "checkNotNull;checkNotEmpty;checkInt");
+  validator.addNormalCheckPoint("regionPriority", "区域优先级", "checkNotNull;checkNotEmpty");
+  validator.addNormalCheckPoint("activationConditionOne", "会员激活条件", "checkNotNull;checkNotEmpty");
+
+  function doSave(){
+  	blcheck();
+    var e = document.editForm;
+    if (checkInput(e)) {
+      e.submitFlag.value = "1";
+      e.submit();
+    }
+  }
+  function checkInput(e) {
+    if (e.submitFlag.value == "1") {
+      alert("当前页面已经提交，请稍等！");
+      return false;
+    }
+    return validator.checkAll();
+  }
+  function blcheck(){
+   var ids="";
+   $("input[name='withdrawals']:checkbox").each(function(){ 
+		if ("checked" == $(this).attr("checked")) { 
+		ids += $(this).attr('value')+','; 
+		} 
+	}); 
+	$("#withdrawals_time_id").val(ids);
+	ids="";
+	$("input[name='transfertim']:checkbox").each(function(){ 
+		if ("checked" == $(this).attr("checked")) { 
+		ids += $(this).attr('value')+','; 
+		} 
+	}); 
+	$("#transfer_time_id").val(ids);
+	ids="";
+  }
+  
+  function onxscheck(){
+  	var wtid=$("#withdrawals_time_id").val();
+	if(wtid!=""){
+	   var sd=wtid.split(",");
+	     $.each(sd, function(i,val){    
+          	$("input[name='withdrawals']:checkbox").each(function(){ 
+				var checkval=$(this).attr('value');
+				if (val==checkval) { 
+				   $(this).attr("checked","checked");
+				} 
+			}); 
+  		}); 
+	}
+	
+	var wtid=$("#transfer_time_id").val();
+	if(wtid!=""){
+	   var sdd=wtid.split(",");
+	     $.each(sdd, function(i,val){      
+          	$("input[name='transfertim']:checkbox").each(function(){ 
+				var checkval=$(this).attr('value');
+				if (val==checkval) { 
+				   $(this).attr("checked","checked");
+				} 
+			}); 
+  		}); 
+	}
+	
+	
+  }
+  </script>
+</body>
+</html>

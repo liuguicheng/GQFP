@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  #headInclude()
+  <script type="text/javascript" src="../script/validator.js"></script>
+  <script type="text/javascript">
+  validator.formName = "editForm";
+  validator.addNormalCheckPoint("gradeNum", "股权等级", "checkNotNull;checkNotEmpty");
+  validator.addNormalCheckPoint("money", "股权金额", "checkNotNull;checkNotEmpty;checkFloat");
+  validator.addNormalCheckPoint("stockMoney", "所持股权", "checkNotNull;checkNotEmpty;checkFloat");
+  validator.addNormalCheckPoint("cap", "投资封顶值", "checkNotNull;checkNotEmpty;checkFloat");
+  validator.addNormalCheckPoint("istrue", "是否启用", "checkNotNull;checkNotEmpty");
+  function doSave(){
+    var e = document.editForm;
+    if (checkInput(e)) {
+      e.submitFlag.value = "1";
+      e.submit();
+    }
+  }
+  function checkInput(e) {
+    if (e.submitFlag.value == "1") {
+      alert("当前页面已经提交，请稍等！");
+      return false;
+    }
+    return validator.checkAll();
+  }
+  function doReturn() {
+    document.location.href = "../gq/stockList.do?token=$!{token}";
+  }
+  </script>
+</head>
+<body>
+<div class="PageHeader">
+  <div class="LeftBox Title">#if(!$!{command.id}) 添加 #else 修改   #end 股权种类 </div>
+</div>
+
+<div class="indieui-scroll">
+<form name="editForm" method="post" action="#getRequestUri()" class="indieui-form">
+  <input type="hidden" name="token" value="$!{token}" />
+  <input type="hidden" name="submitFlag" value="0" />
+  <input type="hidden" name="id" value="$!{command.id}" />
+  <input type="hidden" name="createTime" value="$!{command.createTime}" />
+  <table class="TbCommon">
+    <tr>
+      <td class="TdLabel" style="width:150px;">#requiredInput("股权等级")</td>
+	  <td>
+		#if(!${command.id}) 
+		#formSingleSelectDictionary("gradeNum" $!{command.gradeNum} ${dicData.dicStockLevel} "style='width:120'" " ---- 请选择 ---- ")
+        #else
+			<input type="hidden" name="gradeNum" value="$!{command.gradeNum}" />
+			#lookUpDict($dicData.dicStockLevel "$!{command.gradeNum}") 
+	    #end
+	  </td>
+    </tr>
+    <tr>
+      <td class="TdLabel">#requiredInput("股权金额")</td>
+      <td class="TdInput">
+    	  <input type="text" name="money" value="$!{command.money}" style="width:30%" />(元)
+      </td>
+    </tr>
+	<tr>
+      <td class="TdLabel">#requiredInput("所持股权")</td>
+      <td class="TdInput">
+		<input type="text" name="stockMoney" value="$!{command.stockMoney}" style="width:30%;" />(股)
+      </td>
+    </tr>
+    <tr>
+      <td class="TdLabel">#requiredInput("投资封顶值")</td>
+      <td class="TdInput">
+		<input type="text" name="cap" value="$!{command.cap}" style="width:30%;"/>(元)
+      </td>
+    </tr>
+	<tr>
+      <td class="TdLabel">#requiredInput("是否开放")</td>
+      <td class="TdInput">
+			#if ($!{command.istrue}== 1)
+			<input type="radio" id="male" name="istrue" value="1" checked="checked"/><label for="male">开放</label>&nbsp;&nbsp;
+			<input type="radio" id="female" name="istrue" value="0"/><label for="female">未开放</label>
+			#elseif ($!{command.istrue}==0)
+			<input type="radio" id="male" name="istrue" value="1"/><label for="male"  >开放</label>&nbsp;&nbsp;
+			<input type="radio" id="female" name="istrue" value="0" checked="checked"/><label for="female">未开放</label>
+			#else
+			<input type="radio" id="male" name="istrue" value="1" checked="checked"/><label for="male"  >开放</label>&nbsp;&nbsp;
+			<input type="radio" id="female" name="istrue" value="0"/><label for="female">未开放</label>
+			#end
+      </td>
+    </tr>
+  </table>
+  <div class="PageHeader">
+  <div class="LeftBox Title">股权奖励  </div>
+  </div>
+  <table class="TbCommon">
+	    ##遍历字典表
+		#foreach($option in $dicData.dicBonusContent.entrySet())
+			<tr>
+				<td class="TdLabel" style="width:150px;">#requiredInput("${option.value.name}")</td>
+				<td class="TdInput">
+					##遍历股权奖励种类（所有）
+				  #foreach( $data in $bonuscontentlist )
+					##判断是否是同一类型
+					#if($!{data.bonusType}==${option.key})
+						##判断是否添加 、还是修改
+						#if($!{userbonuscontentstr}!="[]")
+							##用户选择
+							#foreach($bon in $userbonuscontentstr)
+								#if($!{bon}==$!{data.id})
+										
+									<input type="radio" id="$!{data.id}" name="bonuscontentstr_$!{data.bonusType}" value="$!{data.id}"checked="checked" /><label for="$!{data.bonusType}"  >$!{data.proportion}%</label>&nbsp;&nbsp;
+								#set($var=$!{bon})	
+								#break
+								#end
+							#end
+							#foreach($removebon in $removeuserbonusbontentlist)
+								#if(($!{removebon.bonusType}==$!{data.bonusType})&&($!{data.id}!=$var))
+									<input type="radio" id="$!{data.id}" name="bonuscontentstr_$!{data.bonusType}" value="$!{data.id}" /><label for="$!{data.bonusType}"  >$!{data.proportion}%</label>&nbsp;&nbsp;
+								#break
+								#end
+							#end
+						#else
+							<input type="radio" id="$!{data.id}" name="bonuscontentstr_$!{data.bonusType}" value="$!{data.id}"/><label for="$!{data.bonusType}"  >$!{data.proportion}%</label>&nbsp;&nbsp;
+						#end
+					#end
+				  #end
+				</td>
+			</tr>
+        #end
+  </table>
+  
+</div>
+</form>
+</div>
+
+<div class="CommandTool indieui-form">
+  <input type="button" id="btnconfirm" value="保存" onclick="javascript:doSave();"/>
+  <input type="button" id="btnback" value="返回" onclick="javascript:doReturn();"/>
+</div>
+</body>
+</html>

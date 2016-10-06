@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  #headInclude()
+  <script type="text/javascript">
+  #if($message)alert("#javaScriptEscape($message)");#end
+
+  function doEdit(objId) {
+    $('body').processMask();
+    parent.location.href = "../plugins/smsEdit.do";
+  }
+  </script>
+</head>
+<body>
+##<div class="PageHeader">
+##  <div class="LeftBox Title">短信发送查询</div>
+##</div>
+
+<div class="SearchBox" id="divSearch">
+<form name="queryForm" action="#getRequestUri()" method="post" class="indieui-form">
+  <table class="TbCommon">
+    <tr>
+      <td class="TdLabel" style="width:100px;">接收号码</td>
+      <td class="TdInput" style="width:200px;">
+        <input type="text" name="receiveNum" value="#htmlEscape($!{command.receiveNum})" maxlength="15"/>
+      </td>
+      <td class="TdLabel" style="width:100px;">发送时间</td>
+      <td class="TdInput">
+        <input type="text" name="sendTimeUp" value="#customFormatDate(${command.sendTimeUp} 'yyyy-MM-dd HH:mm')" style="width:160px;" dateFormat="yyyy-MM-dd HH:mm"/>-
+        <input type="text" name="sendTimeDown" value="#customFormatDate(${command.sendTimeDown} 'yyyy-MM-dd HH:mm')" style="width:160px;" dateFormat="yyyy-MM-dd HH:mm"/>
+      </td>      
+    </tr>
+    #if($currentUser.hasOperate("408001"))
+    <tr>
+      <td class="TdLabel">发送内容</td>
+      <td class="TdInput">
+        <input type="text" name="smsInfo" value="#htmlEscape($!{command.smsInfo})" maxlength="30"/>
+      </td>      
+      <td class="TdLabel">发送人</td>
+      <td class="TdInput">
+        <input type="text" name="senderName" value="#htmlEscape($!{command.senderName})" maxlength="30"/>
+      </td>
+    </tr>
+    #else
+    <tr>
+      <td class="TdLabel">发送内容</td>
+      <td class="TdInput" colspan="3">
+        <input type="text" name="smsInfo" value="#htmlEscape($!{command.smsInfo})" maxlength="30"/>
+      </td>      
+    </tr>      
+    #end
+  </table>
+  <div class="CommandTool">
+    <input type="button" value="确 定" onClick="javascript:document.queryForm.submit();$('body').processMask();"/>
+    <input type="button" value="清 空" onClick="javascript:clearQuery(document.queryForm);"/>
+    <input type="button" value="取 消" onClick="javascript:showDiv('divSearch');">    
+  </div>
+</form>
+</div>
+
+<div class="PageTool">
+  <div class="LeftBox Tool">
+    <input type="button" class="BtnSearch" value="查询"  title="查询" onclick="javascript:showDiv('divSearch');"/>
+    <input type="button" class="BtnAdd" value="发送短信"  title="发送短信" onclick="javascript:doEdit('');"/>
+  </div>
+  <div class="RightBox Pager">
+    #pageDirector( $page "#getRequestUri()" false)
+  </div>
+</div>
+
+<div class="PageContainer indieui-scroll">
+<form name="listForm" method="post">
+<input type="hidden" name="submitFlag" value="0">
+<input type="hidden" name="token" value="$!{command.token}">
+<table class="TbList">
+  <thead> 
+    <tr>
+      <th style="width:35px;">序号</th>
+      <th style="width:120px;">接收号码</th>
+      <th style="width:100px;">接收人</th>
+      <th>内容</th>
+      <th style="width:100px;">发送人</th>
+      <th style="width:40px;">状态</th>
+      <th style="width:160px;">发送时间</th>
+    </tr>
+  </thead>
+  <tbody>
+  #foreach( $data in $page.data )
+    <tr>
+      <td>$velocityCount</td>
+      <td>$!{data.receiveNum}</td>
+      <td>$!{data.receiverName}</td>
+      <td style="text-align:left;" class="TdTxtOver" title="#htmlEscape($!{data.smsInfo})">$!{data.smsInfo}</td>
+      <td>$!{data.senderName}</td>
+      <td>
+        #if($!{data.smsState}=="0")<span class="Status SmsCreated" title="已提交"></span>
+        #elseif($!{data.smsState}=="1")<span class="Status SmsSuccess" title="发送成功"></span>
+        #elseif($!{data.smsState}=="2")<span class="Status SmsReply" title="已回复"></span>
+        #elseif($!{data.smsState}=="8")<span class="Status SmsCreateFail" title="提交失败"></span>
+        #elseif($!{data.smsState}=="9")<span class="Status SmsSendFail" title="发送失败"></span>
+        #end        
+      </td>
+      <td>#formatTime($!{data.sendTime})</td>
+    </tr>
+  #end
+  </tbody>   
+</table>
+</form>
+</div>
+</body>
+</html>

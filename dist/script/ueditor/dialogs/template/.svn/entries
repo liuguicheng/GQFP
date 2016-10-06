@@ -1,0 +1,79 @@
+8
+
+dir
+83
+https://192.168.1.118/svn/GQFP/trunk/dist/script/ueditor/dialogs/template
+https://192.168.1.118/svn/GQFP
+
+
+
+2016-09-26T01:12:08.552569Z
+83
+LGC
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+7eaa1c50-b5f8-8d46-a0b5-e5067a1f1115
+
+config.js
+file
+
+
+
+
+2016-09-24T04:05:47.486000Z
+13f4f817092e62931d993fbee6e89268
+2016-09-26T01:12:08.552569Z
+83
+LGC
+
+images
+dir
+
+template.css
+file
+
+
+
+
+2016-09-24T04:05:47.488000Z
+2d165cce8b44acfa83dea402200d03a8
+2016-09-26T01:12:08.552569Z
+83
+LGC
+
+template.html
+file
+
+
+
+
+2016-09-24T04:05:47.488000Z
+fec78310306f563daf56272326755c34
+2016-09-26T01:12:08.552569Z
+83
+LGC
+
+template.js
+file
+
+
+
+
+2016-09-24T04:05:47.488000Z
+9d23abeaf4771feddabb4744e938b6c5
+2016-09-26T01:12:08.552569Z
+83
+LGC
+

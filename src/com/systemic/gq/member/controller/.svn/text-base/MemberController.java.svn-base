@@ -1,0 +1,129 @@
+package com.systemic.gq.member.controller;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.lang.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springline.orm.Page;
+import org.springline.web.filter.AuthenticationFilter;
+
+import com.console.ConsoleHelper;
+import com.console.entity.Staff;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.systemic.gq.entity.Member;
+import com.systemic.gq.member.command.MemberEditInfo;
+import com.systemic.gq.member.command.MemberInfo;
+import com.systemic.gq.member.service.ISpringMemberService;
+
+@Controller
+public class MemberController {
+	@Autowired
+	private ISpringMemberService springMemberService;
+	//private static Logger LOG = Logger.getLogger(MemberController.class); 
+	@RequestMapping(value = "/member/memberManage.do")
+	public String memberManage(HttpServletRequest request,
+			HttpServletResponse response, Model model, MemberInfo info) {
+		Page page;
+		try {
+			page = this.springMemberService.selectMeber(info);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException("获取数据失败！请联系管理员！"+e.getMessage());
+		}
+		model.addAttribute("page", page);
+		model.addAttribute("message", request.getParameter("message"));
+		return "gq/member/memberManage";
+	}
+	@RequestMapping(value="/member/memberEdit.do",method=RequestMethod.GET)
+	public String memberEdit(HttpServletRequest request,
+			HttpServletResponse response, Model model, Long token, String memberId) {
+		MemberEditInfo command = new MemberEditInfo();
+		if (StringUtils.isNotBlank(memberId)) {
+			Member member = this.springMemberService.loadMermber(memberId);
+			model.addAttribute("command", member);
+		} else {// 新增默认项
+			command.setCreateTime(new Date());
+			Staff staff = (Staff) AuthenticationFilter.getAuthenticator(request);
+			try {
+				Member member = ConsoleHelper.getInstance().getManageService()
+						.selectMemberByStaffId(staff.getId());
+				command.setReferenceId(member.getMemberId());
+				command.setReferenceName(member.getUserName());
+			} catch (Exception e) {
+				e.printStackTrace();
+				throw new RuntimeException("获取数据失败！请联系管理员！");
+			}
+			model.addAttribute("command", command);
+		}
+		model.addAttribute("token", token);
+
+		return "gq/member/memberEdit";
+	}
+	@RequestMapping(value="/member/memberEdit.do",method=RequestMethod.POST)
+	public String memberEditSave(HttpServletRequest request,
+			HttpServletResponse response, Model model, Long token, MemberEditInfo info) {
+		try {
+			this.springMemberService.saveMermber(info);
+			model.addAttribute("message", "保存成功");
+		} catch (Exception e) {
+			e.printStackTrace();
+			model.addAttribute("message", "保存失败"+e.getMessage());
+		}
+		model.addAttribute("command", info);
+		model.addAttribute("token", token);
+
+		 return "redirect:../member/memberManage.do";
+	}
+	@RequestMapping(value="/member/memberDelete.do",method=RequestMethod.POST)
+	public String memberDelete(HttpServletRequest request, String[] memberId, Long token ,Model model){
+		if (memberId != null && memberId.length > 0) {
+			this.springMemberService.deleteMember(memberId);
+		}
+	    model.addAttribute("token", token);
+        return "redirect:../member/memberManage.do";
+	}
+	@RequestMapping(value = "/member/singleMember.do")
+	public String singleMember(HttpServletRequest request,
+			HttpServletResponse response, Model model, MemberInfo info) {
+		Page page = this.springMemberService.selectMeber(info);
+		model.addAttribute("page", page.getData());
+		System.out.println(page.getData());
+		model.addAttribute("message", request.getParameter("message"));
+		return "gq/member/singleMember";
+	}
+	@RequestMapping(value="/member/memberListAjax.do",  produces="text/plain;charset=gbk")
+	@ResponseBody
+	public String ajaxMember(HttpServletRequest request,
+			HttpServletResponse response,MemberInfo info){
+		
+		Page page = this.springMemberService.selectMeber(info);
+		List list = new ArrayList();
+        String gsonString = "";
+        if (page.getData().size() > 0) {
+            for (Iterator it = page.getData().iterator(); it.hasNext();) {
+            	Member m = (Member) it.next();
+                Map data = new HashMap();
+                data.put("memberId", m.getMemberId());
+                data.put("name", m.getUserName());
+                list.add(data);
+            }
+            Gson g = (new GsonBuilder()).create();
+            gsonString = g.toJson(list);
+        }
+        return gsonString;
+	}
+}

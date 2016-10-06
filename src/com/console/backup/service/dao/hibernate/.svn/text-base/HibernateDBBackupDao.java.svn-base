@@ -1,0 +1,35 @@
+package com.console.backup.service.dao.hibernate;
+
+
+import java.util.List;
+
+import org.springline.beans.dataquery.IQueryObject;
+import org.springline.beans.dataquery.IQueryStringUtil;
+import org.springline.orm.Page;
+import org.springline.orm.dao.hibernate.HibernateCommonDao;
+
+import com.console.backup.command.DBBackupInfo;
+import com.console.backup.service.dao.IDBBackupDAO;
+
+public class HibernateDBBackupDao extends HibernateCommonDao implements IDBBackupDAO {
+	
+	private IQueryStringUtil dbbackupQueryStringUtil;
+	
+	
+	public void setDbbackupQueryStringUtil(IQueryStringUtil dbbackupQueryStringUtil) {
+		this.dbbackupQueryStringUtil = dbbackupQueryStringUtil;
+	}
+	
+
+	@Override
+	public Page selectBackupList(DBBackupInfo dbbackinfo) {
+		IQueryObject io = this.dbbackupQueryStringUtil.getQueryObject(dbbackinfo);
+		if (dbbackinfo.getNotPage() != null && dbbackinfo.getNotPage().booleanValue()) {
+            List data = super.doQuery(io.getQueryString(), io.getParam());
+            return super.putDataToPage(data);
+        }
+		return super.find(io.getQueryString(), io.getParam(),
+				dbbackinfo.getPageNumber(), dbbackinfo.getPageSize());
+	}
+
+}

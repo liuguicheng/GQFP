@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  #headInclude()
+   <script type="text/javascript" src="../script/validator.js"></script>
+  <script type="text/javascript">
+  #if($message)alert("#javaScriptEscape($message)");#end
+ function doSave(){
+            var url="../pay/ajaxEditPay.do";
+            var memnberStaffId = $("#memnberStaffId").val();
+			 var applyRecordNum = $("#applyRecordNum").val();
+            var recordType = $("select[name='recordType'] option:selected").val();
+			var memberId=$("#memberId").val();
+            if(memnberStaffId==""){
+				alert("会员编号不能为空");
+				return false;
+			}
+			if(recordType==""){
+                alert("充值类型不能为空！");
+                return false;
+            }
+            if(applyRecordNum==""){
+                alert("￥不能为空！");
+                return false;
+            }
+			
+            var arrs={
+                "recordType":recordType,
+                "applyRecordNum":applyRecordNum,
+				"memnberStaffId":memnberStaffId,
+				"memberId":memberId
+            };
+			
+            $.post(url,arrs,function(data){
+                if(data==1){
+                  alert("申请成功");
+                  window.location.href="../pay/payManage.do";
+                }else if(data==2){
+				alert("申请成功");
+                  window.location.href="../pay/payMember.do";
+				}else{
+				  alert("充值失败");
+				}
+            });
+} 
+
+  function doQuery() {
+      $("#queryForm").submit();
+      $('body').processMask();
+}
+ function doRefresh() {
+    $(":text").val('');
+    //$("#queryForm").submit();
+  }
+  
+  function review(id){
+  	 var theUrl="../pay/payReview.do?numberId="+id+"&modalDialog=true";
+	 top.openDialog("充值审核", theUrl,reloadPendingds,closeCallback, 800, 400 );
+  }
+  function reloadPendingds(obj) {
+  	alert(1);
+   top.closeDialog();
+    parent.closeDialog();
+  }
+	function closeCallback(){
+	location.reload();
+	}
+  </script>
+</head>
+<body>
+<div class="PageHeader">
+  <div class="LeftBox Title">充值申请列表</div>
+</div>
+
+
+
+<div class="PageContainer indieui-scroll">
+	
+    <div class="InfoBox">
+		<form name="editForm" method="post"  action="#getRequestUri()" class="indieui-form">
+    <h2>信息</h2>
+<table class="TbCommon">
+	#if(!${member.memberId})
+		
+     #else
+		 <tr >
+    <td width="8%" align="left" class="TdLabel">奖金余额：</td>
+    <td  align="left" class="TdInput" >
+		<input type="hidden" id="memberId" value="${member.memberId}"/>
+		 #if(!${member.goldAward})<font color="red">￥0.00</font>#else
+        <font color="red">￥#showMoney($!{member.goldAward})</font><input type="hidden" id="" name="" value="$!{member.goldAward}" readonly >
+		 #end    
+	</td>
+    <td width="8%" align="left" class="TdLabel">现金余额：</td>
+    <td  align="left" class="TdInput" >
+			<font color="red">￥0.00</font>
+    </td> 
+    <td width="8%" align="left" class="TdLabel">注册金余额：</td>
+    <td  align="left" class="TdInput" >
+            #if(!${member.electroniccurrency})<font color="red">￥0.00</font>#else
+        <font color="red">￥#showMoney($!{member.electroniccurrency})</font>
+            #end
+    </td> 
+    </tr>
+		
+    #end
+    <tr >
+		#if(!${member.memberId})
+			<td width="8%" align="left" class="TdLabel">#requiredInput("会员编号")：</td>
+	  <td  align="left" class="TdInput" colspan="5">
+        <input type="text" id="memnberStaffId" name="memnberStaffId" value="" >
+			#requiredInput("充值类型")：
+			#formSingleSelectDictionary("recordType" $!{command.recordType} ${dicData.dicPayType} "" "--请选择--")
+			#requiredInput("充值金额")
+			￥：<input type="text" id="applyRecordNum" name="applyRecordNum" value="" >
+            <input type="button" value="申请充值" onclick="javascript:doSave();"/>
+		#else
+			<td width="8%" align="left" class="TdLabel">#requiredInput("会员编号")：</td>
+	  <td  align="left" class="TdInput" colspan="5">
+        <input type="text" id="memnberStaffId" name="memnberStaffId" value="$!{member.staffId}" readonly  >
+			#requiredInput("充值类型")：
+			#formSingleSelectDictionary("recordType" $!{command.recordType} ${dicData.dicPayType} "" "--请选择--")
+			#requiredInput("充值金额")
+			￥：<input type="text" id="applyRecordNum" name="applyRecordNum" value="" >
+            <input type="button" value="申请充值" onclick="javascript:doSave();"/>
+		#end
+    </td>
+</tr>
+</table>
+</form>
+</div>  
+
+
+<div id="toolbar" style="padding:5px;height:auto">
+  <div>
+    <form id="queryForm" name="queryForm" action="#getRequestUri()" method="post" class="indieui-form">
+        <table cellpadding="5">
+        <tr> 
+          <td style="width:120px;height:30px;text-align:right">充值时间：</td>
+          <td colspan="3" >
+            <input type="text" name="applyTimeUp" value="#formatDate($!{command.applyTimeUp})" dateFormat  style="width:120px" >
+                <span>-</span>
+            <input type="text" name="applyTimeDown" value="#formatDate($!{command.applyTimeDown})" dateformat  style="width:120px" >
+          </td>
+          <td  colspan="2" style="text-align:center">
+            <a href="javascript:doQuery()" class="easyui-linkbutton" iconCls="icon-search">查 询</a>
+            <a href="javascript:doRefresh()" class="easyui-linkbutton" iconCls="icon-cut">清 空</a></td>
+        </tr>
+      </table> 
+    </form>          
+  </div>
+</div>
+<form name="listForm" method="post">
+<input type="hidden" name="submitFlag" value="0">
+<input type="hidden" name="token" value="$!{command.token}">
+<table class="TbList">
+  <thead> 
+    <tr>
+		<th data-options="field:'' ">会员编号</th>
+        <th data-options="field:'' ">账户类型</th>
+        <th data-options="field:'' ">充值金额</th>
+        <th data-options="field:'',  fit:true">充值前余额</th>
+        <th data-options="field:'',  fit:true">充值后余额</th>
+        <th data-options="field:'',  fit:true">充值时间</th>
+        <th data-options="field:'',  fit:true">确认时间</th>
+        <th data-options="field:'',  fit:true">备注</th>
+        <th data-options="field:'',  fit:true">状态</th>  
+        <th data-options="field:'',  fit:true">操作</th>  
+    </tr>
+  </thead>
+  <tbody>
+  #foreach( $data in $page.data )
+     #set($index = ($page.pageNumber - 1) * $page.pageSize + $velocityCount)
+            #if($velocityCount % 2 == 0) #set($css = "TrListEven") #else #set($css = "TrListOdd") #end
+    <tr>
+     <td> $!{data.memnberStaffId}</td>
+      <td>#lookUpDict($dicData.dicPayType $!{data.recordType})</td>
+      <td>$!{data.applyRecordNum}</td>
+      <td>$!{data.payBeforeNum}</td>
+      <td>$!{data.payAfterNum}</td>
+      <td>$!{data.applyTime}</td>
+      <td>$!{data.auditTime}</td>
+      <td>$!{data.remark}</td>
+      <td> #lookUpDict($dicData.dicAuditState $!{data.applyState})</td>
+      <td>
+		#if(!${member.memberId})
+		#if($!{data.applyState}==1) [<a href="javascript:review('$!{data.numberId}')" style="color:red;">审核</a>]#else -- #end</td>
+		#else
+			--
+		#end	
+	</tr>
+  #end
+  </tbody>   
+</table>
+</form>
+</div>
+
+
+
+<div data-options="region:'south'" style="overflow-y:hidden"> 
+#pageDirector($page "#getRequestUri()" "")
+</div>
+
+
+</body>
+</html>

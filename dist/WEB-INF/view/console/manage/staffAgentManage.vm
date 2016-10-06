@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  #headInclude()
+  <script type="text/javascript">
+  #if($message)alert("#javaScriptEscape($message)");#end
+  // 设置代理
+  function doSet(objId) {
+    document.location.href = "../manage/staffAgentUnset.do?staffId=" + objId;
+  }
+  // 取消代理
+  function doUnset(objId, agentId) {
+    document.location.href = "../manage/staffAgentSet.do?staffId=" + objId + "&agentId=" + agentId;
+  }
+  </script>  
+</head>
+<body>
+<div class="PageTool">
+  <div class="LeftBox Tool">
+    <font style="color:red;">注：每人只能设置一名代理人</font>
+  </div>
+</div>
+
+<div class="PageContainer indieui-scroll">
+<form name="listForm" method="post">
+<input type="hidden" name="submitFlag" value="0">
+<input type="hidden" name="token" value="$!{command.token}">
+<table class="TbList">
+  <thead> 
+    <tr>
+      <th style="width:35px;">序号</th>
+      <th>姓名</th>
+      <th style="width:100px;">操作</th>
+    </tr>
+  </thead>
+  <tbody>
+  #set($index = 1)
+  #foreach( $data in ${staffList} )
+    #if($!{data.id}!=$!{currentUser.id})
+    <tr>
+      <td>$index</td>
+      <td>#htmlEscape($!{data.name})</td>
+      <td>
+      #if($!{agent.id}==$!{data.id})
+        <a href="javascript:doSet('$!{curStaff.id}');" style="color:red;">取消</a>
+      #else
+        <a href="javascript:doUnset('$!{curStaff.id}','$!{data.id}');">设置</a>
+      #end        
+      </td>
+    </tr>
+    #set($index = $index + 1)
+    #end
+  #end
+  </tbody>   
+</table>
+</form>
+</div>
+</body>
+</html>

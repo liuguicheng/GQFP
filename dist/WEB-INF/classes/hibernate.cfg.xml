@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd">
+        
+   <!-- <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="location"><value>/WEB-INF/config/applicationContext.properties</value></property>
+        <property name="fileEncoding"><value>GBK</value></property>
+    </bean>-->
+    <!--使用基本数据源的配置 -->
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+        <property name="driverClass"><value>com.mysql.jdbc.Driver</value></property>
+        <property name="jdbcUrl"><value>jdbc:mysql://127.0.0.1:3306/gqfp?useUnicode=true&amp;characterEncoding=UTF-8</value></property>
+        <property name="user"><value>root</value></property>
+        <property name="password"><value>cisoft</value></property>
+        <!--连接池配置-->
+        <property name="acquireIncrement"><value>10</value></property>
+        <property name="initialPoolSize"><value>10</value></property>
+        <property name="minPoolSize"><value>10</value></property>
+        <property name="maxPoolSize"><value>500</value></property>
+        <property name="idleConnectionTestPeriod"><value>18000</value></property>
+        <property name="maxIdleTime"><value>25000</value></property>
+    </bean>
+    
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">org.hibernate.dialect.SpringlineMySQLDialect</prop>
+                <prop key="hibernate.cache.provider_class">org.hibernate.cache.HashtableCacheProvider</prop>
+                <prop key="hibernate.cache.region.factory_class">org.hibernate.cache.ehcache.EhCacheRegionFactory</prop>
+                <prop key="jdbc.use_scrollable_resultset">false</prop>
+                <prop key="hibernate.show_sql">false</prop>
+                <prop key="hibernate.format_sql">false</prop>
+                <prop key="hibernate.use_sql_comments">false</prop>
+                <prop key="hibernate.connection.release_mode">auto</prop>
+                <prop key="hibernate.autoReconnect">true</prop>
+            </props>
+        </property>
+        <property name="mappingResources">
+            <list>
+                <value>com/console/entity/Department.hbm.xml</value>
+                <value>com/console/entity/Power.hbm.xml</value>
+                <value>com/console/entity/Role.hbm.xml</value>
+                <value>com/console/entity/Staff.hbm.xml</value>
+                <value>com/console/entity/StaffSecurity.hbm.xml</value>
+                <value>com/console/entity/Operate.hbm.xml</value>
+                <value>com/console/entity/OperateLog.hbm.xml</value>
+                <value>com/console/entity/DBBackup.hbm.xml</value>
+                <value>com/plugins/dictionary/entity/DicData.hbm.xml</value>
+                <value>com/plugins/dictionary/entity/DicType.hbm.xml</value>
+                <value>com/plugins/dictionary/entity/DicDataTree.hbm.xml</value>
+                <value>com/plugins/dirtree/entity/DirType.hbm.xml</value>
+                <value>com/plugins/dirtree/entity/DirData.hbm.xml</value>
+                <value>com/plugins/sn/entity/SysSerialNumber.hbm.xml</value>
+                
+                <!-- 附件 -->
+                <value>com/plugins/attach/common/entity/SysAttach.hbm.xml</value>
+                <value>com/plugins/attach/common/entity/SysAttachBody.hbm.xml</value>
+                <!-- 新闻发布 -->
+                <value>com/plugins/cms/entity/CmsChannel.hbm.xml</value>
+                <value>com/plugins/cms/entity/CmsContent.hbm.xml</value>
+                <!-- 待办事项 -->
+                <value>com/plugins/pending/entity/PendingItem.hbm.xml</value>
+                <value>com/plugins/pending/entity/FinishedItem.hbm.xml</value>
+                <value>com/plugins/pending/entity/PendingItemRecipients.hbm.xml</value>
+                <value>com/plugins/pending/entity/PendingItemRecipientsBak.hbm.xml</value>
+                <!-- 系统消息 -->
+                <value>com/plugins/msg/entity/SysMessage.hbm.xml</value>
+                <!-- 短信息 -->
+                <value>com/plugins/sms/entity/SysSms.hbm.xml</value> 
+                <value>com/plugins/sms/entity/SysSmsHistory.hbm.xml</value> 
+                <value>com/plugins/sms/entity/SysSmsReply.hbm.xml</value> 
+                <value>com/plugins/sms/entity/SysSmsReplyHistory.hbm.xml</value> 
+                <value>com/plugins/sms/entity/VSysSms.hbm.xml</value> 
+                <value>com/plugins/sms/entity/VSysSmsReply.hbm.xml</value>
+                <!-- 短信维护 -->
+                <value>com/systemic/basic/sms/entity/SysSmsType.hbm.xml</value>
+                <!-- 股权 -->
+                <value>com/systemic/gq/entity/Member.hbm.xml</value>
+                <value>com/systemic/gq/entity/BonusContent.hbm.xml</value>
+                <value>com/systemic/gq/entity/Rule.hbm.xml</value>
+                <value>com/systemic/gq/entity/Stock.hbm.xml</value>
+                 <!-- 充值 -->
+                 <value>com/systemic/gq/entity/PayInfo.hbm.xml</value>
+                 <!-- 充值记录 -->
+                 <value>com/systemic/gq/entity/PayLog.hbm.xml</value>
+                <!--奖金  -->
+                 <value>com/systemic/gq/entity/BonusRecord.hbm.xml</value>
+                 <!-- 提现管理 -->
+                  <value>com/systemic/gq/entity/Withdrawals.hbm.xml</value>
+                 <!-- 转账管理 -->
+                  <value>com/systemic/gq/entity/TransferAccounts.hbm.xml</value>
+                 <!-- 转换管理 -->
+                  <value>com/systemic/gq/entity/Transformation.hbm.xml</value>
+            </list>
+        </property>
+    </bean>
+    <bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <tx:method name="save*" propagation="REQUIRED" />
+            <tx:method name="create*" propagation="REQUIRED" />
+            <tx:method name="insert*" propagation="REQUIRED" />
+            <tx:method name="update*" propagation="REQUIRED" />
+            <tx:method name="delete*" propagation="REQUIRED" />
+            <tx:method name="select*" propagation="REQUIRED" />
+            <tx:method name="load*" propagation="REQUIRED" />
+            <tx:method name="get*" propagation="REQUIRED" />
+            <tx:method name="do*" propagation="REQUIRED" />
+        </tx:attributes>
+    </tx:advice>
+    <aop:config expose-proxy="true">
+        <aop:pointcut id="txPointcut" expression="execution(* com..service.spring.*.* (..))" />
+        <aop:advisor advice-ref="txAdvice" pointcut-ref="txPointcut" order="200" />
+    </aop:config>
+</beans>

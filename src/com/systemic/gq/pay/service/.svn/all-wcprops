@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/GQFP/!svn/ver/70/trunk/src/com/systemic/gq/pay/service
+END
+ISpringWithdrawalsService.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/GQFP/!svn/ver/95/trunk/src/com/systemic/gq/pay/service/ISpringWithdrawalsService.java
+END
+ISpringPayLogService.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/GQFP/!svn/ver/91/trunk/src/com/systemic/gq/pay/service/ISpringPayLogService.java
+END
+ISpringPayService.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/GQFP/!svn/ver/91/trunk/src/com/systemic/gq/pay/service/ISpringPayService.java
+END
+ITransferAccountService.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/GQFP/!svn/ver/101/trunk/src/com/systemic/gq/pay/service/ITransferAccountService.java
+END

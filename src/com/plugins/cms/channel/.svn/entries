@@ -1,0 +1,49 @@
+8
+
+dir
+72
+https://192.168.1.118/svn/GQFP/trunk/src/com/plugins/cms/channel
+https://192.168.1.118/svn/GQFP
+
+
+
+2016-09-07T09:42:09.304169Z
+2
+ZBJ
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+7eaa1c50-b5f8-8d46-a0b5-e5067a1f1115
+
+cms.channel.config.xml
+file
+
+
+
+
+2016-09-08T07:57:32.797000Z
+a551ddfa32a51a3cd0a4bb18d57214c4
+2016-09-07T09:42:09.304169Z
+2
+ZBJ
+
+command
+dir
+
+controller
+dir
+
+service
+dir
+

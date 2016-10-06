@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  #headInclude()
+  <script type="text/javascript">
+function selectSubDepartmentList(channelId) {
+    document.getElementById("depFrame").src = "../cms/contentManageList.do?channelId=" +channelId ;
+}
+
+</script>
+</head>
+<body >
+<div class="indieui-scroll">
+  <div class="LeftSide">
+            <input type="hidden" id="parentId" value="$!{parentId}">
+            #showTree($dicData.dicCmsChannelTree.children "¸ùÄ¿Â¼" 1 "allNode" "selectSubDepartmentList" )
+  </div>
+
+  <div class="MainWrap">
+            <iframe frameborder="0" height="95%" width="100%" marginwidth="10" scrolling="auto"
+                        id="depFrame" name="depFrame" ></iframe>
+  </div>
+</div>
+
+
+</table>
+</body>
+<script>
+#if($channelId) selectSubDepartmentList('$!{channelId}'); #end
+</script>
+</html>

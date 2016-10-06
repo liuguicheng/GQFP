@@ -1,0 +1,226 @@
+/* 
+	icon style
+	create by huanganzhi 2012-12-18
+	version v.0.1.0
+	support ie6.0+/ff/chrome
+*/
+.BtnAdd{
+	background-image: url(icons/addico.gif);
+}
+.BtnEdit{
+	background-image: url(icons/editico.gif);
+}
+.BtnDel{
+	background-image: url(icons/delico_2.gif);
+}
+.BtnSearch{
+	background-image: url(icons/searchico.png);
+}
+.BtnRefresh{
+	background-image: url(icons/refreshico2.gif);
+}
+.BtnPrint{
+	background-image: url(icons/printico.gif);
+}
+.BtnBack{
+	background-image: url(icons/backico.gif);
+}
+.BtnLock{
+	background-image: url(icons/lockico.gif);
+}
+.BtnUnlock{
+	background-image: url(icons/unlockico.gif);
+}
+.BtnKey{
+	background-image: url(icons/keyico.gif);
+}
+.BtnSave{
+	background-image: url(icons/saveico.gif);
+}
+.BtnDownload{
+	background-image: url(icons/downloadico.gif);
+}
+.BtnPage{
+	background-image: url(icons/pageico.gif);
+}
+.BtnNote{
+	background-image: url(icons/notepadico.gif);
+}
+.BtnSetting{
+	background-image: url(icons/settingico.png);
+}
+.BtnAddMail{
+	background-image: url(icons/email_add.png);
+}
+.BtnUpload{
+	background-image: url(icons/top.png);
+}
+.BtnLocation{
+	background-image: url(icons/locate.png);
+}
+.BtnSort{
+	background-image: url(icons/sort.png);
+}
+.BtnSortUp{
+	background-image: url(icons/up.png);
+}
+.BtnSortDown{
+	background-image: url(icons/down.png);
+}
+.BtnPerson{
+	background-image: url(icons/hcard.png);
+}
+.BtnMarked{
+	background-image: url(icons/document_a4_marked.png);
+}
+.BtnUnMarked{
+	background-image: url(icons/document_a4_unmarked.png);
+}
+.BtnStar{
+	background-image: url(icons/star_full.png);
+}
+.BtnUnStar{
+	background-image: url(icons/star_empty.png);
+}
+.BtnTransfer{
+	background-image: url(icons/document_a4_forward.png);
+}
+.BtnApvs{
+	background-image: url(icons/documents_okay.png);
+}
+.BtnHasten{
+	background-image: url(icons/work_alert.png);
+}
+
+/* 公文办理图标 */
+.UnReceive{
+	background-image: url(icons/work_to_received.png);
+}
+.Received{
+	background-image: url(icons/work_received.png);	
+}
+.Finished{
+	background-image: url(icons/doc_completed.png);
+}
+/* 紧急程度 */
+.Level1{
+	background-image: url(icons/doc_urgency_0.png);
+	color: #060;
+}
+.Level2{
+	background-image: url(icons/doc_urgency_1.png);
+	color: #069;
+}
+.Level3{
+	background-image: url(icons/doc_urgency_2.png);
+	color: #F30;
+}
+.Level4{
+	background-image: url(icons/doc_urgency_3.png);
+	color: #F00;
+	font-weight: bold;
+}
+/* 公文状态 */
+.Onwork{
+	background-image: url(icons/doc_on_work.png);	
+}
+.ToFile{
+	background-image: url(icons/doc_to_file.png);
+}
+.Filed{
+	background-image: url(icons/doc_filed.png);
+}
+.Saved{
+	background-image: url(icons/doc_saved.png);
+}
+.Apps{
+	background-image: url(icons/application_cascade.png);
+}
+.Bring{
+	background-image: url(icons/special_offer.png);
+}
+.UnAlert{
+	background-image: url(icons/work_no_alert.png);
+}
+.Alert{
+	background-image: url(icons/work_alert.png);
+}
+.Spv{
+	background-image: url(icons/doc_spv.png);
+}
+.UnSpv{
+	background-image: url(icons/doc_no_spv.png);
+}
+.Check{
+	background-image: url(icons/checkico.png);
+}
+.Commend{
+	background-image: url(icons/top2.png);
+}
+.SmsSuccess{
+	background-image: url(icons/sms_success.png);
+}
+.SmsReply{
+	background-image: url(icons/sms_reply.png);
+}
+.SmsCreateFail{
+	background-image: url(icons/sms_create_fail.png);
+}
+.SmsCreated{
+	background-image: url(icons/sms_created.png);
+}
+.SmsSendFail{
+	background-image: url(icons/sms_send_fail.png);
+}
+
+.FormerProposalImportant{
+	background-image: url(icons/pro_important.png);
+}
+
+/*状态颜色*/
+.textLevel1{
+    color: #069;
+    font-weight: bold;
+}
+.textLevel2{
+     color: #F30;
+    font-weight: bold;
+}
+.textLevel3{
+     color: #060;
+    font-weight: bold;
+}
+.textLevel4{
+    color: #F00;
+    font-weight: bold;
+}
+
+/*增加的状态图标*/
+.ReVisit{
+   background-image: url(icons/doc_on_revisit.png);
+}
+
+.Reject{
+   background-image: url(icons/doc_reject.png);
+}
+
+.Delay{
+   background-image: url(icons/doc_delay.png);
+}
+
+.Dead{
+   background-image: url(icons/doc_dead.png);
+}
+
+.Transfer{
+   background-image: url(icons/email_go.png);
+}
+
+/*水情分析-瞬时数据展开隐藏图标*/
+.blueArrowUp{
+   background-image: url(icons/bluearrow_up.png);
+}
+
+.blueArrowDown{
+   background-image: url(icons/bluearrow_down.png);
+}

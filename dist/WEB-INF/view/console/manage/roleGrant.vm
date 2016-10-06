@@ -1,0 +1,120 @@
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=GBK" />
+  <title>$!{appContext.appName}</title>
+  <link href="$!{appContext.skin}/content.css" rel="stylesheet" type="text/css" />
+  <script type="text/javascript" src="../script/common.js"></script>
+  <script type="text/javascript" src="../script/validator.js"></script>
+<script type="text/javascript">
+function selectRole(obj) {
+    var e = document.editForm;
+    submitRequest("../manage/roleGrant.do?roleId=" + obj.value + "&departmentId=" + e.departmentId.value);
+    obj.disabled = "true";
+}
+function selectDepartment(depId, depName) {
+    var e = document.editForm;
+    e.departmentId.value = depId;
+    submitRequest("../manage/roleGrant.do?roleId=" + e.roleId.value + "&departmentId=" + e.departmentId.value);
+    //obj.disabled = "true";
+}
+function submitGrant() {
+    var e = document.editForm;
+    if (e.roleId.value == "") {
+        alert("请先选择要授权的角色！");
+        return;
+    }
+    e.submit();
+}
+
+</script>
+</head>
+<body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+<form name="editForm" method="post" action="#getRequestUri()">
+
+<table width="100%" height="100%" border="0" cellpadding="0" cellspacing="0">
+  <tr valign="top" height="1">
+    <td>
+
+        <table width="100%" border="0" cellpadding="0" cellspacing="0">
+        <tr>
+          <td width="5" class="Right-left_img">&nbsp;</td>
+          <td valign="middle" class="Right-center_imgbg"> <table width="99%" border="0" cellspacing="0" cellpadding="1">
+              <tr>
+                <td align="center" valign="middle" class="Right-ng_img">&nbsp;</td>
+                <td class="main-lmtxt1"> 按系统角色授权</td>
+                <td align="right" nowrap class="main-lmtxt1">
+                        选择系统角色:
+                        <select name="roleId" class="inputobject" onchange="selectRole(this)">
+                            <option value=""></option>
+                            #foreach($role in $roleList)
+                               <option value="$role.id"
+                                #if("$!{role.id}" == "$!roleId") selected #end
+                                >$role.name</option>
+                            #end
+                        </select>
+                        <input type="button" class="button" value="保存" onclick="javascript:submitGrant()" />
+                        <input type="button" class="button" value="复位" onclick="document.editForm.reset();" />
+                </td>
+              </tr>
+            </table></td>
+          <td width="5" class="Right-right_img">&nbsp;</td>
+        </tr>
+      </table>
+
+      <table width="100%" height="100%" border="0" cellpadding="0" cellspacing="0" class="mainTable">
+        <tr>
+          <td valign="top" width="35%" class="tablearea">
+            <table width="100%" border="0" cellpadding="3" cellspacing="0" class="subTable">
+                <tr class="trTitle" height="31">
+                    <td class="tabletitle" colspan="3">已授权人员名单</td>
+                </tr>
+            #foreach($staff in $grantStaffSet)
+                <tr class="trData">
+                    <td class="tabledata" width="5%">
+                        <input type="checkbox" name="staffId" value="$!{staff.id}" checked/>
+                    </td>
+                    <td class="tabledata">$!{staff.department.name}</td>
+                    <td class="tabledata">$!{staff.name}</td>
+                </tr>
+            #end
+            </table>
+          </td>
+          <td class="t2" width="3"> </td>
+          <td valign="top" width="65%" class="tablearea">
+            <table width="100%" border="0" cellpadding="3" cellspacing="0" class="subTable">
+                <tr class="trTitle" height="30">
+                    <td class="tabletitle" colspan="5">待授权人员名单  部门：
+                        <input type="hidden" name="departmentId" value="$!{department.id}">
+                        <input type="text" name="departmentName" value="$!{department.Name}" class="inputobject" readonly>
+                        #selectDepartmentAction("选择部门" "" "selectDepartment")</td>
+                </tr>
+                <tr>
+  #set($mods = 0)
+  #foreach($staff in $staffList)
+                        <td class="inputarea">
+                           <input type="checkbox" name="staffId" value="$!{staff.id}" id="cb_staffId_$!staff.id"
+                            #if($grantStaffSet.contains(${staff})) disabled #end>
+                            <label for="cb_staffId_$!staff.id" style="CURSOR:hand">$!staff.name</label>
+                        </td>
+                   #set($mods = $velocityCount % 5)
+                   #if($mods == 0)
+                     </tr>
+                     <tr>
+                    #end
+  #end
+     #if($mods != 0)
+        #set($mods = 5 - $mods)
+        <td class="inputarea" colspan="$mods"></td>
+     #end
+                </tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+</form>
+</body>
+</html>

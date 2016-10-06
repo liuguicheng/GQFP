@@ -1,0 +1,67 @@
+8
+
+dir
+72
+https://192.168.1.118/svn/GQFP/trunk/src/com/systemic/gq/stock/service/dao
+https://192.168.1.118/svn/GQFP
+
+
+
+2016-09-12T09:39:08.226082Z
+36
+LGC
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+7eaa1c50-b5f8-8d46-a0b5-e5067a1f1115
+
+IBonusContentDao.java
+file
+
+
+
+
+2016-09-12T03:01:00.799000Z
+5b7bbda4c4ce57f508a3b8acb00c6407
+2016-09-12T09:39:08.226082Z
+36
+LGC
+
+IRuleDao.java
+file
+
+
+
+
+2016-09-09T10:36:54.109000Z
+fbe0b26b824d03df3876755d6d52f999
+2016-09-09T10:53:54.312611Z
+33
+LGC
+
+IStockDao.java
+file
+
+
+
+
+2016-09-09T08:32:31.131000Z
+e64bda59b444c8227f7b36c3449c1e12
+2016-09-09T10:53:54.312611Z
+33
+LGC
+
+hibernate
+dir
+

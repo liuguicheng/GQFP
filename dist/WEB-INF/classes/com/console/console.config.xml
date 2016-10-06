@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+<import resource="classpath:com/console/main/main.config.xml"/> 
+<import resource="classpath:com/console/role/role.config.xml"/>
+<import resource="classpath:com/console/power/power.config.xml"/>
+<import resource="classpath:com/console/manage/manage.config.xml"/> 
+<!--<import resource="classpath:com/console/manage/manage.ldap.config.xml"/>-->
+<!-- <import resource="classpath:com/console/operate/operate.config.xml"/> -->
+<import resource="classpath:com/console/operatelog/operatelog.config.xml"/>
+<import resource="classpath:com/console/backup/dbbackup.config.xml"/>
+
+<bean class="com.console.support.ConsoleHelperImpl" autowire="byType"/>
+
+<!-- 常量数据字典：是否 -->
+<bean class="org.springline.beans.dictionary.support.SystemDictionaryInstance">
+   <property name="identifier"><value>dicWhether</value></property>
+   <property name="data">
+          <map>
+            <entry key="1"><value>是</value></entry>
+            <entry key="0"><value>否</value></entry>
+          </map>
+   </property>
+</bean>
+
+<!-- 日志分类 -->
+<bean class="org.springline.beans.dictionary.support.SystemDictionaryInstance">
+   <property name="identifier"><value>dicLogType</value></property>
+   <property name="data">
+          <map>
+            <entry key="00"><value>系统日志</value></entry>
+            <entry key="01"><value>基础数据日志</value></entry>
+            <entry key="10"><value>应急机构信息日志</value></entry>
+            <entry key="11"><value>应急专家信息日志</value></entry>
+            <entry key="12"><value>应急预案信息日志</value></entry>
+            <entry key="13"><value>应急资源储备信息日志</value></entry>
+            <entry key="14"><value>应急救援队伍信息日志</value></entry>
+            <entry key="15"><value>应急案例信息日志</value></entry>
+            <entry key="16"><value>重大危险源信息日志</value></entry>
+            <entry key="17"><value>防护目标信息日志</value></entry>
+            <entry key="21"><value>环保局信息日志</value></entry>
+            <entry key="22"><value>气象局气象日志</value></entry>
+            <entry key="23"><value>药监局信息日志</value></entry>
+            <entry key="18"><value>其他日志</value></entry>
+            <entry key="20"><value>其他日志2</value></entry>
+          </map>
+   </property>
+</bean>
+
+<!-- 大屏数据菜单 -->
+<bean class="org.springline.beans.dictionary.support.SystemDictionaryInstance">
+   <property name="identifier"><value>dicDataViewMenu</value></property>
+   <property name="data">
+          <map>
+            <entry key="1"><value>30</value></entry>
+          </map>
+   </property>
+</bean>
+
+<!-- 电子地图菜单 -->
+<bean class="org.springline.beans.dictionary.support.SystemDictionaryInstance">
+   <property name="identifier"><value>dicMapMenu</value></property>
+   <property name="data">
+          <map>
+            <entry key="1"><value>40</value></entry>
+          </map>
+   </property>
+</bean>
+
+<!-- 菜单所属模块名 -->
+<bean class="org.springline.beans.dictionary.support.SystemDictionaryInstance">
+   <property name="identifier"><value>dicModuleName</value></property>
+   <property name="data">
+          <map>
+            <entry key="01"><value>电脑端</value></entry>
+            <entry key="02"><value>手机端</value></entry>
+          </map>
+   </property>
+</bean>
+
+</beans>

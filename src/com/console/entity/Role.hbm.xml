@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping default-lazy="false">
+	<class name="com.console.entity.Role" table="sys_role"
+		dynamic-update="true" dynamic-insert="false">
+
+		<id name="id" column="role_id" type="java.lang.String">
+			<generator class="assigned">
+			</generator>
+		</id>
+
+		<property name="name" type="java.lang.String" update="true"
+			insert="true" access="property" column="role_name" length="40"
+			not-null="true" />
+		<property name="sortOrder" type="java.lang.Integer" update="true"
+			insert="true" access="property" column="sort_order" length="40"
+			not-null="false" />
+		<property name="homeUrl" type="java.lang.String" update="true"
+			insert="true" access="property" column="default_home_url" length="400"
+			not-null="false" />
+		<property name="remark" type="java.lang.String" update="true"
+			insert="true" access="property" column="remark" length="40" not-null="false" />
+		<set name="powers" table="sys_role_power" lazy="true" inverse="false"
+			cascade="none" sort="unsorted" order-by="power_id asc">
+			<key column="role_id"></key>
+			<many-to-many class="com.console.entity.Power" column="power_id"
+				outer-join="auto" />
+
+		</set>
+
+		<set name="staffSet" table="sys_staff_role_rel" lazy="true"
+			inverse="false" cascade="none" sort="unsorted">
+			<key column="role_id"></key>
+			<many-to-many class="com.console.entity.Staff" column="staff_id"
+				outer-join="auto" />
+
+		</set>
+		<!-- To add non XDoclet property mappings, create a file named hibernate-properties-Role.xml 
+			containing the additional properties and place it in your merge dir. -->
+		<set name="operates" table="sys_role_operate" lazy="false"
+			inverse="false" cascade="none" sort="unsorted" order-by="operate_id asc">
+			<key column="role_id"></key>
+			<many-to-many class="com.console.entity.Operate" column="operate_id"
+				outer-join="auto" />
+		</set>
+
+	</class>
+
+</hibernate-mapping>

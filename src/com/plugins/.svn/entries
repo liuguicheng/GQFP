@@ -1,0 +1,70 @@
+8
+
+dir
+72
+https://192.168.1.118/svn/GQFP/trunk/src/com/plugins
+https://192.168.1.118/svn/GQFP
+
+
+
+2016-09-07T09:42:09.304169Z
+2
+ZBJ
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+7eaa1c50-b5f8-8d46-a0b5-e5067a1f1115
+
+cms
+dir
+
+dictionary
+dir
+
+dirtree
+dir
+
+holiday
+dir
+
+listener
+dir
+
+memory
+dir
+
+msg
+dir
+
+pending
+dir
+
+plugins.config.xml
+file
+
+
+
+
+2016-09-08T07:57:33.606000Z
+3cc8c8110b3222dce7ede43e05e1bce2
+2016-09-07T09:42:09.304169Z
+2
+ZBJ
+
+sms
+dir
+
+sn
+dir
+

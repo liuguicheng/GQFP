@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+        
+    <bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+        <property name="mappings">
+            <props>
+            	<!-- 新增页面权限 -->
+                <prop key="manage/operateEdit.do">operateEditController</prop>
+                <prop key="manage/operate*">operateController</prop>
+            </props>
+        </property>
+    </bean>
+    <bean id="operateDao" class="com.console.operate.service.dao.hibernate.HibernateOperateDao">
+        <property name="sessionFactory"><ref bean="sessionFactory" /></property>
+    </bean>
+
+    <bean id="operateService" class="com.console.operate.service.spring.SpringOperateService">
+        <property name="operateDao"><ref bean="operateDao" /></property>
+    </bean>
+    <bean id="operateServiceProxy" parent="serviceProxyFactory">
+        <property name="target"><ref bean="operateService" /></property>
+    </bean>
+
+
+    <bean id="operateController" class="com.console.operate.controller.OperateController">
+        <property name="operateService"><ref bean="operateServiceProxy" /></property>
+    </bean>
+    <!-- 编辑 -->
+    <bean id="operateEditController" class="com.console.operate.controller.OperateEditController">
+        <property name="sessionForm"><value>true</value></property>
+        <property name="commandClass"><value>com.console.operate.command.OperateEditInfo</value></property>
+        <property name="formView"><value>manage/operateEdit</value></property>
+        <property name="operateService"><ref bean="operateServiceProxy" /></property>
+        <property name="successView"><value>../manage/operateList.do</value></property>
+    </bean>
+</beans>

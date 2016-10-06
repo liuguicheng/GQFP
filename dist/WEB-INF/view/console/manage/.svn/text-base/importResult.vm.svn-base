@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  #headInclude()
+ <script type="text/javascript">
+    function doReturn(departmentId) {
+      document.location.href = "../manage/staffSubDepartmentListInner.do?departmentId=" + departmentId;
+    }
+</script>
+</head>
+<body class="easyui-layout  indieui-form">
+ <div id="tt" class="easyui-tabs" fit="true" pill="true" tabWidth="160">
+<div title="导入结果" style="padding:5px;" selected="true">
+<div class="easyui-layout" fit="true" >##style="overflow-y:hidden"
+
+<div data-options="region:'center',collapsible:false" >
+ <table class="TbCommon">
+    <tr>
+      <td class="TdInput" style="text-align:left;" colspan="7">已读取记录：$!{totalRows}条</td>
+       ##<td class="TdLabel" style="text-align:left;" colspan="4">$!{totalRows} 条</td>
+    </tr>
+     <tr>
+      <td class="TdInput" style="text-align:left;" colspan="7">已成功记录：$!{successRows} 条</td>
+       ##<td class="TdLabel" style="text-align:left;" colspan="4">$!{successRows} 条</td>
+    </tr>
+    <tr>
+      <td class="TdInput" style="text-align:left;" colspan="7">已忽略记录：$!{ignoreRows} 条</td>
+       ##<td class="TdLabel" style="text-align:left;" colspan="4">$!{ignoreRows} 条</td>
+    </tr>
+
+    #if(${failingRow} and ${failingRow.size()} > 0)
+    <tr>   
+      <td class="TdLabel"  style="text-align:center;" >行号</td>
+      <td class="TdLabel"  style="text-align:center;" colspan="2">输入的值</td>
+      <td class="TdLabel"  style="text-align:center;" colspan="4">提示</td>
+    </tr>
+    #foreach($failingkey in $!{failingRow.keySet()})
+          #set( $errorList = $failingRow.get($failingkey))
+         #set( $rows = ${errorList.size()}+1)
+    <tr>
+      <td class="TdInput" style="text-align:center;" rowspan="$rows">$!{failingkey}</td>
+       #foreach($error in $!{errorList})
+             <tr>   
+                <td class="TdInput" style="text-align:center;" colspan="2">#htmlEscape($!{error.value})</td>  
+                <td class="TdInput" style="text-align:center;" colspan="4">#htmlEscape($!{error.name})</td>  
+             </tr>
+        #end 
+    </tr>
+    #end
+    #end
+  </table>
+</div>
+<div data-options="region:'south'" style="overflow:hidden" >
+  <div class="CommandTool indieui-form">
+  <input type="button" style="width:180px" value="返 回" onclick="javascript:doReturn('102');"/>
+  </div>
+</div>
+</body>
+</html>

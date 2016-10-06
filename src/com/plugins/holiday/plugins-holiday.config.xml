@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+        
+    <bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+        <property name="mappings">
+            <props>
+                <!-- 假日主视图 -->
+                <prop key="holiday/selectQueryResult.do">holidayQueryController</prop>
+                <prop key="holiday/holidayEdit.do">holidayEditController</prop>
+                <prop key="holiday/holiday*.do">holidayController</prop>
+                <!-- 点击日时 ajax -->
+                <prop key="holiday/HolidayDWRFind.do">holidayController</prop>
+            </props>
+        </property>
+    </bean>
+
+ <!--   假日查询工具 -->
+    <bean id="holidayQueryStringUtil" class="org.springline.beans.dataquery.support.SimpleQueryMethod">
+        <property name="valueObjectClassName"><value>com.plugins.holiday.entity.Holiday</value></property>
+        <property name="tableAlias"><value>H</value></property>
+        <property name="orderByClause"><value>holidayDate Asc,holidayType</value></property>
+        <property name="queryParam">
+             <list>
+               <!-- <value>holidayDate,minHolidayDate,GT_EQU</value>
+                <value>holidayDate,maxHolidayDate,LESS_EQU</value>-->
+                <value>holidayName,holidayName,LIKE</value>
+                <value>isLeave,isLeave,EQU</value>
+                <value>holidayReason,holidayReason,EQU</value>
+             </list>
+        </property>
+    </bean>
+
+
+
+    <!-- Dao -->
+    <bean id="holidayDao" class="com.plugins.holiday.service.dao.hibernate.HibernateHolidayDao">
+        <property name="sessionFactory"><ref bean="sessionFactory"/></property>
+         <property name="holidayQueryStringUtil"><ref bean="holidayQueryStringUtil"/></property>
+    </bean>
+
+
+    <!-- Service -->
+    <bean id="holidayService" class="com.plugins.holiday.service.spring.SpringHolidayService">
+        <property name="holidayDao"><ref bean="holidayDao"/> </property>
+    </bean>
+
+    <!-- spring Proxy -->
+    <bean id="holidayServiceProxy" parent="serviceProxyFactory">
+        <property name="target"><ref bean="holidayService"/></property>
+    </bean>
+
+
+ <!-- Controller -->
+    <bean id="holidayController" class="com.plugins.holiday.controller.HolidayController">
+        <property name="holidayService"><ref bean="holidayServiceProxy"/></property>
+        <property name="holidayQueryView"><value>../holiday/selectQueryResult.do</value></property>
+    </bean>
+
+    <bean id="holidayEditController" class="com.plugins.holiday.controller.HolidayEditController">
+        <property name="holidayService"><ref bean="holidayServiceProxy"/></property>
+        <property name="commandClass"><value>com.plugins.holiday.command.HolidayEditInfo</value></property>
+        <property name="formView"><value>holiday/holidayEdit</value></property>
+        <property name="successView"><value>../holiday/holidayQuery.do</value></property>
+    </bean>
+
+    <bean id="holidayQueryController" class="com.plugins.holiday.controller.HolidayQueryController">
+        <property name="holidayService"><ref bean="holidayServiceProxy"/></property>
+    </bean>
+
+</beans>

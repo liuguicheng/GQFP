@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  #headInclude()
+  <script type="text/javascript">
+
+function delChannel() {
+    var f = document.formList;
+    if (f.submitFlag.value == "1") {
+        alert('请求已经提交！');
+        return ;
+    }
+    if (!hasCheckBoxSelect("channelId")) {
+        alert("请选择要删除的栏目!");
+        return ;
+    }
+    if (!confirm("数据删除之后将无法恢复\n\n您确定要删除数据吗？")) {
+        return;
+    }
+    f.action = "../cms/channelDelete.do";
+    f.submitFlag.value = "1";
+    f.submit();
+}
+
+
+function editChannel(channelId) {
+    location.href = "../cms/channelEdit.do?parentId=$!{command.parentId}&token=$!{page.token}&channelId=" + channelId;
+}
+
+#if($message)
+  alert("$message");
+#end
+</script>
+</head>
+<body>
+<div class="PageHeader">
+  <div class="LeftBox Title">
+                #if (${command.parentId} == "root") 根目录#else
+                    #lookUpDict($dicData.dicCmsChannel "$!{command.parentId}")#end栏目管理
+  </div>
+</div>
+<div class="PageTool">
+  <div class="LeftBox Tool">
+    <input type="button" value="新 增" class="BtnAdd" onclick="javascript:editChannel('')"  /> 
+    <input type="button" value="删 除" class="BtnDel" onclick="javascript:delChannel('')"  />
+    
+  </div>
+  <div class="RightBox Pager">
+    #pageDirector( $page "#getRequestUri()" false)
+  </div>
+</div>
+<div class="PageContainer indieui-scroll">
+            <form name="formList" method="post">
+                <input type="hidden" name="submitFlag" value="0">
+                <input type="hidden" name="parentId" value="$!{command.parentId}">
+            <table class="TbList">
+              <tr align="center" class="TrListTitle">
+                <td width="30" class="tabletitle" ><input type="checkbox" onclick="javascript:setCheckBoxValue('channelId', this.checked);"></td>
+                <td width="40" class="tabletitle">ID</td>
+                <td width="40" class="tabletitle">序号</td>
+                <td class="tabletitle" align="left">栏目名称</td>
+                <td width="80" class="tabletitle" align="left">栏目代码</td>
+
+              </tr>
+           #foreach($channel in ${page.data})
+                #if($velocityCount % 2 == 0) #set($css = "TrListEven") #else #set($css = "TrListOdd") #end
+
+                #set($index = $velocityCount + $page.pageSize * ($page.pageNumber - 1))
+              <tr   align="center"class="$css" onMouseOver="this.className='TrListFocus'" onMouseOut="this.className='$css'">
+                <td class="tabledata">
+                    <input type="checkbox" name="channelId" value="$!{channel.channelId}" />
+                </td>
+                <td class="tabledata"  >$!{channel.channelId}</td>
+                <td class="tabledata"  >$!{channel.sortOrder}</td>
+                <td  class="tabledata"  align="left"><a class="1" href="javascript:editChannel('$!{channel.channelId}')">#htmlEscape($!{channel.channelName})</a></td>
+                <td class="tabledata"  >$!{channel.channelPath}</td>
+                 <!--
+                <td  class="tabledata" >
+                #if($channel.channelStatus == "0")
+                  <a class="1" href="javascript:startChannel('$!{channel.channelId}')">启用</a>
+                #elseif($channel.channelStatus == "1")
+                  <a href="javascript:forbiddenChannel('$!{channel.channelId}')">禁用</a>
+                #end
+                </td> -->
+              </tr>
+           #end
+              </table>
+              </form>
+</div>
+
+</body>
+</html>

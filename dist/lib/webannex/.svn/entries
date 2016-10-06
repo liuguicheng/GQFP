@@ -1,0 +1,57 @@
+8
+
+dir
+6
+https://192.168.1.118/svn/GQFP/trunk/dist/lib/webannex
+https://192.168.1.118/svn/GQFP
+
+
+
+2016-09-07T09:42:09.304169Z
+2
+ZBJ
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+7eaa1c50-b5f8-8d46-a0b5-e5067a1f1115
+
+WebAnnexManager.ocx
+file
+
+
+
+
+2016-09-08T07:57:24.893000Z
+e74ae13791f67a4e6ba396713f509ea0
+2016-09-07T09:42:09.304169Z
+2
+ZBJ
+has-props
+
+ocx_setup.EXE
+file
+
+
+
+
+2016-09-08T07:57:25.001000Z
+f7d7798c0674eb39d0efd1981151fdba
+2016-09-07T09:42:09.304169Z
+2
+ZBJ
+has-props
+
+src
+dir
+

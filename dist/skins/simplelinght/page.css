@@ -1,0 +1,251 @@
+*{
+	margin:0;
+	padding:0;
+	font-family:  "Î¢ÈíÑÅºÚ", "ËÎÌå", Verdana, Geneva, sans-serif;
+	list-style:none;
+	border:none;
+}
+.clearFix,.clear{clear:both;}
+img{ border:0;  }
+a{ text-decoration:none; color:#333;  }
+a{
+	color:#333; 
+	text-decoration:none;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	-webkit-text-overflow: ellipsis;
+	-o-text-overflow: ellipsis;
+	white-space: nowrap;
+}
+a:hover{color:#F00;}
+img{border:none;}
+html, body{
+	font-size:16px;
+	height:100%;
+	width:100%;
+}
+body{
+	background-attachment: fixed;
+	background-image: url(images/body_bg.jpg);
+	background-repeat: no-repeat;
+	background-position: center -80px;	
+}
+.placeHolder{
+	width:0px;
+	height:0px;
+}
+.infoBox1{
+	margin:20px;
+	height:auto;
+	height:215px;
+}
+.infoBox1 .photo{
+	height:215px;
+	width:157px;
+	float:left;
+}
+.infoBox1 .photo img{
+	height:215px;
+	width:157px;
+}
+.infoBox1 .data{
+	margin-left:170px;
+	height:215px;
+	background-color: #FFF;
+}
+.infoBox1 .maginFix{
+	margin:0;
+	height:215px;
+	background-color: #FFF;
+}
+.infoBox1 .data .title{
+	height:40px;
+	line-height:40px;
+	color: #FFF;
+	background-color: #cc0000	;
+	padding-left:20px;
+}
+.infoBox1 .data .infoTable{
+	width:100%;
+	table-layout:fixed;
+	color: #77000a;
+}
+.infoBox1 .data .infoTable td{
+	padding:10px 5px;
+	font-size: 24px;	
+}
+.infoBox1 .data .infoTable .lable{
+	text-align:right;
+	color: #999;	
+}
+.infoBox{
+	margin:20px;
+	height:auto;
+	background-color: #FFF;
+	border: 1px solid #980000;
+}
+.infoBox h2.title{
+	height:50px;
+	line-height:50px;
+	color: #FFF;
+	background-color: #cc0000	;
+	padding-left:20px;
+	font-size: 24px;
+}
+.infoBox .info{
+	width:60%;
+	float:left;
+	margin:30px;
+}
+.infoBox  .infoTable{
+	width:100%;
+	border-collapse:collapse;
+	border:none;
+}
+.infoBox  .infoTable td{
+	padding:5px;
+	font-size: 24px;
+}
+.infoBox  .infoTable .txt{
+	height:30px;
+	line-height:30px;
+	border:1px solid #ccc;
+	background-color: #FFF1DD;
+	color: #999;
+	font-size: 18px;
+}
+.infoBox  .infoTable .lable{
+	text-align:right;
+}
+ .btn{
+	height:30px;
+	line-height:30px;
+	border:1px solid #ccc;
+	padding-left:20px;
+	padding-right:20px;
+	font-size: 20px;
+ }
+.infoBox .list{
+	width:100%;
+	border-collapse:collapse;
+	border:none;
+}
+.infoBox .list thead tr{
+	background-color: #FFF3E1;	
+	height:40px;
+	line-height:40px;
+	border-top:1px solid #ccc;
+}
+.infoBox .list td{
+	padding: 10px 5px;
+	text-align:center;
+	border:1px solid #ccc;
+	border-bottom:none;
+}
+.infoBox .list thead tr th{
+	font-size: 24px;
+	font-weight: normal;
+}
+.infoBox .pageTool{
+	margin:10px;
+	height:40px;
+	line-height:40px;
+	font-weight: bold;
+}
+.infoBox .pageTool .pager{
+	float:right;
+	width:auto;
+}
+.infoBox .pageTool .pager a{
+	width:120px;
+	height:35px;
+	line-height:35px;
+	display:block;
+	float:left;
+	background-color: #FFF0D9;
+	text-align:center;
+	margin-right:2px;
+	border:1px  solid #ccc;
+}
+.infoBox .pageTool .pager a:hover{
+	color: #FFF;
+	background-color: #F60;
+	cursor:pointer;
+}
+.infoBox .pageTool .pageInfo{
+	float:left;
+	width:auto;
+}
+.infoBox .info ul{
+	font-size: 24px;
+	line-height:2.0;
+	color: #333;
+}
+.infoBox .scaner{
+	width:300px;
+	float:right;
+	line-height:260px;
+	text-align:center;
+	height:320px;
+	background-image: url(images/scaner.png);
+	background-repeat: no-repeat;
+	background-position: center 20px;
+	font-weight: bold;
+	color: #FFF;
+}
+.chartContainer{
+	padding:20px;
+	height:auto;
+}
+.chartContainer .chart{
+	float:left;
+	width:50%;
+	font-size: 24px;
+}
+.chartContainer .label{
+	height:40px;
+	line-height:40px;
+	font-size: 30px;
+	text-align:center;
+}
+
+.listNav { margin:0 0 10px; }
+.ln-letters { overflow:hidden; }
+.ln-letters a {
+	font-size:20px;
+	display:block;
+	float:left;
+	width:60px;
+	height:40px;
+	line-height:40px;
+	text-align:center;
+	border: 1px solid #ccc;
+	margin:5px;
+	/*border-right:none;*/
+	text-decoration:none;
+	
+	-moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+    border-radius: 6px;
+}
+.ln-letters a.ln-first {
+	border-right:1px solid silver;
+	width:60px;
+}
+.ln-letters a.ln-last { border-right:1px solid silver; }
+.ln-letters a:hover,
+.ln-letters a.ln-selected {
+	background-color:#F30;
+	color: #FFF;
+}
+.ln-letters a.ln-disabled { color:#e7e7e7; }
+.ln-letters a.ln-disabled:hover {
+	color:#e7e7e7;
+	background-color: #FFF;
+	cursor:default;
+}
+.ln-letter-count { text-align:center; font-size:0.8em; line-height:1; margin-bottom:3px; color:#336699; }
+.ln-no-match{
+	padding:10px;
+	font-size: 24px;	
+}

@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/GQFP/!svn/ver/70/trunk/src/com/systemic/gq/pay/service/spring
+END
+SpringPayService.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/GQFP/!svn/ver/91/trunk/src/com/systemic/gq/pay/service/spring/SpringPayService.java
+END
+SpringPayLogService.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/GQFP/!svn/ver/91/trunk/src/com/systemic/gq/pay/service/spring/SpringPayLogService.java
+END
+SpringWithdrawalsService.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/GQFP/!svn/ver/95/trunk/src/com/systemic/gq/pay/service/spring/SpringWithdrawalsService.java
+END
+SpringTransferAccountService.java
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/GQFP/!svn/ver/101/trunk/src/com/systemic/gq/pay/service/spring/SpringTransferAccountService.java
+END

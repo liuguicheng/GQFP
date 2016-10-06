@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+ <!-- url mapping -->
+    <bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+        <property name="mappings">
+            <props>
+                <prop key="dirTree/dirTypeManage.do">dirTypeQueryController</prop>
+                <prop key="dirTree/dirTypeEdit.do">dirTypeEditController</prop>
+                <prop key="dirTree/dirTypeDelete.do">dirTypeController</prop>
+                <prop key="dirTree/dirTypeUse.do">dirTypeController</prop>
+                <prop key="dirTree/dirTypeSort.do">dirTypeController</prop>
+
+                <prop key="dirTree/dirManage.do">dirDataQueryController</prop>
+                <prop key="dirTree/dirDataManage.do">dirDataQueryController</prop>
+                <prop key="dirTree/dirDataDialog.do">dirDataQueryController</prop>
+                <prop key="dirTree/dirDataSelect.do">dirDataQueryController</prop>
+                <prop key="dirTree/dirDataEdit.do">dirDataEditController</prop>
+                <prop key="dirTree/dirDataDelete.do">dirDataController</prop>
+                <prop key="dirTree/dirDataUse.do">dirDataController</prop>
+                <prop key="dirTree/dirDataSort.do">dirDataController</prop>
+            </props>
+        </property>
+    </bean>
+
+    <!-- Dao -->
+    <bean id="dirTypeDao" class="com.plugins.dirtree.service.dao.hibernate.HibernateDirTypeDao">
+        <property name="sessionFactory"><ref bean="sessionFactory"/></property>
+    </bean>
+    <bean id="dirDataDao" class="com.plugins.dirtree.service.dao.hibernate.HibernateDirDataDao">
+        <property name="sessionFactory"><ref bean="sessionFactory"/></property>
+    </bean>
+
+    <!-- Service -->
+    <bean id="dirService" class="com.plugins.dirtree.service.spring.SpringDirService">
+        <property name="dirTypeDao"><ref bean="dirTypeDao"/> </property>
+        <property name="dirDataDao"><ref bean="dirDataDao"/> </property>
+    </bean>
+
+     <!-- spring Proxy -->
+<!--     <bean id="dirServiceProxy" parent="serviceProxyFactory"> -->
+<!--         <property name="target"><ref bean="dirService"/></property> -->
+<!--     </bean> -->
+
+    <!-- Controller -->
+     <bean id="dirTypeQueryController" class="com.plugins.dirtree.controller.DirTypeQueryController">
+        <property name="dirService"><ref bean="dirService"/></property>
+        <property name="dirTypeListView"><value>dirTree/dirTypeList</value></property>
+    </bean>
+
+    <bean id="dirTypeEditController" class="com.plugins.dirtree.controller.DirTypeEditController">
+        <property name="dirService"><ref bean="dirService"/></property>
+        <property name="commandClass"><value>com.plugins.dirtree.command.DirTypeEditInfo</value></property>
+        <property name="formView"><value>dirTree/dirTypeEdit</value></property>
+        <property name="successView"><value>../dirTree/dirTypeManage.do</value></property>
+    </bean>
+
+    <bean id="dirTypeController" class="com.plugins.dirtree.controller.DirTypeController">
+        <property name="dirService"><ref bean="dirService"/></property>
+        <property name="dirTypeListView"><value>../dirTree/dirTypeManage.do</value></property>
+        </bean>
+
+    <bean id="dirDataQueryController" class="com.plugins.dirtree.controller.DirDataQueryController">
+        <property name="dirService"><ref bean="dirService"/></property>
+        </bean>
+
+    <bean id="dirDataController" class="com.plugins.dirtree.controller.DirDataController">
+        <property name="dirService"><ref bean="dirService"/></property>
+        </bean>
+
+   <bean id="dirDataEditController" class="com.plugins.dirtree.controller.DirDataEditController">
+        <property name="dirService"><ref bean="dirService"/></property>
+        <property name="commandClass"><value>com.plugins.dirtree.command.DirDataEditInfo</value></property>
+        <property name="formView"><value>dirTree/dirDataEdit</value></property>
+        <property name="successView"><value>../dirTree/dirDataSelect.do</value></property>
+    </bean>
+
+ </beans>

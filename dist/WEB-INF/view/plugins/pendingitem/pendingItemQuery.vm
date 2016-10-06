@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  #headInclude()
+  <script type="text/javascript" src="../lib/indieui/external/My97DatePicker/WdatePicker.js"></script>
+  <script type="text/javascript">
+  #if($message)alert("#javaScriptEscape($message)");#end
+  validator.formName = "queryForm";
+  validator.addRelationCheckPoint("sendTimeBegin", "开始时间", "sendTimeEnd", "结束时间", "checkLesserEqual", "", "查询条件的截止时间不能早于开始时间！\n\n请重新设定查询条件！");
+
+  function tofinished(){
+    location.href = "../pendingitem/finishedItemQuery.do";
+  }
+
+  function doQuery() {
+    if (validator.checkAll()) {
+      document.queryForm.submit();
+    }
+  }
+
+  var INNERSYSFLAG = '#lookUpDict(${dicData.dicMessageManageIndex} "INNERSYSTEM")';
+  function openItemPending(url, module, fordoId) {
+    var e = document.queryFrm;
+    var theUrl = "";
+    if (module == INNERSYSFLAG || module == "") {
+      submitRequest(url);
+    } else {
+      theUrl = "../pendingitem/pendingWSDispatch.do?pendingItemId=" + fordoId;
+      e.action = theUrl;
+      e.submit();
+    }
+  }
+
+  function doEdit (url) {
+    $("body").processMask();
+    document.location.href = url + "&${pendingItemFlag}=1";
+  }
+  </script>  
+</head>
+<body>
+<div class="SearchBox" id="divSearch">
+<form name="queryForm" action="#getRequestUri()" method="post" class="indieui-form">
+  <table class="TbCommon">
+    <tr>
+      <td class="TdLabel" style="width:100px;">主题</td>
+      <td class="TdInput" >
+        <input type="text" name="title" value="#htmlEscape($!{command.title})"/>
+      </td>
+    </tr>
+    <tr>
+      <td class="TdLabel" style="width:100px;">发送时间</td>
+      <td class="TdInput">
+        <input type="text" name="sendTimeBegin" value="#formatDate($!{command.sendTimeBegin})" dateFormat="yyyy-MM-dd" style="width:120px;"/>-
+        <input type="text" name="sendTimeEnd" value="#formatDate($!{command.sendTimeEnd})" dateFormat="yyyy-MM-dd" style="width:120px;"/>
+      </td>
+    </tr>
+  </table>
+  <div class="CommandTool">
+    <input type="button" value="确 定" onClick="javascript:document.queryForm.submit();$('body').processMask();"/>
+    <input type="button" value="清 空" onClick="javascript:clearQuery(document.queryForm);"/>
+    <input type="button" value="取 消" onClick="javascript:showDiv('divSearch');">    
+  </div>
+</form>
+</div>
+
+<div class="PageTool">
+  <div class="LeftBox Tool">
+    <input type="button" class="BtnSearch" value="查询"  title="查询" onclick="javascript:showDiv('divSearch');"/>
+  </div>
+  <div class="RightBox Pager">
+    #pageDirector( $page "#getRequestUri()" false)
+  </div>
+</div>
+<div class="PageContainer indieui-scroll">
+<form name="listForm" method="post">
+<input type="hidden" name="submitFlag" value="0">
+<input type="hidden" name="token" value="$!{command.token}">
+<table class="TbList">
+  <thead> 
+    <tr>
+      <th style="width:35px;">序号</th>
+      <th>待办事宜主题</th>
+      <th style="width:100px;">发送人</th>
+      <th style="width:100px;">发送时间</th>
+    </tr>
+  </thead>
+  <tbody>
+  #foreach( $data in $page.data )
+    #set($index = ($page.pageNumber - 1) * $page.pageSize + $velocityCount)
+    <tr>
+      <td>$index</td>
+      <td style="text-align:left;" class="TdTxtover" title="#htmlEscape($!{data.forDoc.title})"><a href="javascript:doEdit('$!{data.forDoc.url}')">#htmlEscape($!{data.forDoc.title})</a></td>
+      <td>#htmlEscape($!{data.forDoc.senderName})</td>
+      <td>#formatDate($!{data.forDoc.sendTime})</td>
+    </tr>
+  #end
+  </tbody>   
+</table>
+</form>
+</div>
+</body>
+</html>

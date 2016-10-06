@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="urlManageMapping"
+		class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<property name="mappings">
+			<props>
+				<prop key="db/backuplist.do">backupController</prop>
+				<prop key="db/addBackup.do">backupManageController</prop>
+				<prop key="db/delBackup.do">backupManageController</prop>
+				<prop key="db/recoveryBackup.do">backupManageController</prop>
+				<prop key="db/fileDownload.do">backupManageController</prop>
+			</props>
+		</property>
+	</bean>
+
+
+	<!-- QueryStringUtil -->
+	<bean id="dbbackupQueryStringUtil"
+		class="org.springline.beans.dataquery.support.SimpleQueryMethod">
+		<property name="valueObjectClassName">
+			<value>com.console.entity.DBBackup</value>
+		</property>
+		<property name="tableAlias">
+			<value>me</value>
+		</property>
+		<property name="orderByClause"><value>db_time desc</value></property>
+		<property name="queryParam">
+			<list>
+				<!-- <value>userid,userid,LIKE</value> <value>bonustype,bonustype,EQU</value> 
+					<value>create_time,create_time,GT_EQU</value> <value>create_time,end_time,LESS_EQU</value> -->
+			</list>
+		</property>
+	</bean>
+	<bean id="dbbackupDao"
+		class="com.console.backup.service.dao.hibernate.HibernateDBBackupDao">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+		<property name="dbbackupQueryStringUtil">
+			<ref bean="dbbackupQueryStringUtil" />
+		</property>
+	</bean>
+	<bean id="dbbackupService" class="com.console.backup.service.spring.SpringDBBackupService"
+		autowire="byType" />
+
+	
+	<bean id="backupController" class="com.console.backup.controller.BackupController" autowire="byType">
+    <property name="dbbackupService"><ref bean="dbbackupService" /></property>
+    <property name="commandClass"><value> com.console.backup.command.DBBackupInfo</value></property>
+    <property name="successView"><value>db/dbbackupList</value></property>
+  </bean>
+  
+  	<bean id="backupManageController" class="com.console.backup.controller.DBBackupManageController" >
+    <property name="dbbackupService"><ref bean="dbbackupService" /></property>
+    </bean>
+</beans>

@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping default-lazy="false">
+	<class name="com.console.entity.Duty" table="sys_duty"
+		dynamic-update="true" dynamic-insert="false">
+
+		<id name="id" column="duty_id" type="java.lang.Integer">
+			<generator class="assigned">
+			</generator>
+		</id>
+
+		<property name="mainDuty" type="java.lang.String" update="true"
+			insert="true" access="property" column="main_duty" length="1" />
+
+		<property name="name" type="java.lang.String" update="true"
+			insert="true" access="property" column="name" length="50" />
+
+		<property name="remark" type="java.lang.String" update="true"
+			insert="true" access="property" column="remark" length="255" />
+
+	</class>
+
+</hibernate-mapping>

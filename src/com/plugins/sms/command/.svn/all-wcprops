@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/GQFP/!svn/ver/2/trunk/src/com/plugins/sms/command
+END
+SmsEditInfo.java
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/GQFP/!svn/ver/2/trunk/src/com/plugins/sms/command/SmsEditInfo.java
+END
+SmsReplyEditInfo.java
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/GQFP/!svn/ver/2/trunk/src/com/plugins/sms/command/SmsReplyEditInfo.java
+END
+SmsInfo.java
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/GQFP/!svn/ver/2/trunk/src/com/plugins/sms/command/SmsInfo.java
+END
+SmsReplyQueryInfo.java
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/GQFP/!svn/ver/2/trunk/src/com/plugins/sms/command/SmsReplyQueryInfo.java
+END
+SmsQueryInfo.java
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/GQFP/!svn/ver/2/trunk/src/com/plugins/sms/command/SmsQueryInfo.java
+END

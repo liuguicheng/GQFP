@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  #headInclude()
+
+<script>
+  //上移
+  function moveUp() {
+    var chkbox = document.getElementsByName("dirType");
+    var tbl = document.getElementById("dataTable");
+    if(chkbox.length > 0)  {
+      for(var i=0; i<chkbox.length; ++i) {
+        if (chkbox[i] && chkbox[i].checked) {
+          if(i>0 && !chkbox[(i-1)].checked)  {
+##            var tr1 = document.getElementById("typeRow" + i);
+##            var tr2 = document.getElementById("typeRow"+(i-1));
+##            var temp1 = tr1.innerHTML;
+##            tr1.innerHTML = tr2.innerHTML;
+##            tr2.innerHTML = temp1;
+            var tr1 = $("#typeRow" + i);
+            var tr2 = $("#typeRow" + (i - 1));
+            var temp = tr1.html();
+            tr1.html(tr2.html());
+            tr2.html(temp);
+      chkbox[i-1].checked = true;
+          }
+        }
+      }
+    }
+  }
+  //下移
+  function moveDown() {
+    var chkbox = document.getElementsByName("dirType");
+    var tbl = document.getElementById("dataTable");
+    if(chkbox.length > 0)  {
+      for(var i=chkbox.length - 1; i >= 0; --i) {
+        if (chkbox[i] && chkbox[i].checked) {
+          if(i < chkbox.length - 1 && !chkbox[(i+1)].checked)  {
+##            var tr1 = document.getElementById("typeRow" + i);
+##            var tr2 = document.getElementById("typeRow"+(i+1));
+##            var temp1 = tr1.innerHTML;
+##            tr1.innerHTML = tr2.innerHTML;
+##            tr2.innerHTML = temp1;
+            var tr1 = $("#typeRow" + i);
+            var tr2 = $("#typeRow" + (i + 1));
+            var temp = tr1.html();
+            tr1.html(tr2.html());
+            tr2.html(temp);
+      chkbox[i+1].checked = true;
+          }
+        }
+      }
+    }
+  }
+
+//排序
+function sort() {
+    var chkbox = document.getElementsByName("dirType");
+    if(chkbox.length > 0)  {
+        for(var i=chkbox.length - 1; i >= 0; --i) {
+           chkbox[i].checked = true;
+        }
+    }
+    var e = document.listForm;
+    e.action = "../dirTree/dirTypeSort.do";
+    e.submit();
+}
+
+function doEdit(staffId) {
+  jQuery('body').processMask();
+  location.href = "../dirTree/dirTypeEdit.do?departmentId=${parentDep.Id}&staffId=" + staffId;
+}
+</script>
+</head>
+<body class="easyui-layout">
+	<form name="listForm">
+<div data-options="region:'north',title:'目录类型管理',iconCls:'icon-topic',collapsible:false,height:70">
+  <div class="PageTool">
+    <div class="LeftBox Tool">
+      <input type="button" class="BtnAdd" value="新增" title="新增" onclick="javascript:doEdit('');"/>
+      <input type="button" class="BtnSortUp" value="上移" title="上移" onclick="javascript:moveUp()"/>
+      <input type="button" class="BtnSortDown" value="下移" title="下移" onclick="javascript:moveDown()"/>
+      <input type="button" class="BtnSort" value="排序" title="排序" onclick="javasciprt:sort()"/>
+    </div>
+  </div>
+</div>
+
+<div data-options="region:'center'">
+  <div >
+                <table width="100%" border="0" cellpadding="3" cellspacing="0" class="TbList">
+                  <thead>
+                  <tr align="center" class="TrListTitle">
+					<th width="3%"><input type="checkbox" onclick="javascript:setCheckBoxValue('dirType', this.checked);"/></th>
+                    <th width="6%" class="TdCommand">序号</th>
+                    <th width="30%" class="TdCommand">名称</th>
+					<th width="25%" class="TdCommand">编码</th>
+					<th width="20%" class="TdCommand">创建时间</th>
+                    <th width="12%" class="TdCommand">操作</th>
+                  </tr>
+                  </thead>
+                </table>
+  </div>
+                  #foreach($dirType in ${dirTypeList})
+           #set($index = $velocityCount - 1)
+                #if($velocityCount % 2 == 0) #set($css = "TrListEven") #else #set($css = "TrListOdd") #end
+  <div id="typeRow${index}">
+				<table cellpadding="2" cellspacing="0" class="TbList" align="center" >
+                  <tr align="center" class="$css" onMouseOver="this.className='TrListFocus'" onMouseOut="this.className='$css'">
+					<td width="3%">
+                    <input type="checkbox" name="dirType" value="$!{dirType.dirTypeId}"/>
+                </td>
+                    <td width="6%" align="center">$dirType.sortOrder</td>
+					<td width="30%" align="center">$dirType.dirTypeName</td>
+                    <td width="25%" align="center">$dirType.dirTypeCode</td>
+					<td width="20%" align="center">#formatTime($dirType.createTime)</td>
+                    <td width="12%" align="center" nowrap>
+					<a href="../dirTree/dirTypeEdit.do?dirTypeId=$!{dirType.dirTypeId}">编辑</a>
+					&nbsp;|&nbsp;
+					#if($dirType.isValid == "0")
+						<a href="../dirTree/dirTypeUse.do?dirTypeId=$!{dirType.dirTypeId}"
+          onclick="javascript:return(confirm('是否确定启用此项，启用后目录类型恢复使用！'))">启用</a>
+        #elseif($dirType.isValid == "1")
+                  <a href="../dirTree/dirTypeDelete.do?dirTypeId=$!{dirType.dirTypeId}"
+          onclick="javascript:return(confirm('是否确定禁用此项，禁用后目录类型只能显示不能选择！'))">禁用</a>
+        #end
+					</td>
+                  </tr>
+  </table></div>
+                  #end
+
+</div>
+    </form>
+</body>
+</html>

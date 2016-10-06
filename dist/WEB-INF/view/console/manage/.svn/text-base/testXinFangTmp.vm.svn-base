@@ -1,0 +1,73 @@
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=GBK" />
+  <title>$!{appContext.appName}</title>
+  <link href="$!{appContext.skin}/content.css" rel="stylesheet" type="text/css" />
+  <script type="text/javascript" src="../script/common.js"></script>
+</head>
+<script>
+#if($message)
+  alert("$message");
+#end
+
+function submitQuery(url) {
+    var e = document.editFrm;
+    e.action = url;
+    e.submit();
+}
+
+function test(department) {
+alert(department.id + "  " + department.name);
+}
+</script>
+<body class="main-bgimg1" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+<table class="Right" width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td>
+      <table width="100%" border="0" cellpadding="0" cellspacing="0">
+      <form action="" method="post" name="editFrm">
+        <tr>
+          <td width="5" class="Right-left_img">&nbsp;</td>
+          <td valign="middle" class="Right-center_imgbg"> <table width="99%" border="0" cellspacing="0" cellpadding="1">
+              <tr>
+                <td align="center" valign="middle" class="Right-ng_img">&nbsp;</td>
+                <td class="main-lmtxt1"> 系统角色列表</td>
+                <td align="right" nowrap class="main-lmtxt1">
+                  <!--在此处放置按钮--->
+                  <input type="button" class="button" value="读取未扫描数据" onclick="submitQuery('../document/readDocFormTmp.action')" />
+                  <input type="button" class="button" value="写数据进临时表" onclick="submitQuery('../testXml/testVMToXml.do?parentId=11920')" />
+                  #selectReceiveSingleDept("test" "test")
+                </td>
+              </tr>
+            </table></td>
+          <td width="5" class="Right-right_img">&nbsp;</td>
+        </tr>
+</form>
+      </table>
+      <table width="100%" border="0" cellpadding="0" cellspacing="0" class="mainTable">
+        <tr>
+          <td class="tablearea">
+            <table width="100%" border="0" cellpadding="3" cellspacing="0" class="subtable">
+              <tr align="center" class="trTitle">
+                <td width="20%" class="tabletitle">数据状态</td>
+                <td width="30%" class="tabletitle">文档名称</td>
+                <td width="30%" class="tabletitle">发文部门</td>
+                <td width="20%" class="tabletitle">收文部门</td>
+              </tr>
+#foreach($xinfang in ${xinFangList})
+              <tr align="center" class="trData">
+                <td class="tabledata">${xinfang.docStatus}</td>
+                <td class="tabledata">${xinfang.fileName}</td>
+                <td class="tabledata">${xinfang.sourceDeptName}</td>
+                <td class="tabledata">${xinfang.receiveDeptName}</td>
+              </tr>
+#end
+            </table>
+          </td>
+        </tr>
+      </table>
+  </td>
+  </tr>
+</table>
+</body>
+</html>

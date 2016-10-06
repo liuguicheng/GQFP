@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  #headInclude()
+  <script type="text/javascript">
+  #if($message)alert("#javaScriptEscape($message)");#end
+
+  function doEdit(memberId) {
+    var url = "../member/memberEdit.do?token=$!{command.token}&memberId=" + memberId;
+    document.location.href = url;
+  }
+
+  function doDelete() {
+    if (!hasCheckBoxSelect("memberId")) {
+      alert("请选择要删除的人员！");
+      return;
+    }
+    if (confirm("您确定要删除所选择的人员吗?")) {
+      var f =  document.listForm;
+      f.action = "../member/memberDelete.do";
+      f.submit();      
+    }
+  }
+  
+      jQuery(document).ready(function(){
+      var theUrl = "../member/memberListAjax.do";
+            jQuery.ajax({
+              url: theUrl,
+              cache: false,
+              type: 'POST',
+              error: function(r) {
+                alert("请求错误！");
+              },
+              success: function(result){
+                          if(result != ""){
+                              var data = eval("(" + result + ")");
+                              //var name = data;
+                              //$(".fruit").html(data[0].memberId);
+                              for(var i=0;i<data.length;i++){
+                                $(".fruit_"+j).html(data[i].memberId);
+                              } 
+                          }
+                    }     
+            });
+});
+  </script>
+</head>
+<body>
+<div class="PageHeader">
+  <div class="LeftBox Title">人员管理列表</div>
+</div>
+
+<div class="SearchBox" id="divSearch">
+<form name="queryForm" action="#getRequestUri()" method="post" class="indieui-form">
+  <table class="TbCommon">
+    <tr>
+      <td class="TdLabel" style="width:100px;">：</td>
+      <td class="TdInput">
+        <input type="text" name="operateCode" value="#htmlEscape($!{command.operateCode})" >
+      </td>
+      <td class="TdLabel" style="width:100px;">：</td>
+      <td class="TdInput">
+        <input type="text" name="operateName" value="#htmlEscape($!{command.operateName})" >
+      </td>
+    </tr>
+  </table>
+  <div class="CommandTool">
+    <input type="button" value="确 定" onClick="javascript:document.queryForm.submit();jQuery('body').processMask();"/>
+    <input type="button" value="清 空" onClick="javascript:clearQuery(document.queryForm);"/>
+    <input type="button" value="取 消" onClick="javascript:showDiv('divSearch');">    
+  </div>
+</form>
+</div>
+
+<div class="PageTool">
+  <div class="LeftBox Tool">
+    <input type="button" class="BtnSearch" value="查询"  title="查询" onclick="javascript:showDiv('divSearch');"/>
+    <input type="button" class="BtnAdd" value="会员注册"  title="新增" onclick="javascript:doEdit('');"/>
+    <input type="button" class="BtnDel" value="删除"  title="删除" onclick="javascript:doDelete();"/>
+  </div>
+</div>
+
+<div class="PageContainer indieui-scroll">
+<form name="listForm" method="post">
+<input type="hidden" name="submitFlag" value="0">
+<input type="hidden" name="token" value="$!{command.token}">
+<table class="TbList">
+  <thead> 
+    <tr>
+      <th style="width:20px;" nowrap>
+        <input type="checkbox" onclick="javascript:setCheckBoxValue('memberId', this.checked);">
+      </th>
+        <th data-options="field:'typeCode', width:150">用户名</th>
+        <th data-options="field:'typeName', width:250">推荐人</th>
+        <th data-options="field:'typeWay', width:80, fit:true">股权等级</th>
+        <th data-options="field:'dataLength', width:80, fit:true">金币</th>
+        <th data-options="field:'isLonger', width:80, fit:true">创建时间</th>  
+    </tr>
+  </thead>
+  <tbody>
+  #foreach( $data in $page.data )
+     #set($index = ($page.pageNumber - 1) * $page.pageSize + $velocityCount)
+            #if($velocityCount % 2 == 0) #set($css = "TrListEven") #else #set($css = "TrListOdd") #end
+    <tr>
+      <td><input type="checkbox" name="memberId" value="$!{data.memberId}"></td>
+      <td><a href="../member/memberEdit.do?memberId=$!{data.memberId}">$!{data.userName}</a></td>
+      <td>$!{data.referenceName}</td>
+      <td>#lookUpDict($dicData.dicStockLevel "$!{data.stock.gradeNum}")</td>
+      <td>$!{data.stock.money}</td>
+      <td class="fruit_$index">#formatTime(${data.createTime})</td>
+      
+    </tr>
+  #end
+  </tbody>   
+</table>
+</form>
+</div>
+
+<div data-options="region:'south'" style="overflow-y:hidden"> 
+#pageDirector($page "#getRequestUri()" "")
+</div>
+</body>
+</html>

@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  #headInclude()
+   <script type="text/javascript" src="../script/validator.js"></script>
+  <script type="text/javascript">
+  #if($message)alert("#javaScriptEscape($message)");#end
+ function doSave(){
+            var url="../transferAccount/ajaxTransferAccount.do";
+            var taTurnoutAccount = $("#taTurnoutAccount").val();
+			 var taIntoAccount = $("#taIntoAccount").val();
+            var taType = $("select[name='taType'] option:selected").val();
+			var taMoeny=$("#taMoeny").val();
+			var memberId=$("#memberId").val();
+            if(taTurnoutAccount==""){
+				alert("转出会员编号不能为空");
+				return false;
+			}
+			if(taType==""){
+                alert("转账账户类型不能为空！");
+                return false;
+            }
+            if(taIntoAccount==""){
+                alert("转入会员编号不能为空！");
+                return false;
+            }
+			if(taMoeny==""){
+                alert("转账金额不能为空！");
+                return false;
+            }
+			if(!isNumberBy100(taMoeny)){
+				alert("金额请填写100的倍数！");
+                return false;
+			}
+            var arrs={
+                "taTurnoutAccount":taTurnoutAccount,
+                "taType":taType,
+				"taIntoAccount":taIntoAccount,
+				"memberId":memberId,
+				"taMoeny":taMoeny
+            };
+			
+            $.post(url,arrs,function(data){
+                if(data==1){
+                  	alert("转账成功");
+                    window.location.href="../transferAccount/selectTransferAccountPage.do";
+                }else if(data==2){
+					alert("转账成功");
+                    window.location.href="../transferAccount/selectTransferAccountPageMember.do";
+				}else if(data==-1){
+					alert("单次转账金额已超过限定");
+				}else if(data==-2){
+					alert("该会员今日转账次数已达上限,请明日再进行转账");
+				}else if(data==-3){
+					alert("该会员今日转账金额已达上限,请明日再进行转账");
+				}else if(data==-4){
+					alert("转账余额不足");
+				}else if(data==-5){
+					alert("转出会员编号不存在");
+				}else if(data==-6){
+					alert("转入会员编号不存在");
+				}else if(data==-7){
+					alert("今日不在系统规定可转账日期内,请在规定日期内再次尝试");
+				}else{
+				  	alert("转账失败");
+				}
+            });
+} 
+
+  function doQuery() {
+      $("#queryForm").submit();
+      $('body').processMask();
+}
+ function doRefresh() {
+    $(":text").val('');
+    //$("#queryForm").submit();
+  }
+  function isNumberBy100(ssn) {
+ 		var re = /^[0-9]*[0-9]$/i;       //校验是否为数字
+ 		if(re.test(ssn) && ssn%100===0) {
+ 			return true;
+ 		}else {
+  			return false;
+ 		}
+	}
+ 
+  </script>
+</head>
+<body>
+<div class="PageHeader">
+  <div class="LeftBox Title">转账列表</div>
+</div>
+
+
+
+<div class="PageContainer indieui-scroll">
+	
+    <div class="InfoBox">
+		<form name="editForm" method="post"  action="#getRequestUri()" class="indieui-form">
+    <h2>信息</h2>
+<table class="TbCommon">
+	#if(!${member.memberId})
+		
+     #else
+		 <tr >
+    <td width="8%" align="left" class="TdLabel">奖金余额：</td>
+    <td  align="left" class="TdInput" >
+		<input type="hidden" id="memberId" value="${member.memberId}"/>
+		 #if(!${member.goldAward})<font color="red">￥0.00</font>#else
+        <font color="red">￥#showMoney($!{member.goldAward})</font><input type="hidden" id="" name="" value="$!{member.goldAward}" readonly >
+		 #end    
+	</td>
+    <td width="8%" align="left" class="TdLabel">现金余额：</td>
+    <td  align="left" class="TdInput" >
+			<font color="red">￥0.00</font>
+    </td> 
+    <td width="8%" align="left" class="TdLabel">注册金余额：</td>
+    <td  align="left" class="TdInput" >
+            #if(!${member.electroniccurrency})<font color="red">￥0.00</font>#else
+        <font color="red">￥#showMoney($!{member.electroniccurrency})</font>
+            #end
+    </td> 
+    </tr>
+		
+    #end
+    <tr >
+		#if(!${member.memberId})
+			<td width="8%" align="left" class="TdLabel">#requiredInput("转出会员编号")：</td>
+	  <td  align="left" class="TdInput" colspan="5">
+        <input type="text" id="taTurnoutAccount" name="taTurnoutAccount" value="" >
+			#requiredInput("转入会员编号")：
+			 <input type="text" id="taIntoAccount" name="taIntoAccount" value="" >
+			#requiredInput("转帐类型")：
+			#formSingleSelectDictionary("taType" $!{command.taType} ${dicData.dicPayType} "" "--请选择--")
+			#requiredInput("转账金额")
+			￥：<input type="text" id="taMoeny" name="taMoeny" value="" >
+            <input type="button" value="转账" onclick="javascript:doSave();"/>
+		#else
+				<td width="8%" align="left" class="TdLabel">#requiredInput("转出会员编号")：</td>
+	  <td  align="left" class="TdInput" colspan="5">
+        <input type="text" id="taTurnoutAccount" name="taTurnoutAccount" value="$!{member.staffId}" readonly >
+			#requiredInput("转入会员编号")：
+			 <input type="text" id="taIntoAccount" name="taIntoAccount" value="" >
+			#requiredInput("转帐类型")：
+			#formSingleSelectDictionary("taType" $!{command.taType} ${dicData.dicPayType} "" "--请选择--")
+			#requiredInput("转账金额")
+			￥：<input type="text" id="taMoeny" name="taMoeny" value="" >
+            <input type="button" value="转账" onclick="javascript:doSave();"/>
+		#end
+    </td>
+</tr>
+</table>
+</form>
+</div>  
+
+
+<div id="toolbar" style="padding:5px;height:auto">
+  <div>
+    <form id="queryForm" name="queryForm" action="#getRequestUri()" method="post" class="indieui-form">
+        <table cellpadding="5">
+        <tr> 
+          <td style="width:120px;height:30px;text-align:right">转账时间：</td>
+          <td colspan="3" >
+            <input type="text" name="applyTimeUp" value="" dateFormat  style="width:120px" >
+                <span>-</span>
+            <input type="text" name="applyTimeDown" value="" dateformat  style="width:120px" >
+          </td>
+          <td  colspan="2" style="text-align:center">
+            <a href="javascript:doQuery()" class="easyui-linkbutton" iconCls="icon-search">查 询</a>
+            <a href="javascript:doRefresh()" class="easyui-linkbutton" iconCls="icon-cut">清 空</a></td>
+        </tr>
+      </table> 
+    </form>          
+  </div>
+</div>
+<form name="listForm" method="post">
+<input type="hidden" name="submitFlag" value="0">
+<input type="hidden" name="token" value="$!{command.token}">
+<table class="TbList" style="table-layout:auto;">
+  <thead> 
+    <tr>
+		<th data-options="field:'' ">转出账号</th>
+        <th data-options="field:'' ">姓名</th>
+        <th data-options="field:'' ">转入账号</th>
+        <th data-options="field:'',  fit:true">姓名</th>
+        <th data-options="field:'',  fit:true">账户</th>
+        <th data-options="field:'',  fit:true">转账金额</th>
+        <th data-options="field:'',  fit:true">转账时间</th>
+    </tr>
+  </thead>
+  <tbody>
+  #foreach( $data in $page.data )
+     #set($index = ($page.pageNumber - 1) * $page.pageSize + $velocityCount)
+            #if($velocityCount % 2 == 0) #set($css = "TrListEven") #else #set($css = "TrListOdd") #end
+    <tr>
+     <td> $!{data.taTurnoutAccount}</td>
+      <td>$!{data.taTurnoutName}</td>
+      <td>$!{data.taIntoAccount}</td>
+      <td>$!{data.taIntoName}</td>
+      <td>#lookUpDict($dicData.dicPayType $!{data.taType})</td>
+      <td>$!{data.taMoeny}</td>
+      <td>$!{data.taTime}</td>
+      
+	</tr>
+  #end
+  </tbody>   
+</table>
+</form>
+</div>
+
+
+
+<div data-options="region:'south'" style="overflow-y:hidden"> 
+#pageDirector($page "#getRequestUri()" "")
+</div>
+
+
+</body>
+</html>

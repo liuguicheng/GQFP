@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/GQFP/!svn/ver/2/trunk/src/com/plugins/pending/controller
+END
+PendingItemMultiController.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/GQFP/!svn/ver/2/trunk/src/com/plugins/pending/controller/PendingItemMultiController.java
+END
+PendingItemQueryController.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/GQFP/!svn/ver/2/trunk/src/com/plugins/pending/controller/PendingItemQueryController.java
+END
+FinishedItemQueryController.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/GQFP/!svn/ver/2/trunk/src/com/plugins/pending/controller/FinishedItemQueryController.java
+END

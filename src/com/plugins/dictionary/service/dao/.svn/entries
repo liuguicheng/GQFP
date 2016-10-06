@@ -1,0 +1,43 @@
+8
+
+dir
+72
+https://192.168.1.118/svn/GQFP/trunk/src/com/plugins/dictionary/service/dao
+https://192.168.1.118/svn/GQFP
+
+
+
+2016-09-07T09:42:09.304169Z
+2
+ZBJ
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+7eaa1c50-b5f8-8d46-a0b5-e5067a1f1115
+
+IDictionaryDao.java
+file
+
+
+
+
+2016-09-08T07:57:33.052000Z
+3f4537634cec409c55207074c2a9cd0a
+2016-09-07T09:42:09.304169Z
+2
+ZBJ
+
+hibernate
+dir
+

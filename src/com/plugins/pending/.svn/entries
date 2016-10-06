@@ -1,0 +1,55 @@
+8
+
+dir
+72
+https://192.168.1.118/svn/GQFP/trunk/src/com/plugins/pending
+https://192.168.1.118/svn/GQFP
+
+
+
+2016-09-07T09:42:09.304169Z
+2
+ZBJ
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+7eaa1c50-b5f8-8d46-a0b5-e5067a1f1115
+
+command
+dir
+
+common
+dir
+
+controller
+dir
+
+entity
+dir
+
+plugins-pendingitem.config.xml
+file
+
+
+
+
+2016-09-08T07:57:33.561000Z
+059ab6f83bd97dac8ddb1f75facfba91
+2016-09-07T09:42:09.304169Z
+2
+ZBJ
+
+service
+dir
+

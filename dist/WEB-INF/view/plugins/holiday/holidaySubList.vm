@@ -1,0 +1,127 @@
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=gbk" />
+        <title>$!{appContext.appName}</title>
+        <link href="../skins/css/mainpage.css" rel="stylesheet" type="text/css" />
+        <script language="javascript" type="text/javascript" src="../script/common.js"></script>
+        <script language="javascript" type="text/javascript" src="../script/validator.js"></script>
+        <script language="javascript" type="text/javascript" src="../script/loadingBar.js"></script>
+        <script language="javascript" type="text/javascript" src="../lib/indieui/external/My97DatePicker/WdatePicker.js"></script>
+    </head>
+    <script>
+        function HolidayEdit(holidayId) {
+        location.href = "../holiday/holidayEdit.do?token=$!{command.token}&holidayId="+holidayId;
+        }
+        function HolidaySubList(holidayName) {
+            location.href = "../holiday/holidaySubList.do?name="+holidayName;
+        }
+        function HolidayDel(){
+        if (!hasCheckBoxSelect("holidayName")) {
+        alert("请选择要删除的节日信息！");
+        return ;
+        }
+        if (confirm("删除该节日后，该节日的所有记录将被删除，是否要删除？")) {
+        document.DelForm.submit();}
+        }
+    </script>
+    <body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" >
+        <table width="100%" height="100%" cellpadding="0" cellspacing="0">
+            <tr valign="top">
+                <td height="28" valign="top">
+                    <table cellspacing="0" cellpadding="0" class="TbTitle" align="center">
+                        <tr>
+                            <td height="24">
+                                <div class="DivIcoList">$!{name}
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td height="28" align="center" >
+                    <table cellpadding="0" cellspacing="0" class="tbtool">
+                        <tr>
+                            <td width="30%" align="left">
+                                <div class="DivButton">
+                                    <a href="javascript:HolidayEdit('');" class="btnAdd" > 新 增&nbsp; </a>
+                                    <a href="javascript:HolidayDel()" class="btnDel" > 删 除&nbsp; </a>
+                                </div>
+                            </td>
+                            <td>
+                                #pageDirector( $page "#getRequestUri()" false)
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr valign="top">
+                <td align="center">
+                    <div id="divSearch" style="display:none">
+                        <form name="queryForm" action="../holiday/holidayQuery.do" method="post">
+                            <table cellpadding="0" cellspacing="0" class="TbCommon">
+                                <tr class="TrTitle">
+                                    <td colspan="4" >
+                                        <div class="DivIcoSearch">查询菜单</div>
+                                    </td>
+                                </tr>
+                                <tr >
+                                    <td width="10%" class="TdLabel">节日日期：</td>
+                                    <td width="20%" class="TdInput">
+                                        #dateEditor("minHolidayDate" "#formatDate($!{command.minHolidayDate})" "queryForm" "style='width:30%'")-
+                                        #dateEditor("maxHolidayDate" "#formatDate($!{command.maxHolidayDate})" "queryForm" "style='width:30%'")
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="6" align="center" class="TdCommand">
+                                        #makeButton("查 找" "document.queryForm.submit()" "")
+                                        &nbsp;
+                                        #makeButton("清 空" "document.queryForm.reset()" "")
+                                        &nbsp;
+                                        #makeButton("取 消" "showDiv('divSearch')" "")
+                                    </td>
+                                </tr>
+                            </table>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td align="center" valign="top" height="100%" >
+                    <div class="DivScroll">
+                        <form name="DelForm" action="../datacollecting/nodeDelete.do" method="post">
+                            <input type="hidden" name="token" value="$!{command.token}"/>
+                            <table cellpadding="2" cellspacing="0" class="TbList" align="center" >
+                                <tr align="center" class="TrListTitle">
+                                    <td width="2%"  >
+                                        <input type="checkbox" onclick="javascript:setCheckBoxValue('holidayName', this.checked);"></td>
+                                        <td width="5%" >序号</td>
+                                        <td width="55%">节日名称</td>
+                    <td width="10%">节日日期</td>
+                    <td width="10%">节日类型</td>
+                    <td width="10%">是否放假</td>
+                    <td width="10%">放假原因</td>
+</tr>
+#foreach($holiday in ${listHoliday})
+
+    <tr align="center" onMouseOver="this.className='TrListFocus'" onMouseOut="this.className='TrListOdd'">
+        <td width="1%" >
+            <input type="checkbox" name="holidayId" value="$!{holiday.holidayId}"/>
+        </td>
+        <td >$velocityCount</td>
+        <td nowrap>
+            <a href="javascript:HolidayEdit('$!{holiday.holidayName}')">$!{holiday.holidayName}</a>
+        </td>
+        <td nowrap>#formatDate($!{node.holidayDate})</td>
+        <td nowrap>$!{node.useredSpace}</td>
+        <td nowrap  align="center">#lookUpDict($dicData.holidayReason $!{holiday.holidayReason})</td>
+    </tr>
+#end
+</table>
+</form>
+</div>
+</td>
+</tr>
+</table>
+</body>
+</html>

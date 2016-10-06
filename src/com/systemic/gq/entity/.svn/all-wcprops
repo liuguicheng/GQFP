@@ -1,0 +1,125 @@
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/GQFP/!svn/ver/89/trunk/src/com/systemic/gq/entity
+END
+Member.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/GQFP/!svn/ver/101/trunk/src/com/systemic/gq/entity/Member.hbm.xml
+END
+Withdrawals.java
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/GQFP/!svn/ver/99/trunk/src/com/systemic/gq/entity/Withdrawals.java
+END
+Member.java
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/GQFP/!svn/ver/101/trunk/src/com/systemic/gq/entity/Member.java
+END
+Transformation.java
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/GQFP/!svn/ver/101/trunk/src/com/systemic/gq/entity/Transformation.java
+END
+Transformation.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/GQFP/!svn/ver/89/trunk/src/com/systemic/gq/entity/Transformation.hbm.xml
+END
+PayInfo.java
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/GQFP/!svn/ver/90/trunk/src/com/systemic/gq/entity/PayInfo.java
+END
+Rule.java
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/GQFP/!svn/ver/90/trunk/src/com/systemic/gq/entity/Rule.java
+END
+TransferAccounts.java
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/GQFP/!svn/ver/101/trunk/src/com/systemic/gq/entity/TransferAccounts.java
+END
+BonusRecord.java
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/GQFP/!svn/ver/85/trunk/src/com/systemic/gq/entity/BonusRecord.java
+END
+BonusRecord.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/GQFP/!svn/ver/85/trunk/src/com/systemic/gq/entity/BonusRecord.hbm.xml
+END
+Stock.java
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/GQFP/!svn/ver/62/trunk/src/com/systemic/gq/entity/Stock.java
+END
+Stock.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/GQFP/!svn/ver/56/trunk/src/com/systemic/gq/entity/Stock.hbm.xml
+END
+PayInfo.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/GQFP/!svn/ver/90/trunk/src/com/systemic/gq/entity/PayInfo.hbm.xml
+END
+Rule.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/GQFP/!svn/ver/90/trunk/src/com/systemic/gq/entity/Rule.hbm.xml
+END
+BonusContent.java
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/GQFP/!svn/ver/67/trunk/src/com/systemic/gq/entity/BonusContent.java
+END
+Withdrawals.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/GQFP/!svn/ver/89/trunk/src/com/systemic/gq/entity/Withdrawals.hbm.xml
+END
+PayLog.java
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/GQFP/!svn/ver/90/trunk/src/com/systemic/gq/entity/PayLog.java
+END
+TransferAccounts.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/GQFP/!svn/ver/101/trunk/src/com/systemic/gq/entity/TransferAccounts.hbm.xml
+END
+PayLog.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/GQFP/!svn/ver/90/trunk/src/com/systemic/gq/entity/PayLog.hbm.xml
+END
+BonusContent.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/GQFP/!svn/ver/20/trunk/src/com/systemic/gq/entity/BonusContent.hbm.xml
+END

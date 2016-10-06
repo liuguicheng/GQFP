@@ -1,0 +1,79 @@
+8
+
+dir
+72
+https://192.168.1.118/svn/GQFP/trunk/src/com/plugins/holiday
+https://192.168.1.118/svn/GQFP
+
+
+
+2016-09-07T09:42:09.304169Z
+2
+ZBJ
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+7eaa1c50-b5f8-8d46-a0b5-e5067a1f1115
+
+HolidayHelper.java
+file
+
+
+
+
+2016-09-08T07:57:33.206000Z
+fcf448d8f01643bd09aff7c9e42538f2
+2016-09-07T09:42:09.304169Z
+2
+ZBJ
+
+IHolidayObserver.java
+file
+
+
+
+
+2016-09-08T07:57:33.208000Z
+3b98a6431d73609c1429ea261d497285
+2016-09-07T09:42:09.304169Z
+2
+ZBJ
+
+command
+dir
+
+controller
+dir
+
+entity
+dir
+
+plugins-holiday.config.xml
+file
+
+
+
+
+2016-09-08T07:57:33.251000Z
+c58ec71a0cbcefdce4e103e80f25f495
+2016-09-07T09:42:09.304169Z
+2
+ZBJ
+
+service
+dir
+
+utils
+dir
+

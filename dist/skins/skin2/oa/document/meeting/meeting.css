@@ -1,0 +1,7 @@
+@charset "utf-8";
+/* CSS Document */
+/* tab */
+.tab_menu{margin-left:0px;margin-bottom:0px; list-style-type:none;padding-left:0px;}
+.tab_menu li{height:25px; border-left:#BEE2F3 1px solid; border-right:#BEE2F3 1px solid; border-top:#BEE2F3 1px solid; float:left; line-height:25px; text-align:center; background:url(images/tab_menu_bg_s1.jpg) repeat-x; padding:0 10px; color:#000; margin-left:1px;}
+.tab_menu li.current{height:25px; border-left:#BEE2F3 1px solid; border-right:#BEE2F3 1px solid; border-top:#BEE2F3 1px solid; float:left; line-height:25px; text-align:center; background:url(images/tab_menu_hover_bg_s1.jpg) repeat-x; padding:0 10px; color:#FFF;}
+.tab_box .hide{display:none;}

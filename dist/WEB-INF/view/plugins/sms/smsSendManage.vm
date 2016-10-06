@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  #headInclude()
+  <!-- easyui -->
+  <script src="../lib/easyui/jquery.easyui.min.js" type="text/javascript" ></script>
+  <script src="../lib/easyui/locale/easyui-lang-zh_CN.js" type="text/javascript"></script>
+  <link href="../lib/easyui/themes/$!{appContext.theme}/easyui.css" rel="stylesheet" type="text/css" />
+  <link href="../lib/easyui/themes/icon.css" rel="stylesheet" type="text/css" />
+  <script type="text/javascript">
+  #if($message) alert("$message"); #end
+  $(document).ready(function() {
+    document.getElementById("doneFrame").src = "../plugins/smsSendList.do";
+    document.getElementById("undoFrame").src = "../plugins/smsSendFailList.do";
+  })
+  </script>
+</head>
+<body>
+<div class="PageHeader">
+  <div class="LeftBox Title">短信发送查询</div>
+</div>
+<div class="PageTool">
+  <div class="RightBox">
+    <span class="Status SmsCreateFail">提交失败</span>
+    <span class="Status SmsCreated">已提交</span>
+    <span class="Status SmsSuccess">发送成功</span>
+    <span class="Status SmsSendFail">发送失败</span>
+    <span class="Status SmsReply">已回复</span>
+  </div>
+</div>
+<div class="indieui-scroll easyui-tabs" id="infoTabs" data-option="fit:true">
+  <div title="全部" #if(!${tab} || $!{tab}=="0") data-options="selected:true" #end>
+    <iframe frameborder="0" style="width:100%;height:99%;" scrolling="no" id="doneFrame" name="doneFrame" src=""></iframe>
+  </div>
+  <div title="提交失败" #if(${tab} && $!{tab}=="1") data-options="selected:true" #end>
+    <iframe frameborder="0" style="width:100%;height:99%;" scrolling="no" id="undoFrame" name="undoFrame" src=""></iframe>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,47 @@
+/* 
+	jquery.processmask.css
+	Create By HuangAnzhi 2012-08-25
+	Version V.0.1.0
+	Support IE6.0+/FF/Chrome
+*/
+.process_loadmask_msg{
+	position: absolute;
+	background-position:center center;
+	width:340px;
+	height:65px;
+	background-color:#FFFFFF;
+	left: expression((document.body.offsetWidth - 340)/2);
+	top: expression((document.body.offsetHeight - 120)/2);
+	/*background-image: url(images/pressbar.gif);*/
+	background-repeat: no-repeat;
+	font-size: 12px;
+	color: #666666;
+	padding-top: 10px;
+	border:#83B1F2 2px solid;
+	padding-left: 18px;
+	z-index:1000;
+	line-height:2.0;
+	cursor:wait;
+}
+.process_loadmask {
+    z-index: 100;
+    position: absolute;
+    top:0;
+    left:0;
+    -moz-opacity: 0.1;
+    opacity: .10;
+    filter: alpha(opacity=10);
+    background-color: #fff;/*c1c1c1;*/
+    zoom: 1;
+    /*background-image: url(images/mask.png);*/
+}
+.process_masked_relative {
+    position: relative !important;
+}
+.process_masked {
+    overflow: hidden !important;
+    overflow:hidden;
+}
+.process_masked_hidden {
+    visibility: hidden !important;
+}

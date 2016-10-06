@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  #headInclude()
+   <script type="text/javascript" src="../script/validator.js"></script>
+  <script type="text/javascript">
+  #if($message)alert("#javaScriptEscape($message)");#end
+  function doBackup() {
+     document.location.href ="../db/addBackup.do";
+  }
+ function dorecovery(id) {
+ 	if(confirm("确认恢复此备份数据？")){
+		document.location.href ="../db/recoveryBackup.do?db_id="+id;
+	}
+ 	
+  }
+  
+  function doDel(id){
+  	if(confirm("确认删除此备份数据？")){
+ 	 document.location.href ="../db/delBackup.do?db_id="+id;
+ 	 }
+  }
+  function doDownload(id){
+ document.location.href ="../db/fileDownload.do?db_id="+id;
+  }
+  
+  </script>
+</head>
+<body>
+<div class="PageHeader">
+  <div class="LeftBox Title">数据库管理</div>
+</div>
+<form name="editForm" method="post"  action="#getRequestUri()" class="indieui-form">
+<div class="PageContainer indieui-scroll">
+    <div class="InfoBox">
+<table class="TbCommon" style="text-align:left;">
+      <tr style="text-align:left;">
+		<td style="text-align:left;">
+			1．此操作需FSO功能支持，执行此操作前，请先关闭其它网页窗口，断开FTP连接；<br/>
+			2．提交后，请耐心等待（请不要重复点击上面的按钮），完成时间视网络状况而定；<br/>
+			3．请在网络空闲时进行此操作，执行此操作可能导致服务器变慢或不稳定，右键下载数据库文件；<br/>
+			4．<label style="color:red;" >如果当前系统不是使用独立服务器而是虚拟空间，请让相关技术人员手动用数据库软件备份和恢复数据！</label><br/>
+			5．重要：当进行恢复操作时，未出现操作完成的提示请勿关闭此页面，否则数据库将有可能被破坏！<br/>
+            6．<label style="color:red;" >提示：系统数据结构最后修改时间为，如需要恢复此时间之前的备份，请联系相关技术人员！</label><br/>
+		</td>
+    </tr>
+    
+</table>
+</div>  
+</form> 
+<div id="toolbar" style="padding:5px;height:auto">
+  <div>
+    <form id="queryForm" name="queryForm" action="" method="post" class="indieui-form">
+        <table cellpadding="5">
+        <tr> 
+          <td  colspan="2" style="text-align:center">
+            <a href="javascript:doBackup()" class="easyui-linkbutton" iconCls="icon-search">备份</a>
+          ###  <a href="javascript:dodelBackup()" class="easyui-linkbutton" iconCls="icon-cut">清空测试数据</a></td>
+        </tr>
+      </table> 
+    </form>          
+  </div>
+</div>
+<form name="listForm" method="post">
+<input type="hidden" name="submitFlag" value="0">
+<input type="hidden" name="token" value="$!{command.token}">
+<table class="TbList">
+  <thead> 
+    <tr>
+        <th data-options="field:''">备份文件</th>
+        <th data-options="field:''0">备份日期</th>
+        <th data-options="field:'', fit:true">操作</th>
+    </tr>
+  </thead>
+  <tbody>
+  #foreach( $data in $page.data )
+    <tr>
+      <td>$!{data.db_bskcupName}</td>
+      <td><label style="color:red;" >$!{data.db_time}</label></td>
+      <td style="color:red;"> [<a href="javascript:dorecovery('$!{data.db_id}')">恢复</a>] [<a href="javascript:doDel('$!{data.db_id}')">删除</a>] [<a href="javascript:doDownload('$!{data.db_id}')">下载</a>]</td>
+      ##<td></td>
+    </tr>
+  #end
+  </tbody>   
+</table>
+</form>
+</div>
+
+<div data-options="region:'south'" style="overflow-y:hidden"> 
+#pageDirector($page "#getRequestUri()" "")
+</div>
+</body>
+</html>

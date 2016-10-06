@@ -1,0 +1,49 @@
+8
+
+dir
+78
+https://192.168.1.118/svn/GQFP/trunk/src/com/console/backup
+https://192.168.1.118/svn/GQFP
+
+
+
+2016-09-23T09:37:32.540316Z
+78
+LGC
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+7eaa1c50-b5f8-8d46-a0b5-e5067a1f1115
+
+command
+dir
+
+controller
+dir
+
+dbbackup.config.xml
+file
+
+
+
+
+2016-09-23T08:18:09.267000Z
+3d57673f1461a7a445bcff2fe6b2f784
+2016-09-23T09:37:32.540316Z
+78
+LGC
+
+service
+dir
+

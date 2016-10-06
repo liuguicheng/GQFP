@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  #headInclude()
+  <script type="text/javascript" src="../script/validator.js"></script>
+  <script type="text/javascript">
+#if($message)
+    alert("$message");
+#end
+
+  <!--
+  validator.formName = "editForm";
+  validator.addNormalCheckPoint("channelName", "栏目名称", "checkNotNull;checkNotEmpty");
+
+
+  function checkInput(e) {
+    if (e.submitFlag.value == "1") {
+        alert("当前页面已经提交，请稍等！");
+        return false;
+    }
+    if (!validator.checkAll()) {
+      return false;
+    }
+
+    return true;
+  }
+
+  function doSave()  {
+     var e = document.editForm;
+     if (checkInput(e)) {
+       e.submitFlag.value = "1";
+       e.submit();
+     }
+  }
+
+  function doReturn() {
+      #if (${command.parentId})
+    location.href = "../cms/channelManageList.do?parentId=$!{command.parentId}";
+    #else
+    location.href = "../cms/channelManageList.do?parentId=root";
+   #end
+}
+
+
+
+function editServiceWindowCallback(data) {
+    alert(data);
+}
+function selectChannel() {
+    var url = "../cms/channelSelect.do";
+    top.openDialog("选择栏目", url, selectOrgCallback);
+}
+function selectOrgCallback(obj) {
+    $("#parentId").val(obj.channelId);
+    $("#parentIdText").val(obj.channelName);
+    //alert($("#${nameField}").val());
+}
+  -->
+  </script>
+</head>
+
+#set($lock = false)
+<body>
+<form name="editForm" method="post" action="#getRequestUri()">
+<input type="hidden" name="submitFlag" value="0" />
+<input type="hidden" name="token" value="$!{token}" />
+<input type="hidden" name="channelId" value="$!{command.channelId}">
+<input type="hidden" name ="channelType" value="$!{command.channelType}"/>
+<div class="PageHeader">
+  <div class="LeftBox Title">
+          编辑#lookUpDict($dicData.dicCmsChannel "$!{command.channelId}")栏目信息  </div>
+</div>
+
+
+<div class="indieui-scroll indieui-form">
+   <table class="TbCommon">
+      <tr>
+        <td class="TdLabel" style="width:100px">#requiredInput('上级栏目')</td>
+        <td class="TdInput" >
+            <input type="hidden" id="parentId" name="parentId" value="$!{command.parentId}">
+                #if ("$!{command.parentId}" != "root")
+                #set($cname = "#lookUpDict($dicData.dicCmsChannel ${command.parentId})")
+                #else #set($cname="根目录") #end
+            <input type="text" id="parentIdText" name="parentIdText" value="$cname">
+            <input type="button" value="选择" onclick="javascript:selectChannel()">
+
+        </td>
+      </tr>
+      <tr align="center">
+         <td class="TdLabel">#requiredInput('栏目名称')</td>
+        <td class="TdInput" >
+            <input type="text" name="channelName" value="#htmlEscape($!{command.channelName})"  maxlength='30' />
+        </td>
+      </tr>
+      <!--
+      <tr>
+         <td class="TdLabel">栏目简称</td>
+        <td class="TdInput">
+            <input type="text" name="shortName" value="#htmlEscape($!{command.shortName})"  maxlength='30'/>
+        </td>
+        <td class="TdLabel">#requiredInput('序号')</td>
+        <td width="32%"  align="left" class="TdInput" >
+          <input type="text" name="orderNumber"   value="$!{command.orderNumber}"  maxlength="8">
+        </td>
+      </tr>
+      -->
+      <tr align="center">
+         <td class="TdLabel">栏目代码</td>
+        <td class="TdInput">
+          <input type="text" name="channelPath" value="#htmlEscape($!{command.channelPath})"  maxlength='9'/>
+        </td>
+      </tr>
+      <tr>
+         <td class="TdLabel">显示顺序</td>
+        <td class="TdInput">
+          <input type="text" name="sortOrder" value="$!{command.sortOrder}"  maxlength='9'/>
+        </td>
+      </tr>
+      <tr align="center">
+         <td class="TdLabel">是否新窗口打开</td>
+        <td class="TdInput">
+         ## <input type="text" name="channelPath" value="#htmlEscape($!{command.channelPath})"  maxlength='9'/>
+         #formRadioButtonDictionary("isBlank" "$!{command.isBlank}" $dicData.dicWhether "" "")
+        </td>
+      </tr>
+      <tr>
+         <td class="TdLabel"></td>
+        <td class="TdInput">
+          ##<input type="text" name="sortOrder" value="$!{command.sortOrder}"  maxlength='9'/>
+        </td>
+      </tr>
+<!--
+              <tr align="center">
+                 <td class="TdLabel">栏目简介</td>
+                <td class="TdInput" colspan="3">
+                    <textarea name="introduction" style="height:80px;width:90%">#htmlEscape($!{command.introduction})</textarea>
+                </td>
+              </tr>
+              -->
+    </table>
+</div>
+
+<div class="CommandTool indieui-form">
+  <input type="button"  value="保 存" onclick="doSave();" />
+  <input type="button"  value="返 回" onclick="doReturn();" />
+</div>
+
+</form>
+
+</body>
+</html>

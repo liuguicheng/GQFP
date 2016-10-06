@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+        
+    <bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+        <property name="mappings">
+            <props>
+                <prop key="manage/powerEdit.do">powerEditController</prop>
+                <prop key="manage/powerGrant.do">powerGrantController</prop>
+                <prop key="manage/power*">powerController</prop>
+            </props>
+        </property>
+    </bean>
+    <bean id="powerDao" class="com.console.power.service.dao.hibernate.HibernatePowerDao">
+        <property name="sessionFactory"><ref bean="sessionFactory" /></property>
+    </bean>
+
+    <bean id="powerService" class="com.console.power.service.spring.SpringPowerService">
+        <property name="powerDao"><ref bean="powerDao" /></property>
+    </bean>
+
+
+    <bean id="powerController" class="com.console.power.contoller.PowerController">
+        <property name="powerService"><ref bean="powerService" /></property>
+    </bean>
+    <bean id="powerEditController" class="com.console.power.contoller.PowerEditController">
+        <property name="sessionForm"><value>true</value></property>
+        <property name="commandClass"><value>com.console.power.command.PowerInfo</value></property>
+        <property name="formView"><value>manage/powerEdit</value></property>
+        <property name="powerService"><ref bean="powerService" /></property>
+        <property name="successView"><value>../manage/powerInnerList.do</value></property>
+    </bean>
+    <bean id="powerGrantController" class="com.console.power.contoller.PowerGrantController">
+        <property name="commandClass"><value>com.console.power.command.PowerGrantInfo</value></property>
+        <property name="formView"><value>manage/powerGrant</value></property>
+        <property name="powerService"><ref bean="powerService" /></property>
+        <property name="successView"><value>../manage/powerGrant.do</value></property>
+    </bean>
+</beans>

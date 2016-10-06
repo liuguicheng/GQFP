@@ -1,0 +1,509 @@
+#**
+ * 形成待办标识
+*#
+#macro(formPendingItemFlag)
+<input type="hidden" name="pendingItemFlag" value="$!{pendingItemFlag}"/>
+#end
+
+#**
+ * 形成待办返回
+ * @param url 业务Url
+*#
+#macro(formReturnUrl $url)
+#if(${pendingItemFlag}&&$!{pendingItemFlag}!="")"../pendingitem/pendingItemQuery.do"#else"$url"#end
+#end
+#**
+ * selectArea
+ *
+ * 选择所属区域
+ * $fieldName : 输入框的名称
+ * $fieldValue: 输入框的值，机场名称
+ * $airports  : 机场清单 List of CityAirport
+ * $attributes: 输入框的属性
+ *
+*#
+#macro(selectArea $fieldName $fieldValue $attributes)
+    <select id="$fieldName" name='$fieldName' ${attributes} valid="true">
+       <option value=''></option>
+        #set($tmp = $currentUser.belongCode)
+        #foreach($option in $dicData.dicArea.entrySet())
+          #if ("$!{option.value.data.isValid}" != "0" && $option.key.startsWith($tmp))
+            #if("$fieldValue" == "$option.key")
+                <option value='${option.key}'
+                    selected='selected'
+                >
+                ${option.value.name}</option>
+            #else
+                <option value='${option.key}' >
+                ${option.value.name}</option>
+            #end
+          #end
+        #end
+    </select>
+#end
+
+#**
+ * selectLawMember
+ *
+ * 选择执法队员
+ * @param $title 按钮名
+ * @param $editorName input域的名称
+ * @param $idValue 人员的Id列表初始值，各值之间以逗号分割
+ * @param $nameValue 人员的名称列表初始值，各值之间以逗号分割
+ * @param $rootId 人员所在组织结构的根Id，各值之间以逗号分割，为空则在全局中选择
+ * @param $attributes 按钮样式
+*#
+#macro(selectLawMember $title $editorName $idValue $nameValue $rootId $attributes)
+<script type="text/javascript">
+function selectLawMemberFor${editorName}(data) {
+  // 清空原来的
+  $("#${editorName}-name").val("");
+  $("#$editorName").val("");
+  // 添加数据
+  var nameVal = "";
+  var idVal = "";
+  for (var i = 0; i < data.length; i++) {
+    nameVal += data[i].name + ",";
+    idVal += data[i].id + ",";
+  };
+  // 去掉最后一个逗号
+  if (nameVal.length > 1 && idVal.length > 1) {
+    nameVal = nameVal.substr(0,nameVal.length - 1);
+    idVal = idVal.substr(0,idVal.length - 1);
+  }
+  $("#${editorName}-name").val(nameVal);
+  $("#$editorName").val(idVal);
+}
+</script>
+<input type="text" id="${editorName}-name" name="${editorName}-name" $attributes value="$nameValue" readonly>
+<input type="hidden" id="$editorName" name="$editorName" value="$idValue" >
+#selectLawMemberAction("${title}" "$editorName" "${rootId}" "selectLawMemberFor${editorName}")
+#end
+
+#**
+ * selectLawMemberAction
+ *
+ * 选择执法队员
+ * @param $title 按钮名，窗体名
+ * @param $editorName input域的名称
+ * @param $rootId 人员所在组织结构的根Id，各值之间以逗号分割，为空则在全局中选择
+ * @param $callbackFunction 回调函数
+*#
+#macro(selectLawMemberAction $title $editorName $rootId $callbackFunction)
+<script type="text/javascript">
+function showSelectLawMemberDlgFor${editorName}(callbackFunc) {
+  var val = document.getElementById("${editorName}").value;
+  var theUrl = "../patrolmember/patrolmemberSelect.do?rootId=${rootId}&memberIds=";
+  top.openDialog("选择人员",theUrl,callbackFunc,null,700,400);
+}
+</script>
+<input type="button" value="${title}" onclick="javascript:showSelectLawMemberDlgFor${editorName}($callbackFunction)"/>
+#end
+
+
+#**
+ * selectMemberWithEdit
+ *
+ * 选择巡查队员，可编辑的文本框
+ * @param $title 按钮名
+ * @param $editorName input域的名称
+ * @param $idValue 人员的Id列表初始值，各值之间以逗号分割
+ * @param $rootId 人员所在组织结构的根Id，各值之间以逗号分割，为空则在全局中选择
+ * @param $nameValue 人员的名称列表初始值，各值之间以逗号分割
+*#
+#macro(selectMemberWithEdit $title $editorName $idValue $nameValue $rootId $attributes)
+<script type="text/javascript">
+function selectLawMemberFor${editorName}(data) {
+  // 清空原来的
+  $("#${editorName}-name").val("");
+  $("#$editorName").val("");
+  // 添加数据
+  var nameVal = "";
+  var idVal = "";
+  for (var i = 0; i < data.length; i++) {
+    nameVal += data[i].name + ",";
+    idVal += data[i].id + ",";
+  };
+  // 去掉最后一个逗号
+  if (nameVal.length > 1 && idVal.length > 1) {
+    nameVal = nameVal.substr(0,nameVal.length - 1);
+    idVal = idVal.substr(0,idVal.length - 1);
+  }
+  $("#${editorName}-name").val(nameVal);
+  $("#$editorName").val(idVal);
+}
+</script>
+<input type="text" id="${editorName}-name" name="${editorName}-name" $attributes value="$nameValue">
+<input type="hidden" id="$editorName" name="$editorName" value="$idValue" >
+#selectMemberActionWithNoId("${title}" "$editorName" "${rootId}" "selectLawMemberFor${editorName}")
+#end
+
+#**
+ * selectMemberActionWithNoId
+ *
+ * 选择巡查队员
+ * @param $title 按钮名，窗体名
+ * @param $editorName input域的名称
+ * @param $rootId 人员所在组织结构的根Id，各值之间以逗号分割，为空则在全局中选择
+ * @param $callbackFunction 回调函数
+*#
+#macro(selectMemberActionWithNoId $title $editorName $rootId $callbackFunction)
+<script type="text/javascript">
+function showSelectLawMemberDlgFor${editorName}(callbackFunc) {
+  var theUrl = "../patrolmember/patrolmemberSelect.do?rootId=${rootId}&memberIds=";
+  top.openDialog("选择人员",theUrl,callbackFunc,null,700,400);
+}
+</script>
+<input type="button" value="${title}" onclick="javascript:showSelectLawMemberDlgFor${editorName}($callbackFunction)"/>
+#end
+
+
+#**
+ * fixedlengthText
+ *
+ * 固定长度字符串输出，不足的补空格，用于打印
+ *
+ * @param message 要标记的信息
+ *
+*#
+#macro(fixedlengthText $text $length)
+#set($tmp = "$!{text}")#set($l = $tmp.length())
+#if ($l < $length)#set($l = ($length -$l) / 2)#foreach($d in [0..$l])&nbsp;#end$!{text}#foreach($d in [0..$l])&nbsp;#end
+#else$tmp#end
+#end  
+
+#**
+ * lookUpRiverUpEnd
+ *
+ * 显示河道起止位置
+ *
+ * @param $id 属主ID
+ *
+*#
+#macro(lookUpRiverUpEnd $id )
+<script type="text/javascript">
+jQuery(document).ready(function(){
+    if("$id" != "" ){
+      var theUrl = "../enforcement/getRiverUpEnd.do?riverId=$id&time=" + new Date();
+            jQuery.ajax({
+              url: theUrl,
+              cache: false,
+              type: 'POST',
+              error: function(r) {
+                alert("请求错误！");
+              },
+              success: function(result){
+                          if(result != ""){
+                              var data = eval("(" + result + ")");
+                              $('.createShow-riverId').html(data.riverName);
+                          }
+                    }     
+            });
+    }
+});
+</script>
+#end
+
+
+#**
+ * lookUpRiverArea
+ *
+ * 显示所属区域
+ *
+ * @param $id 属主ID
+ *
+*#
+#macro(lookUpRiverArea $id )
+<script type="text/javascript">
+jQuery(document).ready(function(){
+    if("$id" != "" ){
+		var theUrl = "../enforcement/getRegion.do?riverId=$id&time=" + new Date();
+            jQuery.ajax({
+              url: theUrl,
+              cache: false,
+              type: 'POST',
+              error: function(r) {
+                alert("请求错误！");
+              },
+              success: function(result){
+                          if(result != ""){
+                              var data = eval("(" + result + ")");
+                              $('.createShow-riverArea').html(data.name);
+                          }
+                    }     
+            });
+    }
+});
+</script>
+#end
+
+
+#**
+ * lookUpStaff
+ *
+ * 显示人员姓名
+ *
+ * @param $id 属主ID
+ *
+*#
+#macro(lookUpStaff $id $className)
+<script type="text/javascript">
+jQuery(document).ready(function(){
+    if("$id" != "" && "$className" != ""){
+      var theUrl = "../enforcement/getNameByStaffId.do?id=$id&time=" + new Date();
+            jQuery.ajax({
+              url: theUrl,
+              cache: false,
+              type: 'POST',
+              error: function(r) {
+                alert("请求错误！");
+              },
+              success: function(result){
+                          if(result != ""){
+                              var data = eval("(" + result + ")");
+                              var name = data.name;
+                              $(".$className").html(name);
+                          }
+                    }     
+            });
+    }
+});
+</script>
+#end
+
+#**
+ * selectPatrolMember
+ *
+ * 多选巡查人员
+ * @param $title 按钮名
+ * @param $editorName input域的名称
+ * @param $idValue 人员的Id列表初始值，各值之间以逗号分割
+ * @param $nameValue 人员的名称列表初始值，各值之间以逗号分割
+ * @param $rootId 人员所在组织结构的根Id，各值之间以逗号分割，为空则在全局中选择
+ * @param $attributes 按钮样式
+*#
+#macro(selectPatrolMember $title $editorName $idValue $nameValue $rootId $attributes)
+<script type="text/javascript">
+function selectPatrolMemberFor${editorName}(data) {
+  // 清空原来的
+  $("#${editorName}-name").val("");
+  $("#$editorName").val("");
+  // 添加数据
+  var nameVal = "";
+  var idVal = "";
+  for (var i = 0; i < data.length; i++) {
+    nameVal += data[i].name + ",";
+    idVal += data[i].id + ",";
+  };
+  // 去掉最后一个逗号
+  if (nameVal.length > 1 && idVal.length > 1) {
+    nameVal = nameVal.substr(0,nameVal.length - 1);
+    idVal = idVal.substr(0,idVal.length - 1);
+  }
+  $("#${editorName}-name").val(nameVal);
+  $("#$editorName").val(idVal);
+}
+</script>
+<input type="text" id="${editorName}-name" name="${editorName}-name" $attributes value="$nameValue" readonly>
+<input type="hidden" id="$editorName" name="$editorName" value="$idValue" >
+#selectPatrolMemberAction("${title}" "$editorName" "${rootId}" "selectPatrolMemberFor${editorName}")
+#end
+
+#**
+ * selectPatrolMemberAction
+ *
+ * 选择巡查人员
+ * @param $title 按钮名，窗体名
+ * @param $editorName input域的名称
+ * @param $rootId 人员所在组织结构的根Id，各值之间以逗号分割，为空则在全局中选择
+ * @param $callbackFunction 回调函数
+*#
+#macro(selectPatrolMemberAction $title $editorName $rootId $callbackFunction)
+<script type="text/javascript">
+function showSelectPatrolMemberDlgFor${editorName}(callbackFunc) {
+  var val = document.getElementById("${editorName}").value;
+  var theUrl = "../patrolmember/patrolmemberSelect.do?rootId=${rootId}&memberIds=";
+  top.openDialog("选择巡查人员",theUrl,callbackFunc,null,400,400);
+}
+</script>
+<input type="button" value="${title}" onclick="javascript:showSelectPatrolMemberDlgFor${editorName}($callbackFunction)"/>
+#end
+
+
+#**
+ * showStaffContacts
+ *
+ * 形成物品盘点清单表格
+ * @param $categoryData 物品目录信息
+ * @param $thingsList 物品盘点信息
+ * @param $levelArray 初始列表一般设置 []
+*#
+#macro(showStaffContacts $departmentData $staffList $levelArray)
+  #set( $curInx = $levelArray.size() - 1)
+  #set( $rowCount = $levelArray.get($curInx))
+  #foreach( $nodeData in ${departmentData} )
+    <tr>
+      
+      <td style="text-align:left;">#foreach( $i in [0..$curInx] )#if($i>0)&nbsp;&nbsp;&nbsp;&nbsp;#end#end<font style="font-weight:bold;">$!{nodeData.getNodeName()}</font></td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+    </tr>
+    #set( $rowCount = $rowCount)
+    #foreach( $data in $staffList)
+      #if( ${data.department.id}=="${nodeData.getNodeKey()}" )
+      ## 是该部门下的人员才显示
+      <tr>
+        <td>$rowCount</td>
+        <td style="text-align:left;">#foreach( $i in [0..$curInx] )#if($i>0)&nbsp;&nbsp;&nbsp;&nbsp;#end#end$!{data.name}</td>
+        <td>$!{data.roomNo}</td>
+        <td>$!{data.phone}</td>
+        <td>$!{data.mobile}</td>
+        <td>$!{data.homeTel}</td>
+      </tr>
+      #set( $rowCount = $rowCount + 1 )
+      #end
+    #end
+    #set( $temp = $levelArray.add($rowCount) )
+    #showStaffContacts($nodeData.getChildren() $staffList $levelArray)
+    #set( $curInx = $levelArray.size() - 1 )
+    #set( $rowCount = $levelArray.get($curInx))
+    #set( $temp = $levelArray.remove($curInx) )
+    #set( $curInx = $levelArray.size() - 1 )
+  #end
+  #set( $curInx = $levelArray.size() - 1 )
+  #set( $temp = $levelArray.remove($curInx) )
+  #set( $temp = $levelArray.add($rowCount) )
+#end
+
+
+#**
+ * selectSinglePatrolMember
+ *
+ * 选择人员的宏 单选,用文本框显示选择的人员列表
+ * @param $title 按钮名，窗口名
+ * @param $editorName input域的名称
+ * @param $idValue 人员的Id列表初始值
+ * @param $nameValue 人员的名称列表初始值
+ * @param $rootId 人员所在组织结构的根Id，为空则在全局中选择
+ * @param $attributes input域的样式属性
+*#
+#macro(selectSinglePatrolMember $title $editorName $idValue $nameValue $rootId $attributes)
+<script type="text/javascript">
+function selectSinglePatrolMemberFor${editorName}(data) {
+  document.getElementById("${editorName}-name").value = data.name ;
+  document.getElementById("${editorName}").value = data.id;
+}
+</script>
+<input type="text" id="${editorName}-name" name="${editorName}-name" $attributes value="$nameValue" readonly>
+<input type="hidden" id="$editorName" name="$editorName" value="$idValue" >
+#selectSinglePatrolMemberAction("${title}" "${editorName}" "${rootId}" "selectSinglePatrolMemberFor${editorName}")
+#end
+
+#**
+ * selectSinglePatrolMember
+ *
+ * 选择人员的宏 单选
+ * @param $title 按钮名，窗口名
+ * @param $editorName input域的名称
+ * @param $rootId 人员所在组织结构的根Id，为空则在全局中选择
+ * @param $callbackFunction 回调函数
+*#
+#macro(selectSinglePatrolMemberAction $title $editorName $rootId $callbackFunction)
+<script type="text/javascript">
+function showselectSinglePatrolMemberFor${editorName} (callbackFunc) {
+  #if(!${editorName} || $!{editorName}=="")
+  #else
+  var val = document.getElementById("${editorName}").value;
+  //top.setDialogParam("staffSelDlgParam",val);
+  #end
+  var theUrl = "../member/singleMember.do?rootId=${rootId}&memberId=" + document.getElementById("$editorName").value;
+  top.openDialog("${title}",theUrl,callbackFunc,null,400,400);
+}
+</script>
+<input type="button" value="${title}" onclick="javascript:showselectSinglePatrolMemberFor${editorName}($callbackFunction);"/>
+#end
+
+
+#**
+ * 多选部门
+ *
+ * 可以多选的选择人员的宏,用文本框显示选择的人员列表
+ * @param $title 窗体名
+ * @param $editorName input域的名称
+ * @param $idValue 人员的Id列表初始值，各值之间以逗号分割
+ * @param $rootId 人员所在组织结构的根Id，各值之间以逗号分割，为空则在全局中选择
+ * @param $nameValue 人员的名称列表初始值，各值之间以逗号分割
+*#
+#macro(selectMultiDeptment $title $editorName $idValue $nameValue $rootId $attributes)
+<script type="text/javascript">
+function selectMultiDeptmentFor${editorName}(data) {
+  // 清空原来的
+  $("#${editorName}-name").val("");
+  $("#$editorName").val("");
+  // 添加数据
+  var nameVal = "";
+  var idVal = "";
+  for (var i = 0; i < data.length; i++) {
+    nameVal += data[i].name + ",";
+    idVal += data[i].id + ",";
+  };
+  // 去掉最后一个逗号
+  if (nameVal.length > 1 && idVal.length > 1) {
+    nameVal = nameVal.substr(0,nameVal.length - 1);
+    idVal = idVal.substr(0,idVal.length - 1);
+  }
+  $("#${editorName}-name").val(nameVal);
+  $("#$editorName").val(idVal);
+}
+</script>
+<input type="text" id="${editorName}-name" name="${editorName}-name" $attributes value="$nameValue" readonly>
+<input type="hidden" id="$editorName" name="$editorName" value="$idValue" >
+#selectMultiDeptmentAction("${title}" "$editorName" "${rootId}" "selectMultiDeptmentFor${editorName}")
+#end
+
+#**
+ * selectMultiStaffAction
+ *
+ * 可以多选的选择人员的宏
+ * @param $title 按钮名，窗体名
+ * @param $editorName input域的名称
+ * @param $rootId 人员所在组织结构的根Id，各值之间以逗号分割，为空则在全局中选择
+ * @param $callbackFunction 回调函数
+*#
+#macro(selectMultiDeptmentAction $title $editorName $rootId $callbackFunction)
+<script type="text/javascript">
+function showSelectMultiDeptmentDlgFor${editorName}(callbackFunc) {
+  #if(!${editorName} || $!{editorName}=="")
+  #else
+  var val = document.getElementById("${editorName}").value;
+  top.setDialogParam("staffSelDlgParam",val);
+  #end
+  var theUrl = "../manage/departmentMultiTree.do";
+  top.openDialog("${title}",theUrl,callbackFunc,null,700,400);
+}
+</script>
+<input type="button" value="${title}" onclick="javascript:showSelectMultiDeptmentDlgFor${editorName}($callbackFunction)"/>
+#end
+
+#**
+ * formSingleSelectStock
+ * 新增会员股权选择的宏
+*#
+#macro(formSingleSelectStock $fieldName $fieldValue $options $attributes $display)
+    <select name='$fieldName' ${attributes}>
+        <option value=''>$display</option>
+        #foreach($option in $options.entrySet())
+            #if("$fieldValue" == "$option.key")
+                <option value='${option.key}'
+                    selected='selected'
+                >
+                #lookUpDict($dicData.dicStockLevel "${option.value.name}")</option>
+            #elseif("$!{option.value.data.isValid}" != "0")
+                <option value='${option.key}' >
+                #lookUpDict($dicData.dicStockLevel "${option.value.name}")</option>
+            #end
+        #end
+    </select>
+#end

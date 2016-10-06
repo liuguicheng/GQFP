@@ -1,0 +1,91 @@
+.SeatList{
+	width:100%;
+	background-color: #FFF;
+	border:none;
+	table-layout:fixed;
+}
+
+.SeatList th,.SeatList tr td:first-child{
+	margin:5px;
+	width:90px;
+	border:none;
+	background:none;
+	padding:2px;
+	text-align:center;
+	background-image:none;
+	font-size: 14px;
+	color: #666;
+}
+.SeatList tr td:first-child,.SeatList tr th:first-child{
+	width:30px;
+	font-size: 14px;
+	color: #666;
+}
+.SeatList td{
+	background-color:#FFF;
+	border: 1px solid #F3F3F3;
+	background-repeat: no-repeat;
+	background-position: 3px center;
+	padding:2px;
+	/*padding-left:25px;*/
+	text-align:center;
+	font-size: 14px;
+}
+.SeatList td:hover{
+	border: 1px solid #5BADEA;
+	cursor:pointer;	
+}
+.SeatList td .Name,.SeatList td .Num{
+	height:auto;
+	display:block;
+	padding:2px;
+}
+.SeatList td .Name{
+	font-size: 14px;
+	color: #242424;
+}
+.SeatList td .Num{
+	font-size: 14px;
+	color: #CCC;
+}
+.SeatList td.Main{
+	padding-left:25px;
+	background-image: url(conference/sit_div_img.jpg);
+	border: 1px solid #999;
+}
+.SeatList td.Common{
+	padding-left:25px;
+	background-image: url(conference/seat_01.png);
+	border: 1px solid #999;
+}
+/**…Ë÷√ƒ¨»œ—’…´*/
+.SeatList td.Party{
+	/**background-color: #FFF7D7;*/
+}
+.SeatList td.Party01{
+	background-color: #DDF1FF;
+}
+.SeatList td.Party02{
+	background-color: #FFF7D7;	
+}
+.SeatList td.Party03{
+	background-color: #E7E7E7;
+}
+.SeatList td.Party04{
+	background-color: #9BC3FF;
+}
+.SeatList td.Party05{
+	background-color: #FFCDCD;
+}
+.SeatList td.Party06{
+	background-color: #FCF;
+}
+.SeatList td.Party07{
+	background-color: #E2FF89;
+}
+.SeatList td.Party08{
+	background-color: #5CFFF2;
+}
+.SeatList td.Party09{
+	background-color: #FFCF0D;
+}

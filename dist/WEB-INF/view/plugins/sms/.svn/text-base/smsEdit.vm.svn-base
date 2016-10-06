@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  #headInclude()
+  <script type="text/javascript" src="../script/validator.js"></script>
+  <script type="text/javascript">
+  #if($message)alert("#javaScriptEscape($message)");#end
+  validator.formName = "editForm";
+  validator.addNormalCheckPoint("smsContent","短信内容","checkNotNull;checkNotEmpty");
+  validator.addRangeCheckPoint("smsContent","短信内容","checkLength",0,250);;
+  function doSave() {
+    var e = document.editForm;
+    if (checkInput(e) && confirm("您确定要提交数据吗？")) {
+      e.action = "../plugins/smsSend.do";
+      e.submitFlag.value = "1";
+      e.submit();
+      $('body').processMask();
+    }
+  }
+
+  function checkInput(e) {
+    if (e.submitFlag.value == "1") {
+      alert("当前页面已提交，请稍候！");
+      return false;
+    }
+    if (jQuery(".rNum").size() <= 0) {
+      alert("接收号码或接收人不能为空！");
+      return false;
+    }
+    return validator.checkAll();
+  }
+    // 检查是否是手机号码
+    function checkIsMobile (mobile) {
+      var reg = /^1[3458]\d{9}/;
+      return reg.test(mobile);
+    }  
+  // 添加自定义号码
+  function addCustom() {
+    var e = document.editForm;
+    if (e.customNum.value != null && e.customNum.value != "") {
+	  var mobileString = e.customNum.value;
+	  var result=mobileString.split(",");
+	  for(var i = 0 ; i<result.length; i++){
+	      var newMobile = trim(result[i]);
+          if (checkIsMobile(newMobile)) {
+            // 检查号码是否已经添加
+            if (jQuery(".rNum[value='" + newMobile + "']").get(0) == null) {
+              // 添加显示和号码
+              jQuery("#receiverContain").append("<div id='" + newMobile + "' class='receiver'>"
+                + "<input type='hidden' name='rNum' class='rNum' value='" + newMobile + "'/>"
+                + "<input type='hidden' name='rId' class='rId' value=''/>"
+                + "<input type='hidden' name='rName' class='rName' value=''/>"
+                + "<span style='white-space:nowrap;'>" + newMobile +"</span>"
+                + "<span class='SMSDel'  onclick=\"javascript:deleteReceiver('" + newMobile + "')\"></span></div>");
+            } else {
+              alert("此号码已经添加！");
+            }
+    
+            e.customNum.value = "";
+          } else {
+            alert("请输入正确的手机号码！");
+          }
+	  }
+     
+    } else {
+      alert("请输入要添加的手机号码！");
+    }  
+  }
+  // 从系统通讯录添加
+  function addFromSys() {
+    var theUrl = "../manage/staffMultiSelect.do?rootId=10";
+    top.openDialog("选择经办人",theUrl,addSys,null,700,520);  
+  }
+  String.prototype.trim=function(){  
+　　    return this.replace(/(^\s*)|(\s*$)/g, "");  
+　　 }  
+  // 添加系统人员
+  function addSys(data) {
+    if (data != null) {
+      if (data.length > 0) {
+        for (var i = 0; i < data.length; i++) {
+          if ($(".rNum[manId='" + data[i].id + "']").get(0) == null) {		  	    
+            // 可以添加
+            $("#receiverContain").append("<div id='" + data[i].id + "' class='receiver'>"
+              + "<input type='hidden' name='rNum' class='rNum' value='" + data[i].mobile + "' manId='" + data[i].id + "'/>"
+              + "<input type='hidden' name='rId' class='rId' value='" + data[i].id + "'/>"
+              + "<input type='hidden' name='rName' class='rName' value='" + data[i].name + "'/>"
+              + "<span style='white-space:nowrap;' id='name"+data[i].id+"'>" + data[i].name + "(" + data[i].mobile + ")" +"</span>"
+              + "<span class='SMSDel'  onclick=\"javascript:deleteReceiver('" + data[i].id + "')\"></span></div>");
+			  //对没有电话号码的人员进行添加红色标注
+			  if(data[i].mobile.trim().length == 0){
+			      $("#name"+data[i].id).css("color","red");
+			  }	  
+			  
+          }
+        }
+      }
+    }
+  }
+  
+    String.prototype.trim=function(){  
+　　    return this.replace(/(^\s*)|(\s*$)/g, "");  
+　　 } 
+  // 从政协人员添加
+  function addFromMember() {
+    var theUrl = "../basic/memberMultiSelect.do";
+    top.openDialog("选择经办人",theUrl,addMember,null,700,500);  
+  }
+ 
+  // 添加政协人员
+  function addMember(data) {
+    if (data != null) {
+      if (data.length > 0) {
+        for (var i = 0; i < data.length; i++) {
+          if ($(".rNum[manId='" + data[i].memberId + "']").get(0) == null) {		  	    
+            // 可以添加
+            $("#receiverContain").append("<div id='" + data[i].memberId + "' class='receiver'>"
+              + "<input type='hidden' name='rNum' class='rNum' value='" + data[i].phone + "' manId='" + data[i].memberId + "'/>"
+              + "<input type='hidden' name='rId' class='rId' value='" + data[i].memberId + "'/>"
+              + "<input type='hidden' name='rName' class='rName' value='" + data[i].memberName + "'/>"
+              + "<span style='white-space:nowrap;' id='name"+data[i].memberId+"'>" + data[i].memberName + "(" + data[i].phone + ")" +"</span>"
+              + "<span class='SMSDel'  onclick=\"javascript:deleteReceiver('" + data[i].memberId + "')\"></span></div>");
+			  //对没有电话号码的人员进行添加红色标注
+			  if(data[i].phone.trim().length == 0){
+			      $("#name"+data[i].memberId).css("color","red");
+			  }	  
+			  
+          }
+        }
+      }
+    }
+  }
+  
+  // 从个人名片夹添加
+  function addFromPersonal() {
+    var theUrl = "../oa/personalCardcaseMultiSelect.do";
+    top.openDialog("个人名片夹",theUrl,addPerson,null);
+  }
+  // 添加名片夹
+  function addPerson(data) {
+    if (data != null) {
+      if (data.length > 0) {
+        for (var i = 0; i < data.length; i++) {
+          if ($(".rNum[recordId='" + data[i].id + "']").get(0) == null) {
+            // 可以添加
+            $("#receiverContain").append("<div id='" + data[i].id + "' class='receiver'>"
+              + "<input type='hidden' name='rNum' class='rNum' value='" + data[i].tel + "' recordId='" + data[i].id + "'/>"
+              + "<input type='hidden' name='rId' class='rId' value=''/>"
+              + "<input type='hidden' name='rName' class='rName' value=''/>"
+              + "<span style='white-space:nowrap;' id='name"+data[i].id+"'>" + data[i].name + "(" + data[i].tel + ")" +"</span>"
+              + "<span class='SMSDel'  onclick=\"javascript:deleteReceiver('" + data[i].id + "')\"></span></div>");
+			  //对没有电话号码的人员进行添加红色标注
+			  if(data[i].tel.trim().length == 0){
+			      $("#name"+data[i].id).css("color","red");
+			  }	
+          }
+        }
+      }
+    }
+  }
+  // 删除收件人
+  function deleteReceiver (id) {
+    jQuery("#" + id).remove();
+##    var e = document.editForm;
+##    if (e.receiverIds.value.indexOf(id+",")>=0) {
+##      e.receiverIds.value = e.receiverIds.value.replace(id+",","");
+##    }
+##    if (e.addressBookIds.value.indexOf(id+",")>=0) {
+##      e.addressBookIds.value = e.addressBookIds.value.replace(id+",");
+##    }
+  }
+  // 清空全部
+  function clearAll() {
+    $("#receiverContain").children().remove();
+  }
+  </script>
+  <style type="text/css">
+	.aa{color:red;}
+  .SMSDel{background:url('../images/sms_del.png') no-repeat center center;width:16px;height:16px;display:inline-block;padding:0 20px 0 5px;background-position:right center;display:inline-block;vertical-align:baseline;width:auto;margin:0;cursor:pointer;}
+  .receiver{border:solid 1px rgb(178, 178, 178);float:left;padding:2px;margin:2px;background-color:#EAF2FD;}  
+  </style>
+</head>
+<body>
+<div class="PageHeader">
+  <div class="LeftBox Title">发送短信息</div>
+</div>
+
+<div class="indieui-scroll">
+<form name="editForm" method="post" class="indieui-form">
+<input type="hidden" name="submitFlag" value="0" />
+<input type="hidden" name="token" value="$!{token}"/>
+<table class="TbCommon">
+  <tr>
+    <td class="TdLabel" style="width:100px;">发送人</td>
+    <td class="TdInput">$!{currentUser.name}</td>
+    <td class="TdLabel" style="width:100px;">发送时间</td>
+    <td class="TdInput" colspan="3">#customFormatDate(${now} 'yyyy-MM-dd HH:mm')</td>    
+  </tr>
+  <tr>
+    <td class="TdLabel">接收人</td>
+    <td class="TdInput" colspan="5">
+      <span style="color:red;">注：号码为空的联系人将无法发送信息。</span><br/>
+      手机号码：<input type="text" name="customNum" title="请输入手机号码" maxlength='12' style="width:200px"/>
+	  <input type="button" value="添加" onclick="javascript:addCustom();"/>    
+      <input type="button" value="从系统通讯录添加" onclick="javascript:addFromSys();"/>
+      <input type="button" value="从个人名片夹添加" onclick="javascript:addFromPersonal();"/>        
+      <input type="button" value="清空" onclick="javascript:clearAll();"/>
+      <div id="receiverContain"></div>
+    </td>
+  </tr>
+  <tr>
+    <td class="TdLabel">短信内容</td>
+    <td class="TdInput" colspan="5">
+      <textarea name="smsContent" style="width:98%;height:50px;" title="不超过250个字"></textarea>
+    </td>    
+  </tr>
+</table>
+</form>
+</div>
+
+<div class="CommandTool indieui-form">
+  <input type="button" value="发送" onclick="javascript:doSave();"/>
+</div>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping default-lazy="false">
+<!--
+    Created by the Middlegen Hibernate plugin 2.1
+
+    http://boss.bekk.no/boss/middlegen/
+    http://www.hibernate.org/
+-->
+
+<class
+    name="com.plugins.sn.entity.SysSerialNumber"
+    table="sys_serial_number"
+>
+
+    <id
+        name="id"
+        type="java.lang.String"
+        column="id"
+        unsaved-value="0"
+    >
+        <generator class="uuid" />
+    </id>
+
+    <property
+        name="prefixIdentifier"
+        type="java.lang.String"
+        column="prefix_identifier"
+        not-null="true"
+        length="60"
+    >
+        <meta attribute="field-description">
+           @hibernate.property
+            column="prefix_identifier"
+            length="60"
+            not-null="true"
+        </meta>
+    </property>
+    <property
+        name="classifyIdentifier"
+        type="java.lang.String"
+        column="classify_identifier"
+        length="60"
+    >
+        <meta attribute="field-description">
+           @hibernate.property
+            column="classify_identifier"
+            length="60"
+        </meta>
+    </property>
+    <property
+        name="serialNumber"
+        type="java.lang.Integer"
+        column="serial_number"
+        length="10"
+    >
+        <meta attribute="field-description">
+           @hibernate.property
+            column="serial_number"
+            length="10"
+        </meta>
+    </property>
+
+    <!-- Associations -->
+
+
+</class>
+</hibernate-mapping>
