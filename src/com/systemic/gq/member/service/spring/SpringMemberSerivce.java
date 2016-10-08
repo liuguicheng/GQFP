@@ -43,7 +43,7 @@ public class SpringMemberSerivce implements ISpringMemberService {
 	}
 
 	@Override
-	public void saveMermber(MemberEditInfo info) {
+	public Member saveMermber(MemberEditInfo info) {
 		Member member = new Member();
 		if (StringUtils.isNotBlank(info.getId())) {
 			BeanUtils.copyProperties(info, member);
@@ -105,7 +105,7 @@ public class SpringMemberSerivce implements ISpringMemberService {
 		} 
 		this.memberDao.save(member);
 		CacheHelper.getInstance().dispatchRefreshEvent(Member.SIMPLE_DIC_IDENTIFICATION);
-		
+		return member;
 	}
 
 	@Override
@@ -165,6 +165,44 @@ public class SpringMemberSerivce implements ISpringMemberService {
 	public void updateMermberInfo(Member member) {
 		this.memberDao.save(member);
 		CacheHelper.getInstance().dispatchRefreshEvent(Member.SIMPLE_DIC_IDENTIFICATION);
+	}
+
+	@Override
+	public Member selectMemberById(String memberId) {
+		return (Member) this.memberDao.load(Member.class, memberId);
+	}
+
+	@Override
+	public List<Member> selectMemberListByStaffid(String id) {
+		return memberDao.selectMemberListByStaffid(id);
+	}
+
+	@Override
+	public int selectMemberCountByStaffid(String staffId) {
+		 List<Member> memberlist=selectMemberListByStaffid(staffId);
+		 if(memberlist!=null&&!staffId.isEmpty()){
+			 
+			 return memberlist.size();
+		 }
+		return 0;
+	}
+
+	@Override
+	public double selectMemberMoneyTotalByStaffid(String staffId) {
+		double totalMoney=0;
+		List<Member> memberlist=selectMemberListByStaffid(staffId);
+		if(memberlist!=null&&!staffId.isEmpty()){
+			for (Member member : memberlist) {
+				totalMoney+=member.getStock().getMoney();
+			}
+		}
+		return totalMoney;
+	}
+
+	@Override
+	public List<Member> selectMember() {
+		// TODO Auto-generated method stub
+		return this.memberDao.selectMember();
 	}
 
 	

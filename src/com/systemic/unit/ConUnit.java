@@ -3,6 +3,7 @@ package com.systemic.unit;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -11,6 +12,11 @@ import java.util.List;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+/**
+ * 工具类
+ * @author lgc
+ *
+ */
 public class ConUnit {
 	
 	//换算两位小数
@@ -51,6 +57,7 @@ public class ConUnit {
 		 }  
 		 return dayForWeek;  
 	}
+	//封装json 
 	public static String tojson(ErrorDataMsg ed){
 		List list=new ArrayList();
 		list.add(ed);
@@ -62,8 +69,16 @@ public class ConUnit {
 		return gsonString;
 	}
 	
+	public static String formateDateToString(Date date ){
+		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+		return sdf.format(date);
+	}
+	
+	
+  
+	
 	public static void main(String[] args){
 		
-			System.out.println("1,2,3,4,5,".indexOf("1"));
+			
 	}
 }

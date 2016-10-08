@@ -12,9 +12,12 @@
         <property name="orderByClause"><value>memberId asc</value></property>
        <property name="queryParam">
             <list>
+          	
               <value>stock,stock,LIKE</value>
-              <value>isActivation,isActivation,GT_EQU</value>
-              <value>referenceId,referenceId,GT_EQU</value>
+              <value>isActivation,isActivation,EQU</value>
+              <value>referenceId,referenceId,EQU</value>
+               <value>staffId,staffId,LIKE</value>
+                <value>zsxm,zsxm,LIKE</value>
             </list>
         </property>
     </bean>

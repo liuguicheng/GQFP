@@ -54,13 +54,13 @@
 <form name="queryForm" action="#getRequestUri()" method="post" class="indieui-form">
   <table class="TbCommon">
     <tr>
-      <td class="TdLabel" style="width:100px;">：</td>
+      <td class="TdLabel" style="width:100px;">会员编号：</td>
       <td class="TdInput">
-        <input type="text" name="operateCode" value="#htmlEscape($!{command.operateCode})" >
+        <input type="text" name="staffId" value="" >
       </td>
-      <td class="TdLabel" style="width:100px;">：</td>
+      <td class="TdLabel" style="width:100px;">会员姓名：</td>
       <td class="TdInput">
-        <input type="text" name="operateName" value="#htmlEscape($!{command.operateName})" >
+        <input type="text" name="zsxm" value="" >
       </td>
     </tr>
   </table>
@@ -103,7 +103,7 @@
             #if($velocityCount % 2 == 0) #set($css = "TrListEven") #else #set($css = "TrListOdd") #end
     <tr>
       <td><input type="checkbox" name="memberId" value="$!{data.memberId}"></td>
-      <td><a href="../member/memberEdit.do?memberId=$!{data.memberId}">$!{data.userName}</a></td>
+      <td><a href="../member/MemberInfo.do?memberId=$!{data.memberId}">$!{data.userName}</a></td>
       <td>$!{data.referenceName}</td>
       <td>#lookUpDict($dicData.dicStockLevel "$!{data.stock.gradeNum}")</td>
       <td>$!{data.stock.money}</td>

@@ -27,11 +27,13 @@ import com.console.entity.Role;
 import com.console.entity.Staff;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.systemic.gq.bonus.settlement.SettlementHelper;
 import com.systemic.gq.entity.Member;
 import com.systemic.gq.entity.Rule;
 import com.systemic.gq.member.command.MemberEditInfo;
 import com.systemic.gq.member.command.MemberInfo;
 import com.systemic.gq.member.service.ISpringMemberService;
+import com.systemic.unit.ConUnit;
 import com.systemic.unit.ErrorDataMsg;
 
 @Controller
@@ -100,12 +102,14 @@ public class MemberController {
 	public String memberEditSave(HttpServletRequest request, HttpServletResponse response, Model model, Long token,
 			MemberEditInfo info) {
 		try {
-			this.springMemberService.saveMermber(info);
+			Member member=this.springMemberService.saveMermber(info);
 			// 是否激活
 			int isActivation = info.getIsActivation();
 			if (isActivation == 1) {
-				// 结算奖金
-
+				/**
+				 * 结算奖金
+				 */
+				SettlementHelper.doBonusSettlementForDisposable(member);
 			}
 			model.addAttribute("message", "保存成功");
 		} catch (Exception e) {
@@ -265,9 +269,15 @@ public class MemberController {
 	 * 
 	 */
 	@RequestMapping(value="/member/MemberInfo.do",method=RequestMethod.GET)
-	public String toMemberInfo(HttpServletRequest request,Model model){
-		Staff staff = (Staff) AuthenticationFilter.getAuthenticator(request);
-		Member member = ConsoleHelper.getInstance().getManageService().selectMemberByStaffId(staff.getId());
+	public String toMemberInfo(HttpServletRequest request,Model model,MemberInfo info){
+		Member member =null;
+		if(info.getMemberId()!=null&&!"".equals(info.getMemberId())){
+			member=this.springMemberService.selectMemberById(info.getMemberId());
+		}else{
+			Staff staff = (Staff) AuthenticationFilter.getAuthenticator(request);
+		    member = ConsoleHelper.getInstance().getManageService().selectMemberByStaffId(staff.getId());
+		}
+		
 		Rule rule = ConsoleHelper.getInstance().getRuleService().selectRuleBY();
 		model.addAttribute("rule", rule);
 		model.addAttribute("command", member);
@@ -299,5 +309,80 @@ public class MemberController {
 			ConsoleHelper.getInstance().getLogService().saveOperateLogForMember(OperateLog.LOG_TYPE_UP_MEMBERINFO, member, logContent);
 		}
 		return "redirect:../member/MemberInfo.do";
+	}
+	
+	/**
+	 * 激活会员
+	 */
+	@RequestMapping(value="/member/activationMemberAjax.do",produces = "text/plain;charset=gbk")
+	@ResponseBody
+	public String  activationMemberAjax(HttpServletRequest request,MemberInfo info){
+		String msg="";
+		ErrorDataMsg edm=new ErrorDataMsg();
+		edm.setMessage("激活失败");
+		Member member=this.springMemberService.selectMemberById(info.getMemberId());
+		if(member!=null){
+			member.setActivationTime(new Date());
+			member.setIsActivation(1);
+			this.springMemberService.updateMermberInfo(member);
+			edm.setMessage("激活成功");
+			Staff staff = (Staff) AuthenticationFilter.getAuthenticator(request);
+			Member loginmember = ConsoleHelper.getInstance().getManageService().selectMemberByStaffId(staff.getId());
+			String logContent = "在IP为" +  ConsoleHelper.getUserIp() + "的机器上-激活了会员编号为："+member.getStaffId();
+			ConsoleHelper.getInstance().getLogService().saveOperateLogForMember(OperateLog.LOG_TYPE_ACTIVATION,loginmember, logContent);
+		    
+			/**
+			 * 结算奖金
+			 */
+			SettlementHelper.doBonusSettlementForDisposable(member);
+		}
+		msg=ConUnit.tojson(edm);
+		return msg;
+	}
+	
+	/**
+	 * 会员冻结
+	 */
+	@RequestMapping(value="/member/frozenMemberAjax.do",produces = "text/plain;charset=gbk")
+	@ResponseBody
+	public String frozenMemberAjax(HttpServletRequest request,MemberInfo info){
+		String msg="";
+		ErrorDataMsg edm=new ErrorDataMsg();
+		edm.setMessage("冻结失败");
+		Member member=this.springMemberService.selectMemberById(info.getMemberId());
+		if(member!=null){
+			member.setIsok(0);
+			this.springMemberService.updateMermberInfo(member);
+			edm.setMessage("冻结成功");
+			Staff staff = (Staff) AuthenticationFilter.getAuthenticator(request);
+			Member loginmember = ConsoleHelper.getInstance().getManageService().selectMemberByStaffId(staff.getId());
+			String logContent = "在IP为" +  ConsoleHelper.getUserIp() + "的机器上-冻结了会员编号为："+member.getStaffId();
+			ConsoleHelper.getInstance().getLogService().saveOperateLogForMember(OperateLog.LOG_TYPE_FROZEN,loginmember, logContent);
+		}
+		msg=ConUnit.tojson(edm);
+		return msg;
+	}
+	
+	/**
+	 * 会员解冻
+	 */
+	@RequestMapping(value="/member/thwaMemberAjax.do",produces = "text/plain;charset=gbk")
+	@ResponseBody
+	public String thwaMemberAjax(HttpServletRequest request,MemberInfo info){
+		String msg="";
+		ErrorDataMsg edm=new ErrorDataMsg();
+		edm.setMessage("冻结解除失败");
+		Member member=this.springMemberService.selectMemberById(info.getMemberId());
+		if(member!=null){
+			member.setIsok(1);
+			this.springMemberService.updateMermberInfo(member);
+			edm.setMessage("冻结解除成功");
+			Staff staff = (Staff) AuthenticationFilter.getAuthenticator(request);
+			Member loginmember = ConsoleHelper.getInstance().getManageService().selectMemberByStaffId(staff.getId());
+			String logContent = "在IP为" +  ConsoleHelper.getUserIp() + "的机器上-冻结解除了会员编号为："+member.getStaffId();
+			ConsoleHelper.getInstance().getLogService().saveOperateLogForMember(OperateLog.LOG_TYPE_THAW,loginmember, logContent);
+		}
+		msg=ConUnit.tojson(edm);
+		return msg;
 	}
 }

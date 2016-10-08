@@ -43,6 +43,38 @@
                     }     
             });
 });
+
+function frozen(id){
+	if(confirm("确认冻结会员？")){
+	   $.ajax({
+        url: '../member/frozenMemberAjax.do',
+        type: 'POST',
+		data:"memberId="+id,
+        cache: false,
+        success: function(result) {
+				var s=$.parseJSON(result);
+					alert(s[0].message);
+					 location.reload()
+				}
+   		 });
+	}
+}
+
+function thwa(id){
+	if(confirm("确认冻结会员？")){
+	   $.ajax({
+        url: '../member/thwaMemberAjax.do',
+        type: 'POST',
+		data:"memberId="+id,
+        cache: false,
+        success: function(result) {
+				var s=$.parseJSON(result);
+					alert(s[0].message);
+					 location.reload()
+				}
+   		 });
+	}
+}
   </script>
 </head>
 <body>
@@ -54,13 +86,13 @@
 <form name="queryForm" action="#getRequestUri()" method="post" class="indieui-form">
   <table class="TbCommon">
     <tr>
-      <td class="TdLabel" style="width:100px;">：</td>
+      <td class="TdLabel" style="width:100px;">会员编号：</td>
       <td class="TdInput">
-        <input type="text" name="operateCode" value="#htmlEscape($!{command.operateCode})" >
+        <input type="text" name="staffId" value="" >
       </td>
-      <td class="TdLabel" style="width:100px;">：</td>
+      <td class="TdLabel" style="width:100px;">会员姓名：</td>
       <td class="TdInput">
-        <input type="text" name="operateName" value="#htmlEscape($!{command.operateName})" >
+        <input type="text" name="zsxm" value="" >
       </td>
     </tr>
   </table>
@@ -111,7 +143,7 @@
             #if($velocityCount % 2 == 0) #set($css = "TrListEven") #else #set($css = "TrListOdd") #end
     <tr>
       <td>$!{data.staffId}</td>
-      <td><a href="../member/memberEdit.do?memberId=$!{data.memberId}">$!{data.userName}</a></td>
+      <td><a href="../member/MemberInfo.do?memberId=$!{data.memberId}">$!{data.userName}</a></td>
       <td>$!{data.lxdh}</td>
       <td>#lookUpDict($dicData.dicStockLevel "$!{data.stock.gradeNum}")</td>
       <td>$!{data.stock.money}</td>
@@ -122,7 +154,13 @@
 	  <td class="fruit_$index">#formatTime(${data.createTime})</td>
 	   <td class="fruit_$index">#if($!{data.isok}==1)正常 #else 冻结  #end</td>
 	    <td class="fruit_$index">#formatTime(${data.activationTime})</td>
-      <td class="fruit_$index"><a href="$!{data.memberId}">[编辑]</a><a href="$!{data.memberId}">[冻结]</a></td>
+      <td class="fruit_$index"><a href="../member/MemberInfo.do?memberId=$!{data.memberId}">[编辑]</a>
+		#if($!{data.isok}==1)
+			<a href="javascript:frozen('$!{data.memberId}')">[冻结]</a>
+		#else
+			<a href="javascript:thwa('$!{data.memberId}')">[解除]</a>
+		#end
+		</td>
       
     </tr>
   #end

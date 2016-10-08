@@ -109,7 +109,7 @@
   }
 
   function doReturn() {
-    location.href = "../member/memberManage.do?isActivation=-1";
+    location.href = history.go(-1);
   }
   
   function oncheckLognUserName(){
@@ -353,7 +353,7 @@
 
 <div class="CommandTool indieui-form">
   <input type="button" id="btnconfirm" value="提交" onclick="javascript:doSave();"/>
-  <input type="button" id="btnback" value="取消" onclick="javascript:doReturn();"/>
+  <input type="button" id="btnback" value="返回" onclick="javascript:doReturn();"/>
 </div>
 </body>
 </html>

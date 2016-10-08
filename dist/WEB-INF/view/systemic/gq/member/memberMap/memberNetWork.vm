@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  #headInclude()
+  <link rel="stylesheet" href="../lib/ztree/zTreeStyle/zTreeStyle.css" type="text/css">
+	  <link rel="stylesheet" href="../lib/ztree/zTreeStyle/map.css" type="text/css">
+  <script type="text/javascript" src="../lib/ztree/js/jquery.ztree.core.min.js"></script>
+  <script type="text/javascript">
+  #if($message)alert("#javaScriptEscape($message)");#end
+    
+		
+		function onmynode(){
+		 $.ajax({
+       			 url: '../memberMap/xzChildNode.do',
+        		 type: 'POST',
+			     data:"staffId="+$("#staffId").val(),
+       			 cache: false,
+       			 success: function(result) {
+				 	var s=$.parseJSON(result);
+					var imgs="<img src='../lib/ztree/zTreeStyle/img/ico/agent.gif'>";
+				 	$("#mynodeid").html(imgs+s[0].name);
+        		 }
+   		    });
+		
+		}
+  </script>
+</head>
+<body>
+<div class="PageHeader">
+  <div class="LeftBox Title">网络结构图</div>
+</div>
+
+<div class="PageContainer indieui-scroll">
+	<!--查询-->
+    <div class="InfoBox">
+		<div class="indieui-form">
+			<table class="TbCommon">
+				<tr >
+					<td width="8%" align="left" class="TdLabel">#requiredInput("会员编号")：</td>
+					<td  align="left" class="TdInput" colspan="5">
+						<input type="text" id="staffId" value="$!{command.id}" >
+						<input type="button" value="查询" onclick="javascript:doSearch();"/>
+						<input type="button" value="我的图谱" onclick="javascript:doSearchmy('$!{command.id}');"/>
+      				</td>
+				</tr>
+			</table>
+		</div>
+	</div>  
+	<div id="toolbar" style="padding:5px;height:auto;border: 1px solid #ddd;margin: 5px;">
+			            
+		<div class="cRed" style="text-align: center;margin: 4px 0px;font-size: 12px;">单位：单<span class="cDRed">(每单=)</span></div>
+		<div class="map" id="divMapTree">
+		<table width="100%" border="0" cellspacing="0" cellpadding="0">
+			<tbody>
+				<tr>
+					<td colspan="9">
+						<div>
+							<a href="/Member/MemberMap?UserID=100000"
+								onmouseover="yidao(event,this)" onmousemove="yidong(event)"
+								onmouseout="yichu(this)"  
+								title="总业绩：120000.00 <br></a>左区：120000.00  中区 ：0.00 右区 ：0.00<br/>左区新增：0.00  中区新增 ：0.00 右区新增 ：0.00<br/>左区单数：4 中区单数：0  右区单数：0 <br/> ">
+								<img src="../lib/ztree/zTreeStyle/img/ico/2.png" height="32"> <br> <span>100000</span>
+							</a>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="9"><img src="../lib/ztree/zTreeStyle/img/ico/l_down.gif" height="30">
+						<img src="../lib/ztree/zTreeStyle/img/ico/line.gif" width="32%" height="30"> <img
+						src="../lib/ztree/zTreeStyle/img/ico/up.gif" height="30"> <img src="../lib/ztree/zTreeStyle/img/ico/line.gif"
+						width="32%" height="30"> <img src="../lib/ztree/zTreeStyle/img/ico/r_down.gif" alt=""
+						height="30"></td>
+				</tr>
+				<tr>
+					<td colspan="3">
+						<div>
+							<a href="/Member/MemberMap?UserID=0001"
+								onmouseover="yidao(event,this)" onmousemove="yidong(event)"
+								onmouseout="yichu(this)"  
+								title="总业绩：90000.00 <br></a>左区：0.00  中区 ：90000.00 右区 ：0.00<br/>左区新增：0.00  中区新增 ：0.00 右区新增 ：0.00<br/>左区单数：0 中区单数：3  右区单数：0 <br/> ">
+								<img src="../lib/ztree/zTreeStyle/img/ico/5.png" height="32"> <br> <span>0001</span>
+							</a>
+						</div>
+					</td>
+					<td colspan="3">
+						<div>
+							<a href="/Member/RegMember?fartherUid=100000&amp;treeplace=2"
+								 > <img src="../lib/ztree/zTreeStyle/img/ico/empty.png" height="32">
+								<br> <span>注册</span></a>
+						</div>
+					</td>
+					<td colspan="3">
+						<div>
+							<a href="/Member/RegMember?fartherUid=100000&amp;treeplace=3"
+								 > <img src="../lib/ztree/zTreeStyle/img/ico/empty.png" height="32">
+								<br> <span>注册</span></a>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="3"><img src="../lib/ztree/zTreeStyle/img/ico/l_down.gif" height="30">
+						<img src="../lib/ztree/zTreeStyle/img/ico/line.gif" width="32%" height="30"> <img
+						src="../lib/ztree/zTreeStyle/img/ico/up.gif" height="30"> <img src="../lib/ztree/zTreeStyle/img/ico/line.gif"
+						width="32%" height="30"> <img src="../lib/ztree/zTreeStyle/img/ico/r_down.gif" alt=""
+						height="30"></td>
+					<td colspan="3"><img src="../lib/ztree/zTreeStyle/img/ico/l_down.gif" height="30">
+						<img src="../lib/ztree/zTreeStyle/img/ico/line.gif" width="32%" height="30"> <img
+						src="../lib/ztree/zTreeStyle/img/ico/up.gif" height="30"> <img src="../lib/ztree/zTreeStyle/img/ico/line.gif"
+						width="32%" height="30"> <img src="../lib/ztree/zTreeStyle/img/ico/r_down.gif" alt=""
+						height="30"></td>
+					<td colspan="3"><img src="../lib/ztree/zTreeStyle/img/ico/l_down.gif" height="30">
+						<img src="../lib/ztree/zTreeStyle/img/ico/line.gif" width="32%" height="30"> <img
+						src="../lib/ztree/zTreeStyle/img/ico/up.gif" height="30"> <img src="../lib/ztree/zTreeStyle/img/ico/line.gif"
+						width="32%" height="30"> <img src="../lib/ztree/zTreeStyle/img/ico/r_down.gif" alt=""
+						height="30"></td>
+				</tr>
+				<tr>
+					<td>
+						<div>
+							<a href="/Member/RegMember?fartherUid=0001&amp;treeplace=1"
+								 > <img src="../lib/ztree/zTreeStyle/img/ico/empty.png" height="32">
+								<br> <span>注册</span></a>
+						</div>
+					</td>
+					<td>
+						<div>
+							<a href="/Member/MemberMap?UserID=0002"
+								onmouseover="yidao(event,this)" onmousemove="yidong(event)"
+								onmouseout="yichu(this)"  
+								title="总业绩：60000.00 <br></a>左区：60000.00  中区 ：0.00 右区 ：0.00<br/>左区新增：0.00  中区新增 ：0.00 右区新增 ：0.00<br/>左区单数：2 中区单数：0  右区单数：0 <br/> ">
+								<img src="../lib/ztree/zTreeStyle/img/ico/5.png" height="32"> <br> <span>0002</span>
+							</a>
+						</div>
+					</td>
+					<td>
+						<div>
+							<a href="/Member/RegMember?fartherUid=0001&amp;treeplace=3"
+								 > <img src="../lib/ztree/zTreeStyle/img/ico/empty.png" height="32">
+								<br> <span>注册</span></a>
+						</div>
+					</td>
+					<td>
+						<div>
+							<a href="javascript:;"  > <img
+								src="../lib/ztree/zTreeStyle/img/ico/empty.png" height="32"> <br> <span>空位</span></a>
+						</div>
+					</td>
+					<td>
+						<div>
+							<a href="javascript:;"  > <img
+								src="../lib/ztree/zTreeStyle/img/ico/empty.png" height="32"> <br> <span>空位</span></a>
+						</div>
+					</td>
+					<td>
+						<div>
+							<a href="javascript:;"  > <img
+								src="../lib/ztree/zTreeStyle/img/ico/empty.png" height="32"> <br> <span>空位</span></a>
+						</div>
+					</td>
+					<td>
+						<div>
+							<a href="javascript:;"  > <img
+								src="../lib/ztree/zTreeStyle/img/ico/empty.png" height="32"> <br> <span>空位</span></a>
+						</div>
+					</td>
+					<td>
+						<div>
+							<a href="javascript:;"  > <img
+								src="../lib/ztree/zTreeStyle/img/ico/empty.png" height="32"> <br> <span>空位</span></a>
+						</div>
+					</td>
+					<td>
+						<div>
+							<a href="javascript:;"  > <img
+								src="../lib/ztree/zTreeStyle/img/ico/empty.png" height="32"> <br> <span>空位</span></a>
+						</div>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+						<table border="0" cellpadding="1" cellspacing="1" class="bot" style="margin: 4px; background-color: #888;">
+                        <tbody><tr align="center" >
+                            <td>颜色<br><br>级别 </td>
+                            <td>
+                                <img src="../lib/ztree/zTreeStyle/img/ico/empty.png">空白</td>
+                                <td>
+                                    <img src="../lib/ztree/zTreeStyle/img/ico/1.png">普通账户</td>
+                                <td>
+                                    <img src="../lib/ztree/zTreeStyle/img/ico/2.png">银卡账户</td>
+                                <td>
+                                    <img src="../lib/ztree/zTreeStyle/img/ico/3.png">金卡账户</td>
+                                <td>
+                                    <img src="../lib/ztree/zTreeStyle/img/ico/4.png"> 白金账户</td>
+                                <td>
+                                    <img src="../lib/ztree/zTreeStyle/img/ico/5.png"> 钻石账户</td>
+                                <td>
+                                    <img src="../lib/ztree/zTreeStyle/img/ico/6.png">铂金账户</td>
+								<td>
+                                <img src="../lib/ztree/zTreeStyle/img/ico/0.png">未激活</td>
+                        </tr>
+						</tbody>
+						</table>
+    </div>
+</div>
+
+<script type="text/javascript">
+        var x = -155;
+		var y = -95;
+        var myTitle = ""
+        function yidao(e, obj) {
+
+            myTitle = obj.title;
+            obj.title = "";
+            var tooltip = "<div id='tooltip'style='width:350px;height:80px;;text-align:center' >" + myTitle + "</div>";   //创建DIV元素
+            $("#divMapTree").append(tooltip);  //追加到文档中
+            $("#tooltip").css({ "top": (e.pageY + y) + "px", "left": (e.pageX + x) + "px" }).show(); //设置X  Y坐标， 并且显示
+        }
+        function yidong(e) {
+            $("#tooltip").css({ "top": (e.pageY + y) + "px", "left": (e.pageX + x) + "px" });
+        }
+        function yichu(obj) {
+            obj.title = myTitle;
+            $("#tooltip").remove();    //移除
+        }
+    
+</script>
+</body>
+</html>

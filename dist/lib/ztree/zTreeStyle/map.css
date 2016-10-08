@@ -1,0 +1,31 @@
+/* CSS Document */
+body{font-size:13px;color:#000;font-family:Î¢ÈíÑÅºÚ,ËÎÌå,Verdana, Geneva, sans-serif;}
+.map *{margin:0;padding:0;}
+.map a{color:#000; text-decoration:none; width:130px;}
+.map a:hover{color:#f00;text-decoration:underline;}
+.map span{width:130px;}
+.map table{text-align:center;border-collapse: collapse; border:#fff;}
+.map table td{padding:0 2px; text-align:center; border:#fff;}
+/*.map table td div{width:130px;text-align:center;}*/
+.map table dl,.map table p{width:130px;height:127px;margin:0 auto;border:1px solid #999;}
+.map table p{margin:0 auto;height:127px;}
+.map table dl dd{padding:1px;}
+.map table dl dd table{background:#ccc;}
+.map table dl dd table td{background:#fff;padding:2px;white-space:nowrap;}
+.map table span { display:-moz-inline-box; display:inline-block; width:110px;}
+ #tooltip {
+            background: #171818;
+			border-radius: 5px;
+            position: absolute;
+            padding: 5px;
+			height: 15px;
+            line-height: 15px;
+            color: #fff;
+            display: none;
+			 font-size: 10px;
+             width:80px;
+        }
+        
+.bot td{
+	    border: 1px solid #ddd;
+}         

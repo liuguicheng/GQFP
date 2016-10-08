@@ -43,6 +43,22 @@
                     }     
             });
 });
+
+function activation(id){
+	if(confirm("确认激活会员？")){
+	   $.ajax({
+        url: '../member/activationMemberAjax.do',
+        type: 'POST',
+		data:"memberId="+id,
+        cache: false,
+        success: function(result) {
+					var s=$.parseJSON(result);
+					alert(s[0].message);
+					 location.reload(); 
+				}
+   		 });
+	}
+}
   </script>
 </head>
 <body>
@@ -54,13 +70,13 @@
 <form name="queryForm" action="#getRequestUri()" method="post" class="indieui-form">
   <table class="TbCommon">
     <tr>
-      <td class="TdLabel" style="width:100px;">：</td>
+      <td class="TdLabel" style="width:100px;">会员编号：</td>
       <td class="TdInput">
-        <input type="text" name="operateCode" value="#htmlEscape($!{command.operateCode})" >
+        <input type="text" name="staffId" value="" >
       </td>
-      <td class="TdLabel" style="width:100px;">：</td>
+      <td class="TdLabel" style="width:100px;">会员姓名：</td>
       <td class="TdInput">
-        <input type="text" name="operateName" value="#htmlEscape($!{command.operateName})" >
+        <input type="text" name="zsxm" value="" >
       </td>
     </tr>
   </table>
@@ -107,14 +123,14 @@
             #if($velocityCount % 2 == 0) #set($css = "TrListEven") #else #set($css = "TrListOdd") #end
     <tr>
       <td>$!{data.staffId}</td>
-      <td><a href="../member/memberEdit.do?memberId=$!{data.memberId}">$!{data.userName}</a></td>
+      <td><a href="../member/MemberInfo.do?memberId=$!{data.memberId}">$!{data.userName}</a></td>
       <td>$!{data.lxdh}</td>
       <td>#lookUpDict($dicData.dicStockLevel "$!{data.stock.gradeNum}")</td>
       <td>$!{data.stock.money}</td>
 	  <td class="fruit_$index">$!{data.referenceId}</td>
 	  <td class="fruit_$index">$!{data.note}</td>
 	  <td class="fruit_$index">#formatTime(${data.createTime})</td>
-      <td class="fruit_$index"><a href="$!{data.memberId}">[激活]</a></td>
+      <td class="fruit_$index"><a href="javascript:activation('$!{data.memberId}')">[激活]</a></td>
       
     </tr>
   #end
