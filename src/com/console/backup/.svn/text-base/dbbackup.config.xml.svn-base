@@ -28,6 +28,7 @@
 		<property name="tableAlias">
 			<value>me</value>
 		</property>
+		<property name="orderByClause"><value>db_time desc</value></property>
 		<property name="queryParam">
 			<list>
 				<!-- <value>userid,userid,LIKE</value> <value>bonustype,bonustype,EQU</value> 

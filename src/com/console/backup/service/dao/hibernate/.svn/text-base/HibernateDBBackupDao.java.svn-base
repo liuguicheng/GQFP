@@ -10,6 +10,8 @@ import org.springline.orm.dao.hibernate.HibernateCommonDao;
 
 import com.console.backup.command.DBBackupInfo;
 import com.console.backup.service.dao.IDBBackupDAO;
+import com.console.entity.DBBackup;
+import com.systemic.gq.entity.Withdrawals;
 
 public class HibernateDBBackupDao extends HibernateCommonDao implements IDBBackupDAO {
 	
@@ -23,13 +25,25 @@ public class HibernateDBBackupDao extends HibernateCommonDao implements IDBBacku
 
 	@Override
 	public Page selectBackupList(DBBackupInfo dbbackinfo) {
-		IQueryObject io = this.dbbackupQueryStringUtil.getQueryObject(dbbackinfo);
+		
+		Object[] values = new Object[25];
+		int idx = 0;
+		StringBuffer select = new StringBuffer(" from ").append(DBBackup.class.getName()).append(" as me ");
+		StringBuffer where = new StringBuffer(200);
+
+		Object[] param = new Object[idx];
+		System.arraycopy(values, 0, param, 0, idx);
+		IQueryObject io = this.dbbackupQueryStringUtil.getQueryObject(dbbackinfo, where.toString(), param);
+		select.append(" where ").append(io.getWhereClause());
+		select.append(" order by ");
+		select.append(" me.db_time desc  ");
 		if (dbbackinfo.getNotPage() != null && dbbackinfo.getNotPage().booleanValue()) {
-            List data = super.doQuery(io.getQueryString(), io.getParam());
-            return super.putDataToPage(data);
-        }
-		return super.find(io.getQueryString(), io.getParam(),
-				dbbackinfo.getPageNumber(), dbbackinfo.getPageSize());
+			List data = super.doQuery(select.toString(), io.getParam());
+			dbbackinfo.setNotPage(false);
+			return super.putDataToPage(data);
+		}
+		return super.find(io.getQueryString(), io.getParam(), dbbackinfo.getPageNumber(), dbbackinfo.getPageSize());
+
 	}
 
 }

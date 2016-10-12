@@ -14,7 +14,7 @@ public class Rule  implements java.io.Serializable {
 	private String id;
      private Integer counterFee;//手续费
      private Double dayCap;//日奖金封顶值
-     private Integer areaNumber;//区域数量
+     private Integer areaNumber;//区域数量 对应的数值从左至右 0至10
      private String regionPriority;//区域优先级
      private String activationConditionOne;//会员激活条件
      private Integer activationConditionTwo;//

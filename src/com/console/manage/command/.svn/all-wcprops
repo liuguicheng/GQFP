@@ -6,8 +6,8 @@ END
 StaffInfo.java
 K 25
 svn:wc:ra_dav:version-url
-V 72
-/svn/GQFP/!svn/ver/2/trunk/src/com/console/manage/command/StaffInfo.java
+V 74
+/svn/GQFP/!svn/ver/103/trunk/src/com/console/manage/command/StaffInfo.java
 END
 DepartmentInfo.java
 K 25
@@ -21,17 +21,17 @@ svn:wc:ra_dav:version-url
 V 81
 /svn/GQFP/!svn/ver/2/trunk/src/com/console/manage/command/StaffTypeQueryInfo.java
 END
-StaffQueryInfo.java
-K 25
-svn:wc:ra_dav:version-url
-V 77
-/svn/GQFP/!svn/ver/2/trunk/src/com/console/manage/command/StaffQueryInfo.java
-END
 DepartmentPowerInfo.java
 K 25
 svn:wc:ra_dav:version-url
 V 82
 /svn/GQFP/!svn/ver/2/trunk/src/com/console/manage/command/DepartmentPowerInfo.java
+END
+StaffQueryInfo.java
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/GQFP/!svn/ver/2/trunk/src/com/console/manage/command/StaffQueryInfo.java
 END
 DepartmentQueryInfo.java
 K 25

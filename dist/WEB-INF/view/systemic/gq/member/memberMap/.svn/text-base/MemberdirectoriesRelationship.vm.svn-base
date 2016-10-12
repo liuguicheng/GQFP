@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  #headInclude()
+  <link rel="stylesheet" href="../lib/ztree/zTreeStyle/zTreeStyle.css" type="text/css">
+  <script type="text/javascript" src="../lib/ztree/js/jquery.ztree.core.min.js"></script>
+  <script type="text/javascript">
+  #if($message)alert("#javaScriptEscape($message)");#end
+    var setting = {
+			async: {
+				enable: true,
+				url:getUrl,
+				dataFilter: filter
+			},
+			check: {
+				enable: true
+			},
+			view: {
+				expandSpeed: ""
+			},
+			callback: {
+				beforeExpand: beforeExpand,
+				onAsyncSuccess: onAsyncSuccess,
+				onAsyncError: onAsyncError
+			}
+		};
+		//数据回调
+		function filter(treeId, parentNode, childNodes) {
+			if (!childNodes) return null;
+			for (var i=0, l=childNodes.length; i<l; i++) {
+				childNodes[i].name = childNodes[i].name.replace(/\.n/g, '.');
+			}
+			return childNodes;
+		}
+		var log, className = "dark",
+		startTime = 0, endTime = 0, perCount = 100, perTime = 100;
+		
+		function getUrl(treeId, treeNode) {
+			if(typeof(treeNode) == "undefined"){
+				 var param = "staffId="+$("#staffId").val();
+			  return "../memberMap/directoriesRelationship.do?" + param;
+			}
+			
+			var param = "staffId="+treeNode.id;
+			return "../memberMap/directoriesRelationship.do?" + param;
+		}
+		
+		function beforeExpand(treeId, treeNode) {
+			if (!treeNode.isAjaxing) {
+				startTime = new Date();
+				treeNode.times = 1;
+				ajaxGetNodes(treeNode, "refresh");
+				return true;
+			} else {
+				alert("zTree 正在下载数据中，请稍后展开节点。。。");
+				return false;
+			}
+		}
+		function onAsyncSuccess(event, treeId, treeNode, msg) {
+			if (!msg || msg.length == 0) {
+				return;
+			}
+			if(typeof(treeNode) == "undefined"){
+				return;
+			}
+			var zTree = $.fn.zTree.getZTreeObj("treeDemo"),
+			totalCount = treeNode.count;
+			if (treeNode.children.length < totalCount) {
+				setTimeout(function() {ajaxGetNodes(treeNode);}, perTime);
+			} else {
+				treeNode.icon = "";
+				zTree.updateNode(treeNode);
+				zTree.selectNode(treeNode.children[0]);
+				endTime = new Date();
+				var usedTime = (endTime.getTime() - startTime.getTime())/1000;
+				className = (className === "dark" ? "":"dark");
+				showLog("[ "+getTime()+" ]&nbsp;&nbsp;treeNode:" + treeNode.name );
+				showLog("加载完毕，共进行 "+ (treeNode.times-1) +" 次异步加载, 耗时："+ usedTime + " 秒");
+			}
+		}
+		function onAsyncError(event, treeId, treeNode, XMLHttpRequest, textStatus, errorThrown) {
+			var zTree = $.fn.zTree.getZTreeObj("treeDemo");
+			alert("异步获取数据出现异常。");
+			treeNode.icon = "";
+			zTree.updateNode(treeNode);
+		}
+		function ajaxGetNodes(treeNode, reloadType) {
+			var zTree = $.fn.zTree.getZTreeObj("treeDemo");
+			if (reloadType == "refresh") {
+				treeNode.icon = "../lib/ztree/zTreeStyle/img/loading.gif";
+				zTree.updateNode(treeNode);
+			}
+			zTree.reAsyncChildNodes(treeNode, reloadType, true);
+		}
+		function showLog(str) {
+			if (!log) log = $("#log");
+			log.append("<li class='"+className+"'>"+str+"</li>");
+			if(log.children("li").length > 4) {
+				log.get(0).removeChild(log.children("li")[0]);
+			}
+		}
+		function getTime() {
+			var now= new Date(),
+			h=now.getHours(),
+			m=now.getMinutes(),
+			s=now.getSeconds(),
+			ms=now.getMilliseconds();
+			return (h+":"+m+":"+s+ " " +ms);
+		}
+		
+		$(document).ready(function(){
+			$.fn.zTree.init($("#treeDemo"), setting);
+			onmynode();
+		});
+		
+		function doSearch(){
+		 $.fn.zTree.init($("#treeDemo"), setting);
+		 onmynode();
+		}
+		
+		function doSearchmy(id){
+		 $("#staffId").val(id);
+		 $.fn.zTree.init($("#treeDemo"), setting);
+		 onmynode();
+		}
+		
+		function onmynode(){
+		 $.ajax({
+       			 url: '../memberMap/xzChildNode.do',
+        		 type: 'POST',
+			     data:"staffId="+$("#staffId").val(),
+       			 cache: false,
+       			 success: function(result) {
+				 	var s=$.parseJSON(result);
+					var imgs="<img src='../lib/ztree/zTreeStyle/img/ico/agent.gif'>";
+				 	$("#mynodeid").html(imgs+s[0].name);
+        		 }
+   		    });
+		
+		}
+  </script>
+</head>
+<body>
+<div class="PageHeader">
+  <div class="LeftBox Title">直属关系</div>
+</div>
+
+<div class="PageContainer indieui-scroll">
+	<!--查询-->
+    <div class="InfoBox">
+		<div class="indieui-form">
+			<table class="TbCommon">
+				<tr >
+					<td width="8%" align="left" class="TdLabel">#requiredInput("会员编号")：</td>
+					<td  align="left" class="TdInput" colspan="5">
+						<input type="text" id="staffId" value="$!{command.id}" >
+						<input type="button" value="查询" onclick="javascript:doSearch();"/>
+						<input type="button" value="我的直属图谱" onclick="javascript:doSearchmy('$!{command.id}');"/>
+      				</td>
+				</tr>
+			</table>
+		</div>
+	</div>  
+	<div id="toolbar" style="padding:5px;height:auto;border: 1px solid #ddd;margin: 5px;">
+        <span style="margin-left:3.5%;font-weight: bold;">字段表示：会员号 + 注册金额 + 注册时间+ 注册时间+ 团队人数+团队业绩；   图像表示：<img src="../lib/ztree/zTreeStyle/img/ico/member.gif"/>正式用户  <img src="../lib/ztree/zTreeStyle/img/ico/user.gif"/>临时用户</span></br>
+        <span  style="margin-left:3.5%;font-weight: bold;" id="mynodeid"></span></br>
+		<ul id="treeDemo" class="ztree" style="margin-left:3%"></ul>
+    </div>
+</div>
+
+
+</body>
+</html>

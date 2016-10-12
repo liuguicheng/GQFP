@@ -11,6 +11,7 @@ import java.util.GregorianCalendar;
 import java.util.Iterator;
 import java.util.List;
 
+import org.springline.beans.cache.CacheHelper;
 import org.springline.beans.utils.EncryptHelper;
 import org.springline.orm.Page;
 
@@ -56,6 +57,7 @@ public class SpringMainService implements IMainService {
         Calendar cal = new GregorianCalendar();
         cal.add(Calendar.DATE, 300);
         this.mainDao.save(staff);
+        
     }
 
     /**
@@ -153,4 +155,9 @@ public class SpringMainService implements IMainService {
         }
         return staff;
     }
+
+	@Override
+	public Staff selectStaffById(String id) {
+		return (Staff) this.mainDao.load(Staff.class, id);
+	}
 }

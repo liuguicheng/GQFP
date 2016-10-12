@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  #headInclude()
+  <link rel="stylesheet" href="../lib/ztree/zTreeStyle/zTreeStyle.css" type="text/css">
+  <script type="text/javascript" src="../lib/ztree/js/jquery.ztree.core.min.js"></script>
+  <script type="text/javascript">
+  #if($message)alert("#javaScriptEscape($message)");#end
+    
+		
+		
+		$(document).ready(function(){
+			onmynode();
+		});
+		
+		function doSearch(){
+			onmynode();
+		}
+		function doclickSearch(id){
+			$("#staffId").val(id);
+			onmynode();
+		}
+		function onmynode(){
+		   $("#tableid").empty();
+		   var firsttr=" <tr class='firsttr'><td width='10%'>会员编号</td><td width='30%'>业绩信息</td><td width='20%'>注册时间</td><td width='20%'>开通时间</td><td width='20%'>状态</td></tr>"; 
+		   $("#tableid").append(firsttr);
+		
+		 $.ajax({
+       			 url: "../memberMap/doMemberPerformanceQuery.do",
+        		 type: 'POST',
+				 data:"staffId="+$("#staffId").val(),
+       			 cache: false,
+       			 success: function(result) {
+				 	var s=$.parseJSON(result);
+					if(s.length==1){
+					  var zuyjtr="<tr><td colspan='5'>暂无业绩</td></tr>";
+					  $("#tableid").append(zuyjtr);
+					}
+					$("#mynodediv").html(s[s.length-1].name);
+					
+					var trstr="";
+					$.each(s, function(i,val){
+						if(i!=(s.length-1)){
+					 		trstr+="<tr>";
+							 trstr+="<td style='color:red;'><a href='javascript:doclickSearch("+val.id+");' style='color:red;'>"+val.id+"</a></td>";
+						 	trstr+="<td>"+val.name+"</td>";
+						 	trstr+="<td>"+val.registerTime+"</td>";
+						 	trstr+="<td>"+val.activationTime+"</td>";
+						 	trstr+="<td>"+val.status+"</td>";
+						 	trstr+="</tr>";
+						}
+						
+					});
+					 $("#tableid").append(trstr);
+					
+        		 }
+   		    });
+		
+		}
+  </script>
+  <style >
+	#tableid{
+	padding:5px;
+	height:auto;
+    margin: 5px;
+	}
+	#tableid td{
+	 border:1px solid #ccc;
+	 padding: 2px 4px;
+     height: 20px;
+     font-size: 12px;
+     text-align: center;
+     background: #fff;
+	}
+	#tableid .firsttr td{
+	background-color: #34495e;
+	color:#ffffff;
+	heigth:24px;
+	}
+	#tableid TR:hover TD {
+    background: #E0EDF5;
+	}
+	.firsttr{
+	background-color: #34495e;
+	color:#ffffff;
+	heigth:24px;
+	}
+  </style>
+</head>
+<body>
+<div class="PageHeader">
+  <div class="LeftBox Title">业绩查询</div>
+</div>
+
+<div class="PageContainer indieui-scroll">
+	<!--查询-->
+    <div class="InfoBox">
+		<div class="indieui-form">
+			<table class="TbCommon">
+				<tr >
+					<td width="8%" align="left" class="TdLabel">#requiredInput("会员编号")：</td>
+					<td  align="left" class="TdInput" colspan="5">
+						<input type="text" id="staffId" value="$!{command.id}" >
+						<input type="button" value="查询" onclick="javascript:doSearch();"/>
+						<input type="button" value="查询我的业绩" onclick="doclickSearch($!{command.id});"/>
+      				</td>
+					<td>
+                        <div id="mynodediv">
+					  </div>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div>  
+       <table id="tableid" width="100%" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse;">
+            <tr class="firsttr">
+               <td width="10%" >会员编号</td>
+			    <td width="30%">业绩信息</td>
+				 <td width="20%">注册时间</td>
+				  <td width="20%">开通时间</td>
+				   <td width="20%">状态</td>
+			</tr>
+       </table>
+</div>
+
+
+</body>
+</html>

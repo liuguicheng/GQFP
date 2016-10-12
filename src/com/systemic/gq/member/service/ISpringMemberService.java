@@ -46,4 +46,12 @@ public interface ISpringMemberService {
 	 * @return
 	 */
 	List<Member> selectMember();
+	/**
+	 * 查询接入节点下的子节点
+	 * @param staffId 节点id
+	 * @param region 区域
+	 * @return
+	 */
+	Member selectMemberByNode(String staffId,String region);
+	List<Member> selectMemberListByNode(String staffId);
 }

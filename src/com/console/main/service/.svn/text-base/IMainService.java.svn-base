@@ -83,5 +83,7 @@ public interface IMainService {
      */
     public Staff doUnlock(Staff staff) ;
     
+    public Staff selectStaffById(String id);
+    
    
 }

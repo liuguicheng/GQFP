@@ -88,7 +88,7 @@
 </form>
 <div id="winChat" class="easyui-window" title="¼´Ê±ÏûÏ¢" data-options="iconCls:'icon-chat',closed:true,closable:true,minimizable:false,maximizable:false,collapsible:false"
     style="width:685px;height:540px;margin:auto;top:1px;">
-	<iframe id='chatFrame' name="chatFrame" frameborder='0' scrolling='no' src='../oa/personalInstantDialog.do' style='width:100%;height:480px;'></iframe>
+	#**<iframe id='chatFrame' name="chatFrame" frameborder='0' scrolling='no' src='../oa/personalInstantDialog.do' style='width:100%;height:480px;'></iframe>*#
 </div>
 </div>
 </body>

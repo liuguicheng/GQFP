@@ -260,21 +260,23 @@
     <tr>
       <td class="TdLabel">#requiredInput("推荐人编号")</td>
       <td class="TdInput">
-    	  <input type="text" name="referenceId" value="" style="width:30%" />
+    	  <input type="text" name="referenceId" value="$!{command.referenceId}" style="width:30%" />
 		  <span style="color:red;" id="errmesgreferenceId"></span>
       </td>
     </tr>
 	<tr>
       <td class="TdLabel">#requiredInput("接点人编号")</td>
       <td class="TdInput">
-		<input type="text" name="note" value="" style="width:30%;" />
+		<input type="text" name="note" value="$!{command.note}" style="width:30%;" />
 		<span style="color:red;" id="errmesgnote"></span>
       </td>
     </tr>
     <tr>
       <td class="TdLabel">#requiredInput("区域")</td>
       <td class="TdInput">
-		#foreach($foo in [1..$!{rule.areaNumber}])
+		#set($areanum=$!{rule.areaNumber})  
+		#set($id_x=$areanum - 1)  
+		#foreach($foo in [0..$id_x])
 		区域$!{velocityCount}&nbsp;<input type="radio" name="region" value="$foo" onchange="onregion()" />
 		#end
         &nbsp;<span style="color:red;font-size:12px;">由左向右排列,例如区域1:代表左1</span>

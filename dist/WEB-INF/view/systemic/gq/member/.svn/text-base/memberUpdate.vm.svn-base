@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  #headInclude()
+  <script type="text/javascript" src="../script/validator.js"></script>
+  <script type="text/javascript">
+  #if($message)alert("#javaScriptEscape($message)");#end
+  validator.formName = "editForm";
+  validator.addNormalCheckPoint("lxdh", "联系电话", "checkNotNull;checkNotEmpty");
+
+  function checkInput(e) {
+  	
+    if (e.submitFlag.value == "1") {
+      alert("当前页面已经提交，请稍等!");
+      return false;
+    }
+    if (!validator.checkAll()) {
+      return false;
+    }
+    
+    if (!confirm("您确定要保存人员资料吗？")) {
+      return false;
+    }
+    return true;
+  }
+
+  function doSave()  {
+    var e = document.editForm;
+    if (checkInput(e)) {
+     
+      e.submitFlag.value = "1";
+      e.submit();
+    }
+  }
+
+  function doReturn() {
+    location.href = "../member/memberManage.do?isActivation=-1";
+  }
+  
+  
+  </script>
+</head>
+<body>
+<div class="PageHeader">
+  <div class="LeftBox Title">个人资料</div>
+</div>
+<div class="indieui-scroll">
+<form name="editForm" method="post" action="#getRequestUri()" class="indieui-form">
+  <input type="hidden" name="submitFlag" value="0" />
+  <input type="hidden" name="memberId" value="$!{command.memberId}" />
+  <input type="hidden" name="staffId" value="$!{command.staffId}" />
+  <table class="TbCommon">
+    <tr>
+      <td class="TdLabel" style="width:150px;">#requiredInput("会员登录名")</td>
+	  <td>
+		<input type="text" name="userName" id="userName" value="$!{command.userName}" style="width:30%"  readonly />
+	     <span style="color:red;" id="errmesg"></span>
+	  </td>
+    </tr>
+	<tr>
+      <td class="TdLabel">#requiredInput("密保问题")</td>
+      <td class="TdInput">
+		问题: #formSingleSelectDictionary("mbwt" $!{command.mbwt} ${dicData.dicSecurityQuestion} "style='width:120'" " ---- 请选择 ---- ")
+		答案:<input type="password"  name="mbwtDn" value="$!{command.mbwtDn}" style="width:16.5%;"/>
+      </td>
+    </tr>
+  </table>
+  
+  <div class="PageHeader">
+  <div class="LeftBox Title">网络资料</div>
+  </div>
+  <table class="TbCommon">
+    <tr>
+      <td class="TdLabel" style="width:150px;">#requiredInput("级别")</td>
+	  <td>
+		 #lookUpDict($dicData.dicStockLevel "$!{command.stock.gradeNum}")
+	  </td>
+    </tr>
+    <tr>
+      <td class="TdLabel">#requiredInput("推荐人编号")</td>
+      <td class="TdInput">
+    	  <input type="text" name="referenceId" value="$!{command.referenceId}" style="width:30%" readonly />
+		  <span style="color:red;" id="errmesgreferenceId"></span>
+      </td>
+    </tr>
+	<tr>
+      <td class="TdLabel">#requiredInput("接点人编号")</td>
+      <td class="TdInput">
+		<input type="text" name="note" value="$!{command.note}" style="width:30%;" readonly />
+		<span style="color:red;" id="errmesgnote"></span>
+      </td>
+    </tr>
+    <tr>
+      <td class="TdLabel">#requiredInput("区域")</td>
+      <td class="TdInput">
+		#foreach($foo in [1..$!{rule.areaNumber}])
+			#if($!{command.region}==$foo)
+				区域$!{velocityCount}&nbsp;<input type="radio" name="region" value="$foo" checked  disabled />
+			#else
+				区域$!{velocityCount}&nbsp;<input type="radio" name="region" value="$foo" disabled   />
+			#end
+		#end
+        &nbsp;<span style="color:red;font-size:12px;">由左向右排列,例如区域1:代表左1</span>
+		<span style="color:red;" id="errmesgregion"></span>
+      </td>
+    </tr>
+	<tr>
+      <td class="TdLabel">#requiredInput("是否激活")</td>
+      <td class="TdInput">
+		#if($!{command.isActivation}==0)
+		是<input type="radio" name="isActivation" value="1"   disabled />
+		否<input type="radio" name="isActivation" value="0"checked disabled />
+		#else
+			是<input type="radio" name="isActivation" value="1"  checked disabled/>
+		            否<input type="radio" name="isActivation" value="0" disabled/>
+		#end
+	  </td>
+    </tr>
+  </table>
+  <div class="PageHeader">
+  <div class="LeftBox Title">基本信息</div>
+  </div>
+  <table class="TbCommon">
+    <tr>
+      <td class="TdLabel" style="width:150px;">#requiredInput("真实姓名")</td>
+	  <td>
+		<input type="text" name="zsxm" value="$!{command.zsxm}" style="width:30%"   />
+	  </td>
+    </tr>
+    <tr>
+      <td class="TdLabel">#requiredInput("身份证号码")</td>
+      <td class="TdInput">
+    	  <input type="text" name="sfzhm" value="$!{command.sfzhm}" style="width:30%"   />
+      </td>
+    </tr>
+	<tr>
+      <td class="TdLabel">#requiredInput("联系电话")</td>
+      <td class="TdInput">
+		<input type="text" name="lxdh" value="$!{command.lxdh}" style="width:30%;" />
+      </td>
+    </tr>
+    <tr>
+      <td class="TdLabel">联系地址</td>
+      <td class="TdInput">
+		<input type="text" name="lxdz" value="$!{command.lxdz}" style="width:30%;"/>
+      </td>
+    </tr>
+	<tr>
+      <td class="TdLabel" style="width:150px;">电子邮箱</td>
+	  <td>
+		<input type="text" name="email" value="$!{command.email}" style="width:30%" />
+	  </td>
+    </tr>
+  </table>
+  <div class="PageHeader">
+  <div class="LeftBox Title">银行资料</div>
+  </div>
+  <table class="TbCommon">
+    <tr>
+      <td class="TdLabel" style="width:150px;">银行信息</td>
+	  <td>
+		#formSingleSelectDictionary("yhxx" $!{command.yhxx} ${dicData.dicBank} "style='width:120'" " ---- 请选择 ---- ")
+	  </td>
+    </tr>
+    <tr>
+      <td class="TdLabel">开户姓名</td>
+      <td class="TdInput">
+    	  <input type="text" name="khxm" value="$!{command.khxm}" style="width:30%" />
+      </td>
+    </tr>
+	<tr>
+      <td class="TdLabel">银行卡号</td>
+      <td class="TdInput">
+		<input type="text" name="yhkh" value="$!{command.yhkh}" style="width:30%;" />
+      </td>
+    </tr>
+  </table>
+</div>
+</form>
+</div>
+
+<div class="CommandTool indieui-form">
+  <input type="button" id="btnconfirm" value="提交" onclick="javascript:doSave();"/>
+  <input type="button" id="btnback" value="取消" onclick="javascript:doReturn();"/>
+</div>
+</body>
+</html>

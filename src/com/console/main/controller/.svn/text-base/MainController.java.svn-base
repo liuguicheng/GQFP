@@ -270,7 +270,7 @@ public class MainController extends SpringlineMultiActionController {
         request.getSession().invalidate();
         AuthenticationFilter.cancelAuthentication(request);
         //标记离线
-        this.mainService.updateIsLogin(staff, ConsoleHelper.NO);
+       // this.mainService.updateIsLogin(staff, ConsoleHelper.NO);
         // 退出系统后显示登录日志
         String logContent = "在IP为" +  ConsoleHelper.getUserIp() + "的机器上退出系统";
         ConsoleHelper.getInstance().getLogService().saveOperateLog(OperateLog.LOG_TYPE_SYSTEM, staff, logContent);

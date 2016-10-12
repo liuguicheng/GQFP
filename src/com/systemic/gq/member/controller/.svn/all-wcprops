@@ -3,9 +3,27 @@ svn:wc:ra_dav:version-url
 V 65
 /svn/GQFP/!svn/ver/62/trunk/src/com/systemic/gq/member/controller
 END
+MemberOperateLogController.java
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/GQFP/!svn/ver/103/trunk/src/com/systemic/gq/member/controller/MemberOperateLogController.java
+END
+MemberUpPasswordController.java
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/GQFP/!svn/ver/103/trunk/src/com/systemic/gq/member/controller/MemberUpPasswordController.java
+END
+MemberMapController.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/GQFP/!svn/ver/108/trunk/src/com/systemic/gq/member/controller/MemberMapController.java
+END
 MemberController.java
 K 25
 svn:wc:ra_dav:version-url
-V 87
-/svn/GQFP/!svn/ver/62/trunk/src/com/systemic/gq/member/controller/MemberController.java
+V 88
+/svn/GQFP/!svn/ver/103/trunk/src/com/systemic/gq/member/controller/MemberController.java
 END

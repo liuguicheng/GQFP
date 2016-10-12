@@ -6,6 +6,6 @@ END
 HibernateMemberDao.java
 K 25
 svn:wc:ra_dav:version-url
-V 100
-/svn/GQFP/!svn/ver/85/trunk/src/com/systemic/gq/member/service/dao/hibernate/HibernateMemberDao.java
+V 101
+/svn/GQFP/!svn/ver/108/trunk/src/com/systemic/gq/member/service/dao/hibernate/HibernateMemberDao.java
 END

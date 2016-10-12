@@ -248,15 +248,13 @@ public class SpringManageService implements IManageService, ICacheConnector {
 			staff = new Staff();
 			staff.setId(SNHelper.getSNService().getSerialNumber(
 				Staff.class.getName(), "id", false));
-			staff.setPassword(StaffInfo.DEFAULT_PASSWORD);
-			staffInfo.setPassword(StaffInfo.DEFAULT_PASSWORD);
+			staff.setPassword(staffInfo.getPassword());
 			staffInfo.setSysTemplate("1");
 			staff.setRegDate(new Date());
 			staff.setStaffType(staffInfo.getStaffType());
 			staff.setIdNum(staffInfo.getIdNum());
 			staff.setInDate(staffInfo.getInDate());
 			staff.setRoomNum(staffInfo.getRoomNum());
-			staff.setPassword(StaffInfo.DEFAULT_PASSWORD);
 			
 		} else { // ÐÞ¸Ä
 			staff = this.selectStaff(staffInfo.getId());

@@ -24,7 +24,13 @@ public class OperateLog implements java.io.Serializable {
 	public static final String LOG_TYPE_BONUSCONTENT_DEL  ="股权奖励删除";
 	public static final String LOG_TYPE_STOCK_UPDATE  ="股权种类修改";
 	public static final String LOG_TYPE_STOCK_DEL  ="股权种类修改";
-	
+	public static final String LOG_TYPE_UP_LOGINPASSWORD  ="登陆密码修改";
+	public static final String LOG_TYPE_UP_SECONDPASSWORD  ="二级密码修改";
+	public static final String LOG_TYPE_UP_THRIDPASSWORD  ="三级密码修改";
+	public static final String LOG_TYPE_UP_MEMBERINFO  ="个人资料修改";
+	public static final String LOG_TYPE_ACTIVATION  ="会员激活";
+	public static final String LOG_TYPE_FROZEN="会员冻结";
+	public static final String LOG_TYPE_THAW="会员冻结解除";
 	/** 日志id. */
 	private String id;
 	/** 日志分类. */

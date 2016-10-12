@@ -3,11 +3,41 @@ svn:wc:ra_dav:version-url
 V 64
 /svn/GQFP/!svn/ver/72/trunk/dist/WEB-INF/view/systemic/gq/member
 END
+memberUpdate.vm
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/GQFP/!svn/ver/105/trunk/dist/WEB-INF/view/systemic/gq/member/memberUpdate.vm
+END
+memberNotActiveManage.vm
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/GQFP/!svn/ver/105/trunk/dist/WEB-INF/view/systemic/gq/member/memberNotActiveManage.vm
+END
+memberUpPassword.vm
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/GQFP/!svn/ver/105/trunk/dist/WEB-INF/view/systemic/gq/member/memberUpPassword.vm
+END
+memberActiveManage.vm
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/GQFP/!svn/ver/105/trunk/dist/WEB-INF/view/systemic/gq/member/memberActiveManage.vm
+END
 memberEdit.vm
 K 25
 svn:wc:ra_dav:version-url
-V 78
-/svn/GQFP/!svn/ver/72/trunk/dist/WEB-INF/view/systemic/gq/member/memberEdit.vm
+V 79
+/svn/GQFP/!svn/ver/105/trunk/dist/WEB-INF/view/systemic/gq/member/memberEdit.vm
+END
+memberoperateLogList.vm
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/GQFP/!svn/ver/105/trunk/dist/WEB-INF/view/systemic/gq/member/memberoperateLogList.vm
 END
 singleMember.vm
 K 25
@@ -18,6 +48,6 @@ END
 memberManage.vm
 K 25
 svn:wc:ra_dav:version-url
-V 80
-/svn/GQFP/!svn/ver/72/trunk/dist/WEB-INF/view/systemic/gq/member/memberManage.vm
+V 81
+/svn/GQFP/!svn/ver/105/trunk/dist/WEB-INF/view/systemic/gq/member/memberManage.vm
 END

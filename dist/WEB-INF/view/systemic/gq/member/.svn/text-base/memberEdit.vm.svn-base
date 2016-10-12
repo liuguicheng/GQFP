@@ -6,12 +6,17 @@
   <script type="text/javascript">
   #if($message)alert("#javaScriptEscape($message)");#end
   validator.formName = "editForm";
-  validator.addNormalCheckPoint("userName", "姓名", "checkNotNull;checkNotEmpty");
-  validator.addNormalCheckPoint("productgradeId", "股权等级", "checkNotNull;checkNotEmpty");
+  validator.addNormalCheckPoint("userName", "会员登录名", "checkNotNull;checkNotEmpty");
+  validator.addNormalCheckPoint("password", "密码", "checkNotNull;checkNotEmpty");
+  validator.addNormalCheckPoint("mbwt", "密保问题", "checkNotNull;checkNotEmpty");
+  validator.addNormalCheckPoint("mbwtDn", "密保答案", "checkNotNull;checkNotEmpty");
+  validator.addNormalCheckPoint("productgradeId", "级别", "checkNotNull;checkNotEmpty");
   validator.addNormalCheckPoint("referenceId", "推荐人", "checkNotNull;checkNotEmpty");
-  #if (!${command.memberId})
-   validator.addNormalCheckPoint("password", "密码", "checkNotNull;checkNotEmpty");
-   #end
+  validator.addNormalCheckPoint("note", "接点人", "checkNotNull;checkNotEmpty");
+  validator.addNormalCheckPoint("region", "区域", "checkNotNull;checkNotEmpty");
+  validator.addNormalCheckPoint("zsxm", "真实姓名", "checkNotNull;checkNotEmpty");
+  validator.addNormalCheckPoint("sfzhm", "身份证号码", "checkNotNull;checkNotEmpty");
+  validator.addNormalCheckPoint("lxdh", "联系电话", "checkNotNull;checkNotEmpty");
  function confirmPassword()
   {
     var e = document.editForm;
@@ -21,21 +26,30 @@
     var re_symbol = /[!@#$%^&*()]+/.test(password);
     var re_lenght = /[0-9a-zA-Z!@#$%^&*()]{8,18}/.test(password);
 
-    if(password && !re_lenght ){
-      alert("密码长度必须为8-16位!");
-      return false;
-    } else if (password && !re_letter){
-      alert("密码必须包含字母!");
-      return false;
-    } else if (password && !re_number) {
-      alert("密码必须包含数字!");
-      return false;
-    } else if (password && !re_symbol){
-      alert("密码必须包含特殊字符");
+ //  if(password && !re_lenght ){
+  //    alert("密码长度必须为8-16位!");
+  //    return false;
+  //  } else if (password && !re_letter){
+  //    alert("密码必须包含字母!");
+  //    return false;
+   // } else if (password && !re_number) {
+  //    alert("密码必须包含数字!");
+  //    return false;
+  //  } else if (password && !re_symbol){
+  //    alert("密码必须包含特殊字符");
+  //    return false;
+ //   }
+	
+    if (e.password.value != e.con_password.value) {
+      alert('两次输入密码不一样,请重新输入!');
       return false;
     }
-    if (e.password.value != e.confirm_password.value) {
-      alert('两次输入密码不一样,请重新输入!');
+	if (e.passwodTwo.value != e.con_passwodTwo.value) {
+      alert('两次输入二级密码不一样,请重新输入!');
+      return false;
+    }
+	if (e.passwordThree.value != e.con_passwordThree.value) {
+      alert('两次输入三级密码不一样,请重新输入!');
       return false;
     }
    
@@ -44,17 +58,41 @@
 
 
   function checkInput(e) {
+  	var errmsg=$("#errmesg").text();
+  	if(errmsg!=""){
+	  alert("你输入的登录名已存在!");
+      return false;
+	}
+	//验证推荐人
+	oncheckReference(e);
+	var errmesgreferenceId=$("#errmesgreferenceId").text();
+  	if(errmesgreferenceId!=""){
+	  alert("推荐人编号不存在,请核实!");
+      return false;
+	}
+	//验证接点人
+	oncheckNote(e);//
+	var errmesgnote=$("#errmesgnote").text();
+  	if(errmesgnote!=""){
+	  alert("接点人编号不存在,请核实!");
+      return false;
+	}
+	//验证 区域是否合法
+	onregion();
+	var errmesgregion=$("#errmesgregion").text();
+  	if(errmesgregion!=""){
+	  alert("接点人该区域已存在会员,不能重复放置!");
+      return false;
+	}
+	
     if (e.submitFlag.value == "1") {
-      alert("当前页面已经提交，请稍等！");
+      alert("当前页面已经提交，请稍等!");
       return false;
     }
     if (!validator.checkAll()) {
       return false;
     }
     
-    //if (!confirmPassword()) {
-     // return false;
-    //}
     if (!confirm("您确定要保存人员资料吗？")) {
       return false;
     }
@@ -62,66 +100,260 @@
   }
 
   function doSave()  {
-    // $("select[name='productgradeId'] option:selected").val()
     var e = document.editForm;
     if (checkInput(e)) {
-     //document.getElementById("referenceName").value=document.getElementById("referenceId-name").value;
+     
       e.submitFlag.value = "1";
       e.submit();
     }
   }
 
   function doReturn() {
-    location.href = "../member/memberManage.do";
+    location.href = history.go(-1);
   }
+  
+  function oncheckLognUserName(){
+  $.ajax({
+        url: '../member/loginUsernameAjax.do',
+        type: 'POST',
+		data:"userName="+$("#userName").val(),// 你的formid
+        cache: false,
+        success: function(result) {
+				var s=$.parseJSON(result);
+				if(s[0].code==0){
+					alert(s[0].message);
+					$("#errmesg").text(s[0].message);
+				}else{
+					$("#errmesg").text("");
+				}
+        	}
+   		 });
+		 
+	}
+	 function oncheckReference(e){
+  		$.ajax({
+        url: '../member/referenceAjax.do',
+        type: 'POST',
+		data:"referenceId="+e.referenceId.value,// 你的formid
+        cache: false,
+        success: function(result) {
+				var s=$.parseJSON(result);
+				if(s[0].code==0){
+					alert(s[0].message);
+					$("#errmesgreferenceId").text(s[0].message);
+				}else{
+					$("#errmesgreferenceId").text("");
+				}
+        	}
+   		 });
+		 
+	}
+	
+	 function oncheckNote(e){
+  		$.ajax({
+        url: '../member/noteAjax.do',
+        type: 'POST',
+		data:"note="+e.note.value,// 你的formid
+        cache: false,
+        success: function(result) {
+				var s=$.parseJSON(result);
+				if(s[0].code==0){
+					alert(s[0].message);
+					$("#errmesgnote").text(s[0].message);
+				}else{
+					$("#errmesgnote").text("");
+				}
+        	}
+   		 });
+		 
+	}
+	function onregion(){
+	$.ajax({
+        url: '../member/regionAjax.do',
+        type: 'POST',
+		data:"note="+document.editForm.note.value+"&region="+document.editForm.region.value,// 你的formid
+        cache: false,
+        success: function(result) {
+				var s=$.parseJSON(result);
+				if(s[0].code==0){
+					alert(s[0].message);
+					$("#errmesgregion").text("["+s[0].message+"]");
+				}else{
+					$("#errmesgregion").text("");
+				}
+        	}
+   		 });
+	}
   </script>
 </head>
-<body  class="easyui-layout indieui-form">
-
-<div data-options="region:'center',title:'编辑人员信息',iconCls:'icon-edit', collapsible:false" >
-<form name="editForm" method="post" action="#getRequestUri()" >
-<input type="hidden" name="submitFlag" value="0" />
-<input type="hidden" name="memberId" value="$!{command.memberId}">
-    <input type="hidden" name="token" value="$!{command.token}">
-<table class="TbCommon">
-  <tr>
-    <td class="TdLabel" style="width:100px;">#requiredInput('姓名')</td>
-    <td class="TdInput">
-      <input type="text" name="userName" value="#htmlEscape($!{command.userName})" style="width:98%;" maxlength="20" #if($lock) readonly #end/>##登录名应小于数据库长度，否则无法做逻辑删除时的改名处理
-    </td>   
-     <td class="TdLabel">#requiredInput('股权等级')</td>
-    <td class="TdInput">
-      #formSingleSelectStock("productgradeId" $!{command.productgradeId} ${dicData.dicStock} "style='width:120'" " ---- 请选择 ---- ")
-    </td>
-  </tr>
-  <tr>
-  <td class="TdLabel" style="width:120px;" >#requiredInput("推荐人")</td>
-    <td    class="TdInput" colspan="3" >
-        <input type="text" readonly  name="referenceName" id="referenceName" value="${command.referenceName}" />
-        <input type="hidden" name="referenceId" value="$!{command.referenceId}" style="width:98%;" maxlength="16" />
-    </td>  
-  </tr>
-  <tr>
-    <td class="TdLabel">密码</td>
-    <td class="TdInput">
-      <input type="password" name="password" value="" style="width:98%;" maxlength="16"/>
-    </td>
-  </tr>
-  <tr>
-    <td class="TdLabel">确认密码</td>
-    <td class="TdInput">
-      <input type="password" name="confirm_password" value="" style="width:98%;" maxlength="16"/>
-    </td>
-  </tr>
-</table>
+<body>
+<div class="PageHeader">
+  <div class="LeftBox Title">登陆资料</div>
+</div>
+<div class="indieui-scroll">
+<form name="editForm" method="post" action="#getRequestUri()" class="indieui-form">
+  <input type="hidden" name="submitFlag" value="0" />
+  <input type="hidden" name="id" value="$!{command.id}" />
+  <table class="TbCommon">
+    <tr>
+      <td class="TdLabel" style="width:150px;">#requiredInput("会员登录名")</td>
+	  <td>
+		<input type="text" name="userName" id="userName" value="" style="width:30%" onblur="oncheckLognUserName();" />
+	     <span style="color:red;" id="errmesg"></span>
+	  </td>
+    </tr>
+    <tr>
+      <td class="TdLabel">#requiredInput("一级密码")</td>
+      <td class="TdInput">
+    	  <input type="password" name="password" value="" style="width:30%" />
+      </td>
+    </tr>
+	<tr>
+      <td class="TdLabel">#requiredInput("确认一级密码")</td>
+      <td class="TdInput">
+		<input type="password" name="con_password" value="" style="width:30%;" />
+      </td>
+    </tr>
+    <tr>
+      <td class="TdLabel">#requiredInput("二级密码")</td>
+      <td class="TdInput">
+		<input type="password" name="passwodTwo" value="" style="width:30%;"/>
+      </td>
+    </tr>
+	<tr>
+      <td class="TdLabel">#requiredInput("确认二级密码")</td>
+      <td class="TdInput">
+		<input type="password" name="con_passwodTwo" value="" style="width:30%;"/>
+      </td>
+    </tr>
+	<tr>
+      <td class="TdLabel">#requiredInput("三级密码")</td>
+      <td class="TdInput">
+		<input type="password" name="passwordThree" value="" style="width:30%;"/>
+      </td>
+    </tr>
+	<tr>
+      <td class="TdLabel">#requiredInput("确认三级密码")</td>
+      <td class="TdInput">
+		<input type="password" name="con_passwordThree" value="" style="width:30%;"/>
+      </td>
+    </tr>
+	<tr>
+      <td class="TdLabel">#requiredInput("密保问题")</td>
+      <td class="TdInput">
+		问题: #formSingleSelectDictionary("mbwt" $!{command.mbwt} ${dicData.dicSecurityQuestion} "style='width:120'" " ---- 请选择 ---- ")
+		答案:<input type="text" name="mbwtDn" value="" style="width:16.5%;"/>
+      </td>
+    </tr>
+  </table>
+  
+  <div class="PageHeader">
+  <div class="LeftBox Title">网络资料</div>
+  </div>
+  <table class="TbCommon">
+    <tr>
+      <td class="TdLabel" style="width:150px;">#requiredInput("级别")</td>
+	  <td>
+		 #formSingleSelectStock("productgradeId" $!{command.productgradeId} ${dicData.dicStock} "style='width:120'" " ---- 请选择 ---- ")
+	  </td>
+    </tr>
+    <tr>
+      <td class="TdLabel">#requiredInput("推荐人编号")</td>
+      <td class="TdInput">
+    	  <input type="text" name="referenceId" value="" style="width:30%" />
+		  <span style="color:red;" id="errmesgreferenceId"></span>
+      </td>
+    </tr>
+	<tr>
+      <td class="TdLabel">#requiredInput("接点人编号")</td>
+      <td class="TdInput">
+		<input type="text" name="note" value="" style="width:30%;" />
+		<span style="color:red;" id="errmesgnote"></span>
+      </td>
+    </tr>
+    <tr>
+      <td class="TdLabel">#requiredInput("区域")</td>
+      <td class="TdInput">
+		#foreach($foo in [1..$!{rule.areaNumber}])
+		区域$!{velocityCount}&nbsp;<input type="radio" name="region" value="$foo" onchange="onregion()" />
+		#end
+        &nbsp;<span style="color:red;font-size:12px;">由左向右排列,例如区域1:代表左1</span>
+		<span style="color:red;" id="errmesgregion"></span>
+      </td>
+    </tr>
+	<tr>
+      <td class="TdLabel">#requiredInput("是否激活")</td>
+      <td class="TdInput">
+		是<input type="radio" name="isActivation" value="1"  />
+		否<input type="radio" name="isActivation" value="0"checked/>
+      </td>
+    </tr>
+  </table>
+  <div class="PageHeader">
+  <div class="LeftBox Title">基本信息</div>
+  </div>
+  <table class="TbCommon">
+    <tr>
+      <td class="TdLabel" style="width:150px;">#requiredInput("真实姓名")</td>
+	  <td>
+		<input type="text" name="zsxm" value="" style="width:30%" />
+	  </td>
+    </tr>
+    <tr>
+      <td class="TdLabel">#requiredInput("身份证号码")</td>
+      <td class="TdInput">
+    	  <input type="text" name="sfzhm" value="" style="width:30%" />
+      </td>
+    </tr>
+	<tr>
+      <td class="TdLabel">#requiredInput("联系电话")</td>
+      <td class="TdInput">
+		<input type="text" name="lxdh" value="" style="width:30%;" />
+      </td>
+    </tr>
+    <tr>
+      <td class="TdLabel">联系地址</td>
+      <td class="TdInput">
+		<input type="text" name="lxdz" value="" style="width:30%;"/>
+      </td>
+    </tr>
+	<tr>
+      <td class="TdLabel" style="width:150px;">电子邮箱</td>
+	  <td>
+		<input type="text" name="email" value="" style="width:30%" />
+	  </td>
+    </tr>
+  </table>
+  <div class="PageHeader">
+  <div class="LeftBox Title">银行资料</div>
+  </div>
+  <table class="TbCommon">
+    <tr>
+      <td class="TdLabel" style="width:150px;">银行信息</td>
+	  <td>
+		#formSingleSelectDictionary("yhxx" $!{command.yhxx} ${dicData.dicBank} "style='width:120'" " ---- 请选择 ---- ")
+	  </td>
+    </tr>
+    <tr>
+      <td class="TdLabel">开户姓名</td>
+      <td class="TdInput">
+    	  <input type="text" name="khxm" value="" style="width:30%" />
+      </td>
+    </tr>
+	<tr>
+      <td class="TdLabel">银行卡号</td>
+      <td class="TdInput">
+		<input type="text" name="yhkh" value="" style="width:30%;" />
+      </td>
+    </tr>
+  </table>
+</div>
 </form>
 </div>
 
-<div data-options="region:'south'" style="overflow:hidden">
-  <div class="CommandTool">
-  <input type="button" value="保 存" style="width:100px" onclick="javascript:doSave();"/>
-  <input type="button" value="返 回" style="width:100px" onclick="javascript:doReturn();"/>
-  </div>
+<div class="CommandTool indieui-form">
+  <input type="button" id="btnconfirm" value="提交" onclick="javascript:doSave();"/>
+  <input type="button" id="btnback" value="返回" onclick="javascript:doReturn();"/>
 </div>
 </body>
 </html>

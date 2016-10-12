@@ -27,23 +27,23 @@ svn:wc:ra_dav:version-url
 V 76
 /svn/GQFP/!svn/ver/2/trunk/dist/WEB-INF/view/plugins/msg/msgUnreadedQuery.vm
 END
-msgManage.vm
-K 25
-svn:wc:ra_dav:version-url
-V 69
-/svn/GQFP/!svn/ver/2/trunk/dist/WEB-INF/view/plugins/msg/msgManage.vm
-END
-msgInstantQuery.vm
-K 25
-svn:wc:ra_dav:version-url
-V 75
-/svn/GQFP/!svn/ver/2/trunk/dist/WEB-INF/view/plugins/msg/msgInstantQuery.vm
-END
 msgHelpAdd.vm
 K 25
 svn:wc:ra_dav:version-url
 V 71
 /svn/GQFP/!svn/ver/84/trunk/dist/WEB-INF/view/plugins/msg/msgHelpAdd.vm
+END
+msgInstantQuery.vm
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/GQFP/!svn/ver/109/trunk/dist/WEB-INF/view/plugins/msg/msgInstantQuery.vm
+END
+msgManage.vm
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/GQFP/!svn/ver/2/trunk/dist/WEB-INF/view/plugins/msg/msgManage.vm
 END
 msgHelpQuery.vm
 K 25
@@ -51,15 +51,15 @@ svn:wc:ra_dav:version-url
 V 73
 /svn/GQFP/!svn/ver/84/trunk/dist/WEB-INF/view/plugins/msg/msgHelpQuery.vm
 END
-msgQuery.vm
-K 25
-svn:wc:ra_dav:version-url
-V 68
-/svn/GQFP/!svn/ver/2/trunk/dist/WEB-INF/view/plugins/msg/msgQuery.vm
-END
 msgnoticeAdd.vm
 K 25
 svn:wc:ra_dav:version-url
 V 73
 /svn/GQFP/!svn/ver/84/trunk/dist/WEB-INF/view/plugins/msg/msgnoticeAdd.vm
+END
+msgQuery.vm
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/GQFP/!svn/ver/2/trunk/dist/WEB-INF/view/plugins/msg/msgQuery.vm
 END

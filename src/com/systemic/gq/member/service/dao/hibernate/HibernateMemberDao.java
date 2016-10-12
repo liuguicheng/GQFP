@@ -1,5 +1,6 @@
 package com.systemic.gq.member.service.dao.hibernate;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springline.beans.dataquery.IQueryObject;
@@ -11,6 +12,7 @@ import com.systemic.gq.entity.PayInfo;
 import com.systemic.gq.entity.Member;
 import com.systemic.gq.member.command.MemberInfo;
 import com.systemic.gq.member.service.dao.IMemberDao;
+import com.systemic.unit.ConUnit;
 
 public class HibernateMemberDao extends HibernateCommonDao implements IMemberDao {
 	private IQueryStringUtil memberQueryStringUtil;
@@ -49,7 +51,7 @@ public class HibernateMemberDao extends HibernateCommonDao implements IMemberDao
 		queryStr.append("from ").append(Member.class.getName()).append(" as m where 1=1 ");
 		if (info != null) {
 			if (info.getReferenceId() != null && !"".equals(info.getReferenceId())) {
-				queryStr.append(" and m.reference_id = ? ");
+				queryStr.append(" and m.referenceId = ? ");
 				values[idx++] = info.getReferenceId();
 			}
 			if (info.getRegion() != null && !"".equals(info.getRegion())) {
@@ -65,8 +67,13 @@ public class HibernateMemberDao extends HibernateCommonDao implements IMemberDao
 				values[idx++] = info.getMemberId();
 			}
 			if (info.getCreateTime() != null) {
-				queryStr.append(" and datediff(NOW(),m.createTime)>30 ");
-				// values[idx++] = info.getCreateTime() ;
+				if(ConUnit.isSameDate(info.getCreateTime(),new Date())){
+					//当前日期
+					queryStr.append(" and datediff(NOW(),m.createTime)=0 ");
+				}else{
+					queryStr.append(" and datediff(NOW(),m.createTime)>30 ");
+				}
+				
 			}
 
 		}
@@ -125,6 +132,39 @@ public class HibernateMemberDao extends HibernateCommonDao implements IMemberDao
 		List list = super.doQuery(queryStr.toString(), param);
 		if (!list.isEmpty()) {
 			return list;
+		}
+		return null;
+	}
+
+	@Override
+	public Member selectMemberByNode(String id,String region) {
+		Object[] values = new Object[5];
+		int idx = 0;
+		StringBuffer queryStr = new StringBuffer();
+		queryStr.append("from ").append(Member.class.getName()).append(" as m where  m.note =? and m.region=?");
+		values[idx++] = id;
+		values[idx++] = region;
+		Object[] param = new Object[idx];
+		System.arraycopy(values, 0, param, 0, idx);
+		List list = super.doQuery(queryStr.toString(), param);
+		if (!list.isEmpty()) {
+			return (Member) list.get(0);
+		}
+		return null;
+	}
+
+	@Override
+	public List<Member> selectMemberListByNode(String staffId) {
+		Object[] values = new Object[5];
+		int idx = 0;
+		StringBuffer queryStr = new StringBuffer();
+		queryStr.append("from ").append(Member.class.getName()).append(" as m where  m.note =? ");
+		values[idx++] = staffId;
+		Object[] param = new Object[idx];
+		System.arraycopy(values, 0, param, 0, idx);
+		List list = super.doQuery(queryStr.toString(), param);
+		if (!list.isEmpty()) {
+			return  list;
 		}
 		return null;
 	}

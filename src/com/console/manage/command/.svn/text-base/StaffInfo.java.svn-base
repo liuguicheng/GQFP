@@ -8,7 +8,7 @@ public class StaffInfo extends SpringlineCommand {
     /**
      * 初始密码1
      */
-    public static final String DEFAULT_PASSWORD = "c4ca4238a0b923820dcc509a6f75849b";
+    //public static final String DEFAULT_PASSWORD = "c4ca4238a0b923820dcc509a6f75849b";
     /** 员工编号. */
     private String id;
     /** 姓名. */

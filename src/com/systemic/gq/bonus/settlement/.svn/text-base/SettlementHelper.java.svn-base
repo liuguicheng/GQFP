@@ -134,8 +134,9 @@ public abstract class SettlementHelper {
 	/**
 	 * 一次性奖金结算 member 被推荐的会员 currentMmenber 推荐人
 	 */
-	public static void doBonusSettlementForDisposable(Member member, Member currentMmenber) {
+	public static void doBonusSettlementForDisposable(Member member) {
 		if (member != null) {
+			Member currentMmenber=ConsoleHelper.getInstance().getSpringMemberService().selectMemberById(member.getReferenceId());
 			Stock stock = member.getStock();
 			if (stock != null) {
 				// 获取股权等级的奖励方案的字符串

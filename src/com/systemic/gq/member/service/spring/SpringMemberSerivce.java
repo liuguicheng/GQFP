@@ -201,8 +201,17 @@ public class SpringMemberSerivce implements ISpringMemberService {
 
 	@Override
 	public List<Member> selectMember() {
-		// TODO Auto-generated method stub
 		return this.memberDao.selectMember();
+	}
+
+	@Override
+	public Member selectMemberByNode(String staffId,String region) {
+		return memberDao.selectMemberByNode(staffId,region);
+	}
+
+	@Override
+	public List<Member> selectMemberListByNode(String staffId) {
+		return memberDao.selectMemberListByNode(staffId);
 	}
 
 	

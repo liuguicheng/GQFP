@@ -19,4 +19,8 @@ public interface IMemberDao extends ICommonDao {
 	List<Member> selectMemberListByStaffid(String id);
 
 	List<Member> selectMember();
+
+	Member selectMemberByNode(String staffId,String region);
+
+	List<Member> selectMemberListByNode(String staffId);
 }
