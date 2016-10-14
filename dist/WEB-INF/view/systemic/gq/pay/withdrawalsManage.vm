@@ -229,7 +229,7 @@
       <td>#lookUpDict($dicData.dicPayType $!{data.WAccountType})</td>
       <td>$!{data.WMoney}</td>
       <td>$!{data.WCounterfree}%</td>
-      <td>$!{data.actualMoeny}</td>
+      <td>#showMoney($!{data.actualMoeny})</td>
       <td>#lookUpDict($dicData.dicBank $!{data.bank})</td>
       <td>$!{data.bankName}</td>
 	  <td>$!{data.bankUsername}</td>

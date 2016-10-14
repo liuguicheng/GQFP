@@ -13,6 +13,7 @@ import org.springframework.web.servlet.view.RedirectView;
 import org.springline.beans.cache.CacheHelper;
 import org.springline.beans.dictionary.support.DictionaryUtils;
 import org.springline.beans.tree.ITreeNode;
+import org.springline.beans.utils.EncryptHelper;
 import org.springline.web.WebUITool;
 import org.springline.web.filter.AuthenticationFilter;
 import org.springline.web.mvc.SpringlineMultiActionController;
@@ -25,6 +26,7 @@ import com.console.entity.Staff;
 import com.console.entity.StaffSecurity;
 import com.console.main.service.IMainService;
 import com.console.support.MenuManager;
+import com.systemic.gq.entity.Member;
 /**
  * @description 入口Controller.
  */
@@ -75,7 +77,18 @@ public class MainController extends SpringlineMultiActionController {
         String password = request.getParameter("password");
        //获取页面是用什么浏览器访问的值
         String browser = request.getParameter("browser");
-        
+        String rand=(String) request.getSession().getAttribute("rand");
+		String vcode= request.getParameter("code");
+		if(vcode==null||"".equals(vcode)){
+			model.put("message", "验证码不能为空！");
+            model.put("loginName", loginName);
+            return index(request, response, model);
+		}
+		if(!rand.equalsIgnoreCase(vcode)){
+			model.put("message", "验证码错误！");
+            model.put("loginName", loginName);
+            return index(request, response, model);
+		}
         int i = 0;
         boolean afterfailTime = false;
         Staff staffLogin = this.mainService.selectAllStaff(loginName);//此处要调用新方法，返回指定登录名的用户，不限制是否有效！
@@ -382,5 +395,60 @@ public class MainController extends SpringlineMultiActionController {
     // return source;
     // }
     // }
-
+    
+    ///////////////////////////////////////////////////////////////////////////////
+    /**
+     * 验证高级密码
+     * lgc
+     */
+     public ModelAndView verifyAdvancedPassword(HttpServletRequest request,
+            HttpServletResponse response, HashMap model) throws Exception {
+    	 String pwd=request.getParameter("pwd")!=null?request.getParameter("pwd").trim():"";
+    	 String url=request.getParameter("url")!=null?request.getParameter("url").trim():"";
+    	 String level=request.getParameter("level")!=null?request.getParameter("level").trim():"";
+    	 
+    	 if(pwd==null||"".equals(pwd.trim())){
+    		 model.put("message", "密码不能为空");
+    		 model.put("level", level);
+    		 model.put("url", url);
+    		 return new ModelAndView("main/passwrodView", model);
+    	 }
+    	 
+    	 Staff staff = (Staff) AuthenticationFilter.getAuthenticator(request);
+		 Member memberinfo = ConsoleHelper.getInstance().getManageService().selectMemberByStaffId(staff.getId());
+		 String memberPassword="";
+		 switch (level) {
+		 case "二级":
+			memberPassword=memberinfo.getPasswodTwo();
+			 if(memberPassword.equals(EncryptHelper
+		                .md5Encoding(pwd))){
+				 request.getSession().setAttribute("advancedPassword", memberPassword);
+				 return new ModelAndView("redirect:"+url, model);
+			 }
+			break;
+		 case "三级":
+			memberPassword=memberinfo.getPasswordThree();
+			 if(memberPassword.equals(EncryptHelper
+		                .md5Encoding(pwd))){
+				 request.getSession().setAttribute("threePassword", memberPassword);
+				 return new ModelAndView("redirect:"+url, model);
+			 }
+			break;
+		 default:
+			break;
+		}
+		 model.put("message", level+"密码错误");
+		 model.put("level", level);
+		 model.put("url", url);
+		 return new ModelAndView("main/passwrodView", model);
+    }
+     
+     public ModelAndView goVerifyAdvancedPasswrod(HttpServletRequest request,
+             HttpServletResponse response, HashMap model) throws Exception {
+    	 String url=request.getParameter("url");
+    	 String level=request.getParameter("level");
+    	 model.put("level", level);
+		 model.put("url", url);
+    	 return new ModelAndView("main/passwrodView", model);
+     }
 }

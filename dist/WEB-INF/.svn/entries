@@ -28,15 +28,27 @@ svn:special svn:externals svn:needs-lock
 
 applicationContext.properties
 file
-15
+112
 
 
-delete
-2016-09-08T08:13:04.904000Z
-8bd66c64fc250bc2a77ee7c08db6d363
-2016-09-08T09:49:03.823733Z
-15
-LGC
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+deleted
 
 classes
 dir

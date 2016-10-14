@@ -63,17 +63,17 @@ svn:wc:ra_dav:version-url
 V 57
 /svn/GQFP/!svn/ver/2/trunk/dist/skins/default/content.css
 END
+main.css
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/GQFP/!svn/ver/111/trunk/dist/skins/default/main.css
+END
 login.css
 K 25
 svn:wc:ra_dav:version-url
 V 55
 /svn/GQFP/!svn/ver/2/trunk/dist/skins/default/login.css
-END
-main.css
-K 25
-svn:wc:ra_dav:version-url
-V 54
-/svn/GQFP/!svn/ver/2/trunk/dist/skins/default/main.css
 END
 dccfPrint.css
 K 25

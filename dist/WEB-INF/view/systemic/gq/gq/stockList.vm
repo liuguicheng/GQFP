@@ -58,9 +58,9 @@
     <tr>
       <td><input type="checkbox" name="id" value="$!{data.id}"></td>
       <td><a href="javascript:doEdit('$!{data.id}');;"> #lookUpDict($dicData.dicStockLevel "$!{data.gradeNum}") </a></td>
-      <td>$!{data.money}(元)</td>
+      <td>#showMoney($!{data.money})(元)</td>
       <td>$!{data.stockMoney}(股)</td>
-	  <td>$!{data.cap}(元)</td>
+	  <td>#showMoney($!{data.cap})(元)</td>
 	  <td>#if($!{data.istrue} ==1) 已开放 #elseif($!{data.istrue}==0) 未开放   #end  </td>
 	  
     </tr>

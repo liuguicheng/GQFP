@@ -198,7 +198,7 @@
       <td>$!{data.taIntoAccount}</td>
       <td>$!{data.taIntoName}</td>
       <td>#lookUpDict($dicData.dicPayType $!{data.taType})</td>
-      <td>$!{data.taMoeny}</td>
+      <td>#showMoney($!{data.taMoeny})</td>
       <td>$!{data.taTime}</td>
       
 	</tr>

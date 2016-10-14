@@ -34,7 +34,7 @@
   }
 
   function doReturn() {
-    location.href = "../member/memberManage.do?isActivation=-1";
+    location.href = history.go(-1);
   }
   
   

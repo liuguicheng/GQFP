@@ -7,7 +7,7 @@ memberUpdate.vm
 K 25
 svn:wc:ra_dav:version-url
 V 81
-/svn/GQFP/!svn/ver/105/trunk/dist/WEB-INF/view/systemic/gq/member/memberUpdate.vm
+/svn/GQFP/!svn/ver/112/trunk/dist/WEB-INF/view/systemic/gq/member/memberUpdate.vm
 END
 memberNotActiveManage.vm
 K 25
@@ -31,7 +31,7 @@ memberEdit.vm
 K 25
 svn:wc:ra_dav:version-url
 V 79
-/svn/GQFP/!svn/ver/105/trunk/dist/WEB-INF/view/systemic/gq/member/memberEdit.vm
+/svn/GQFP/!svn/ver/112/trunk/dist/WEB-INF/view/systemic/gq/member/memberEdit.vm
 END
 memberoperateLogList.vm
 K 25
@@ -50,4 +50,10 @@ K 25
 svn:wc:ra_dav:version-url
 V 81
 /svn/GQFP/!svn/ver/105/trunk/dist/WEB-INF/view/systemic/gq/member/memberManage.vm
+END
+memberPerformanceQuery.vm
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/GQFP/!svn/ver/112/trunk/dist/WEB-INF/view/systemic/gq/member/memberPerformanceQuery.vm
 END

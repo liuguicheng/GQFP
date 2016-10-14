@@ -6,14 +6,14 @@ END
 hibernate.cfg.xml
 K 25
 svn:wc:ra_dav:version-url
-V 65
-/svn/GQFP/!svn/ver/93/trunk/dist/WEB-INF/config/hibernate.cfg.xml
+V 66
+/svn/GQFP/!svn/ver/112/trunk/dist/WEB-INF/config/hibernate.cfg.xml
 END
 ApplicationContext.xml
 K 25
 svn:wc:ra_dav:version-url
-V 70
-/svn/GQFP/!svn/ver/79/trunk/dist/WEB-INF/config/ApplicationContext.xml
+V 71
+/svn/GQFP/!svn/ver/112/trunk/dist/WEB-INF/config/ApplicationContext.xml
 END
 applicationContext.properties
 K 25

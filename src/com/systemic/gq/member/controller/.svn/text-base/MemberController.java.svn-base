@@ -74,6 +74,7 @@ public class MemberController {
 	@RequestMapping(value = "/member/memberEdit.do", method = RequestMethod.GET)
 	public String memberEdit(HttpServletRequest request, HttpServletResponse response, Model model, Long token,
 			String memberId) {
+		String node=request.getParameter("node");
 		MemberEditInfo command = new MemberEditInfo();
 		if (StringUtils.isNotBlank(memberId)) {
 			Member member = this.springMemberService.loadMermber(memberId);
@@ -83,8 +84,11 @@ public class MemberController {
 			Staff staff = (Staff) AuthenticationFilter.getAuthenticator(request);
 			try {
 				Member member = ConsoleHelper.getInstance().getManageService().selectMemberByStaffId(staff.getId());
-				command.setReferenceId(member.getMemberId());
+				command.setReferenceId(member.getStaffId());
 				command.setReferenceName(member.getUserName());
+				if(node!=null&&!"".equals(node)){
+					command.setNote(node);
+				}
 			} catch (Exception e) {
 				e.printStackTrace();
 				throw new RuntimeException("获取数据失败！请联系管理员！");

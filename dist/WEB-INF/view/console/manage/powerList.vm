@@ -52,8 +52,9 @@
                 <th data-options="field:'powerCode', width:100, fixed:true">菜单编号</th>
                 <th data-options="field:'powerName', width:200">菜单名称</th>
                 <th data-options="field:'url', width:200">菜单功能url</th>
-                <th data-options="field:'imgUrl', width:200">菜单图标url</th>
-                <th data-options="field:'moduleName', width:100">所属模块名</th>
+                <th data-options="field:'imgUrl', width:100">菜单图标url</th>
+                <th data-options="field:'moduleName', width:50">所属模块名</th>
+				<th data-options="field:'passwordLevel', width:50">访问密码等级</th>
     </tr>
   </thead>
   <tbody>
@@ -69,6 +70,7 @@
       <td style="text-align:left;">#htmlEscape($!{data.url})</td>
       <td>#htmlEscape($!{data.imgUrl})</td>
       <td>#lookUpDict($dicData.dicModuleName $!{data.moduleName})</td>
+	  <td>#lookUpDict($dicData.dicPasswordType $!{data.passwordLevel})</td>
     </tr>
   #end
   </tbody>   

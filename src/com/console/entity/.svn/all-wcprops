@@ -66,8 +66,8 @@ END
 Power.hbm.xml
 K 25
 svn:wc:ra_dav:version-url
-V 63
-/svn/GQFP/!svn/ver/2/trunk/src/com/console/entity/Power.hbm.xml
+V 65
+/svn/GQFP/!svn/ver/114/trunk/src/com/console/entity/Power.hbm.xml
 END
 DBBackup.java
 K 25
@@ -90,8 +90,8 @@ END
 Power.java
 K 25
 svn:wc:ra_dav:version-url
-V 60
-/svn/GQFP/!svn/ver/2/trunk/src/com/console/entity/Power.java
+V 62
+/svn/GQFP/!svn/ver/114/trunk/src/com/console/entity/Power.java
 END
 Duty.hbm.xml
 K 25

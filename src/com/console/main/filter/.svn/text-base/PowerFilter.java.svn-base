@@ -57,7 +57,9 @@ public class PowerFilter  extends HttpServlet implements Filter {
 
         HttpServletRequest req = (HttpServletRequest) request; 
         HttpServletResponse sresponse = (HttpServletResponse) response;   
-        HttpSession session = req.getSession();   
+        HttpSession session = req.getSession();
+        String advancedPassword=(String) session.getAttribute("advancedPassword");
+        String threePassword=(String) session.getAttribute("threePassword");
         Staff staff =  (Staff) AuthenticationFilter.getAuthenticator(req);   
         if(staff == null){
             sresponse.sendRedirect(redirectURl); 
@@ -71,6 +73,14 @@ public class PowerFilter  extends HttpServlet implements Filter {
                     if(url != null && url.length() > 0){
                        Power power = ConsoleHelper.getInstance().getManageService().selectPowerByUrl(url);
                        if(power !=null){
+                    	   //验证是否需要高级密码
+                    	   boolean isadv= MenuManager.isAdvancedPassword(advancedPassword, threePassword, power);
+                    	   if(isadv){
+                    			 redirectURl="/main/goVerifyAdvancedPasswrod.do?url="+url+"&level="+power.getPasswordLevel();
+                  			   	 // 过滤器经过过滤后，过滤链继续传递请求和响应   
+                  			     String path = req.getContextPath()+redirectURl;
+                  			    ((HttpServletResponse) response).sendRedirect(path);
+                    	   }
                            boolean isPower = MenuManager.hasPower(power,staff,dep);
                            if(!isPower){
                                // 过滤器经过过滤后，过滤链继续传递请求和响应   
@@ -93,6 +103,8 @@ public class PowerFilter  extends HttpServlet implements Filter {
         }
     
     }
+
+	
 
     /**
      * @see javax.servlet.Filter#destroy()

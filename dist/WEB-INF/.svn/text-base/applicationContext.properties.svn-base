@@ -1,27 +1,0 @@
-#appName
-application.appName=\u80A1\u6743\u5206\u914D\u7CFB\u7EDF
-
-
-# server root disk,server needed
-fileserver.rootDirectory=/upfiles/
-
-# file size limited,ä»¥åä¸ºåä½
-fileserver.fileSizeLimit=100
-
-# attachments store in database(db),filesystem(fs),server needed
-fileserver.storeType=fs
-
-# ftp URL
-fileserver.ftp.url=10.10.0.3
-
-# ftp Port
-fileserver.ftp.port=21
-
-# ftp UserName
-fileserver.ftp.userName=ftp
-# ftp Password
-fileserver.ftp.password=ftp_user
-
-#ç­ä¿¡åééç½®åæ°
-smsIP.authority.url=172.17.12.7
-smsPort.authority.url=6800

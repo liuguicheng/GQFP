@@ -9,9 +9,3 @@ svn:wc:ra_dav:version-url
 V 48
 /svn/GQFP/!svn/ver/10/trunk/dist/WEB-INF/web.xml
 END
-applicationContext.properties
-K 25
-svn:wc:ra_dav:version-url
-V 70
-/svn/GQFP/!svn/ver/15/trunk/dist/WEB-INF/applicationContext.properties
-END

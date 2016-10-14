@@ -502,6 +502,7 @@ public class MemberMapController {
 			double newtotalmoeny=0;//今日新增
 			// 临时变量
 			String totalAndCount = "";
+			String datetime="";
 			// 查询传入会员编号的所有子节点的 数量和总金额
 			// 以逗号隔开，逗号前 count 逗号后total
 			totalAndCount = childMemberTotalMoney(member.getStaffId());
@@ -534,7 +535,10 @@ public class MemberMapController {
 				tm.setActivationTime("");
 				tm.setStatus("投资金额:"+member.getStock().getMoney()+"(未激活)");
 			}else{
-				tm.setActivationTime(sdf.format(member.getActivationTime()));
+				if(member.getActivationTime()!=null&&!"".equals(member.getActivationTime())){
+					datetime=sdf.format(member.getActivationTime());
+				}
+				tm.setActivationTime(datetime);
 				tm.setStatus("投资金额:"+member.getStock().getMoney()+"(已激活)");
 			}
 			return tm;

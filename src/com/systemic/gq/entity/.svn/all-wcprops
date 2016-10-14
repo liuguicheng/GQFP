@@ -36,8 +36,8 @@ END
 PayInfo.java
 K 25
 svn:wc:ra_dav:version-url
-V 67
-/svn/GQFP/!svn/ver/90/trunk/src/com/systemic/gq/entity/PayInfo.java
+V 68
+/svn/GQFP/!svn/ver/114/trunk/src/com/systemic/gq/entity/PayInfo.java
 END
 Rule.java
 K 25
@@ -87,17 +87,17 @@ svn:wc:ra_dav:version-url
 V 67
 /svn/GQFP/!svn/ver/90/trunk/src/com/systemic/gq/entity/Rule.hbm.xml
 END
-Withdrawals.hbm.xml
-K 25
-svn:wc:ra_dav:version-url
-V 74
-/svn/GQFP/!svn/ver/89/trunk/src/com/systemic/gq/entity/Withdrawals.hbm.xml
-END
 BonusContent.java
 K 25
 svn:wc:ra_dav:version-url
 V 72
 /svn/GQFP/!svn/ver/67/trunk/src/com/systemic/gq/entity/BonusContent.java
+END
+Withdrawals.hbm.xml
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/GQFP/!svn/ver/89/trunk/src/com/systemic/gq/entity/Withdrawals.hbm.xml
 END
 PayLog.java
 K 25

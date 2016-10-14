@@ -16,6 +16,9 @@ public class TreeModel {
 	private String tdcolspan;//td 跨多少格子
 	private String trnuml;//多少行
 	private Member member;
+	private String registerTime;//注册时间
+	private String activationTime;//激活时间
+	private String status;//状态
 	public static String OPEN_TRUE="true";
 	public static String OPEN_FALSE="false";
 	public static String ICOIMG_ZS="../lib/ztree/zTreeStyle/img/ico/member.gif";
@@ -186,6 +189,43 @@ public class TreeModel {
 	 */
 	public void setTrnuml(String trnuml) {
 		this.trnuml = trnuml;
+	}
+	
+	/**
+	 * @return the registerTime
+	 */
+	public String getRegisterTime() {
+		return registerTime;
+	}
+	/**
+	 * @param registerTime the registerTime to set
+	 */
+	public void setRegisterTime(String registerTime) {
+		this.registerTime = registerTime;
+	}
+	/**
+	 * @return the activationTime
+	 */
+	public String getActivationTime() {
+		return activationTime;
+	}
+	/**
+	 * @param activationTime the activationTime to set
+	 */
+	public void setActivationTime(String activationTime) {
+		this.activationTime = activationTime;
+	}
+	/**
+	 * @return the status
+	 */
+	public String getStatus() {
+		return status;
+	}
+	/**
+	 * @param status the status to set
+	 */
+	public void setStatus(String status) {
+		this.status = status;
 	}
 	public TreeModel(String id,  String name,String pid) {
 		super();

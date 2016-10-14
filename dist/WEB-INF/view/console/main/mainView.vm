@@ -295,7 +295,7 @@ function getDialogParam(key) {
          <tr>
          <td>
                 <a class="ABtnIco AIcoLogOut" href="javascript:closeApp()">退出系统</a>
-                <a class="ABtnIco AIcoSeting" href="javascript:addContentPanel('修改个人资料','修改个人资料', '../manage/staffEditSelf.do?staffId=$!{currentUser.id}')" >修改个人资料</a>
+                <a class="ABtnIco AIcoSeting" href="javascript:addContentPanel('修改个人资料','修改个人资料', '../member/MemberInfo.do')" >修改个人资料</a>
                 <a class="ABtnIco AIcoHome" href="javascript:addContentPanel('主页','主页', '../main/homepage.do')" >返回主页</a>
                 <span class="spnSysInfo">
 

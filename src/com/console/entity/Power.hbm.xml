@@ -44,6 +44,9 @@
 				column="dep_id" outer-join="auto" />
 
 		</set>
+		<property name="passwordLevel" type="java.lang.Integer">
+			<column name="passwordLevel" />
+		</property>
 	</class>
 
 </hibernate-mapping>

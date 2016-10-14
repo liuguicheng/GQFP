@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  #headInclude()
+  <link rel="stylesheet" href="../lib/ztree/zTreeStyle/zTreeStyle.css" type="text/css">
+	  <link rel="stylesheet" href="../lib/ztree/zTreeStyle/map.css" type="text/css">
+  <script type="text/javascript" src="../lib/ztree/js/jquery.ztree.core.min.js"></script>
+  <script type="text/javascript">
+  #if($message)alert("#javaScriptEscape($message)");#end
+		
+  </script>
+  <style>
+  input[type=password] {
+    padding: 3px;
+    min-height: 26px;
+    line-height: 20px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    border-radius: 3px;
+    margin-left: 2px;
+	}
+  .bor{
+   border: 1px solid #ccc;
+  }
+  </style>
+</head>
+<body>
+<div class="PageHeader">
+  <div class="LeftBox Title">高级密码验证</div>
+</div>
+
+<div class="PageContainer indieui-scroll">
+	
+    
+			            
+		<div>
+        <table class="bor" width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tbody>
+                <tr>
+                    <td style="text-align: center; height: 400px;line-height:400px">
+						#set($var1="二级")
+						#if($!{level}==3)
+							#set($var1="三级")
+						#end
+							<form action="../main/verifyAdvancedPassword.do" method="post">                            
+							<span>$var1级密码：</span> 
+							<input name="pwd" type="password" id="OPass" style="width: 200px;" maxlength="20" value="">
+                            <input type="hidden" name="url" value="$!{url}" />
+							<input type="hidden" name="level" value="${var1} " />
+                            <input type="submit" class="FormatInputBtn" value="确 定">
+							</form>                    
+					</td>
+                </tr>
+        </table>
+
+    </div>
+</div>
+
+
+</body>
+</html>

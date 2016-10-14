@@ -216,8 +216,8 @@ END
 powerEdit.vm
 K 25
 svn:wc:ra_dav:version-url
-V 72
-/svn/GQFP/!svn/ver/2/trunk/dist/WEB-INF/view/console/manage/powerEdit.vm
+V 74
+/svn/GQFP/!svn/ver/112/trunk/dist/WEB-INF/view/console/manage/powerEdit.vm
 END
 departmentTree.vm
 K 25
@@ -318,8 +318,8 @@ END
 powerList.vm
 K 25
 svn:wc:ra_dav:version-url
-V 72
-/svn/GQFP/!svn/ver/2/trunk/dist/WEB-INF/view/console/manage/powerList.vm
+V 74
+/svn/GQFP/!svn/ver/112/trunk/dist/WEB-INF/view/console/manage/powerList.vm
 END
 selectAllStaffList.vm
 K 25

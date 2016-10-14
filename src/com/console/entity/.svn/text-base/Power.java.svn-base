@@ -67,7 +67,11 @@ public class Power implements Serializable, ILayerTreeAbility {
 //    private Set roles;
     /**包含本权限的单位集和**/
     private Set departments;
-
+  
+    /**
+     * 访问该页面需要几级密码
+     */
+    private int passwordLevel;
     /**
      * @hibernate.id column = "power_id" generator-class = "identity"
      * @return Returns the id.
@@ -296,6 +300,20 @@ public class Power implements Serializable, ILayerTreeAbility {
     public String getNodeName() {
         return this.name;
     }
+
+	/**
+	 * @return the passwordLevel
+	 */
+	public int getPasswordLevel() {
+		return passwordLevel;
+	}
+
+	/**
+	 * @param passwordLevel the passwordLevel to set
+	 */
+	public void setPasswordLevel(int passwordLevel) {
+		this.passwordLevel = passwordLevel;
+	}
 
 
 }

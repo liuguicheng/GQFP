@@ -92,6 +92,7 @@
 			<value>text/html;charset=GBK</value>
 		</property>
 		<property name="cache">
+		<!-- 设置缓存  false 用于开发 true 用户线上-->
 			<value>true</value>
 		</property>
 		<property name="prefix">
@@ -119,8 +120,8 @@
 		class="org.springline.web.view.velocity.SpringlineVelocityConfigurer">
 		<property name="velocityProperties">
 			<props>
-				<prop key="runtime.log">velocity.log</prop>
-				<prop key="runtime.log.invalid.references">true</prop>
+				<!--  <prop key="runtime.log">velocity.log</prop>
+				<prop key="runtime.log.invalid.references">true</prop>-->
 				<prop key="resource.manager.logwhenfound">true</prop>
 				<prop key="velocimacro.library.autoreload">true</prop>
 				<prop key="velocimacro.library">sysmacroLib.vm, macroLib.vm</prop>

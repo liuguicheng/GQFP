@@ -55,7 +55,7 @@
     <tr>
       <td class="TdLabel">#requiredInput("股权金额")</td>
       <td class="TdInput">
-    	  <input type="text" name="money" value="$!{command.money}" style="width:30%" />(元)
+    	  <input type="text" name="money" value="#showMoney($!{command.money})" style="width:30%" />(元)
       </td>
     </tr>
 	<tr>
@@ -67,7 +67,7 @@
     <tr>
       <td class="TdLabel">#requiredInput("投资封顶值")</td>
       <td class="TdInput">
-		<input type="text" name="cap" value="$!{command.cap}" style="width:30%;"/>(元)
+		<input type="text" name="cap" value="#showMoney($!{command.cap})" style="width:30%;"/>(元)
       </td>
     </tr>
 	<tr>

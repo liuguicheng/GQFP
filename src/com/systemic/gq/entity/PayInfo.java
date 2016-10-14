@@ -3,7 +3,7 @@ package com.systemic.gq.entity;
 import java.util.Date;
 
 /**
- * PayInfo entity. @author MyEclipse Persistence Tools
+ * PayInfo entity. 
  */
 
 public class PayInfo implements java.io.Serializable {

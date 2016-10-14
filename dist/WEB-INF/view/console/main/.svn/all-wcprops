@@ -19,7 +19,7 @@ mainView.vm
 K 25
 svn:wc:ra_dav:version-url
 V 71
-/svn/GQFP/!svn/ver/109/trunk/dist/WEB-INF/view/console/main/mainView.vm
+/svn/GQFP/!svn/ver/112/trunk/dist/WEB-INF/view/console/main/mainView.vm
 END
 menuTree.vm
 K 25
@@ -30,6 +30,12 @@ END
 index.vm
 K 25
 svn:wc:ra_dav:version-url
-V 66
-/svn/GQFP/!svn/ver/9/trunk/dist/WEB-INF/view/console/main/index.vm
+V 68
+/svn/GQFP/!svn/ver/112/trunk/dist/WEB-INF/view/console/main/index.vm
+END
+passwrodView.vm
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/GQFP/!svn/ver/112/trunk/dist/WEB-INF/view/console/main/passwrodView.vm
 END

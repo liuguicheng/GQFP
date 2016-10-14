@@ -131,6 +131,7 @@ public class TransferAccountController {
 	private void updateMemberForMoney(Member member,Member intoMember,String type,Double Tranmoney) {
 		
 		Double money=0.0;
+		//±ÒÖÖÖÖÀà
 		switch (type) {
 		case "1":
 		    money = member.getElectroniccurrency();

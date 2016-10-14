@@ -71,7 +71,7 @@
                 ##<input type="checkbox" name="id" value="$!{data.id}">
 </td>
 <td>$!{data.username}</td>
-<td>$!{data.money}</td>
+<td>#showMoney($!{data.money})</td>
 <td>
     <a href="javascript:doEdit('$!{data.id}');;"> #lookUpDict($dicData.dicBonusContent "$!{data.bonustype}") </a>
 </td>

@@ -175,9 +175,9 @@
     <tr>
      <td> $!{data.memnberStaffId}</td>
       <td>#lookUpDict($dicData.dicPayType $!{data.recordType})</td>
-      <td>$!{data.applyRecordNum}</td>
-      <td>$!{data.payBeforeNum}</td>
-      <td>$!{data.payAfterNum}</td>
+      <td>#showMoney($!{data.applyRecordNum})</td>
+      <td>#showMoney($!{data.payBeforeNum})</td>
+      <td>#showMoney($!{data.payAfterNum})</td>
       <td>$!{data.applyTime}</td>
       <td>$!{data.auditTime}</td>
       <td>$!{data.remark}</td>

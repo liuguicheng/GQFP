@@ -76,12 +76,6 @@
 		<input type="text" name="areaNumber" value="$!{command.areaNumber}"  />只能填写整数
       </td>
     </tr>
-	#***<tr>
-      <td class="TdLabel">#requiredInput("区域优先级")</td>
-      <td class="TdInput">
-    	 <input type="text" name="regionPriority" value="$!{command.regionPriority}" style="width:30%" />根据区域数量决定,从左往右排序,左1=A,左2=B
-      </td>
-    </tr>*#
 	<tr>
       <td class="TdLabel">#requiredInput("会员激活条件")</td>
       <td class="TdInput" colspan="3">
@@ -183,6 +177,37 @@
 
 
 <script type="text/javascript">
+ function onxscheck(){
+  	var wtid=$("#withdrawals_time_id").val();
+	if(wtid!=""){
+	   wtid=wtid.substring(0,wtid.length-1);
+	   var sd=wtid.split(",");
+	   console.log(sd);
+	     $.each(sd, function(j,valj){    
+          	$("input[name='withdrawals']:checkbox").each(function(){ 
+				var checkval=$(this).attr('value');
+				if (valj==checkval) { 
+				   $(this).attr("checked","checked");
+				} 
+			}); 
+  		}); 
+	}
+	var transfewtr=$("#transfer_time_id").val();
+	
+	if(transfewtr!=""){
+	   transfewtr=transfewtr.substring(0,transfewtr.length-1);
+	   var sdd=transfewtr.split(",");
+	    console.log(sdd);
+	     $.each(sdd, function(i,val){      
+          	$("input[name='transfertim']:checkbox").each(function(){ 
+				var checkval=$(this).attr('value');
+				if (val==checkval) { 
+				   $(this).attr("checked","checked");
+				} 
+			}); 
+  		}); 
+	}
+  }
 	$(document).ready(function(){
 		onxscheck();
 	});
@@ -198,6 +223,7 @@
   	blcheck();
     var e = document.editForm;
     if (checkInput(e)) {
+	 console.log("进入1");
       e.submitFlag.value = "1";
       e.submit();
     }
@@ -215,7 +241,9 @@
 		if ("checked" == $(this).attr("checked")) { 
 		ids += $(this).attr('value')+','; 
 		} 
-	}); 
+	});
+	 ids=ids.substring(0,ids.length-1);
+	 console.log(ids);
 	$("#withdrawals_time_id").val(ids);
 	ids="";
 	$("input[name='transfertim']:checkbox").each(function(){ 
@@ -223,38 +251,10 @@
 		ids += $(this).attr('value')+','; 
 		} 
 	}); 
+	 ids=ids.substring(0,ids.length-1);
+	 console.log(ids);
 	$("#transfer_time_id").val(ids);
 	ids="";
-  }
-  
-  function onxscheck(){
-  	var wtid=$("#withdrawals_time_id").val();
-	if(wtid!=""){
-	   var sd=wtid.split(",");
-	     $.each(sd, function(i,val){    
-          	$("input[name='withdrawals']:checkbox").each(function(){ 
-				var checkval=$(this).attr('value');
-				if (val==checkval) { 
-				   $(this).attr("checked","checked");
-				} 
-			}); 
-  		}); 
-	}
-	
-	var wtid=$("#transfer_time_id").val();
-	if(wtid!=""){
-	   var sdd=wtid.split(",");
-	     $.each(sdd, function(i,val){      
-          	$("input[name='transfertim']:checkbox").each(function(){ 
-				var checkval=$(this).attr('value');
-				if (val==checkval) { 
-				   $(this).attr("checked","checked");
-				} 
-			}); 
-  		}); 
-	}
-	
-	
   }
   </script>
 </body>

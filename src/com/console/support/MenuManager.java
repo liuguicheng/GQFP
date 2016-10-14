@@ -78,5 +78,27 @@ public final class MenuManager {
         }
         return false;
     }
-
+    
+    /**
+     * //验证访问页面是否需要密码
+     * @param advancedPassword 
+     * @param threePassword
+     * @param power
+     * @return
+     */
+    public static boolean isAdvancedPassword(String advancedPassword, String threePassword, Power power) {
+		boolean fa=false;
+		   if(power.getPasswordLevel()==2){
+			 //验证访问页面是否需要密码
+			   if(advancedPassword==null||"".equals(advancedPassword)){
+				   fa=true;
+		    }
+		    }
+		   if(power.getPasswordLevel()==3){
+			   if(threePassword==null||"".equals(threePassword)){
+				   fa=true;
+			   }
+		   }
+		   return fa;
+	}
 }

@@ -21,6 +21,7 @@ public class PowerInfo {
     private String code;
     /** 权限类型标识. */
     private String typeFlag;
+    private int passwordLevel;
     
     public static final String DIC_MODULE_NAME_WEB = "01";
     
@@ -134,4 +135,19 @@ public class PowerInfo {
         map.put("4", "公用权限菜单");
         return map;
     }
+
+	/**
+	 * @return the passwordLevel
+	 */
+	public int getPasswordLevel() {
+		return passwordLevel;
+	}
+
+	/**
+	 * @param passwordLevel the passwordLevel to set
+	 */
+	public void setPasswordLevel(int passwordLevel) {
+		this.passwordLevel = passwordLevel;
+	}
+    
 }

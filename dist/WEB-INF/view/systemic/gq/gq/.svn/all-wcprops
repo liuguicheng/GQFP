@@ -12,20 +12,20 @@ END
 ruleEdit.vm
 K 25
 svn:wc:ra_dav:version-url
-V 72
-/svn/GQFP/!svn/ver/94/trunk/dist/WEB-INF/view/systemic/gq/gq/ruleEdit.vm
+V 73
+/svn/GQFP/!svn/ver/112/trunk/dist/WEB-INF/view/systemic/gq/gq/ruleEdit.vm
 END
 stockEdit.vm
 K 25
 svn:wc:ra_dav:version-url
-V 73
-/svn/GQFP/!svn/ver/38/trunk/dist/WEB-INF/view/systemic/gq/gq/stockEdit.vm
+V 74
+/svn/GQFP/!svn/ver/112/trunk/dist/WEB-INF/view/systemic/gq/gq/stockEdit.vm
 END
 stockList.vm
 K 25
 svn:wc:ra_dav:version-url
-V 73
-/svn/GQFP/!svn/ver/34/trunk/dist/WEB-INF/view/systemic/gq/gq/stockList.vm
+V 74
+/svn/GQFP/!svn/ver/112/trunk/dist/WEB-INF/view/systemic/gq/gq/stockList.vm
 END
 bonusContentList.vm
 K 25

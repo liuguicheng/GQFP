@@ -48,39 +48,44 @@
     <td class="TdInput">
       #formSingleSelect("typeFlag" $!{command.typeFlag} ${command.typeFlagMap} "")
     </td>
+	 <td class="TdLabel" style="width:150px;">菜单访问密码等级</td>
+    <td class="TdInput">
+		#formSingleSelectDictionary("passwordLevel" $!{command.passwordLevel} ${dicData.dicPasswordType} "style='width:120'" " ---- 请选择 ---- ")
+    </td>
   </tr>
   <tr>
     <td class="TdLabel">#requiredInput("菜单名称")</td>
-    <td class="TdInput" colspan="3">
+    <td class="TdInput" colspan="5">
       <input type="text" name="name" value="#htmlEscape($!{command.name})" style="width:98%" />
     </td>
   </tr>
   <tr>
     <td class="TdLabel">菜单功能的url</td>
-    <td class="TdInput"  colspan="3">
+    <td class="TdInput"  colspan="5">
       <input type="text" name="url" value="#htmlEscape($!{command.url})" style="width:98%"/>
     </td>
   </tr>
   <tr>
     <td class="TdLabel">菜单图标的url</td>
-    <td class="TdInput"  colspan="3">
+    <td class="TdInput"  colspan="5">
       <input type="text" name="imgUrl" value="#htmlEscape($!{command.imgUrl})" style="width:98%"/>
     </td>
   </tr>
   <tr>
     <td class="TdLabel">是否放置桌面菜单</td>
-    <td class="TdInput"  colspan="3">
+    <td class="TdInput"  colspan="5">
       #formRadioButtonDictionary("powerDesk" "$!{command.powerDesk}" $dicData.dicWhether "" "")
     </td>
   </tr>  
   <tr>
     <td class="TdLabel">菜单所属模块名</td>
-    <td class="TdInput"  colspan="3">
+    <td class="TdInput" colspan="5" >
       ##<input type="text" name="moduleName" value="#htmlEscape($!{command.moduleName})" style="width:98%"/>
        ###formRadioButtonDictionary("moduleName" "$!{tab}" $dicData.dicModuleName "" "")
         <input type="hidden" name="moduleName" value="$!{tab}"/>
        #lookUpDict($dicData.dicModuleName $!{tab})
     </td>
+	
   </tr>
 </table>
 </form>

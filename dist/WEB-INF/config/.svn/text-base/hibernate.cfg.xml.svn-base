@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xmlns:aop="http://www.springframework.org/schema/aop"
     xmlns:tx="http://www.springframework.org/schema/tx"
     xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd
@@ -16,9 +17,9 @@
     <!--使用基本数据源的配置 -->
     <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
         <property name="driverClass"><value>com.mysql.jdbc.Driver</value></property>
-        <property name="jdbcUrl"><value>jdbc:mysql://192.168.1.118:3306/gqfp?useUnicode=true&amp;characterEncoding=UTF-8</value></property>
-        <property name="user"><value>gqfp</value></property>
-        <property name="password"><value>root</value></property>
+        <property name="jdbcUrl"><value>jdbc:mysql://127.0.0.1:3306/gqfp?useUnicode=true&amp;characterEncoding=UTF-8</value></property>
+        <property name="user"><value>root</value></property>
+        <property name="password"><value>cisoft</value></property>
         <!--连接池配置-->
         <property name="acquireIncrement"><value>10</value></property>
         <property name="initialPoolSize"><value>10</value></property>
@@ -36,9 +37,9 @@
                 <prop key="hibernate.cache.provider_class">org.hibernate.cache.HashtableCacheProvider</prop>
                 <prop key="hibernate.cache.region.factory_class">org.hibernate.cache.ehcache.EhCacheRegionFactory</prop>
                 <prop key="jdbc.use_scrollable_resultset">false</prop>
-                <prop key="hibernate.show_sql">true</prop>
-                <prop key="hibernate.format_sql">true</prop>
-                <prop key="hibernate.use_sql_comments">true</prop>
+                <prop key="hibernate.show_sql">false</prop>
+                <prop key="hibernate.format_sql">false</prop>
+                <prop key="hibernate.use_sql_comments">false</prop>
                 <prop key="hibernate.connection.release_mode">auto</prop>
                 <prop key="hibernate.autoReconnect">true</prop>
             </props>
